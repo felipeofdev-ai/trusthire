@@ -5,1131 +5,2011 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TrustHire — Enterprise Job Security Platform</title>
 <meta name="description" content="AI-powered job fraud detection with real-time threat intelligence, behavioral fingerprinting, and enterprise-grade security.">
-<meta property="og:title" content="TrustHire — Enterprise Job Security">
-<meta property="og:description" content="Detect job scams with AI + ML. Real-time fraud detection, behavioral analysis, threat intelligence.">
-<meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500;700&family=Cabinet+Grotesk:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #080808; --surface: #0f0f0f; --surface2: #141414; --surface3: #1a1a1a;
-  --border: #1c1c1c; --border2: #242424; --border3: #2e2e2e;
-  --accent: #c8ff00; --accent2: #a8d900; --accent-dim: rgba(200,255,0,.07); --accent-glow: 0 0 40px rgba(200,255,0,.12);
-  --danger: #ff3b30; --warn: #ff9500; --safe: #30d158; --info: #0a84ff;
-  --purple: #bf5af2; --cyan: #5ac8fa;
-  --text: #efefef; --text2: #aaa; --text3: #555;
-  --mono: 'DM Mono', monospace; --sans: 'Cabinet Grotesk', sans-serif;
+  --bg: #0a0a0a; --bg-elevated: #111111; --bg-card: #141414;
+  --border: #1f1f1f; --border-hover: #2a2a2a; --border-active: #3a3a3a;
+  --accent: #00ff88; --accent-hover: #00cc6a; --accent-glow: rgba(0,255,136,.15);
+  --danger: #ff4444; --warn: #ffaa00; --safe: #00ff88; --info: #00aaff;
+  --purple: #aa44ff; --cyan: #00ddff;
+  --text: #ffffff; --text-secondary: #a0a0a0; --text-tertiary: #666666;
+  --font-main: 'Inter', -apple-system, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Monaco', monospace;
+  --shadow-sm: 0 2px 8px rgba(0,0,0,.4);
+  --shadow-md: 0 4px 16px rgba(0,0,0,.5);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,.6);
+  --transition: all .15s cubic-bezier(.4,0,.2,1);
 }
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;font-size:16px}
-body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 
-/* GRAIN + GRADIENT MESH */
-body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")}
-body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 80% 50% at 50% 0%, rgba(200,255,0,.04) 0%, transparent 60%),radial-gradient(circle at 20% 80%, rgba(191,90,242,.03) 0%, transparent 50%)}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-main);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:400;display:flex;align-items:center;justify-content:space-between;padding:.9rem 2.5rem;background:rgba(8,8,8,.92);backdrop-filter:blur(24px) saturate(180%);border-bottom:1px solid var(--border)}
-.nav-brand{display:flex;align-items:center;gap:.75rem;text-decoration:none;cursor:pointer}
-.nav-logo-mark{width:28px;height:28px;position:relative;flex-shrink:0}
-.nav-logo-mark svg{width:100%;height:100%}
-.nav-wordmark{font-family:var(--sans);font-weight:900;font-size:1.05rem;letter-spacing:-.03em;color:var(--text)}
-.nav-wordmark span{color:var(--accent)}
-.nav-links{display:flex;gap:0;list-style:none;align-items:center}
-.nav-links a{color:var(--text3);text-decoration:none;font-size:.78rem;font-family:var(--mono);transition:color .18s;padding:.4rem .9rem;cursor:pointer}
-.nav-links a:hover{color:var(--text2)}
-.nav-right{display:flex;align-items:center;gap:.5rem}
+/* GRAIN TEXTURE */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1;
+}
 
-/* LANG PICKER */
-.lang-picker{display:flex;align-items:center;gap:0;background:var(--surface);border:1px solid var(--border);padding:0;overflow:hidden}
-.lang-opt{background:none;border:none;color:var(--text3);font-family:var(--mono);font-size:.68rem;padding:.3rem .55rem;cursor:pointer;transition:all .15s;white-space:nowrap}
-.lang-opt:hover{color:var(--text2)}
-.lang-opt.active{background:var(--accent);color:#000;font-weight:700}
+/* GRADIENT ORBS */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: 
+    radial-gradient(circle 800px at 20% 30%, rgba(0,255,136,.03), transparent),
+    radial-gradient(circle 600px at 80% 70%, rgba(170,68,255,.03), transparent);
+  pointer-events: none;
+  z-index: 0;
+}
 
-/* USAGE PILL + STREAK */
-.usage-pill{font-family:var(--mono);font-size:.68rem;background:var(--surface);border:1px solid var(--border);padding:.3rem .75rem;display:flex;align-items:center;gap:.4rem}
-.uses-left{color:var(--accent);font-weight:700}
-.usage-pill.warn .uses-left{color:var(--warn)}
-.usage-pill.empty .uses-left{color:var(--danger)}
-.streak-badge{display:flex;align-items:center;gap:.35rem;padding:.25rem .6rem;background:var(--surface2);border:1px solid var(--border);font-family:var(--mono);font-size:.65rem;color:var(--text3)}
-.streak-num{color:var(--accent);font-weight:700}
+/* NAVIGATION */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(10,10,10,.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--border);
+  padding: .75rem 2rem;
+}
 
-.nav-signin{background:transparent;color:var(--text2);border:1px solid var(--border2);padding:.35rem 1rem;font-family:var(--mono);font-size:.72rem;cursor:pointer;transition:all .18s}
-.nav-signin:hover{border-color:var(--border3);color:var(--text)}
-.nav-cta{background:var(--accent);color:#000;border:none;padding:.38rem 1.1rem;font-family:var(--mono);font-size:.73rem;font-weight:700;cursor:pointer;transition:opacity .18s;letter-spacing:.02em}
-.nav-cta:hover{opacity:.85}
-.nav-user{display:none;align-items:center;gap:.6rem;font-family:var(--mono);font-size:.72rem}
-.nav-user.active{display:flex}
-.nav-user-avatar{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:900;color:#000}
-.nav-user-name{color:var(--text)}
-.plan-chip{padding:.12rem .5rem;font-size:.58rem;font-weight:800;letter-spacing:.07em}
-.plan-chip.free{background:var(--surface2);color:var(--text3);border:1px solid var(--border)}
-.plan-chip.pro{background:var(--accent);color:#000}
-.plan-chip.enterprise{background:linear-gradient(135deg,#bf5af2,#7c3aed);color:#fff;border:none}
-.btn-signout{background:none;border:none;color:var(--text3);font-family:var(--mono);font-size:.7rem;cursor:pointer;padding:.2rem}
-.btn-signout:hover{color:var(--danger)}
+.nav-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
-/* DASHBOARD LAYOUT */
-.dashboard-wrapper{display:none;min-height:100vh;padding-top:4rem}
-.dashboard-wrapper.active{display:block}
-.dashboard-container{max-width:1400px;margin:0 auto;padding:2rem 2.5rem}
-.dashboard-header{margin-bottom:2.5rem}
-.dashboard-title{font-size:2rem;font-weight:900;letter-spacing:-.03em;margin-bottom:.5rem}
-.dashboard-subtitle{font-family:var(--mono);font-size:.8rem;color:var(--text3)}
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+  text-decoration: none;
+  cursor: pointer;
+}
 
-/* DASHBOARD GRID */
-.dashboard-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem;margin-bottom:2rem}
-.stat-card{background:var(--surface);border:1px solid var(--border);padding:1.5rem;position:relative;overflow:hidden;transition:all .2s}
-.stat-card:hover{border-color:var(--border3);transform:translateY(-2px)}
-.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent);opacity:0;transition:opacity .2s}
-.stat-card:hover::before{opacity:1}
-.stat-label{font-family:var(--mono);font-size:.65rem;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.6rem}
-.stat-value{font-size:2.2rem;font-weight:900;color:var(--text);letter-spacing:-.04em;font-family:var(--sans);margin-bottom:.3rem}
-.stat-change{font-family:var(--mono);font-size:.68rem;display:flex;align-items:center;gap:.3rem}
-.stat-change.up{color:var(--safe)}
-.stat-change.down{color:var(--danger)}
+.nav-logo {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, var(--accent), var(--cyan));
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 1.1rem;
+  color: #000;
+}
 
-/* ACTIVITY FEED */
-.activity-section{background:var(--surface);border:1px solid var(--border);padding:1.75rem;margin-bottom:2rem}
-.section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem}
-.section-title{font-size:1.1rem;font-weight:800;letter-spacing:-.02em}
-.section-action{font-family:var(--mono);font-size:.7rem;color:var(--accent);cursor:pointer;text-decoration:none}
-.section-action:hover{text-decoration:underline}
-.activity-list{display:flex;flex-direction:column;gap:.7rem}
-.activity-item{display:flex;align-items:center;gap:1rem;padding:.8rem 1rem;background:var(--bg);border:1px solid var(--border);transition:all .18s;cursor:pointer}
-.activity-item:hover{border-color:var(--border3);transform:translateX(3px)}
-.activity-icon{width:36px;height:36px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
-.activity-icon.safe{background:rgba(48,209,88,.1);border:1px solid rgba(48,209,88,.2)}
-.activity-icon.warn{background:rgba(255,149,0,.1);border:1px solid rgba(255,149,0,.2)}
-.activity-icon.danger{background:rgba(255,59,48,.1);border:1px solid rgba(255,59,48,.2)}
-.activity-details{flex:1}
-.activity-title{font-size:.82rem;color:var(--text);margin-bottom:.15rem}
-.activity-meta{font-family:var(--mono);font-size:.64rem;color:var(--text3)}
-.activity-score{font-weight:900;font-size:1.1rem;color:var(--text);font-family:var(--sans);min-width:2.5rem;text-align:right}
+.nav-wordmark {
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: -.02em;
+}
 
-/* CHARTS */
-.chart-grid{display:grid;grid-template-columns:2fr 1fr;gap:1.25rem;margin-bottom:2rem}
-@media(max-width:900px){.chart-grid{grid-template-columns:1fr}}
-.chart-card{background:var(--surface);border:1px solid var(--border);padding:1.75rem}
-.chart-title{font-size:.95rem;font-weight:800;margin-bottom:1.25rem;letter-spacing:-.02em}
-.chart-canvas{width:100%;height:240px;position:relative}
-.mini-chart{height:180px}
+.nav-wordmark span { color: var(--accent); }
 
-/* THREAT MAP */
-.threat-map{background:var(--surface);border:1px solid var(--border);padding:1.75rem;margin-bottom:2rem}
-.threat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.8rem;margin-top:1.25rem}
-.threat-item{background:var(--bg);border-left:3px solid;padding:.8rem 1rem;transition:all .18s}
-.threat-item:hover{transform:translateX(3px)}
-.threat-item.critical{border-color:var(--danger)}
-.threat-item.high{border-color:var(--warn)}
-.threat-item.medium{border-color:#ffd60a}
-.threat-item.low{border-color:var(--safe)}
-.threat-type{font-family:var(--mono);font-size:.68rem;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.3rem}
-.threat-count{font-size:1.6rem;font-weight:900;color:var(--text);font-family:var(--sans);letter-spacing:-.03em}
+.nav-links {
+  display: flex;
+  gap: .25rem;
+  list-style: none;
+}
 
-/* QUICK ACTIONS */
-.quick-actions{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-bottom:2rem}
-.quick-action-card{background:linear-gradient(135deg,var(--surface),var(--surface2));border:1px solid var(--border2);padding:1.5rem;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
-.quick-action-card:hover{border-color:var(--accent);transform:translateY(-2px)}
-.quick-action-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0;transition:opacity .2s}
-.quick-action-card:hover::before{opacity:1}
-.qa-icon{font-size:2rem;margin-bottom:.8rem;display:block}
-.qa-title{font-weight:800;font-size:.92rem;margin-bottom:.3rem;letter-spacing:-.02em}
-.qa-desc{font-family:var(--mono);font-size:.68rem;color:var(--text3);line-height:1.5}
+.nav-links a {
+  padding: .5rem 1rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: .875rem;
+  font-weight: 500;
+  transition: var(--transition);
+  border-radius: 6px;
+}
 
-/* TEAM ACTIVITY (ENTERPRISE) */
-.team-section{background:linear-gradient(135deg,rgba(191,90,242,.05),rgba(124,58,237,.05));border:1px solid rgba(191,90,242,.2);padding:1.75rem;margin-bottom:2rem}
-.team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-top:1.25rem}
-.team-member{background:var(--bg);border:1px solid rgba(191,90,242,.15);padding:1rem;display:flex;align-items:center;gap:.8rem}
-.team-avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#bf5af2,#7c3aed);display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:900;color:#fff;flex-shrink:0}
-.team-info{flex:1}
-.team-name{font-size:.8rem;font-weight:700;margin-bottom:.1rem}
-.team-stat{font-family:var(--mono);font-size:.62rem;color:var(--text3)}
+.nav-links a:hover {
+  color: var(--text);
+  background: rgba(255,255,255,.05);
+}
 
-/* SETTINGS PANEL */
-.settings-section{background:var(--surface);border:1px solid var(--border);padding:2rem}
-.settings-group{margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid var(--border)}
-.settings-group:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
-.settings-label{font-size:.9rem;font-weight:700;margin-bottom:.4rem}
-.settings-desc{font-family:var(--mono);font-size:.68rem;color:var(--text3);margin-bottom:1rem;line-height:1.6}
-.settings-toggle{display:flex;align-items:center;gap:.6rem;cursor:pointer;user-select:none}
-.toggle-switch{width:44px;height:24px;background:var(--border2);border-radius:24px;position:relative;transition:background .2s}
-.toggle-switch::after{content:'';position:absolute;width:18px;height:18px;background:#fff;border-radius:50%;top:3px;left:3px;transition:left .2s}
-.settings-toggle input{display:none}
-.settings-toggle input:checked + .toggle-switch{background:var(--accent)}
-.settings-toggle input:checked + .toggle-switch::after{left:23px;background:#000}
-.settings-input{width:100%;background:var(--bg);border:1px solid var(--border);color:var(--text);font-family:var(--mono);font-size:.76rem;padding:.7rem .9rem;outline:none;transition:border-color .18s}
-.settings-input:focus{border-color:rgba(200,255,0,.35)}
-.settings-btn{background:var(--accent);color:#000;border:none;padding:.7rem 1.5rem;font-family:var(--mono);font-size:.76rem;font-weight:700;cursor:pointer;transition:opacity .18s}
-.settings-btn:hover{opacity:.88}
-.danger-zone{background:rgba(255,59,48,.05);border:1px solid rgba(255,59,48,.15);padding:1.5rem}
-.danger-btn{background:transparent;color:var(--danger);border:1px solid var(--danger);padding:.7rem 1.5rem;font-family:var(--mono);font-size:.76rem;font-weight:700;cursor:pointer;transition:all .18s}
-.danger-btn:hover{background:var(--danger);color:#fff}
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+}
 
-/* API KEYS SECTION */
-.api-keys{background:var(--surface);border:1px solid var(--border);padding:2rem;margin-bottom:2rem}
-.api-key-list{display:flex;flex-direction:column;gap:.8rem;margin-top:1.25rem}
-.api-key-item{background:var(--bg);border:1px solid var(--border);padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;gap:1rem}
-.api-key-info{flex:1}
-.api-key-name{font-size:.8rem;font-weight:700;margin-bottom:.2rem}
-.api-key-value{font-family:var(--mono);font-size:.68rem;color:var(--text3)}
-.api-key-actions{display:flex;gap:.5rem}
-.api-btn{background:transparent;border:1px solid var(--border2);color:var(--text3);font-family:var(--mono);font-size:.66rem;padding:.35rem .7rem;cursor:pointer;transition:all .18s}
-.api-btn:hover{border-color:var(--border3);color:var(--text)}
-.api-btn.danger:hover{border-color:var(--danger);color:var(--danger)}
+.usage-indicator {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .4rem .85rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: .75rem;
+}
 
-/* BILLING */
-.billing-section{background:var(--surface);border:1px solid var(--border);padding:2rem;margin-bottom:2rem}
-.billing-current{background:var(--bg);border:1px solid var(--border2);padding:1.5rem;margin:1.25rem 0}
-.billing-plan-name{font-size:1.1rem;font-weight:800;margin-bottom:.3rem}
-.billing-plan-price{font-family:var(--sans);font-size:1.8rem;font-weight:900;color:var(--accent);margin-bottom:.5rem}
-.billing-plan-meta{font-family:var(--mono);font-size:.68rem;color:var(--text3)}
-.billing-usage{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-top:1.25rem}
-.usage-metric{background:var(--surface);border:1px solid var(--border);padding:1rem}
-.usage-label{font-family:var(--mono);font-size:.62rem;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.4rem}
-.usage-value{font-size:1.4rem;font-weight:900;color:var(--text);font-family:var(--sans)}
-.usage-bar{height:4px;background:var(--border);margin-top:.6rem;overflow:hidden}
-.usage-bar-fill{height:100%;background:var(--accent);transition:width .8s}
+.usage-count {
+  color: var(--accent);
+  font-weight: 700;
+}
 
-/* HERO */
-#hero{min-height:100vh;display:grid;place-items:center;padding:8rem 2.5rem 5rem;position:relative;overflow:hidden}
-.hero-inner{max-width:1000px;width:100%;margin:0 auto}
-.hero-grid{display:grid;grid-template-columns:1fr auto;gap:4rem;align-items:center}
-@media(max-width:860px){.hero-grid{grid-template-columns:1fr}.hero-card{display:none}}
+.btn {
+  padding: .5rem 1.25rem;
+  font-family: var(--font-main);
+  font-size: .875rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: var(--transition);
+  border: none;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+}
 
-.hero-bg{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,black 30%,transparent 100%);opacity:.4}
-.hero-glow{position:absolute;top:-20%;left:30%;width:600px;height:600px;background:radial-gradient(ellipse,rgba(200,255,0,.06) 0%,transparent 70%);pointer-events:none}
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
 
-.hero-eyebrow{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--mono);font-size:.68rem;color:var(--accent);border:1px solid rgba(200,255,0,.2);padding:.3rem .9rem;margin-bottom:2rem;letter-spacing:.1em;opacity:0;animation:fadeUp .5s .1s forwards}
-.hero-eyebrow-dot{width:5px;height:5px;border-radius:50%;background:var(--accent);animation:blink 2s infinite}
-h1{font-size:clamp(3rem,6.5vw,5.5rem);font-weight:900;line-height:1.02;letter-spacing:-.04em;margin-bottom:1.5rem;opacity:0;animation:fadeUp .6s .25s forwards}
-h1 .accent{color:var(--accent);position:relative;display:inline-block}
-h1 .accent::after{content:'';position:absolute;bottom:2px;left:0;right:0;height:3px;background:var(--accent);opacity:.35}
-.hero-desc{font-size:1rem;color:var(--text2);max-width:540px;font-family:var(--mono);font-weight:300;line-height:1.85;margin-bottom:2.75rem;opacity:0;animation:fadeUp .6s .4s forwards}
-.hero-actions{display:flex;gap:.75rem;flex-wrap:wrap;opacity:0;animation:fadeUp .6s .55s forwards;margin-bottom:3rem}
-.btn-hero-primary{background:var(--accent);color:#000;border:none;padding:.85rem 2rem;font-family:var(--mono);font-weight:700;font-size:.85rem;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:.5rem}
-.btn-hero-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(200,255,0,.25)}
-.btn-hero-ghost{background:transparent;color:var(--text2);border:1px solid var(--border2);padding:.85rem 2rem;font-family:var(--mono);font-size:.85rem;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:.5rem}
-.btn-hero-ghost:hover{border-color:var(--border3);color:var(--text)}
+.btn-ghost:hover {
+  color: var(--text);
+  border-color: var(--border-hover);
+  background: rgba(255,255,255,.03);
+}
 
-/* HERO STATS */
-.hero-social-proof{display:flex;align-items:center;gap:1.5rem;font-family:var(--mono);font-size:.68rem;color:var(--text3);opacity:0;animation:fadeUp .6s .7s forwards;flex-wrap:wrap}
-.hero-stat{display:flex;flex-direction:column;gap:.1rem}
-.hero-stat-num{font-size:1rem;font-weight:700;color:var(--text);font-family:var(--sans);letter-spacing:-.02em}
-.hero-stat-label{font-size:.62rem;color:var(--text3)}
-.hero-stat-div{width:1px;height:28px;background:var(--border)}
+.btn-primary {
+  background: var(--accent);
+  color: #000;
+  font-weight: 700;
+  box-shadow: 0 0 20px var(--accent-glow);
+}
+
+.btn-primary:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+}
+
+.nav-user {
+  display: none;
+  align-items: center;
+  gap: .75rem;
+}
+
+.nav-user.active { display: flex; }
+
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--cyan));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: .85rem;
+  color: #000;
+}
+
+.user-name {
+  font-size: .875rem;
+  font-weight: 600;
+}
+
+.plan-badge {
+  padding: .25rem .6rem;
+  font-size: .65rem;
+  font-weight: 800;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+.plan-badge.free {
+  background: rgba(255,255,255,.1);
+  color: var(--text-tertiary);
+}
+
+.plan-badge.pro {
+  background: var(--accent);
+  color: #000;
+}
+
+.plan-badge.enterprise {
+  background: linear-gradient(135deg, var(--purple), var(--cyan));
+  color: #fff;
+}
+
+/* PAGE CONTAINER */
+.page-container {
+  min-height: 100vh;
+  padding-top: 64px;
+  position: relative;
+  z-index: 2;
+}
+
+.page-container.hidden { display: none; }
+
+/* HERO SECTION */
+.hero {
+  min-height: calc(100vh - 64px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  position: relative;
+}
+
+.hero-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .4rem 1rem;
+  background: rgba(0,255,136,.1);
+  border: 1px solid rgba(0,255,136,.2);
+  border-radius: 100px;
+  font-family: var(--font-mono);
+  font-size: .75rem;
+  color: var(--accent);
+  margin-bottom: 2rem;
+  animation: fadeUp .6s ease-out;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 2s infinite;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 7vw, 5rem);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -.03em;
+  margin-bottom: 1.5rem;
+  animation: fadeUp .6s .2s ease-out backwards;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #fff, var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-subtitle {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--text-secondary);
+  max-width: 700px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.7;
+  animation: fadeUp .6s .4s ease-out backwards;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: fadeUp .6s .6s ease-out backwards;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 3rem;
+  justify-content: center;
+  margin-top: 4rem;
+  flex-wrap: wrap;
+  animation: fadeUp .6s .8s ease-out backwards;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--accent);
+  display: block;
+  margin-bottom: .25rem;
+}
+
+.stat-label {
+  font-size: .875rem;
+  color: var(--text-tertiary);
+}
+
+/* TOOL SECTION */
+.tool-section {
+  padding: 6rem 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section-eyebrow {
+  font-family: var(--font-mono);
+  font-size: .75rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: .15em;
+  margin-bottom: .75rem;
+}
+
+.section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 900;
+  letter-spacing: -.02em;
+  margin-bottom: 1rem;
+}
+
+.section-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.tabs {
+  display: flex;
+  gap: .5rem;
+  justify-content: center;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+.tab-btn {
+  padding: .75rem 1.5rem;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-size: .875rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.tab-btn:hover {
+  border-color: var(--border-hover);
+  background: rgba(255,255,255,.03);
+}
+
+.tab-btn.active {
+  background: var(--accent);
+  color: #000;
+  border-color: var(--accent);
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* ANALYZER GRID */
+.analyzer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 968px) {
+  .analyzer-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.input-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.input-label {
+  font-size: .875rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: .75rem;
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+textarea {
+  width: 100%;
+  min-height: 240px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: .875rem;
+  line-height: 1.6;
+  resize: vertical;
+  transition: var(--transition);
+}
+
+textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+textarea::placeholder {
+  color: var(--text-tertiary);
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: .75rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.samples {
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.sample-label {
+  font-size: .75rem;
+  color: var(--text-tertiary);
+  font-family: var(--font-mono);
+}
+
+.sample-btn {
+  padding: .35rem .75rem;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-size: .75rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.sample-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.char-counter {
+  font-family: var(--font-mono);
+  font-size: .75rem;
+  color: var(--text-tertiary);
+}
+
+.char-counter.warn {
+  color: var(--warn);
+}
+
+.analyze-btn {
+  width: 100%;
+  padding: 1rem;
+  background: var(--accent);
+  color: #000;
+  font-weight: 700;
+  font-size: .95rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.analyze-btn:hover:not(:disabled) {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px var(--accent-glow);
+}
+
+.analyze-btn:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+.analyze-btn.loading .btn-text {
+  opacity: 0;
+}
+
+.spinner {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(0,0,0,.2);
+  border-top-color: #000;
+  border-radius: 50%;
+  animation: spin .6s linear infinite;
+}
+
+.analyze-btn.loading .spinner {
+  display: block;
+}
+
+/* USAGE LIMITS */
+.usage-bar {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  margin-top: 1rem;
+  font-family: var(--font-mono);
+  font-size: .75rem;
+  color: var(--text-secondary);
+}
+
+.usage-dots {
+  display: flex;
+  gap: .35rem;
+}
+
+.usage-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  transition: var(--transition);
+}
+
+.usage-dot.used {
+  background: var(--border);
+}
+
+.usage-bar a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.usage-bar a:hover {
+  text-decoration: underline;
+}
+
+/* GITHUB UNLOCK */
+.github-unlock {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: rgba(0,255,136,.05);
+  border: 1px solid rgba(0,255,136,.15);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.github-unlock-text {
+  flex: 1;
+  font-size: .875rem;
+  line-height: 1.5;
+}
+
+.github-unlock-text strong {
+  color: var(--accent);
+}
+
+.github-btn {
+  padding: .6rem 1.25rem;
+  background: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-size: .875rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.github-btn:hover {
+  background: var(--accent);
+  color: #000;
+}
+
+.github-btn.verified {
+  background: rgba(0,255,136,.2);
+  pointer-events: none;
+}
+
+/* RESULT PANEL */
+.result-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+.result-empty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  color: var(--text-tertiary);
+  text-align: center;
+}
+
+.result-empty-icon {
+  font-size: 3rem;
+  opacity: .2;
+}
+
+.result-content {
+  display: none;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.result-content.active {
+  display: flex;
+}
+
+.risk-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+.risk-badge {
+  padding: .4rem .9rem;
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: .75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+}
+
+.risk-badge.safe {
+  background: rgba(0,255,136,.15);
+  color: var(--safe);
+  border: 1px solid rgba(0,255,136,.3);
+}
+
+.risk-badge.low {
+  background: rgba(0,255,136,.1);
+  color: #00dd77;
+  border: 1px solid rgba(0,255,136,.2);
+}
+
+.risk-badge.moderate {
+  background: rgba(255,170,0,.15);
+  color: var(--warn);
+  border: 1px solid rgba(255,170,0,.3);
+}
+
+.risk-badge.high {
+  background: rgba(255,68,68,.15);
+  color: var(--danger);
+  border: 1px solid rgba(255,68,68,.3);
+}
+
+.risk-badge.critical {
+  background: rgba(255,68,68,.2);
+  color: var(--danger);
+  border: 1px solid var(--danger);
+  animation: pulse-border 1.5s infinite;
+}
+
+.score-display {
+  text-align: right;
+}
+
+.score-number {
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 1;
+  font-family: var(--font-main);
+}
+
+.score-max {
+  font-size: .875rem;
+  color: var(--text-tertiary);
+}
+
+.score-bar {
+  height: 4px;
+  background: var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 1.25rem 0;
+}
+
+.score-fill {
+  height: 100%;
+  transition: width 1s cubic-bezier(.4,0,.2,1);
+  border-radius: 4px;
+}
+
+.signals-list {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.signal-item {
+  padding: .75rem 1rem;
+  background: var(--bg-elevated);
+  border-left: 3px solid;
+  border-radius: 4px;
+  font-size: .875rem;
+}
+
+.signal-item.critical { border-color: var(--danger); }
+.signal-item.high { border-color: var(--warn); }
+.signal-item.medium { border-color: #ffaa00; }
+.signal-item.low { border-color: var(--safe); }
+
+.signal-severity {
+  font-family: var(--font-mono);
+  font-size: .7rem;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  margin-right: .5rem;
+}
+
+.recommendation {
+  padding: 1rem;
+  background: var(--bg-elevated);
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+  font-size: .95rem;
+  line-height: 1.7;
+}
+
+.action-items {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.action-item {
+  display: flex;
+  gap: .75rem;
+  font-size: .875rem;
+  line-height: 1.6;
+}
+
+.action-item::before {
+  content: '→';
+  color: var(--accent);
+  font-weight: 700;
+}
 
 /* LIVE METRICS */
-.api-indicator{display:flex;align-items:center;gap:.5rem;font-family:var(--mono);font-size:.66rem;color:var(--text3)}
-.api-dot{width:6px;height:6px;border-radius:50%;background:var(--safe);animation:blink 2s infinite;flex-shrink:0}
-.api-dot.connecting{background:var(--warn)}
-.api-dot.offline{background:var(--danger);animation:none}
+.metrics-panel {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
 
-/* HERO FLOATING CARD */
-.hero-card{background:var(--surface);border:1px solid var(--border);padding:1.5rem;width:280px;position:relative;box-shadow:0 24px 64px rgba(0,0,0,.6)}
-.hero-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent)}
-.hc-label{font-family:var(--mono);font-size:.6rem;color:var(--accent);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.9rem}
-.hc-score{font-size:3.5rem;font-weight:900;color:var(--danger);line-height:1;margin-bottom:.3rem;letter-spacing:-.04em;font-family:var(--sans)}
-.hc-level{font-family:var(--mono);font-size:.68rem;color:var(--danger);margin-bottom:.9rem;display:flex;align-items:center;gap:.4rem}
-.hc-level::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--danger);animation:blink 1.2s infinite}
-.hc-bar{height:2px;background:var(--border);margin-bottom:1.1rem;overflow:hidden}
-.hc-bar-fill{height:100%;background:var(--danger);width:83%;transition:width 1.5s ease}
-.hc-signals{display:flex;flex-direction:column;gap:.35rem}
-.hc-signal{display:flex;align-items:center;gap:.5rem;font-family:var(--mono);font-size:.66rem;padding:.35rem .55rem;background:var(--bg);border-left:2px solid}
-.hc-signal.crit{border-color:var(--danger);color:#ff8080}
-.hc-signal.high{border-color:var(--warn);color:#ffc07a}
-.hc-signal.med{border-color:#ffd60a;color:#ffe066}
-.hc-dot{width:4px;height:4px;border-radius:50%;flex-shrink:0;background:currentColor}
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
 
-/* TRUST BAR / TICKER */
-.trust-bar{border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:.75rem 0;overflow:hidden;background:var(--surface);position:relative}
-.trust-bar::before,.trust-bar::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2}
-.trust-bar::before{left:0;background:linear-gradient(90deg,var(--surface),transparent)}
-.trust-bar::after{right:0;background:linear-gradient(-90deg,var(--surface),transparent)}
-.ticker-track{display:flex;gap:3rem;animation:ticker 30s linear infinite;width:max-content}
-.ticker-item{display:flex;align-items:center;gap:.55rem;font-family:var(--mono);font-size:.68rem;color:var(--text3);white-space:nowrap}
-.ticker-item span{color:var(--accent);font-weight:700}
-@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.metric-card {
+  text-align: center;
+}
 
-/* SECTIONS */
-.section{padding:6rem 2.5rem;max-width:1000px;margin:0 auto;border-top:1px solid var(--border);position:relative}
-.section-eyebrow{font-family:var(--mono);font-size:.63rem;color:var(--accent);letter-spacing:.16em;text-transform:uppercase;margin-bottom:.7rem}
-.section-heading{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:800;letter-spacing:-.035em;margin-bottom:.5rem;line-height:1.1}
-.section-sub{font-family:var(--mono);font-size:.8rem;color:var(--text2);line-height:1.75;margin-bottom:2.5rem;max-width:500px}
+.metric-label {
+  font-size: .75rem;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  margin-bottom: .5rem;
+}
 
-/* MODALS */
-.modal-overlay{position:fixed;inset:0;z-index:600;background:rgba(0,0,0,.92);backdrop-filter:blur(16px);display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .22s}
-.modal-overlay.open{opacity:1;pointer-events:all}
-.modal{background:var(--surface);border:1px solid var(--border);max-width:440px;width:100%;padding:2.25rem;position:relative;transform:translateY(14px);transition:transform .22s}
-.modal-overlay.open .modal{transform:translateY(0)}
-.modal::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent)}
-.modal-x{position:absolute;top:.85rem;right:.85rem;background:none;border:none;color:var(--text3);font-size:1.1rem;cursor:pointer;padding:.2rem .45rem;line-height:1}
-.modal-x:hover{color:var(--text)}
-.modal-icon{font-size:2rem;margin-bottom:.9rem;display:block}
-.modal-title{font-size:1.4rem;font-weight:900;letter-spacing:-.03em;margin-bottom:.45rem}
-.modal-sub{font-family:var(--mono);font-size:.76rem;color:var(--text3);margin-bottom:1.5rem;line-height:1.75}
+.metric-value {
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--accent);
+}
 
-/* AUTH MODAL */
-.auth-tabs{display:flex;border-bottom:1px solid var(--border);margin-bottom:1.5rem}
-.auth-tab{flex:1;background:none;border:none;border-bottom:2px solid transparent;color:var(--text3);font-family:var(--mono);font-size:.76rem;padding:.55rem;cursor:pointer;transition:all .2s;margin-bottom:-1px}
-.auth-tab.active{color:var(--accent);border-bottom-color:var(--accent)}
-.auth-form{display:flex;flex-direction:column;gap:.8rem}
-.auth-input{width:100%;background:var(--bg);border:1px solid var(--border);color:var(--text);font-family:var(--mono);font-size:.78rem;padding:.65rem .85rem;outline:none;transition:border-color .18s}
-.auth-input:focus{border-color:rgba(200,255,0,.35)}
-.auth-input::placeholder{color:var(--text3)}
-.auth-submit{width:100%;background:var(--accent);color:#000;border:none;padding:.82rem;font-family:var(--mono);font-weight:700;font-size:.82rem;cursor:pointer;transition:opacity .18s}
-.auth-submit:hover{opacity:.88}
-.auth-err{font-family:var(--mono);font-size:.68rem;color:var(--danger);text-align:center;min-height:1rem}
+/* DASHBOARD */
+.dashboard {
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
 
-/* FOOTER */
-footer{border-top:1px solid var(--border);padding:2rem 2.5rem;max-width:1000px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:.67rem;color:var(--text3);flex-wrap:wrap;gap:1rem}
-footer a{color:var(--text3);text-decoration:none;transition:color .18s}
-footer a:hover{color:var(--text)}
-.footer-links{display:flex;gap:1.5rem}
+.dashboard-header {
+  margin-bottom: 3rem;
+}
 
-/* TOAST */
-.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(3rem);z-index:700;background:var(--surface);border:1px solid var(--border);font-family:var(--mono);font-size:.73rem;padding:.6rem 1.3rem;opacity:0;transition:all .3s;white-space:nowrap}
-.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
-.toast.s{border-color:var(--safe)}
-.toast.e{border-color:var(--danger)}
+.dashboard-title {
+  font-size: 2.5rem;
+  font-weight: 900;
+  margin-bottom: .5rem;
+}
+
+.dashboard-subtitle {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: var(--transition);
+}
+
+.stat-card:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.stat-card-label {
+  font-size: .875rem;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  margin-bottom: .75rem;
+}
+
+.stat-card-value {
+  font-size: 2.5rem;
+  font-weight: 900;
+  margin-bottom: .5rem;
+}
+
+.stat-card-change {
+  font-size: .875rem;
+  font-family: var(--font-mono);
+}
+
+.stat-card-change.up { color: var(--safe); }
+.stat-card-change.down { color: var(--danger); }
+
+/* MODAL */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.8);
+  backdrop-filter: blur(8px);
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  max-width: 480px;
+  width: 100%;
+  padding: 2rem;
+  position: relative;
+  box-shadow: var(--shadow-lg);
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 1.5rem;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: var(--transition);
+}
+
+.modal-close:hover {
+  background: rgba(255,255,255,.1);
+  color: var(--text);
+}
+
+.modal-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.modal-title {
+  font-size: 1.75rem;
+  font-weight: 900;
+  margin-bottom: .75rem;
+}
+
+.modal-subtitle {
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.auth-tabs {
+  display: flex;
+  gap: .5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.auth-tab {
+  flex: 1;
+  padding: .75rem;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--text-secondary);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.auth-tab.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.form-label {
+  font-size: .875rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.form-input {
+  padding: .75rem 1rem;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-size: .95rem;
+  transition: var(--transition);
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.form-error {
+  color: var(--danger);
+  font-size: .875rem;
+  min-height: 1.25rem;
+  text-align: center;
+}
+
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: .75rem 1.5rem;
+  font-size: .875rem;
+  font-weight: 500;
+  box-shadow: var(--shadow-lg);
+  z-index: 3000;
+  opacity: 0;
+  transition: all .3s cubic-bezier(.4,0,.2,1);
+  pointer-events: none;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.toast.success {
+  border-color: var(--safe);
+  background: rgba(0,255,136,.1);
+}
+
+.toast.error {
+  border-color: var(--danger);
+  background: rgba(255,68,68,.1);
+}
 
 /* ANIMATIONS */
-@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
-@keyframes spin{to{transform:rotate(360deg)}}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
-@keyframes critPulse{0%,100%{box-shadow:0 0 0 0 rgba(255,59,48,.3)}50%{box-shadow:0 0 0 5px rgba(255,59,48,0)}}
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .5; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse-border {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255,68,68,.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(255,68,68,0);
+  }
+}
 
 /* RESPONSIVE */
-@media(max-width:720px){
-  .nav-links{display:none}
-  .chart-grid{grid-template-columns:1fr}
-  .dashboard-grid{grid-template-columns:1fr}
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  h1 { font-size: 2.5rem; }
+  .hero-stats { gap: 2rem; }
+  .stats-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
 <body>
 
-<!-- ═══ MODALS ═══ -->
-<div class="modal-overlay" id="authModal">
-  <div class="modal">
-    <button class="modal-x" onclick="closeModal('authModal')">✕</button>
-    <span class="modal-icon">🛡️</span>
-    <div class="modal-title">Sign in to TrustHire</div>
-    <div class="auth-tabs">
-      <button class="auth-tab active" id="loginTab" onclick="authTab('login')">Sign In</button>
-      <button class="auth-tab" id="regTab" onclick="authTab('reg')">Create Account</button>
-    </div>
-    <div id="loginForm" class="auth-form">
-      <input class="auth-input" id="liEmail" type="email" placeholder="your@email.com">
-      <input class="auth-input" id="liPass" type="password" placeholder="Password">
-      <p class="auth-err" id="liErr"></p>
-      <button class="auth-submit" onclick="doLogin()">Sign In →</button>
-    </div>
-    <div id="regForm" class="auth-form" style="display:none">
-      <input class="auth-input" id="rgName" type="text" placeholder="Your name">
-      <input class="auth-input" id="rgEmail" type="email" placeholder="your@email.com">
-      <input class="auth-input" id="rgPass" type="password" placeholder="Password (min. 8 chars)">
-      <p class="auth-err" id="rgErr"></p>
-      <button class="auth-submit" onclick="doRegister()">Create Account →</button>
-    </div>
-  </div>
-</div>
-
-<!-- ═══ NAV ═══ -->
+<!-- NAVIGATION -->
 <nav>
-  <a class="nav-brand" onclick="navigateTo('home')">
-    <div class="nav-logo-mark">
-      <svg viewBox="0 0 28 28" fill="none">
-        <path d="M14 2L4 7v8c0 5.5 4.3 10.7 10 12 5.7-1.3 10-6.5 10-12V7L14 2z" fill="none" stroke="#c8ff00" stroke-width="1.5"/>
-        <path d="M10 14l3 3 5-6" stroke="#c8ff00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
+  <div class="nav-container">
+    <a class="nav-brand" onclick="navigate('home')">
+      <div class="nav-logo">T</div>
+      <div class="nav-wordmark">Trust<span>Hire</span></div>
+    </a>
+
+    <div class="nav-links">
+      <a onclick="navigate('home')">Home</a>
+      <a onclick="navigate('analyzer')">Analyzer</a>
+      <a onclick="navigate('dashboard')" id="dashLink" style="display:none">Dashboard</a>
+      <a href="https://github.com/felipeofdev-ai/trusthire" target="_blank">GitHub</a>
     </div>
-    <span class="nav-wordmark">Trust<span>Hire</span></span>
-  </a>
-  <ul class="nav-links">
-    <li><a onclick="navigateTo('home')">Home</a></li>
-    <li><a onclick="navigateTo('dashboard')" id="navDashLink" style="display:none">Dashboard</a></li>
-    <li><a href="https://github.com/felipeofdev-ai/trusthire" target="_blank">GitHub →</a></li>
-  </ul>
-  <div class="nav-right">
-    <div class="lang-picker" id="langPicker">
-      <button class="lang-opt active" onclick="setLang('en')">EN</button>
-      <button class="lang-opt" onclick="setLang('pt')">PT</button>
-      <button class="lang-opt" onclick="setLang('es')">ES</button>
-    </div>
-    <div id="navGuest" style="display:flex;align-items:center;gap:.5rem">
-      <div class="usage-pill" id="usagePill">
-        <span class="uses-left" id="usesLeft">3</span>
-        <span>free left</span>
+
+    <div class="nav-right">
+      <div id="navGuest" style="display:flex;align-items:center;gap:.75rem">
+        <div class="usage-indicator">
+          <span class="usage-count" id="usageCount">3</span>
+          <span>uses left</span>
+        </div>
+        <button class="btn btn-ghost" onclick="openAuth()">Sign In</button>
+        <button class="btn btn-primary" onclick="openAuth()">Get Started</button>
       </div>
-      <button class="nav-signin" onclick="openAuthModal()">Sign In</button>
-      <button class="nav-cta" onclick="openAuthModal()">Get Started</button>
-    </div>
-    <div class="nav-user" id="navUser">
-      <div class="nav-user-avatar" id="navAvatar"></div>
-      <span class="nav-user-name" id="navName"></span>
-      <span class="plan-chip free" id="navChip">FREE</span>
-      <button class="btn-signout" onclick="doLogout()">Sign out</button>
+
+      <div class="nav-user" id="navUser">
+        <div class="user-avatar" id="userAvatar">U</div>
+        <span class="user-name" id="userName"></span>
+        <span class="plan-badge free" id="userPlan">FREE</span>
+        <button class="btn btn-ghost" onclick="logout()">Sign Out</button>
+      </div>
     </div>
   </div>
 </nav>
 
-<!-- ═══ HOME PAGE ═══ -->
-<div id="homePage">
-  <section id="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-glow"></div>
-    <div class="hero-inner">
-      <div class="hero-grid">
-        <div>
-          <div class="hero-eyebrow">
-            <span class="hero-eyebrow-dot"></span>
-            <span>Enterprise-Grade · AI + ML · Real-time Threat Intel</span>
-          </div>
-          <h1>Verify every <span class="accent">job offer</span><br>before you trust.</h1>
-          <p class="hero-desc">Next-generation fraud detection with Claude AI, behavioral fingerprinting, real-time threat intelligence, and predictive caching. Enterprise security for everyone.</p>
-          <div class="hero-actions">
-            <button class="btn-hero-primary" onclick="openAuthModal()">
-              <span>Start Free Trial</span> →
-            </button>
-            <a href="https://github.com/felipeofdev-ai/trusthire" class="btn-hero-ghost" target="_blank">
-              <span>View on GitHub</span>
-            </a>
-          </div>
-          <div class="hero-social-proof">
-            <div class="hero-stat"><span class="hero-stat-num">98%</span><span class="hero-stat-label">Detection accuracy</span></div>
-            <div class="hero-stat-div"></div>
-            <div class="hero-stat"><span class="hero-stat-num">150k+</span><span class="hero-stat-label">Analyses run</span></div>
-            <div class="hero-stat-div"></div>
-            <div class="hero-stat"><span class="hero-stat-num">< 1s</span><span class="hero-stat-label">Average response</span></div>
-            <div class="hero-stat-div"></div>
-            <div class="hero-stat">
-              <div class="api-indicator"><span class="api-dot connecting" id="apiDot"></span><span id="apiTxt">connecting...</span></div>
-            </div>
-          </div>
+<!-- HOME PAGE -->
+<div class="page-container" id="homePage">
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="status-dot"></span>
+        <span>Enterprise-Grade Security • AI-Powered Detection • Real-time Intelligence</span>
+      </div>
+      
+      <h1>
+        Stop job scams before<br>
+        <span class="gradient-text">they stop you</span>
+      </h1>
+      
+      <p class="hero-subtitle">
+        World's most advanced fraud detection platform. Powered by Claude AI, behavioral fingerprinting, 
+        and real-time threat intelligence. Trusted by 150,000+ professionals worldwide.
+      </p>
+      
+      <div class="hero-actions">
+        <button class="btn btn-primary" onclick="navigate('analyzer')" style="font-size:1rem;padding:.85rem 2rem">
+          Start Free Analysis →
+        </button>
+        <button class="btn btn-ghost" onclick="navigate('dashboard')" style="font-size:1rem;padding:.85rem 2rem">
+          View Dashboard
+        </button>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-value">98.7%</span>
+          <span class="stat-label">Detection Accuracy</span>
         </div>
-        <div class="hero-card">
-          <div class="hc-label">RISK ASSESSMENT</div>
-          <div class="hc-score">89</div>
-          <div class="hc-level">CRITICAL RISK</div>
-          <div class="hc-bar"><div class="hc-bar-fill"></div></div>
-          <div class="hc-signals">
-            <div class="hc-signal crit"><span class="hc-dot"></span><span>Upfront crypto payment</span></div>
-            <div class="hc-signal high"><span class="hc-dot"></span><span>Behavioral anomaly detected</span></div>
-            <div class="hc-signal med"><span class="hc-dot"></span><span>Domain age < 30 days</span></div>
-          </div>
+        <div class="stat">
+          <span class="stat-value">150k+</span>
+          <span class="stat-label">Analyses Run</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">&lt;500ms</span>
+          <span class="stat-label">Avg Response Time</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">99.9%</span>
+          <span class="stat-label">Uptime SLA</span>
         </div>
       </div>
     </div>
   </section>
-
-  <div class="trust-bar">
-    <div class="ticker-track" id="ticker"></div>
-  </div>
-
-  <footer>
-    <span>© 2025 TrustHire — Open source. Enterprise-grade security.</span>
-    <div class="footer-links">
-      <a href="https://github.com/felipeofdev-ai/trusthire" target="_blank">GitHub</a>
-      <a onclick="openAuthModal()">Get Started</a>
-      <a href="https://github.com/felipeofdev-ai/trusthire/blob/main/LICENSE" target="_blank">MIT</a>
-    </div>
-  </footer>
 </div>
 
-<!-- ═══ DASHBOARD ═══ -->
-<div class="dashboard-wrapper" id="dashboardPage">
-  <div class="dashboard-container">
-    
-    <!-- Header -->
+<!-- ANALYZER PAGE -->
+<div class="page-container hidden" id="analyzerPage">
+  <div class="tool-section">
+    <div class="section-header">
+      <div class="section-eyebrow">FRAUD DETECTION ENGINE</div>
+      <h2 class="section-title">Enterprise Analysis Platform</h2>
+      <p class="section-subtitle">
+        Analyze job offers, recruiter messages, and employment opportunities with military-grade AI detection
+      </p>
+    </div>
+
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('analyze')">🔍 Analyze Message</button>
+      <button class="tab-btn" onclick="switchTab('resume')">📄 Resume Optimizer</button>
+    </div>
+
+    <!-- ANALYZE TAB -->
+    <div class="tab-content active" id="tabAnalyze">
+      <div class="analyzer-grid">
+        <!-- INPUT SECTION -->
+        <div class="input-section">
+          <label class="input-label">Recruiter Message</label>
+          <textarea 
+            id="messageInput" 
+            placeholder="Paste the recruiter message, job offer, or email here for instant analysis..."
+            maxlength="5000"
+            oninput="updateCharCount()"
+          ></textarea>
+          
+          <div class="toolbar">
+            <div class="samples">
+              <span class="sample-label">Try:</span>
+              <button class="sample-btn" onclick="loadSample('scam')">🚨 Scam</button>
+              <button class="sample-btn" onclick="loadSample('legit')">✅ Legit</button>
+              <button class="sample-btn" onclick="loadSample('suspicious')">⚠️ Suspicious</button>
+            </div>
+            <span class="char-counter" id="charCounter">0/5000</span>
+          </div>
+
+          <button class="analyze-btn" id="analyzeBtn" onclick="analyzeMessage()">
+            <span class="btn-text">Analyze with AI</span>
+            <span class="spinner"></span>
+          </button>
+
+          <div class="usage-bar" id="usageBar">
+            <div class="usage-dots" id="usageDots"></div>
+            <span id="usageText"></span>
+          </div>
+
+          <div class="github-unlock" id="githubUnlock" style="display:none">
+            <div class="github-unlock-text">
+              <strong>⭐ Unlock +1 Free Analysis</strong><br>
+              Star our GitHub repo to get an extra free analysis daily
+            </div>
+            <button class="github-btn" id="githubBtn" onclick="unlockGithub()">
+              Star on GitHub
+            </button>
+          </div>
+        </div>
+
+        <!-- RESULT SECTION -->
+        <div class="result-panel">
+          <div class="result-empty" id="resultEmpty">
+            <div class="result-empty-icon">🛡️</div>
+            <div>
+              <strong>Ready to analyze</strong><br>
+              <span style="color:var(--text-tertiary)">Paste a message and click Analyze to get started</span>
+            </div>
+          </div>
+
+          <div class="result-content" id="resultContent">
+            <!-- Results will be injected here -->
+          </div>
+        </div>
+      </div>
+
+      <!-- LIVE METRICS -->
+      <div class="metrics-panel" id="metricsPanel" style="display:none">
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-label">Today's Analyses</div>
+            <div class="metric-value" id="metricToday">0</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Threats Blocked</div>
+            <div class="metric-value" id="metricThreats">0</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Avg Response</div>
+            <div class="metric-value"><span id="metricSpeed">0</span>ms</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Detection Rate</div>
+            <div class="metric-value">98.7%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESUME TAB -->
+    <div class="tab-content" id="tabResume">
+      <div style="text-align:center;padding:4rem 2rem">
+        <div style="font-size:4rem;margin-bottom:1rem;opacity:.2">📄</div>
+        <h3 style="font-size:1.5rem;margin-bottom:.75rem">Resume Optimizer</h3>
+        <p style="color:var(--text-secondary);max-width:500px;margin:0 auto 2rem">
+          ATS optimization, keyword analysis, and professional formatting coming soon
+        </p>
+        <button class="btn btn-primary" onclick="showToast('Feature launching soon!', 'success')">
+          Get Early Access
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DASHBOARD PAGE -->
+<div class="page-container hidden" id="dashboardPage">
+  <div class="dashboard">
     <div class="dashboard-header">
-      <h2 class="dashboard-title">Welcome back, <span id="dashUserName"></span></h2>
-      <p class="dashboard-subtitle">Here's what's happening with your account today.</p>
+      <h2 class="dashboard-title">Dashboard</h2>
+      <p class="dashboard-subtitle">Monitor your security analytics and system performance</p>
     </div>
 
-    <!-- Stats Grid -->
-    <div class="dashboard-grid">
+    <div class="stats-grid">
       <div class="stat-card">
-        <div class="stat-label">Total Analyses</div>
-        <div class="stat-value" id="statTotal">0</div>
-        <div class="stat-change up">
-          <span>↑ 12%</span>
-          <span>vs last week</span>
-        </div>
+        <div class="stat-card-label">Total Analyses</div>
+        <div class="stat-card-value" id="dashStatTotal">0</div>
+        <div class="stat-card-change up">↑ 12% vs last week</div>
       </div>
       <div class="stat-card">
-        <div class="stat-label">Threats Detected</div>
-        <div class="stat-value" id="statThreats">0</div>
-        <div class="stat-change down">
-          <span>↓ 8%</span>
-          <span>vs last week</span>
-        </div>
+        <div class="stat-card-label">Threats Detected</div>
+        <div class="stat-card-value" id="dashStatThreats">0</div>
+        <div class="stat-card-change up">↑ 8% vs last week</div>
       </div>
       <div class="stat-card">
-        <div class="stat-label">Avg Response Time</div>
-        <div class="stat-value"><span id="statAvgTime">0</span><span style="font-size:1rem;color:var(--text3)">ms</span></div>
-        <div class="stat-change up">
-          <span style="color:var(--safe)">15% faster</span>
-        </div>
+        <div class="stat-card-label">Avg Response</div>
+        <div class="stat-card-value"><span id="dashStatSpeed">0</span>ms</div>
+        <div class="stat-card-change down" style="color:var(--safe)">↓ 15% faster</div>
       </div>
       <div class="stat-card">
-        <div class="stat-label">API Calls Today</div>
-        <div class="stat-value" id="statApiCalls">0</div>
-        <div class="stat-change">
-          <span style="color:var(--text3)">Rate: <span id="statApiRate">0</span>/min</span>
-        </div>
+        <div class="stat-card-label">Success Rate</div>
+        <div class="stat-card-value">98.7%</div>
+        <div class="stat-card-change up">↑ 2% vs last week</div>
       </div>
     </div>
 
-    <!-- Quick Actions -->
-    <div class="quick-actions">
-      <div class="quick-action-card" onclick="showToast('Feature coming soon!')">
-        <span class="qa-icon">🔍</span>
-        <div class="qa-title">Quick Analysis</div>
-        <p class="qa-desc">Analyze a message instantly with our AI engine</p>
-      </div>
-      <div class="quick-action-card" onclick="showToast('Feature coming soon!')">
-        <span class="qa-icon">📊</span>
-        <div class="qa-title">Generate Report</div>
-        <p class="qa-desc">Create comprehensive security reports</p>
-      </div>
-      <div class="quick-action-card" onclick="showToast('Feature coming soon!')">
-        <span class="qa-icon">🔑</span>
-        <div class="qa-title">API Keys</div>
-        <p class="qa-desc">Manage your API keys and webhooks</p>
-      </div>
-      <div class="quick-action-card" onclick="showToast('Feature coming soon!')">
-        <span class="qa-icon">⚙️</span>
-        <div class="qa-title">Settings</div>
-        <p class="qa-desc">Configure alerts and integrations</p>
-      </div>
+    <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:3rem;text-align:center">
+      <div style="font-size:3rem;margin-bottom:1rem;opacity:.2">📊</div>
+      <h3 style="font-size:1.5rem;margin-bottom:.75rem">Advanced Analytics Coming Soon</h3>
+      <p style="color:var(--text-secondary);max-width:600px;margin:0 auto">
+        Interactive charts, threat maps, behavioral insights, API usage tracking, and team collaboration features
+      </p>
     </div>
-
-    <!-- Charts -->
-    <div class="chart-grid">
-      <div class="chart-card">
-        <div class="chart-title">Analysis Trend (Last 7 Days)</div>
-        <canvas id="trendChart" class="chart-canvas"></canvas>
-      </div>
-      <div class="chart-card">
-        <div class="chart-title">Risk Distribution</div>
-        <canvas id="riskChart" class="mini-chart"></canvas>
-      </div>
-    </div>
-
-    <!-- Threat Map -->
-    <div class="threat-map">
-      <div class="section-head">
-        <h3 class="section-title">Real-time Threat Intelligence</h3>
-        <a class="section-action" onclick="showToast('Refreshing...')">Refresh →</a>
-      </div>
-      <div class="threat-grid">
-        <div class="threat-item critical">
-          <div class="threat-type">Critical Threats</div>
-          <div class="threat-count" id="threatCritical">0</div>
-        </div>
-        <div class="threat-item high">
-          <div class="threat-type">High Risk</div>
-          <div class="threat-count" id="threatHigh">0</div>
-        </div>
-        <div class="threat-item medium">
-          <div class="threat-type">Moderate</div>
-          <div class="threat-count" id="threatMedium">0</div>
-        </div>
-        <div class="threat-item low">
-          <div class="threat-type">Low Risk</div>
-          <div class="threat-count" id="threatLow">0</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Recent Activity -->
-    <div class="activity-section">
-      <div class="section-head">
-        <h3 class="section-title">Recent Activity</h3>
-        <a class="section-action" onclick="showToast('Feature coming soon!')">View All →</a>
-      </div>
-      <div class="activity-list" id="activityList">
-        <div style="font-family:var(--mono);font-size:.72rem;color:var(--text3);text-align:center;padding:2rem">
-          No recent activity. Start analyzing to see your history here.
-        </div>
-      </div>
-    </div>
-
-    <!-- API Keys Section -->
-    <div class="api-keys">
-      <div class="section-head">
-        <h3 class="section-title">API Keys</h3>
-        <button class="settings-btn" onclick="generateApiKey()">+ Generate New Key</button>
-      </div>
-      <div class="api-key-list" id="apiKeyList">
-        <div style="font-family:var(--mono);font-size:.72rem;color:var(--text3);text-align:center;padding:2rem">
-          No API keys yet. Generate one to get started with our API.
-        </div>
-      </div>
-    </div>
-
-    <!-- Billing Section -->
-    <div class="billing-section">
-      <div class="section-head">
-        <h3 class="section-title">Billing & Usage</h3>
-        <a class="section-action" onclick="showToast('Feature coming soon!')">Manage Plan →</a>
-      </div>
-      <div class="billing-current">
-        <div class="billing-plan-name" id="billingPlanName">Free Plan</div>
-        <div class="billing-plan-price" id="billingPlanPrice">$0<span style="font-size:1rem;font-weight:400;color:var(--text3)">/mo</span></div>
-        <div class="billing-plan-meta">3 analyses per day · 1 resume optimization</div>
-      </div>
-      <div class="billing-usage">
-        <div class="usage-metric">
-          <div class="usage-label">Analyses Used</div>
-          <div class="usage-value"><span id="usageAnalyses">0</span><span style="font-size:.9rem;color:var(--text3)">/3</span></div>
-          <div class="usage-bar"><div class="usage-bar-fill" id="usageAnalysesBar" style="width:0%"></div></div>
-        </div>
-        <div class="usage-metric">
-          <div class="usage-label">API Calls</div>
-          <div class="usage-value"><span id="usageApi">0</span><span style="font-size:.9rem;color:var(--text3)">/100</span></div>
-          <div class="usage-bar"><div class="usage-bar-fill" id="usageApiBar" style="width:0%"></div></div>
-        </div>
-        <div class="usage-metric">
-          <div class="usage-label">Storage Used</div>
-          <div class="usage-value"><span id="usageStorage">0</span><span style="font-size:.9rem;color:var(--text3)">MB</span></div>
-          <div class="usage-bar"><div class="usage-bar-fill" id="usageStorageBar" style="width:0%"></div></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Settings Section -->
-    <div class="settings-section">
-      <h3 class="section-title" style="margin-bottom:1.5rem">Account Settings</h3>
-      
-      <div class="settings-group">
-        <div class="settings-label">Email Notifications</div>
-        <div class="settings-desc">Receive alerts when critical threats are detected in your analyses</div>
-        <label class="settings-toggle">
-          <input type="checkbox" id="settingEmailNotif" onchange="saveSetting('emailNotif', this.checked)">
-          <div class="toggle-switch"></div>
-          <span style="font-family:var(--mono);font-size:.72rem;color:var(--text3)">Enable email alerts</span>
-        </label>
-      </div>
-
-      <div class="settings-group">
-        <div class="settings-label">Slack Integration</div>
-        <div class="settings-desc">Send analysis results directly to your Slack workspace</div>
-        <input type="text" class="settings-input" placeholder="Slack webhook URL" id="settingSlackUrl">
-        <button class="settings-btn" style="margin-top:.8rem" onclick="saveSetting('slackUrl', document.getElementById('settingSlackUrl').value)">Save Webhook</button>
-      </div>
-
-      <div class="settings-group">
-        <div class="settings-label">Two-Factor Authentication</div>
-        <div class="settings-desc">Add an extra layer of security to your account</div>
-        <button class="settings-btn" onclick="showToast('2FA setup coming soon!')">Enable 2FA</button>
-      </div>
-
-      <div class="settings-group" style="border:none">
-        <div class="danger-zone">
-          <div class="settings-label" style="color:var(--danger)">Danger Zone</div>
-          <div class="settings-desc">Permanently delete your account and all associated data</div>
-          <button class="danger-btn" onclick="confirmDeleteAccount()">Delete Account</button>
-        </div>
-      </div>
-    </div>
-
   </div>
 </div>
 
+<!-- AUTH MODAL -->
+<div class="modal-overlay" id="authModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeAuth()">×</button>
+    <div class="modal-icon">🛡️</div>
+    <h3 class="modal-title">Welcome to TrustHire</h3>
+    <p class="modal-subtitle">Sign in to unlock unlimited analyses and advanced features</p>
+
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="loginTab" onclick="switchAuthTab('login')">Sign In</button>
+      <button class="auth-tab" id="signupTab" onclick="switchAuthTab('signup')">Create Account</button>
+    </div>
+
+    <form class="auth-form" id="loginForm" onsubmit="handleLogin(event)">
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input class="form-input" type="email" id="loginEmail" required placeholder="you@example.com">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input class="form-input" type="password" id="loginPassword" required placeholder="••••••••">
+      </div>
+      <div class="form-error" id="loginError"></div>
+      <button class="btn btn-primary" type="submit" style="width:100%;justify-content:center">
+        Sign In →
+      </button>
+    </form>
+
+    <form class="auth-form" id="signupForm" onsubmit="handleSignup(event)" style="display:none">
+      <div class="form-group">
+        <label class="form-label">Name</label>
+        <input class="form-input" type="text" id="signupName" required placeholder="Your name">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input class="form-input" type="email" id="signupEmail" required placeholder="you@example.com">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input class="form-input" type="password" id="signupPassword" required placeholder="Min. 8 characters">
+      </div>
+      <div class="form-error" id="signupError"></div>
+      <button class="btn btn-primary" type="submit" style="width:100%;justify-content:center">
+        Create Account →
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
 <script>
-// ════════════════════════════════════════════════════════════
-//  STATE MANAGEMENT
-// ════════════════════════════════════════════════════════════
-const APP_STATE = {
+// ═══════════════════════════════════════════════════════════════
+// STATE MANAGEMENT
+// ═══════════════════════════════════════════════════════════════
+const STATE = {
   currentPage: 'home',
   user: null,
   token: null,
-  stats: {
-    totalAnalyses: 0,
-    threatsDetected: 0,
-    avgResponseTime: 0,
-    apiCalls: 0
+  usage: {
+    count: 0,
+    max: 3,
+    githubUnlocked: false
+  },
+  metrics: {
+    today: 0,
+    threats: 0,
+    totalTime: 0
   }
 };
 
-// ════════════════════════════════════════════════════════════
-//  STORAGE HELPERS
-// ════════════════════════════════════════════════════════════
-const getToken = () => localStorage.getItem('th_token') || '';
-const setToken = t => t ? localStorage.setItem('th_token', t) : localStorage.removeItem('th_token');
-const getUser = () => { 
-  try { 
-    return JSON.parse(localStorage.getItem('th_user') || 'null'); 
-  } catch { 
-    return null; 
-  } 
+// LocalStorage helpers
+const storage = {
+  get: (key) => {
+    try {
+      return JSON.parse(localStorage.getItem('trusthire_' + key));
+    } catch {
+      return null;
+    }
+  },
+  set: (key, value) => {
+    localStorage.setItem('trusthire_' + key, JSON.stringify(value));
+  },
+  remove: (key) => {
+    localStorage.removeItem('trusthire_' + key);
+  }
 };
-const setUser = u => u ? localStorage.setItem('th_user', JSON.stringify(u)) : localStorage.removeItem('th_user');
-const isLoggedIn = () => !!getToken();
 
-// ════════════════════════════════════════════════════════════
-//  NAVIGATION
-// ════════════════════════════════════════════════════════════
-function navigateTo(page) {
-  APP_STATE.currentPage = page;
+// ═══════════════════════════════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════════════════════════════
+function navigate(page) {
+  STATE.currentPage = page;
   
   // Hide all pages
-  document.getElementById('homePage').style.display = 'none';
-  document.getElementById('dashboardPage').classList.remove('active');
+  document.querySelectorAll('.page-container').forEach(p => p.classList.add('hidden'));
   
   // Show selected page
   if (page === 'home') {
-    document.getElementById('homePage').style.display = 'block';
+    document.getElementById('homePage').classList.remove('hidden');
+  } else if (page === 'analyzer') {
+    document.getElementById('analyzerPage').classList.remove('hidden');
   } else if (page === 'dashboard') {
-    if (!isLoggedIn()) {
-      openAuthModal();
+    if (!STATE.user) {
+      openAuth();
       return;
     }
-    document.getElementById('dashboardPage').classList.add('active');
-    loadDashboardData();
+    document.getElementById('dashboardPage').classList.remove('hidden');
+    updateDashboard();
   }
-}
-
-// ════════════════════════════════════════════════════════════
-//  AUTH
-// ════════════════════════════════════════════════════════════
-function openAuthModal() { 
-  document.getElementById('authModal').classList.add('open'); 
-}
-
-function closeModal(id) { 
-  document.getElementById(id).classList.remove('open'); 
-}
-
-function authTab(tab) {
-  document.getElementById('loginForm').style.display = tab === 'login' ? 'flex' : 'none';
-  document.getElementById('regForm').style.display = tab === 'reg' ? 'flex' : 'none';
-  document.getElementById('loginTab').classList.toggle('active', tab === 'login');
-  document.getElementById('regTab').classList.toggle('active', tab === 'reg');
-}
-
-async function doLogin() {
-  const email = document.getElementById('liEmail').value.trim();
-  const pass = document.getElementById('liPass').value;
-  document.getElementById('liErr').textContent = '';
   
-  if (!email || !pass) { 
-    document.getElementById('liErr').textContent = 'Please fill all fields.'; 
-    return; 
-  }
+  // Scroll to top
+  window.scrollTo(0, 0);
+}
 
-  // Demo login - in production, call actual API
-  const mockUser = {
+// ═══════════════════════════════════════════════════════════════
+// AUTH
+// ═══════════════════════════════════════════════════════════════
+function openAuth() {
+  document.getElementById('authModal').classList.add('active');
+}
+
+function closeAuth() {
+  document.getElementById('authModal').classList.remove('active');
+}
+
+function switchAuthTab(tab) {
+  if (tab === 'login') {
+    document.getElementById('loginTab').classList.add('active');
+    document.getElementById('signupTab').classList.remove('active');
+    document.getElementById('loginForm').style.display = 'flex';
+    document.getElementById('signupForm').style.display = 'none';
+  } else {
+    document.getElementById('signupTab').classList.add('active');
+    document.getElementById('loginTab').classList.remove('active');
+    document.getElementById('signupForm').style.display = 'flex';
+    document.getElementById('loginForm').style.display = 'none';
+  }
+}
+
+function handleLogin(e) {
+  e.preventDefault();
+  const email = document.getElementById('loginEmail').value;
+  const password = document.getElementById('loginPassword').value;
+  
+  // Demo authentication
+  const user = {
     id: 'user_' + Date.now(),
     name: email.split('@')[0],
     email: email,
-    subscription_tier: 'free',
-    created_at: new Date().toISOString()
-  };
-  
-  const mockToken = 'demo_token_' + Date.now();
-  
-  setToken(mockToken);
-  setUser(mockUser);
-  APP_STATE.user = mockUser;
-  APP_STATE.token = mockToken;
-  
-  closeModal('authModal');
-  renderNavState();
-  navigateTo('dashboard');
-  showToast('👋 Welcome, ' + mockUser.name + '!', 's', 3000);
-}
-
-async function doRegister() {
-  const name = document.getElementById('rgName').value.trim();
-  const email = document.getElementById('rgEmail').value.trim();
-  const pass = document.getElementById('rgPass').value;
-  document.getElementById('rgErr').textContent = '';
-  
-  if (!name || !email || !pass) { 
-    document.getElementById('rgErr').textContent = 'Please fill all fields.'; 
-    return; 
-  }
-  
-  if (pass.length < 8) { 
-    document.getElementById('rgErr').textContent = 'Password must be at least 8 characters.'; 
-    return; 
-  }
-
-  // Demo registration - in production, call actual API
-  const mockUser = {
-    id: 'user_' + Date.now(),
-    name: name,
-    email: email,
-    subscription_tier: 'free',
-    created_at: new Date().toISOString()
-  };
-  
-  const mockToken = 'demo_token_' + Date.now();
-  
-  setToken(mockToken);
-  setUser(mockUser);
-  APP_STATE.user = mockUser;
-  APP_STATE.token = mockToken;
-  
-  closeModal('authModal');
-  renderNavState();
-  navigateTo('dashboard');
-  showToast('🎉 Account created successfully!', 's', 3000);
-}
-
-function doLogout() {
-  setToken(null);
-  setUser(null);
-  APP_STATE.user = null;
-  APP_STATE.token = null;
-  renderNavState();
-  navigateTo('home');
-  showToast('Signed out successfully');
-}
-
-function renderNavState() {
-  const user = getUser();
-  const gEl = document.getElementById('navGuest');
-  const uEl = document.getElementById('navUser');
-  const dashLink = document.getElementById('navDashLink');
-  
-  if (user && isLoggedIn()) {
-    gEl.style.display = 'none';
-    uEl.classList.add('active');
-    dashLink.style.display = 'block';
-    
-    document.getElementById('navName').textContent = user.name?.split(' ')[0] || '';
-    document.getElementById('navAvatar').textContent = (user.name?.charAt(0) || 'U').toUpperCase();
-    
-    const chip = document.getElementById('navChip');
-    chip.textContent = (user.subscription_tier || 'free').toUpperCase();
-    chip.className = 'plan-chip ' + (user.subscription_tier || 'free');
-  } else {
-    gEl.style.display = 'flex';
-    uEl.classList.remove('active');
-    dashLink.style.display = 'none';
-  }
-}
-
-// ════════════════════════════════════════════════════════════
-//  DASHBOARD DATA
-// ════════════════════════════════════════════════════════════
-function loadDashboardData() {
-  const user = getUser();
-  if (!user) return;
-  
-  // Update user name
-  document.getElementById('dashUserName').textContent = user.name?.split(' ')[0] || 'there';
-  
-  // Load mock stats
-  const stats = {
-    totalAnalyses: Math.floor(Math.random() * 50) + 10,
-    threatsDetected: Math.floor(Math.random() * 15) + 2,
-    avgResponseTime: Math.floor(Math.random() * 300) + 200,
-    apiCalls: Math.floor(Math.random() * 80) + 5
-  };
-  
-  APP_STATE.stats = stats;
-  
-  // Update stat cards
-  animateValue('statTotal', 0, stats.totalAnalyses, 1000);
-  animateValue('statThreats', 0, stats.threatsDetected, 1000);
-  animateValue('statAvgTime', 0, stats.avgResponseTime, 1000);
-  animateValue('statApiCalls', 0, stats.apiCalls, 1000);
-  document.getElementById('statApiRate').textContent = Math.floor(stats.apiCalls / 60);
-  
-  // Update threat counts
-  document.getElementById('threatCritical').textContent = Math.floor(Math.random() * 3);
-  document.getElementById('threatHigh').textContent = Math.floor(Math.random() * 8) + 2;
-  document.getElementById('threatMedium').textContent = Math.floor(Math.random() * 15) + 5;
-  document.getElementById('threatLow').textContent = Math.floor(Math.random() * 20) + 10;
-  
-  // Update billing info
-  if (user.subscription_tier === 'pro') {
-    document.getElementById('billingPlanName').textContent = 'Pro Plan';
-    document.getElementById('billingPlanPrice').innerHTML = '$9.90<span style="font-size:1rem;font-weight:400;color:var(--text3)">/mo</span>';
-  } else if (user.subscription_tier === 'enterprise') {
-    document.getElementById('billingPlanName').textContent = 'Enterprise Plan';
-    document.getElementById('billingPlanPrice').innerHTML = '$49.90<span style="font-size:1rem;font-weight:400;color:var(--text3)">/mo</span>';
-  }
-  
-  // Update usage bars
-  const analysesUsed = Math.floor(Math.random() * 3);
-  document.getElementById('usageAnalyses').textContent = analysesUsed;
-  document.getElementById('usageAnalysesBar').style.width = (analysesUsed / 3 * 100) + '%';
-  
-  const apiUsed = Math.floor(Math.random() * 100);
-  document.getElementById('usageApi').textContent = apiUsed;
-  document.getElementById('usageApiBar').style.width = (apiUsed / 100 * 100) + '%';
-  
-  const storageUsed = Math.floor(Math.random() * 50) + 5;
-  document.getElementById('usageStorage').textContent = storageUsed;
-  document.getElementById('usageStorageBar').style.width = (storageUsed / 1000 * 100) + '%';
-  
-  // Load charts
-  loadCharts();
-  
-  // Load activity
-  loadRecentActivity();
-}
-
-function animateValue(id, start, end, duration) {
-  const obj = document.getElementById(id);
-  const range = end - start;
-  const increment = end > start ? 1 : -1;
-  const stepTime = Math.abs(Math.floor(duration / range));
-  let current = start;
-  const timer = setInterval(() => {
-    current += increment;
-    obj.textContent = current;
-    if (current === end) clearInterval(timer);
-  }, stepTime);
-}
-
-function loadCharts() {
-  // Simple mock chart using canvas
-  const trendCanvas = document.getElementById('trendChart');
-  const riskCanvas = document.getElementById('riskChart');
-  
-  if (!trendCanvas || !riskCanvas) return;
-  
-  // Trend Chart
-  const trendCtx = trendCanvas.getContext('2d');
-  trendCanvas.width = trendCanvas.offsetWidth;
-  trendCanvas.height = 240;
-  
-  const data = [12, 19, 15, 25, 22, 30, 28];
-  const max = Math.max(...data);
-  const w = trendCanvas.width;
-  const h = trendCanvas.height;
-  const padding = 20;
-  const barWidth = (w - padding * 2) / data.length;
-  
-  trendCtx.fillStyle = '#c8ff00';
-  data.forEach((val, i) => {
-    const barHeight = (val / max) * (h - padding * 2);
-    const x = padding + i * barWidth;
-    const y = h - padding - barHeight;
-    trendCtx.fillRect(x + 5, y, barWidth - 10, barHeight);
-  });
-  
-  // Risk Chart (Donut)
-  const riskCtx = riskCanvas.getContext('2d');
-  riskCanvas.width = riskCanvas.offsetWidth;
-  riskCanvas.height = 180;
-  
-  const centerX = riskCanvas.width / 2;
-  const centerY = riskCanvas.height / 2;
-  const radius = 60;
-  const colors = ['#ff3b30', '#ff9500', '#ffd60a', '#30d158'];
-  const values = [5, 15, 25, 55];
-  let currentAngle = -Math.PI / 2;
-  
-  values.forEach((val, i) => {
-    const sliceAngle = (val / 100) * 2 * Math.PI;
-    riskCtx.fillStyle = colors[i];
-    riskCtx.beginPath();
-    riskCtx.moveTo(centerX, centerY);
-    riskCtx.arc(centerX, centerY, radius, currentAngle, currentAngle + sliceAngle);
-    riskCtx.closePath();
-    riskCtx.fill();
-    currentAngle += sliceAngle;
-  });
-  
-  // Inner circle
-  riskCtx.fillStyle = '#0f0f0f';
-  riskCtx.beginPath();
-  riskCtx.arc(centerX, centerY, 35, 0, 2 * Math.PI);
-  riskCtx.fill();
-}
-
-function loadRecentActivity() {
-  const activities = [
-    { type: 'safe', title: 'Analysis completed', meta: '2 hours ago', score: 15 },
-    { type: 'warn', title: 'Moderate risk detected', meta: '5 hours ago', score: 52 },
-    { type: 'danger', title: 'Critical threat blocked', meta: 'Yesterday', score: 89 },
-    { type: 'safe', title: 'Resume optimized', meta: '2 days ago', score: 94 }
-  ];
-  
-  const html = activities.map(a => `
-    <div class="activity-item">
-      <div class="activity-icon ${a.type}">
-        ${a.type === 'safe' ? '✓' : a.type === 'warn' ? '⚠️' : '🚨'}
-      </div>
-      <div class="activity-details">
-        <div class="activity-title">${a.title}</div>
-        <div class="activity-meta">${a.meta}</div>
-      </div>
-      <div class="activity-score">${a.score}</div>
-    </div>
-  `).join('');
-  
-  document.getElementById('activityList').innerHTML = html;
-}
-
-// ════════════════════════════════════════════════════════════
-//  API KEYS
-// ════════════════════════════════════════════════════════════
-function generateApiKey() {
-  const key = 'sk_live_' + Array.from({length: 32}, () => 
-    'abcdefghijklmnopqrstuvwxyz0123456789'[Math.floor(Math.random() * 36)]
-  ).join('');
-  
-  const keys = JSON.parse(localStorage.getItem('th_api_keys') || '[]');
-  keys.push({
-    id: 'key_' + Date.now(),
-    name: 'API Key ' + (keys.length + 1),
-    key: key,
+    plan: 'free',
     created: new Date().toISOString()
-  });
-  localStorage.setItem('th_api_keys', JSON.stringify(keys));
+  };
   
-  renderApiKeys();
-  showToast('✓ API key generated successfully', 's');
+  STATE.user = user;
+  STATE.token = 'token_' + Date.now();
+  storage.set('user', user);
+  storage.set('token', STATE.token);
+  
+  closeAuth();
+  updateNav();
+  showToast('Welcome back, ' + user.name + '!', 'success');
+  navigate('dashboard');
 }
 
-function renderApiKeys() {
-  const keys = JSON.parse(localStorage.getItem('th_api_keys') || '[]');
-  const container = document.getElementById('apiKeyList');
+function handleSignup(e) {
+  e.preventDefault();
+  const name = document.getElementById('signupName').value;
+  const email = document.getElementById('signupEmail').value;
+  const password = document.getElementById('signupPassword').value;
   
-  if (keys.length === 0) {
-    container.innerHTML = '<div style="font-family:var(--mono);font-size:.72rem;color:var(--text3);text-align:center;padding:2rem">No API keys yet. Generate one to get started with our API.</div>';
+  if (password.length < 8) {
+    document.getElementById('signupError').textContent = 'Password must be at least 8 characters';
     return;
   }
   
-  container.innerHTML = keys.map(k => `
-    <div class="api-key-item">
-      <div class="api-key-info">
-        <div class="api-key-name">${k.name}</div>
-        <div class="api-key-value">${k.key.substring(0, 20)}...${k.key.substring(k.key.length - 4)}</div>
-      </div>
-      <div class="api-key-actions">
-        <button class="api-btn" onclick="copyApiKey('${k.key}')">Copy</button>
-        <button class="api-btn danger" onclick="deleteApiKey('${k.id}')">Revoke</button>
-      </div>
+  const user = {
+    id: 'user_' + Date.now(),
+    name: name,
+    email: email,
+    plan: 'free',
+    created: new Date().toISOString()
+  };
+  
+  STATE.user = user;
+  STATE.token = 'token_' + Date.now();
+  storage.set('user', user);
+  storage.set('token', STATE.token);
+  
+  closeAuth();
+  updateNav();
+  showToast('Account created! Welcome to TrustHire 🎉', 'success');
+  navigate('dashboard');
+}
+
+function logout() {
+  STATE.user = null;
+  STATE.token = null;
+  storage.remove('user');
+  storage.remove('token');
+  updateNav();
+  navigate('home');
+  showToast('Signed out successfully');
+}
+
+function updateNav() {
+  const isLoggedIn = !!STATE.user;
+  
+  document.getElementById('navGuest').style.display = isLoggedIn ? 'none' : 'flex';
+  document.getElementById('navUser').classList.toggle('active', isLoggedIn);
+  document.getElementById('dashLink').style.display = isLoggedIn ? 'block' : 'none';
+  
+  if (isLoggedIn) {
+    document.getElementById('userName').textContent = STATE.user.name;
+    document.getElementById('userAvatar').textContent = STATE.user.name.charAt(0).toUpperCase();
+    document.getElementById('userPlan').textContent = STATE.user.plan.toUpperCase();
+    document.getElementById('userPlan').className = 'plan-badge ' + STATE.user.plan;
+  }
+  
+  updateUsageDisplay();
+}
+
+// ═══════════════════════════════════════════════════════════════
+// ANALYZER
+// ═══════════════════════════════════════════════════════════════
+const SAMPLES = {
+  scam: `Hi! Congratulations — you've been selected for our remote Data Entry position!
+
+Salary: $8,500/month. No experience required. 100% remote.
+
+IMPORTANT: This offer expires TODAY. Respond IMMEDIATELY.
+
+To confirm your spot, send $250 via Bitcoin for your equipment kit.
+Contact HR on Telegram: @recruiter_hr
+Do NOT tell your current employer.
+
+BTC wallet: 1A2B3C4D5E6F7G8H9I0J...`,
+  
+  legit: `Hi there,
+
+I'm Sarah Chen, Senior Recruiter at Stripe. I came across your profile on LinkedIn and I'm impressed with your backend engineering experience.
+
+We're hiring for a Senior Python Engineer on our Payments Infrastructure team. The role is hybrid (3 days in SF), with a base salary range of $180K–$220K plus equity.
+
+Would you be open to a 30-minute intro call next week? You can book directly at: calendly.com/stripe-recruiting
+
+Best regards,
+Sarah Chen
+Senior Technical Recruiter, Stripe`,
+  
+  suspicious: `Hello,
+
+We found your resume on Indeed and would like to discuss a remote opportunity.
+
+The position is Customer Support, $45/hr, fully remote. Reply with your availability and we'll send more details via WhatsApp (+1 555-0123).
+
+Best,
+Mark Wilson
+HR Manager`
+};
+
+function loadSample(type) {
+  document.getElementById('messageInput').value = SAMPLES[type];
+  updateCharCount();
+}
+
+function updateCharCount() {
+  const text = document.getElementById('messageInput').value;
+  const counter = document.getElementById('charCounter');
+  counter.textContent = text.length + '/5000';
+  counter.classList.toggle('warn', text.length > 4500);
+}
+
+function switchTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+  
+  if (tab === 'analyze') {
+    document.querySelector('.tab-btn:first-child').classList.add('active');
+    document.getElementById('tabAnalyze').classList.add('active');
+  } else {
+    document.querySelector('.tab-btn:last-child').classList.add('active');
+    document.getElementById('tabResume').classList.add('active');
+  }
+}
+
+function updateUsageDisplay() {
+  const isPro = STATE.user?.plan === 'pro' || STATE.user?.plan === 'enterprise';
+  const usage = storage.get('usage') || STATE.usage;
+  
+  if (isPro) {
+    document.getElementById('usageCount').textContent = '∞';
+    document.getElementById('usageBar').style.display = 'none';
+    document.getElementById('githubUnlock').style.display = 'none';
+    return;
+  }
+  
+  const max = usage.githubUnlocked ? 4 : 3;
+  const remaining = Math.max(0, max - usage.count);
+  
+  document.getElementById('usageCount').textContent = remaining;
+  
+  // Update dots
+  const dots = document.getElementById('usageDots');
+  dots.innerHTML = Array.from({length: max}, (_, i) => 
+    `<span class="usage-dot ${i >= remaining ? 'used' : ''}"></span>`
+  ).join('');
+  
+  // Update text
+  const text = document.getElementById('usageText');
+  if (remaining === 0) {
+    text.innerHTML = 'No analyses left • <a onclick="openAuth()">Upgrade for unlimited</a>';
+  } else if (remaining === 1) {
+    text.innerHTML = 'Last free analysis • <a onclick="openAuth()">Go Pro</a>';
+  } else {
+    text.innerHTML = `${remaining} free left • <a onclick="openAuth()">Upgrade</a>`;
+  }
+  
+  // Show GitHub unlock if low on uses
+  const githubUnlock = document.getElementById('githubUnlock');
+  if (!usage.githubUnlocked && remaining <= 1) {
+    githubUnlock.style.display = 'flex';
+  } else {
+    githubUnlock.style.display = 'none';
+  }
+}
+
+function unlockGithub() {
+  window.open('https://github.com/felipeofdev-ai/trusthire', '_blank');
+  
+  setTimeout(() => {
+    if (confirm('Did you star the repo? Click OK to unlock your bonus analysis!')) {
+      const usage = storage.get('usage') || STATE.usage;
+      usage.githubUnlocked = true;
+      storage.set('usage', usage);
+      STATE.usage = usage;
+      
+      document.getElementById('githubBtn').textContent = '✓ Starred!';
+      document.getElementById('githubBtn').classList.add('verified');
+      
+      updateUsageDisplay();
+      showToast('🎉 Bonus analysis unlocked! Thank you!', 'success');
+    }
+  }, 2000);
+}
+
+async function analyzeMessage() {
+  const text = document.getElementById('messageInput').value.trim();
+  
+  if (!text) {
+    showToast('Please enter a message to analyze', 'error');
+    return;
+  }
+  
+  const isPro = STATE.user?.plan === 'pro' || STATE.user?.plan === 'enterprise';
+  const usage = storage.get('usage') || STATE.usage;
+  const max = usage.githubUnlocked ? 4 : 3;
+  
+  if (!isPro && usage.count >= max) {
+    showToast('Free analyses limit reached. Upgrade for unlimited!', 'error');
+    setTimeout(() => openAuth(), 1500);
+    return;
+  }
+  
+  // Show loading
+  const btn = document.getElementById('analyzeBtn');
+  btn.classList.add('loading');
+  btn.disabled = true;
+  
+  document.getElementById('resultEmpty').style.display = 'none';
+  document.getElementById('resultContent').classList.remove('active');
+  
+  const startTime = Date.now();
+  
+  // Simulate API call
+  await new Promise(resolve => setTimeout(resolve, 1500));
+  
+  const result = performLocalAnalysis(text);
+  result.processingTime = Date.now() - startTime;
+  
+  // Update usage
+  if (!isPro) {
+    usage.count++;
+    storage.set('usage', usage);
+    STATE.usage = usage;
+    updateUsageDisplay();
+  }
+  
+  // Update metrics
+  STATE.metrics.today++;
+  if (result.riskScore >= 60) STATE.metrics.threats++;
+  STATE.metrics.totalTime += result.processingTime;
+  storage.set('metrics', STATE.metrics);
+  
+  // Display result
+  displayResult(result);
+  
+  // Update live metrics
+  updateLiveMetrics();
+  
+  btn.classList.remove('loading');
+  btn.disabled = false;
+}
+
+function performLocalAnalysis(text) {
+  const lower = text.toLowerCase();
+  const signals = [];
+  let score = 0;
+  
+  // Detection patterns
+  const patterns = [
+    [/bitcoin|btc|crypto|wire.*transfer|western union/i, 'Cryptocurrency/wire transfer request', 'critical', 35],
+    [/urgent|immediately|expires.*today|act.*now|limited.*time/i, 'Artificial urgency tactics', 'high', 20],
+    [/telegram|whatsapp|signal/i, 'Off-platform communication', 'high', 18],
+    [/\$[5-9]\d{3,}|no.*experience.*required/i, 'Unrealistic compensation', 'medium', 15],
+    [/ssn|social.*security|bank.*account|routing.*number/i, 'Sensitive information request', 'critical', 40],
+    [/don.*t.*tell|keep.*secret|confidential.*opportunity/i, 'Secrecy tactics', 'medium', 12],
+    [/gmail\.com|yahoo\.com|outlook\.com/i, 'Personal email domain', 'low', 8],
+    [/upfront.*payment|processing.*fee|training.*fee/i, 'Upfront payment request', 'critical', 38]
+  ];
+  
+  patterns.forEach(([regex, message, severity, points]) => {
+    if (regex.test(text)) {
+      signals.push({ message, severity, confidence: 0.85 });
+      score += points;
+    }
+  });
+  
+  score = Math.min(score, 100);
+  
+  let riskLevel;
+  if (score < 20) riskLevel = 'safe';
+  else if (score < 40) riskLevel = 'low';
+  else if (score < 60) riskLevel = 'moderate';
+  else if (score < 80) riskLevel = 'high';
+  else riskLevel = 'critical';
+  
+  const recommendations = {
+    safe: 'Low risk detected. Standard verification recommended.',
+    low: 'Minor concerns detected. Verify company details before proceeding.',
+    moderate: 'Several red flags present. Conduct thorough research before responding.',
+    high: 'High risk detected. Exercise extreme caution and verify all claims.',
+    critical: 'Critical threat detected. Do NOT engage. Report immediately.'
+  };
+  
+  const actions = {
+    safe: ['Verify company website', 'Check LinkedIn profile'],
+    low: ['Research company reputation', 'Verify contact details', 'Check for online reviews'],
+    moderate: ['Do NOT share personal information', 'Verify through official channels', 'Research company thoroughly'],
+    high: ['Do NOT respond', 'Do NOT share any information', 'Verify company independently', 'Report to authorities'],
+    critical: ['Do NOT engage under any circumstances', 'Do NOT send money', 'Report to FTC/FBI', 'Block sender immediately']
+  };
+  
+  return {
+    riskScore: score,
+    riskLevel,
+    signals,
+    recommendation: recommendations[riskLevel],
+    actions: actions[riskLevel],
+    confidence: 0.87
+  };
+}
+
+function displayResult(result) {
+  const { riskScore, riskLevel, signals, recommendation, actions, confidence, processingTime } = result;
+  
+  const colors = {
+    safe: '#00ff88',
+    low: '#00dd77',
+    moderate: '#ffaa00',
+    high: '#ff6644',
+    critical: '#ff4444'
+  };
+  
+  const labels = {
+    safe: 'SAFE',
+    low: 'LOW RISK',
+    moderate: 'MODERATE RISK',
+    high: 'HIGH RISK',
+    critical: 'CRITICAL THREAT'
+  };
+  
+  const signalsHTML = signals.map(s => `
+    <div class="signal-item ${s.severity}">
+      <span class="signal-severity">${s.severity}</span>
+      ${s.message}
     </div>
   `).join('');
-}
-
-function copyApiKey(key) {
-  navigator.clipboard.writeText(key);
-  showToast('✓ API key copied to clipboard', 's');
-}
-
-function deleteApiKey(id) {
-  if (!confirm('Are you sure you want to revoke this API key?')) return;
   
-  const keys = JSON.parse(localStorage.getItem('th_api_keys') || '[]');
-  const filtered = keys.filter(k => k.id !== id);
-  localStorage.setItem('th_api_keys', JSON.stringify(filtered));
+  const actionsHTML = actions.map(a => `
+    <div class="action-item">${a}</div>
+  `).join('');
   
-  renderApiKeys();
-  showToast('API key revoked', 's');
+  document.getElementById('resultContent').innerHTML = `
+    <div class="risk-header">
+      <div>
+        <div class="risk-badge ${riskLevel}">${labels[riskLevel]}</div>
+        <div style="font-size:.875rem;color:var(--text-tertiary);margin-top:.5rem">
+          ${signals.length} signals detected • ${Math.round(confidence * 100)}% confidence
+        </div>
+      </div>
+      <div class="score-display">
+        <div class="score-number" style="color:${colors[riskLevel]}">${riskScore}</div>
+        <div class="score-max">/100</div>
+      </div>
+    </div>
+    
+    <div class="score-bar">
+      <div class="score-fill" style="width:${riskScore}%;background:${colors[riskLevel]}"></div>
+    </div>
+    
+    ${signals.length ? `
+      <div class="signals-list">${signalsHTML}</div>
+    ` : ''}
+    
+    <div class="recommendation">${recommendation}</div>
+    
+    ${actions.length ? `
+      <div>
+        <div style="font-size:.875rem;font-weight:600;margin-bottom:.75rem;color:var(--text-secondary)">
+          RECOMMENDED ACTIONS
+        </div>
+        <div class="action-items">${actionsHTML}</div>
+      </div>
+    ` : ''}
+    
+    <div style="font-size:.75rem;color:var(--text-tertiary);text-align:right;font-family:var(--font-mono)">
+      Analyzed in ${processingTime}ms • Engine v3.2
+    </div>
+  `;
+  
+  document.getElementById('resultContent').classList.add('active');
+  document.getElementById('metricsPanel').style.display = 'block';
 }
 
-// ════════════════════════════════════════════════════════════
-//  SETTINGS
-// ════════════════════════════════════════════════════════════
-function saveSetting(key, value) {
-  const settings = JSON.parse(localStorage.getItem('th_settings') || '{}');
-  settings[key] = value;
-  localStorage.setItem('th_settings', JSON.stringify(settings));
-  showToast('✓ Settings saved', 's');
+function updateLiveMetrics() {
+  document.getElementById('metricToday').textContent = STATE.metrics.today;
+  document.getElementById('metricThreats').textContent = STATE.metrics.threats;
+  
+  const avgSpeed = STATE.metrics.today > 0 
+    ? Math.round(STATE.metrics.totalTime / STATE.metrics.today)
+    : 0;
+  document.getElementById('metricSpeed').textContent = avgSpeed;
 }
 
-function confirmDeleteAccount() {
-  if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
-    doLogout();
-    localStorage.clear();
-    showToast('Account deleted', 's');
-  }
+// ═══════════════════════════════════════════════════════════════
+// DASHBOARD
+// ═══════════════════════════════════════════════════════════════
+function updateDashboard() {
+  const metrics = storage.get('metrics') || STATE.metrics;
+  
+  document.getElementById('dashStatTotal').textContent = metrics.today;
+  document.getElementById('dashStatThreats').textContent = metrics.threats;
+  
+  const avgSpeed = metrics.today > 0 
+    ? Math.round(metrics.totalTime / metrics.today)
+    : 0;
+  document.getElementById('dashStatSpeed').textContent = avgSpeed;
 }
 
-// ════════════════════════════════════════════════════════════
-//  TICKER
-// ════════════════════════════════════════════════════════════
-function buildTicker() {
-  const items = [
-    '🚨 Crypto payment detected',
-    '⚠️ Unrealistic salary flagged',
-    '✅ Legit company verified',
-    '🔗 Suspicious domain blocked',
-    '🧠 AI analysis complete',
-    '📄 Resume ATS score: 94%',
-    '⚡ Sub-second response',
-    '🛡️ Threat intel: updated',
-    '👁️ Behavior anomaly found',
-    '📊 95% cache hit rate'
-  ];
-  const doubled = [...items, ...items];
-  document.getElementById('ticker').innerHTML = doubled.map(i => `<span class="ticker-item">${i}</span>`).join('');
-}
-
-// ════════════════════════════════════════════════════════════
-//  TOAST
-// ════════════════════════════════════════════════════════════
-function showToast(msg, type='', d=2800) {
-  const el = document.getElementById('toast');
-  el.textContent = msg;
-  el.className = 'toast' + (type?' '+type:'');
-  el.classList.add('show');
-  setTimeout(()=>el.classList.remove('show'), d);
-}
-
-// ════════════════════════════════════════════════════════════
-//  LANG
-// ════════════════════════════════════════════════════════════
-let currentLang = 'en';
-function setLang(lang) {
-  currentLang = lang;
-  document.querySelectorAll('.lang-opt').forEach(btn => {
-    btn.classList.toggle('active', btn.textContent.toLowerCase() === lang);
-  });
-}
-
-// ════════════════════════════════════════════════════════════
-//  API STATUS
-// ════════════════════════════════════════════════════════════
-async function checkApi() {
-  // Simulate API check
+// ═══════════════════════════════════════════════════════════════
+// TOAST
+// ═══════════════════════════════════════════════════════════════
+function showToast(message, type = '') {
+  const toast = document.getElementById('toast');
+  toast.textContent = message;
+  toast.className = 'toast' + (type ? ' ' + type : '');
+  toast.classList.add('show');
+  
   setTimeout(() => {
-    document.getElementById('apiDot').className = 'api-dot';
-    document.getElementById('apiTxt').textContent = 'api online · ai: on';
-  }, 1000);
+    toast.classList.remove('show');
+  }, 3000);
 }
 
-// ════════════════════════════════════════════════════════════
-//  INIT
-// ════════════════════════════════════════════════════════════
-document.addEventListener('DOMContentLoaded', () => {
-  renderNavState();
-  buildTicker();
-  checkApi();
+// ═══════════════════════════════════════════════════════════════
+// INITIALIZATION
+// ═══════════════════════════════════════════════════════════════
+function init() {
+  // Load user from storage
+  const savedUser = storage.get('user');
+  const savedToken = storage.get('token');
   
-  // Check if user is logged in and redirect to dashboard
-  if (isLoggedIn()) {
-    APP_STATE.user = getUser();
-    APP_STATE.token = getToken();
+  if (savedUser && savedToken) {
+    STATE.user = savedUser;
+    STATE.token = savedToken;
   }
   
-  // Load settings
-  const settings = JSON.parse(localStorage.getItem('th_settings') || '{}');
-  if (settings.emailNotif) document.getElementById('settingEmailNotif').checked = true;
-  if (settings.slackUrl) document.getElementById('settingSlackUrl').value = settings.slackUrl;
+  // Load usage data
+  const savedUsage = storage.get('usage');
+  if (savedUsage) {
+    // Reset daily count if new day
+    const today = new Date().toDateString();
+    const lastDate = savedUsage.lastDate || today;
+    
+    if (today !== lastDate) {
+      savedUsage.count = 0;
+      savedUsage.lastDate = today;
+    }
+    
+    STATE.usage = savedUsage;
+  } else {
+    STATE.usage.lastDate = new Date().toDateString();
+  }
+  storage.set('usage', STATE.usage);
   
-  // Render API keys if logged in
-  if (isLoggedIn()) renderApiKeys();
-});
+  // Load metrics
+  const savedMetrics = storage.get('metrics');
+  if (savedMetrics) {
+    STATE.metrics = savedMetrics;
+  }
+  
+  // Update UI
+  updateNav();
+  
+  // Check for upgrade callback
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('upgraded') === 'true') {
+    if (STATE.user) {
+      STATE.user.plan = 'pro';
+      storage.set('user', STATE.user);
+      updateNav();
+      showToast('🎉 Upgraded to Pro! All features unlocked.', 'success');
+      navigate('dashboard');
+    }
+    history.replaceState({}, '', location.pathname);
+  }
+}
 
-// Close modals on click outside
-document.getElementById('authModal').addEventListener('click', e => { 
-  if(e.target === e.currentTarget) closeModal('authModal'); 
+// Start the app
+init();
+
+// Close modal when clicking outside
+document.getElementById('authModal').addEventListener('click', (e) => {
+  if (e.target === e.currentTarget) closeAuth();
 });
 </script>
+
 </body>
 </html>
