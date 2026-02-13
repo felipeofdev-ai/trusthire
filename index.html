@@ -30,13 +30,13 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;back
 
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:400;display:flex;align-items:center;justify-content:space-between;padding:.9rem 2.5rem;background:rgba(8,8,8,.92);backdrop-filter:blur(24px) saturate(180%);border-bottom:1px solid var(--border)}
-.nav-brand{display:flex;align-items:center;gap:.75rem;text-decoration:none}
+.nav-brand{display:flex;align-items:center;gap:.75rem;text-decoration:none;cursor:pointer}
 .nav-logo-mark{width:28px;height:28px;position:relative;flex-shrink:0}
 .nav-logo-mark svg{width:100%;height:100%}
 .nav-wordmark{font-family:var(--sans);font-weight:900;font-size:1.05rem;letter-spacing:-.03em;color:var(--text)}
 .nav-wordmark span{color:var(--accent)}
 .nav-links{display:flex;gap:0;list-style:none;align-items:center}
-.nav-links a{color:var(--text3);text-decoration:none;font-size:.78rem;font-family:var(--mono);transition:color .18s;padding:.4rem .9rem}
+.nav-links a{color:var(--text3);text-decoration:none;font-size:.78rem;font-family:var(--mono);transition:color .18s;padding:.4rem .9rem;cursor:pointer}
 .nav-links a:hover{color:var(--text2)}
 .nav-right{display:flex;align-items:center;gap:.5rem}
 
@@ -60,6 +60,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:400;display:flex;align-items:cen
 .nav-cta:hover{opacity:.85}
 .nav-user{display:none;align-items:center;gap:.6rem;font-family:var(--mono);font-size:.72rem}
 .nav-user.active{display:flex}
+.nav-user-avatar{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:900;color:#000}
 .nav-user-name{color:var(--text)}
 .plan-chip{padding:.12rem .5rem;font-size:.58rem;font-weight:800;letter-spacing:.07em}
 .plan-chip.free{background:var(--surface2);color:var(--text3);border:1px solid var(--border)}
@@ -67,6 +68,128 @@ nav{position:fixed;top:0;left:0;right:0;z-index:400;display:flex;align-items:cen
 .plan-chip.enterprise{background:linear-gradient(135deg,#bf5af2,#7c3aed);color:#fff;border:none}
 .btn-signout{background:none;border:none;color:var(--text3);font-family:var(--mono);font-size:.7rem;cursor:pointer;padding:.2rem}
 .btn-signout:hover{color:var(--danger)}
+
+/* DASHBOARD LAYOUT */
+.dashboard-wrapper{display:none;min-height:100vh;padding-top:4rem}
+.dashboard-wrapper.active{display:block}
+.dashboard-container{max-width:1400px;margin:0 auto;padding:2rem 2.5rem}
+.dashboard-header{margin-bottom:2.5rem}
+.dashboard-title{font-size:2rem;font-weight:900;letter-spacing:-.03em;margin-bottom:.5rem}
+.dashboard-subtitle{font-family:var(--mono);font-size:.8rem;color:var(--text3)}
+
+/* DASHBOARD GRID */
+.dashboard-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem;margin-bottom:2rem}
+.stat-card{background:var(--surface);border:1px solid var(--border);padding:1.5rem;position:relative;overflow:hidden;transition:all .2s}
+.stat-card:hover{border-color:var(--border3);transform:translateY(-2px)}
+.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent);opacity:0;transition:opacity .2s}
+.stat-card:hover::before{opacity:1}
+.stat-label{font-family:var(--mono);font-size:.65rem;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.6rem}
+.stat-value{font-size:2.2rem;font-weight:900;color:var(--text);letter-spacing:-.04em;font-family:var(--sans);margin-bottom:.3rem}
+.stat-change{font-family:var(--mono);font-size:.68rem;display:flex;align-items:center;gap:.3rem}
+.stat-change.up{color:var(--safe)}
+.stat-change.down{color:var(--danger)}
+
+/* ACTIVITY FEED */
+.activity-section{background:var(--surface);border:1px solid var(--border);padding:1.75rem;margin-bottom:2rem}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem}
+.section-title{font-size:1.1rem;font-weight:800;letter-spacing:-.02em}
+.section-action{font-family:var(--mono);font-size:.7rem;color:var(--accent);cursor:pointer;text-decoration:none}
+.section-action:hover{text-decoration:underline}
+.activity-list{display:flex;flex-direction:column;gap:.7rem}
+.activity-item{display:flex;align-items:center;gap:1rem;padding:.8rem 1rem;background:var(--bg);border:1px solid var(--border);transition:all .18s;cursor:pointer}
+.activity-item:hover{border-color:var(--border3);transform:translateX(3px)}
+.activity-icon{width:36px;height:36px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.activity-icon.safe{background:rgba(48,209,88,.1);border:1px solid rgba(48,209,88,.2)}
+.activity-icon.warn{background:rgba(255,149,0,.1);border:1px solid rgba(255,149,0,.2)}
+.activity-icon.danger{background:rgba(255,59,48,.1);border:1px solid rgba(255,59,48,.2)}
+.activity-details{flex:1}
+.activity-title{font-size:.82rem;color:var(--text);margin-bottom:.15rem}
+.activity-meta{font-family:var(--mono);font-size:.64rem;color:var(--text3)}
+.activity-score{font-weight:900;font-size:1.1rem;color:var(--text);font-family:var(--sans);min-width:2.5rem;text-align:right}
+
+/* CHARTS */
+.chart-grid{display:grid;grid-template-columns:2fr 1fr;gap:1.25rem;margin-bottom:2rem}
+@media(max-width:900px){.chart-grid{grid-template-columns:1fr}}
+.chart-card{background:var(--surface);border:1px solid var(--border);padding:1.75rem}
+.chart-title{font-size:.95rem;font-weight:800;margin-bottom:1.25rem;letter-spacing:-.02em}
+.chart-canvas{width:100%;height:240px;position:relative}
+.mini-chart{height:180px}
+
+/* THREAT MAP */
+.threat-map{background:var(--surface);border:1px solid var(--border);padding:1.75rem;margin-bottom:2rem}
+.threat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.8rem;margin-top:1.25rem}
+.threat-item{background:var(--bg);border-left:3px solid;padding:.8rem 1rem;transition:all .18s}
+.threat-item:hover{transform:translateX(3px)}
+.threat-item.critical{border-color:var(--danger)}
+.threat-item.high{border-color:var(--warn)}
+.threat-item.medium{border-color:#ffd60a}
+.threat-item.low{border-color:var(--safe)}
+.threat-type{font-family:var(--mono);font-size:.68rem;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.3rem}
+.threat-count{font-size:1.6rem;font-weight:900;color:var(--text);font-family:var(--sans);letter-spacing:-.03em}
+
+/* QUICK ACTIONS */
+.quick-actions{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-bottom:2rem}
+.quick-action-card{background:linear-gradient(135deg,var(--surface),var(--surface2));border:1px solid var(--border2);padding:1.5rem;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.quick-action-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.quick-action-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0;transition:opacity .2s}
+.quick-action-card:hover::before{opacity:1}
+.qa-icon{font-size:2rem;margin-bottom:.8rem;display:block}
+.qa-title{font-weight:800;font-size:.92rem;margin-bottom:.3rem;letter-spacing:-.02em}
+.qa-desc{font-family:var(--mono);font-size:.68rem;color:var(--text3);line-height:1.5}
+
+/* TEAM ACTIVITY (ENTERPRISE) */
+.team-section{background:linear-gradient(135deg,rgba(191,90,242,.05),rgba(124,58,237,.05));border:1px solid rgba(191,90,242,.2);padding:1.75rem;margin-bottom:2rem}
+.team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-top:1.25rem}
+.team-member{background:var(--bg);border:1px solid rgba(191,90,242,.15);padding:1rem;display:flex;align-items:center;gap:.8rem}
+.team-avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#bf5af2,#7c3aed);display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:900;color:#fff;flex-shrink:0}
+.team-info{flex:1}
+.team-name{font-size:.8rem;font-weight:700;margin-bottom:.1rem}
+.team-stat{font-family:var(--mono);font-size:.62rem;color:var(--text3)}
+
+/* SETTINGS PANEL */
+.settings-section{background:var(--surface);border:1px solid var(--border);padding:2rem}
+.settings-group{margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid var(--border)}
+.settings-group:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
+.settings-label{font-size:.9rem;font-weight:700;margin-bottom:.4rem}
+.settings-desc{font-family:var(--mono);font-size:.68rem;color:var(--text3);margin-bottom:1rem;line-height:1.6}
+.settings-toggle{display:flex;align-items:center;gap:.6rem;cursor:pointer;user-select:none}
+.toggle-switch{width:44px;height:24px;background:var(--border2);border-radius:24px;position:relative;transition:background .2s}
+.toggle-switch::after{content:'';position:absolute;width:18px;height:18px;background:#fff;border-radius:50%;top:3px;left:3px;transition:left .2s}
+.settings-toggle input{display:none}
+.settings-toggle input:checked + .toggle-switch{background:var(--accent)}
+.settings-toggle input:checked + .toggle-switch::after{left:23px;background:#000}
+.settings-input{width:100%;background:var(--bg);border:1px solid var(--border);color:var(--text);font-family:var(--mono);font-size:.76rem;padding:.7rem .9rem;outline:none;transition:border-color .18s}
+.settings-input:focus{border-color:rgba(200,255,0,.35)}
+.settings-btn{background:var(--accent);color:#000;border:none;padding:.7rem 1.5rem;font-family:var(--mono);font-size:.76rem;font-weight:700;cursor:pointer;transition:opacity .18s}
+.settings-btn:hover{opacity:.88}
+.danger-zone{background:rgba(255,59,48,.05);border:1px solid rgba(255,59,48,.15);padding:1.5rem}
+.danger-btn{background:transparent;color:var(--danger);border:1px solid var(--danger);padding:.7rem 1.5rem;font-family:var(--mono);font-size:.76rem;font-weight:700;cursor:pointer;transition:all .18s}
+.danger-btn:hover{background:var(--danger);color:#fff}
+
+/* API KEYS SECTION */
+.api-keys{background:var(--surface);border:1px solid var(--border);padding:2rem;margin-bottom:2rem}
+.api-key-list{display:flex;flex-direction:column;gap:.8rem;margin-top:1.25rem}
+.api-key-item{background:var(--bg);border:1px solid var(--border);padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.api-key-info{flex:1}
+.api-key-name{font-size:.8rem;font-weight:700;margin-bottom:.2rem}
+.api-key-value{font-family:var(--mono);font-size:.68rem;color:var(--text3)}
+.api-key-actions{display:flex;gap:.5rem}
+.api-btn{background:transparent;border:1px solid var(--border2);color:var(--text3);font-family:var(--mono);font-size:.66rem;padding:.35rem .7rem;cursor:pointer;transition:all .18s}
+.api-btn:hover{border-color:var(--border3);color:var(--text)}
+.api-btn.danger:hover{border-color:var(--danger);color:var(--danger)}
+
+/* BILLING */
+.billing-section{background:var(--surface);border:1px solid var(--border);padding:2rem;margin-bottom:2rem}
+.billing-current{background:var(--bg);border:1px solid var(--border2);padding:1.5rem;margin:1.25rem 0}
+.billing-plan-name{font-size:1.1rem;font-weight:800;margin-bottom:.3rem}
+.billing-plan-price{font-family:var(--sans);font-size:1.8rem;font-weight:900;color:var(--accent);margin-bottom:.5rem}
+.billing-plan-meta{font-family:var(--mono);font-size:.68rem;color:var(--text3)}
+.billing-usage{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-top:1.25rem}
+.usage-metric{background:var(--surface);border:1px solid var(--border);padding:1rem}
+.usage-label{font-family:var(--mono);font-size:.62rem;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.4rem}
+.usage-value{font-size:1.4rem;font-weight:900;color:var(--text);font-family:var(--sans)}
+.usage-bar{height:4px;background:var(--border);margin-top:.6rem;overflow:hidden}
+.usage-bar-fill{height:100%;background:var(--accent);transition:width .8s}
 
 /* HERO */
 #hero{min-height:100vh;display:grid;place-items:center;padding:8rem 2.5rem 5rem;position:relative;overflow:hidden}
@@ -90,7 +213,7 @@ h1 .accent::after{content:'';position:absolute;bottom:2px;left:0;right:0;height:
 .btn-hero-ghost:hover{border-color:var(--border3);color:var(--text)}
 
 /* HERO STATS */
-.hero-social-proof{display:flex;align-items:center;gap:1.5rem;font-family:var(--mono);font-size:.68rem;color:var(--text3);opacity:0;animation:fadeUp .6s .7s forwards}
+.hero-social-proof{display:flex;align-items:center;gap:1.5rem;font-family:var(--mono);font-size:.68rem;color:var(--text3);opacity:0;animation:fadeUp .6s .7s forwards;flex-wrap:wrap}
 .hero-stat{display:flex;flex-direction:column;gap:.1rem}
 .hero-stat-num{font-size:1rem;font-weight:700;color:var(--text);font-family:var(--sans);letter-spacing:-.02em}
 .hero-stat-label{font-size:.62rem;color:var(--text3)}
@@ -134,252 +257,6 @@ h1 .accent::after{content:'';position:absolute;bottom:2px;left:0;right:0;height:
 .section-heading{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:800;letter-spacing:-.035em;margin-bottom:.5rem;line-height:1.1}
 .section-sub{font-family:var(--mono);font-size:.8rem;color:var(--text2);line-height:1.75;margin-bottom:2.5rem;max-width:500px}
 
-/* TOOL SECTION */
-#tool-section{padding:6rem 2.5rem;max-width:1000px;margin:0 auto}
-.tool-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:2.5rem;gap:1rem;flex-wrap:wrap}
-.tool-tabs{display:flex;gap:0;border:1px solid var(--border);overflow:hidden}
-.tab-btn{background:var(--surface);border:none;border-right:1px solid var(--border);color:var(--text3);font-family:var(--mono);font-size:.74rem;padding:.6rem 1.3rem;cursor:pointer;transition:all .18s;display:flex;align-items:center;gap:.5rem}
-.tab-btn:last-child{border-right:none}
-.tab-btn:hover{color:var(--text2)}
-.tab-btn.active{background:var(--accent);color:#000;font-weight:700}
-.tab-panel{display:none}
-.tab-panel.active{display:block}
-.pro-chip{font-size:.55rem;background:rgba(0,0,0,.3);color:inherit;padding:.1rem .35rem;letter-spacing:.04em;border-radius:2px}
-.tab-btn.active .pro-chip{background:rgba(0,0,0,.2)}
-.free-chip{font-size:.55rem;background:rgba(200,255,0,.15);color:var(--accent);padding:.1rem .35rem;letter-spacing:.04em;border-radius:2px;font-weight:700}
-
-/* ANALYZER */
-.analyzer-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
-@media(max-width:720px){.analyzer-grid{grid-template-columns:1fr}.nav-links{display:none}}
-.input-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem}
-.input-row-label{font-family:var(--mono);font-size:.63rem;color:var(--text3);letter-spacing:.1em;text-transform:uppercase}
-textarea#msg{width:100%;height:230px;resize:vertical;background:var(--surface);border:1px solid var(--border);color:var(--text);font-family:var(--mono);font-size:.8rem;padding:1rem;outline:none;line-height:1.75;transition:border-color .18s}
-textarea#msg:focus{border-color:rgba(200,255,0,.4)}
-textarea#msg::placeholder{color:var(--text3)}
-.toolbar{display:flex;justify-content:space-between;align-items:center;margin-top:.5rem}
-.samples{display:flex;gap:.35rem;align-items:center}
-.samples-label{font-family:var(--mono);font-size:.62rem;color:var(--text3)}
-.sample-btn{background:transparent;border:1px solid var(--border);color:var(--text3);font-family:var(--mono);font-size:.63rem;padding:.2rem .55rem;cursor:pointer;transition:all .18s}
-.sample-btn:hover{border-color:var(--border3);color:var(--text2)}
-.char-count{font-family:var(--mono);font-size:.65rem;color:var(--text3)}
-.char-count.warn{color:var(--warn)}
-
-/* ANALYZE BUTTON */
-.analyze-btn{width:100%;background:var(--accent);color:#000;border:none;padding:.88rem;font-family:var(--mono);font-weight:700;font-size:.84rem;cursor:pointer;transition:all .2s;margin-top:.65rem;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;gap:.5rem}
-.analyze-btn:disabled{opacity:.3;cursor:not-allowed}
-.analyze-btn:not(:disabled):hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(200,255,0,.2)}
-.analyze-btn.loading span.btn-text{visibility:hidden}
-.analyze-btn .spin{display:none;width:15px;height:15px;border:2px solid #000;border-top-color:transparent;border-radius:50%;animation:spin .6s linear infinite;position:absolute}
-.analyze-btn.loading .spin{display:block}
-
-/* LIMIT BAR */
-.limit-bar{display:flex;align-items:center;gap:.65rem;margin-top:.55rem;font-family:var(--mono);font-size:.65rem;color:var(--text3)}
-.limit-dots{display:flex;gap:.28rem}
-.ldot{width:7px;height:7px;border-radius:50%;background:var(--accent);transition:background .3s}
-.ldot.used{background:var(--border2)}
-.limit-bar a{color:var(--accent);text-decoration:none;cursor:pointer}
-.limit-bar a:hover{text-decoration:underline}
-
-/* GITHUB STAR UNLOCK */
-.github-unlock{background:var(--surface2);border:1px solid var(--border2);padding:.7rem 1rem;margin-top:.55rem;display:flex;align-items:center;justify-content:space-between;gap:.8rem}
-.github-unlock-left{display:flex;align-items:center;gap:.6rem;flex:1}
-.github-unlock-icon{font-size:1.2rem}
-.github-unlock-text{font-family:var(--mono);font-size:.68rem;color:var(--text2);line-height:1.4}
-.github-unlock-text strong{color:var(--accent)}
-.btn-github-star{background:transparent;border:1px solid var(--border3);color:var(--text);font-family:var(--mono);font-size:.7rem;padding:.4rem .9rem;cursor:pointer;transition:all .18s;display:flex;align-items:center;gap:.4rem;white-space:nowrap}
-.btn-github-star:hover{border-color:var(--accent);color:var(--accent)}
-.btn-github-star.verified{background:rgba(200,255,0,.1);border-color:var(--accent);color:var(--accent);pointer-events:none}
-
-/* RESULT PANEL */
-.result-panel{background:var(--surface);border:1px solid var(--border);padding:1.5rem;display:flex;flex-direction:column;gap:1rem;min-height:310px;position:relative}
-.result-panel::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(200,255,0,.2),transparent);opacity:0;transition:opacity .4s}
-.result-panel.has-result::before{opacity:1}
-.result-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:.8rem;color:var(--text3);font-family:var(--mono);font-size:.72rem;text-align:center;padding:2rem 0;flex:1}
-.result-empty-icon{font-size:2.2rem;opacity:.12}
-
-/* RISK DISPLAY */
-.risk-header{display:flex;justify-content:space-between;align-items:flex-start}
-.risk-badge{font-family:var(--mono);font-size:.65rem;font-weight:700;padding:.22rem .65rem;letter-spacing:.1em}
-.risk-badge.safe{background:rgba(48,209,88,.1);color:var(--safe);border:1px solid rgba(48,209,88,.2)}
-.risk-badge.low{background:rgba(48,209,88,.07);color:#6dd98a;border:1px solid rgba(48,209,88,.12)}
-.risk-badge.moderate{background:rgba(255,149,0,.08);color:var(--warn);border:1px solid rgba(255,149,0,.18)}
-.risk-badge.high{background:rgba(255,59,48,.08);color:var(--danger);border:1px solid rgba(255,59,48,.18)}
-.risk-badge.critical{background:rgba(255,59,48,.14);color:var(--danger);border:1px solid var(--danger);animation:critPulse 1.5s infinite}
-.score-block{text-align:right}
-.score-num{font-size:2.6rem;font-weight:900;line-height:1;letter-spacing:-.04em;font-family:var(--sans)}
-.score-sub{font-family:var(--mono);font-size:.6rem;color:var(--text3)}
-.score-track{height:2px;background:var(--border);overflow:hidden;margin:0}
-.score-fill{height:100%;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
-
-/* SIGNALS */
-.signals{display:flex;flex-direction:column;gap:.3rem}
-.signal{display:flex;gap:.5rem;align-items:flex-start;font-family:var(--mono);font-size:.7rem;padding:.38rem .6rem;background:var(--bg);border-left:2px solid}
-.signal.critical{border-color:var(--danger)}
-.signal.high{border-color:#ff6b00}
-.signal.medium{border-color:var(--warn)}
-.signal.low{border-color:var(--safe)}
-.signal-sev{font-size:.55rem;opacity:.5;text-transform:uppercase;white-space:nowrap;padding-top:1px}
-.signal-msg{flex:1;line-height:1.4;color:var(--text)}
-
-/* RECOMMENDATIONS */
-.rec{font-family:var(--mono);font-size:.74rem;color:var(--text);background:var(--bg);padding:.75rem 1rem;border-left:3px solid var(--accent);line-height:1.7}
-.actions{display:flex;flex-direction:column;gap:.3rem}
-.action-row{font-family:var(--mono);font-size:.7rem;display:flex;gap:.45rem;line-height:1.4}
-.action-row::before{content:'→';color:var(--accent);flex-shrink:0}
-
-/* AI BLOCK */
-.pro-tag{font-family:var(--mono);font-size:.55rem;background:var(--accent);color:#000;padding:.1rem .38rem;font-weight:800;letter-spacing:.05em;vertical-align:middle;margin-left:.3rem}
-.ai-block{background:var(--bg);border:1px solid rgba(200,255,0,.12);padding:.9rem 1rem}
-.ai-block-head{font-family:var(--mono);font-size:.6rem;color:var(--accent);letter-spacing:.1em;margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem}
-.ai-block-body{font-family:var(--mono);font-size:.72rem;line-height:1.75;color:var(--text2)}
-
-/* THREAT INTEL (NEW) */
-.threat-intel{background:linear-gradient(135deg,rgba(191,90,242,.05),rgba(124,58,237,.05));border:1px solid rgba(191,90,242,.15);padding:.9rem 1rem;margin-top:.5rem}
-.threat-intel-head{font-family:var(--mono);font-size:.6rem;color:var(--purple);letter-spacing:.1em;margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem}
-.threat-intel-body{font-family:var(--mono);font-size:.68rem;line-height:1.6;color:var(--text2)}
-.threat-match{display:inline-flex;align-items:center;gap:.3rem;background:rgba(255,59,48,.1);color:var(--danger);padding:.15rem .45rem;border-radius:2px;font-size:.64rem;margin:.2rem .15rem}
-
-/* BEHAVIORAL FINGERPRINT (NEW) */
-.behavior-fp{background:linear-gradient(135deg,rgba(90,200,250,.05),rgba(10,132,255,.05));border:1px solid rgba(90,200,250,.15);padding:.9rem 1rem;margin-top:.5rem}
-.behavior-fp-head{font-family:var(--mono);font-size:.6rem;color:var(--cyan);letter-spacing:.1em;margin-bottom:.6rem}
-.fp-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.45rem}
-.fp-item{display:flex;justify-content:space-between;align-items:center;padding:.35rem .5rem;background:var(--bg);border-radius:2px}
-.fp-label{font-family:var(--mono);font-size:.64rem;color:var(--text3)}
-.fp-value{font-family:var(--mono);font-size:.64rem;color:var(--text);font-weight:700}
-.fp-value.anomaly{color:var(--danger)}
-
-/* LOCKED FEATURES */
-.locked-stack{display:flex;flex-direction:column;gap:.3rem}
-.locked-row{display:flex;align-items:center;justify-content:space-between;font-family:var(--mono);font-size:.7rem;background:var(--bg);padding:.48rem .8rem;border:1px solid var(--border);cursor:pointer;transition:border-color .18s}
-.locked-row:hover{border-color:var(--border3)}
-.lock-i{color:var(--text3);font-size:.72rem}
-.lock-lbl{flex:1;margin-left:.5rem;color:var(--text3)}
-.lock-cta{color:var(--accent);font-size:.64rem;white-space:nowrap}
-
-/* EXPORT */
-.export-row{display:flex;gap:.4rem;margin-top:.3rem}
-.export-btn{flex:1;padding:.45rem;font-family:var(--mono);font-size:.68rem;cursor:pointer;border:none;transition:opacity .18s}
-.btn-copy{background:var(--surface2);color:var(--text);border:1px solid var(--border)!important}
-.btn-pdf,.btn-csv{background:var(--accent-dim);color:var(--accent);border:1px solid rgba(200,255,0,.15)!important}
-.export-btn:hover{opacity:.75}
-.proc-time{font-family:var(--mono);font-size:.6rem;color:var(--text3);text-align:right;margin-top:.2rem}
-
-/* RESUME TAB */
-.resume-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
-@media(max-width:720px){.resume-grid{grid-template-columns:1fr}}
-.resume-form{display:flex;flex-direction:column;gap:.9rem}
-.field{display:flex;flex-direction:column;gap:.4rem}
-.field-label{font-family:var(--mono);font-size:.62rem;color:var(--text3);letter-spacing:.1em;text-transform:uppercase}
-.drop-zone{border:1px dashed var(--border2);background:var(--surface);padding:1.75rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.55rem;cursor:pointer;transition:all .2s;min-height:110px;text-align:center;position:relative}
-.drop-zone:hover,.drop-zone.over{border-color:rgba(200,255,0,.3);background:var(--accent-dim)}
-.drop-zone.done{border-color:rgba(48,209,88,.35);border-style:solid}
-.drop-icon{font-size:1.5rem;opacity:.25}
-.drop-text{font-family:var(--mono);font-size:.7rem;color:var(--text3);line-height:1.5}
-.drop-text strong{color:var(--accent)}
-.file-chosen{font-family:var(--mono);font-size:.7rem;color:var(--safe);display:none}
-.file-chosen.show{display:block}
-
-select.field-select{background:var(--surface);border:1px solid var(--border);color:var(--text);font-family:var(--mono);font-size:.74rem;padding:.55rem .75rem;outline:none;width:100%;cursor:pointer;transition:border-color .18s;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg width='10' height='6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23555' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .75rem center}
-select.field-select:focus{border-color:rgba(200,255,0,.35)}
-textarea#jobDesc{width:100%;height:130px;resize:vertical;background:var(--surface);border:1px solid var(--border);color:var(--text);font-family:var(--mono);font-size:.76rem;padding:.85rem .95rem;outline:none;line-height:1.7;transition:border-color .18s}
-textarea#jobDesc:focus{border-color:rgba(200,255,0,.35)}
-textarea#jobDesc::placeholder{color:var(--text3)}
-.optimize-btn{width:100%;background:var(--surface2);color:var(--accent);border:1px solid rgba(200,255,0,.25);padding:.85rem;font-family:var(--mono);font-weight:700;font-size:.8rem;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
-.optimize-btn:not(:disabled):hover{background:var(--accent);color:#000;border-color:var(--accent)}
-.optimize-btn:disabled{opacity:.3;cursor:not-allowed}
-.optimize-btn.loading span.btn-text{visibility:hidden}
-.optimize-btn .spin{display:none;width:14px;height:14px;border:2px solid currentColor;border-top-color:transparent;border-radius:50%;animation:spin .6s linear infinite;position:absolute}
-.optimize-btn.loading .spin{display:block}
-
-/* RESUME RESULTS */
-.res-panel{background:var(--surface);border:1px solid var(--border);padding:1.5rem;display:flex;flex-direction:column;gap:1.25rem;min-height:340px}
-.res-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:.7rem;font-family:var(--mono);font-size:.7rem;color:var(--text3);text-align:center;flex:1}
-.compat-ring-wrap{display:flex;align-items:center;gap:1.25rem}
-.ring-svg-wrap{position:relative;width:74px;height:74px;flex-shrink:0}
-.ring-svg-wrap svg{width:100%;height:100%;transform:rotate(-90deg)}
-.ring-label{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
-.ring-label .rn{font-size:1.2rem;font-weight:900;color:var(--accent);display:block;line-height:1;font-family:var(--sans)}
-.ring-label .rp{font-family:var(--mono);font-size:.52rem;color:var(--text3)}
-.compat-info h4{font-size:.92rem;font-weight:700;margin-bottom:.2rem}
-.compat-info p{font-family:var(--mono);font-size:.66rem;color:var(--text3);line-height:1.55}
-.res-section h5{font-family:var(--mono);font-size:.6rem;color:var(--accent);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.55rem}
-.res-list{list-style:none;display:flex;flex-direction:column;gap:.32rem}
-.res-list li{font-family:var(--mono);font-size:.7rem;display:flex;gap:.4rem;line-height:1.4}
-.res-list li::before{content:'→';flex-shrink:0}
-.res-list.pos li::before{color:var(--safe)}
-.res-list.sug li::before{color:var(--warn)}
-.kw-section h5{font-family:var(--mono);font-size:.6rem;color:var(--accent);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.55rem}
-.kw-group-lbl{font-family:var(--mono);font-size:.6rem;color:var(--text3);margin-bottom:.35rem}
-.kw-tags{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:.75rem}
-.kw{font-family:var(--mono);font-size:.62rem;padding:.2rem .55rem}
-.kw.match{background:rgba(48,209,88,.08);border:1px solid rgba(48,209,88,.18);color:var(--safe)}
-.kw.miss{background:rgba(255,149,0,.07);border:1px solid rgba(255,149,0,.16);color:var(--warn)}
-.dl-resume-btn{display:flex;align-items:center;justify-content:center;gap:.55rem;width:100%;background:var(--accent-dim);color:var(--accent);border:1px solid rgba(200,255,0,.15);padding:.7rem;font-family:var(--mono);font-size:.74rem;font-weight:700;cursor:pointer;transition:all .2s}
-.dl-resume-btn:hover{background:var(--accent);color:#000}
-
-/* HOW IT WORKS */
-.how-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border);margin-top:2rem}
-@media(max-width:640px){.how-grid{grid-template-columns:1fr 1fr}}
-.how-step{background:var(--bg);padding:1.5rem 1rem}
-.step-n{font-family:var(--mono);font-size:.62rem;color:var(--accent);margin-bottom:.6rem}
-.step-title{font-weight:800;font-size:.88rem;margin-bottom:.28rem;letter-spacing:-.01em}
-.step-desc{font-family:var(--mono);font-size:.65rem;color:var(--text3);line-height:1.55}
-
-/* FEATURES GRID */
-.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin-top:2rem}
-@media(max-width:640px){.features-grid{grid-template-columns:1fr}}
-.feature-card{background:var(--surface);padding:1.75rem 1.5rem;position:relative;overflow:hidden;transition:background .2s}
-.feature-card:hover{background:var(--surface2)}
-.feature-card::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:var(--accent);opacity:0;transition:opacity .2s}
-.feature-card:hover::after{opacity:.4}
-.feat-icon{font-size:1.5rem;margin-bottom:.9rem;display:block}
-.feat-title{font-weight:800;font-size:.95rem;margin-bottom:.5rem;letter-spacing:-.02em}
-.feat-desc{font-family:var(--mono);font-size:.7rem;color:var(--text3);line-height:1.65}
-
-/* HISTORY */
-.history-list{display:flex;flex-direction:column;gap:.4rem;margin-top:1.5rem}
-.history-item{display:flex;align-items:center;gap:1rem;background:var(--surface);border:1px solid var(--border);padding:.75rem 1rem;cursor:pointer;transition:all .18s}
-.history-item:hover{border-color:var(--border3);transform:translateX(3px)}
-.h-score{font-weight:900;font-size:1.1rem;min-width:2.5rem;font-family:var(--sans)}
-.h-meta{flex:1;font-family:var(--mono);font-size:.7rem}
-.h-text{color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:340px}
-.h-time{color:var(--text3);font-size:.62rem;margin-top:.1rem}
-.history-empty{font-family:var(--mono);font-size:.76rem;color:var(--text3);margin-top:1rem}
-
-/* PRICING */
-.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin-top:2rem}
-@media(max-width:700px){.pricing-grid{grid-template-columns:1fr}}
-.plan-card{background:var(--surface);padding:2rem 1.6rem;position:relative;overflow:hidden}
-.plan-card.featured{background:#0a1000}
-.plan-card.featured::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent)}
-.plan-card.enterprise-plan{background:linear-gradient(135deg,rgba(191,90,242,.03),rgba(124,58,237,.03))}
-.plan-card.enterprise-plan::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(135deg,#bf5af2,#7c3aed)}
-.plan-popular{position:absolute;top:1rem;right:1.4rem;font-family:var(--mono);font-size:.57rem;background:var(--accent);color:#000;padding:.15rem .55rem;font-weight:800;letter-spacing:.06em}
-.plan-name{font-weight:900;font-size:1.1rem;margin-bottom:.4rem;letter-spacing:-.02em}
-.plan-price{font-family:var(--sans);font-size:2rem;font-weight:900;color:var(--accent);line-height:1;letter-spacing:-.04em}
-.plan-price sup{font-size:.7rem;vertical-align:super;color:var(--text2)}
-.plan-price span{font-size:.8rem;color:var(--text3);font-weight:400;letter-spacing:0}
-.plan-limit{font-family:var(--mono);font-size:.66rem;color:var(--text3);margin:.65rem 0 1.1rem;padding-bottom:1.1rem;border-bottom:1px solid var(--border)}
-.plan-feats{list-style:none;display:flex;flex-direction:column;gap:.45rem;margin-bottom:1.7rem}
-.plan-feats li{font-family:var(--mono);font-size:.7rem;display:flex;gap:.4rem}
-.plan-feats li::before{content:'→';color:var(--accent);flex-shrink:0}
-.plan-feats li.no::before{content:'—';color:var(--border2)}
-.plan-feats li.no{color:var(--text3)}
-.plan-btn{width:100%;padding:.72rem;font-family:var(--mono);font-size:.76rem;cursor:pointer;font-weight:700;transition:all .2s;border:none}
-.plan-btn-free{background:transparent;color:var(--text);border:1px solid var(--border)!important}
-.plan-btn-free:hover{border-color:var(--border3)!important;opacity:.8}
-.plan-btn-pro{background:var(--accent);color:#000}
-.plan-btn-pro:hover{opacity:.88;transform:translateY(-1px)}
-.plan-btn-ent{background:linear-gradient(135deg,#bf5af2,#7c3aed);color:#fff}
-.plan-btn-ent:hover{opacity:.88;transform:translateY(-1px)}
-
-/* SOCIAL PROOF */
-.proof-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);margin-top:2rem}
-@media(max-width:600px){.proof-grid{grid-template-columns:1fr 1fr}}
-.proof-card{background:var(--surface);padding:1.6rem 1.4rem}
-.proof-num{font-size:2rem;font-weight:900;color:var(--accent);letter-spacing:-.04em;font-family:var(--sans);display:block;margin-bottom:.3rem}
-.proof-label{font-family:var(--mono);font-size:.66rem;color:var(--text3);line-height:1.5}
-
 /* MODALS */
 .modal-overlay{position:fixed;inset:0;z-index:600;background:rgba(0,0,0,.92);backdrop-filter:blur(16px);display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .22s}
 .modal-overlay.open{opacity:1;pointer-events:all}
@@ -391,16 +268,6 @@ textarea#jobDesc::placeholder{color:var(--text3)}
 .modal-icon{font-size:2rem;margin-bottom:.9rem;display:block}
 .modal-title{font-size:1.4rem;font-weight:900;letter-spacing:-.03em;margin-bottom:.45rem}
 .modal-sub{font-family:var(--mono);font-size:.76rem;color:var(--text3);margin-bottom:1.5rem;line-height:1.75}
-.modal-feats{list-style:none;margin-bottom:1.5rem;display:flex;flex-direction:column;gap:.42rem}
-.modal-feats li{font-family:var(--mono);font-size:.74rem;display:flex;gap:.45rem}
-.modal-feats li::before{content:'✓';color:var(--accent);flex-shrink:0}
-.modal-price{font-size:2rem;font-weight:900;color:var(--accent);letter-spacing:-.04em;margin-bottom:.2rem;font-family:var(--sans)}
-.modal-price span{font-size:.82rem;color:var(--text3);font-weight:400}
-.modal-price-note{font-family:var(--mono);font-size:.66rem;color:var(--text3);margin-bottom:1.35rem}
-.modal-cta{width:100%;background:var(--accent);color:#000;border:none;padding:.9rem;font-family:var(--mono);font-weight:700;font-size:.86rem;cursor:pointer;transition:all .2s;margin-bottom:.6rem}
-.modal-cta:hover{opacity:.88}
-.modal-dismiss{width:100%;background:transparent;color:var(--text3);border:none;font-family:var(--mono);font-size:.68rem;cursor:pointer;padding:.25rem}
-.modal-dismiss:hover{color:var(--text)}
 
 /* AUTH MODAL */
 .auth-tabs{display:flex;border-bottom:1px solid var(--border);margin-bottom:1.5rem}
@@ -432,40 +299,17 @@ footer a:hover{color:var(--text)}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
 @keyframes critPulse{0%,100%{box-shadow:0 0 0 0 rgba(255,59,48,.3)}50%{box-shadow:0 0 0 5px rgba(255,59,48,0)}}
 
-/* LIVE METRICS PANEL (NEW) */
-.live-metrics{background:var(--surface2);border:1px solid var(--border2);padding:.8rem 1.1rem;margin-top:.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem}
-.metric{display:flex;flex-direction:column;gap:.15rem}
-.metric-label{font-family:var(--mono);font-size:.58rem;color:var(--text3);text-transform:uppercase;letter-spacing:.08em}
-.metric-value{font-family:var(--sans);font-size:.9rem;font-weight:800;color:var(--text)}
-.metric-value.live{color:var(--accent)}
+/* RESPONSIVE */
+@media(max-width:720px){
+  .nav-links{display:none}
+  .chart-grid{grid-template-columns:1fr}
+  .dashboard-grid{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
 
 <!-- ═══ MODALS ═══ -->
-<div class="modal-overlay" id="upgradeModal">
-  <div class="modal">
-    <button class="modal-x" onclick="closeModal('upgradeModal')">✕</button>
-    <span class="modal-icon" id="mIcon">🔒</span>
-    <div class="modal-title" id="mTitle">Upgrade to Pro</div>
-    <p class="modal-sub" id="mSub">Unlock all features</p>
-    <ul class="modal-feats">
-      <li>100 analyses per day</li>
-      <li>AI-powered Claude analysis</li>
-      <li>Real-time threat intelligence</li>
-      <li>Behavioral fingerprinting</li>
-      <li>Full analysis history</li>
-      <li>ATS resume optimization</li>
-      <li>PDF & CSV export</li>
-      <li>API access (100 req/min)</li>
-    </ul>
-    <div class="modal-price">$9.90<span>/mo</span></div>
-    <div class="modal-price-note">Cancel anytime. No contracts. Instant access.</div>
-    <button class="modal-cta" onclick="goToCheckout('pro')">Upgrade to Pro →</button>
-    <button class="modal-dismiss" onclick="closeModal('upgradeModal')">Maybe later</button>
-  </div>
-</div>
-
 <div class="modal-overlay" id="authModal">
   <div class="modal">
     <button class="modal-x" onclick="closeModal('authModal')">✕</button>
@@ -493,7 +337,7 @@ footer a:hover{color:var(--text)}
 
 <!-- ═══ NAV ═══ -->
 <nav>
-  <a href="#" class="nav-brand">
+  <a class="nav-brand" onclick="navigateTo('home')">
     <div class="nav-logo-mark">
       <svg viewBox="0 0 28 28" fill="none">
         <path d="M14 2L4 7v8c0 5.5 4.3 10.7 10 12 5.7-1.3 10-6.5 10-12V7L14 2z" fill="none" stroke="#c8ff00" stroke-width="1.5"/>
@@ -503,10 +347,8 @@ footer a:hover{color:var(--text)}
     <span class="nav-wordmark">Trust<span>Hire</span></span>
   </a>
   <ul class="nav-links">
-    <li><a href="#tool-section">Analyzer</a></li>
-    <li><a href="#features">Features</a></li>
-    <li><a href="#history">History</a></li>
-    <li><a href="#pricing">Pricing</a></li>
+    <li><a onclick="navigateTo('home')">Home</a></li>
+    <li><a onclick="navigateTo('dashboard')" id="navDashLink" style="display:none">Dashboard</a></li>
     <li><a href="https://github.com/felipeofdev-ai/trusthire" target="_blank">GitHub →</a></li>
   </ul>
   <div class="nav-right">
@@ -520,15 +362,11 @@ footer a:hover{color:var(--text)}
         <span class="uses-left" id="usesLeft">3</span>
         <span>free left</span>
       </div>
-      <div class="streak-badge" id="streakBadge" style="display:none">
-        <span>🔥</span>
-        <span class="streak-num" id="streakNum">0</span>
-        <span>day streak</span>
-      </div>
       <button class="nav-signin" onclick="openAuthModal()">Sign In</button>
-      <button class="nav-cta" onclick="openModal('nav')">Pro — $9.90/mo</button>
+      <button class="nav-cta" onclick="openAuthModal()">Get Started</button>
     </div>
     <div class="nav-user" id="navUser">
+      <div class="nav-user-avatar" id="navAvatar"></div>
       <span class="nav-user-name" id="navName"></span>
       <span class="plan-chip free" id="navChip">FREE</span>
       <button class="btn-signout" onclick="doLogout()">Sign out</button>
@@ -536,468 +374,337 @@ footer a:hover{color:var(--text)}
   </div>
 </nav>
 
-<!-- ═══ HERO ═══ -->
-<section id="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-glow"></div>
-  <div class="hero-inner">
-    <div class="hero-grid">
-      <div>
-        <div class="hero-eyebrow">
-          <span class="hero-eyebrow-dot"></span>
-          <span>Enterprise-Grade · AI + ML · Real-time Threat Intel</span>
-        </div>
-        <h1>Verify every <span class="accent">job offer</span><br>before you trust.</h1>
-        <p class="hero-desc">Next-generation fraud detection with Claude AI, behavioral fingerprinting, real-time threat intelligence, and predictive caching. Enterprise security for everyone.</p>
-        <div class="hero-actions">
-          <button class="btn-hero-primary" onclick="document.getElementById('tool-section').scrollIntoView({behavior:'smooth'})">
-            <span>Analyze a message</span> →
-          </button>
-          <a href="https://github.com/felipeofdev-ai/trusthire" class="btn-hero-ghost" target="_blank">
-            <span>View on GitHub</span>
-          </a>
-        </div>
-        <div class="hero-social-proof">
-          <div class="hero-stat"><span class="hero-stat-num">98%</span><span class="hero-stat-label">Detection accuracy</span></div>
-          <div class="hero-stat-div"></div>
-          <div class="hero-stat"><span class="hero-stat-num">150k+</span><span class="hero-stat-label">Analyses run</span></div>
-          <div class="hero-stat-div"></div>
-          <div class="hero-stat"><span class="hero-stat-num">< 1s</span><span class="hero-stat-label">Average response</span></div>
-          <div class="hero-stat-div"></div>
-          <div class="hero-stat">
-            <div class="api-indicator"><span class="api-dot connecting" id="apiDot"></span><span id="apiTxt">connecting...</span></div>
+<!-- ═══ HOME PAGE ═══ -->
+<div id="homePage">
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-inner">
+      <div class="hero-grid">
+        <div>
+          <div class="hero-eyebrow">
+            <span class="hero-eyebrow-dot"></span>
+            <span>Enterprise-Grade · AI + ML · Real-time Threat Intel</span>
           </div>
-        </div>
-      </div>
-      <div class="hero-card">
-        <div class="hc-label">RISK ASSESSMENT</div>
-        <div class="hc-score">89</div>
-        <div class="hc-level">CRITICAL RISK</div>
-        <div class="hc-bar"><div class="hc-bar-fill"></div></div>
-        <div class="hc-signals">
-          <div class="hc-signal crit"><span class="hc-dot"></span><span>Upfront crypto payment</span></div>
-          <div class="hc-signal high"><span class="hc-dot"></span><span>Behavioral anomaly detected</span></div>
-          <div class="hc-signal med"><span class="hc-dot"></span><span>Domain age < 30 days</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ TRUST BAR ═══ -->
-<div class="trust-bar">
-  <div class="ticker-track" id="ticker"></div>
-</div>
-
-<!-- ═══ TOOL SECTION ═══ -->
-<section id="tool-section">
-  <div class="section-eyebrow">// live analysis platform</div>
-  <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:2.5rem;flex-wrap:wrap;gap:1rem">
-    <div class="section-heading">Enterprise fraud detection</div>
-    <div class="tool-tabs">
-      <button class="tab-btn active" onclick="switchTab('analyze')">🔍 Analyze Message</button>
-      <button class="tab-btn" onclick="switchTab('resume')">📄 Optimize Resume <span class="free-chip">1 FREE</span></button>
-    </div>
-  </div>
-
-  <!-- ANALYZE TAB -->
-  <div class="tab-panel active" id="tab-analyze">
-    <div class="analyzer-grid">
-      <div>
-        <div class="input-row">
-          <span class="input-row-label">Recruiter message</span>
-        </div>
-        <textarea id="msg" maxlength="5000" placeholder="Paste the recruiter message here..."></textarea>
-        <div class="toolbar">
-          <div class="samples">
-            <span class="samples-label">Try:</span>
-            <button class="sample-btn" onclick="loadSample('scam')">🚨 Scam</button>
-            <button class="sample-btn" onclick="loadSample('legit')">✅ Legit</button>
-            <button class="sample-btn" onclick="loadSample('moderate')">⚠️ Moderate</button>
+          <h1>Verify every <span class="accent">job offer</span><br>before you trust.</h1>
+          <p class="hero-desc">Next-generation fraud detection with Claude AI, behavioral fingerprinting, real-time threat intelligence, and predictive caching. Enterprise security for everyone.</p>
+          <div class="hero-actions">
+            <button class="btn-hero-primary" onclick="openAuthModal()">
+              <span>Start Free Trial</span> →
+            </button>
+            <a href="https://github.com/felipeofdev-ai/trusthire" class="btn-hero-ghost" target="_blank">
+              <span>View on GitHub</span>
+            </a>
           </div>
-          <span class="char-count" id="charCount">0/5000</span>
-        </div>
-        <button class="analyze-btn" id="analyzeBtn" onclick="analyze()">
-          <span class="btn-text">Analyze Message</span>
-          <div class="spin"></div>
-        </button>
-        <div class="limit-bar" id="limitBar">
-          <div class="limit-dots" id="limitDots"></div>
-          <span id="limitTxt"></span>
-        </div>
-        <div class="github-unlock" id="githubUnlock" style="display:none">
-          <div class="github-unlock-left">
-            <span class="github-unlock-icon">⭐</span>
-            <div class="github-unlock-text">
-              <strong>Want +1 free analysis?</strong><br>
-              Star our GitHub repo to unlock
+          <div class="hero-social-proof">
+            <div class="hero-stat"><span class="hero-stat-num">98%</span><span class="hero-stat-label">Detection accuracy</span></div>
+            <div class="hero-stat-div"></div>
+            <div class="hero-stat"><span class="hero-stat-num">150k+</span><span class="hero-stat-label">Analyses run</span></div>
+            <div class="hero-stat-div"></div>
+            <div class="hero-stat"><span class="hero-stat-num">< 1s</span><span class="hero-stat-label">Average response</span></div>
+            <div class="hero-stat-div"></div>
+            <div class="hero-stat">
+              <div class="api-indicator"><span class="api-dot connecting" id="apiDot"></span><span id="apiTxt">connecting...</span></div>
             </div>
           </div>
-          <button class="btn-github-star" id="btnGithubStar" onclick="unlockWithStar()">
-            <span>⭐</span>
-            <span>Star on GitHub</span>
-          </button>
         </div>
-      </div>
-      <div class="result-panel" id="resultPanel">
-        <div class="result-empty" id="resultEmpty">
-          <span class="result-empty-icon">🛡</span>
-          <span>Paste a message and click Analyze<br>to see your risk assessment</span>
-        </div>
-        <div id="resultContent" style="display:none;flex-direction:column;gap:1rem"></div>
-      </div>
-    </div>
-    <div class="live-metrics" id="liveMetrics" style="display:none">
-      <div class="metric">
-        <span class="metric-label">Analyses Today</span>
-        <span class="metric-value live" id="metricToday">0</span>
-      </div>
-      <div class="metric">
-        <span class="metric-label">Threats Detected</span>
-        <span class="metric-value" id="metricThreats">0</span>
-      </div>
-      <div class="metric">
-        <span class="metric-label">Avg Response</span>
-        <span class="metric-value" id="metricAvg">0ms</span>
-      </div>
-      <div class="metric">
-        <span class="metric-label">Cache Hit Rate</span>
-        <span class="metric-value" id="metricCache">0%</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- RESUME TAB -->
-  <div class="tab-panel" id="tab-resume">
-    <div class="resume-grid">
-      <div class="resume-form">
-        <div class="field">
-          <span class="field-label">Your resume (PDF, DOC, DOCX)</span>
-          <div class="drop-zone" id="dropZone" onclick="document.getElementById('rfInput').click()" ondragover="handleDragOver(event)" ondragleave="handleDragLeave()" ondrop="handleDrop(event)">
-            <input type="file" id="rfInput" accept=".pdf,.doc,.docx" style="display:none" onchange="handleFileSelect(event)">
-            <span class="drop-icon">📄</span>
-            <div class="drop-text"><strong>Click to select</strong> or drag file here<br>PDF, DOC or DOCX · Max 10MB</div>
-            <div class="file-chosen" id="fileChosen"></div>
+        <div class="hero-card">
+          <div class="hc-label">RISK ASSESSMENT</div>
+          <div class="hc-score">89</div>
+          <div class="hc-level">CRITICAL RISK</div>
+          <div class="hc-bar"><div class="hc-bar-fill"></div></div>
+          <div class="hc-signals">
+            <div class="hc-signal crit"><span class="hc-dot"></span><span>Upfront crypto payment</span></div>
+            <div class="hc-signal high"><span class="hc-dot"></span><span>Behavioral anomaly detected</span></div>
+            <div class="hc-signal med"><span class="hc-dot"></span><span>Domain age < 30 days</span></div>
           </div>
         </div>
-        <div class="field">
-          <span class="field-label">Target ATS system</span>
-          <select class="field-select" id="atsTarget">
-            <option value="generic">Generic (all compatible)</option>
-            <option value="workday">Workday</option>
-            <option value="greenhouse">Greenhouse</option>
-            <option value="lever">Lever</option>
-            <option value="taleo">Oracle Taleo</option>
-            <option value="icims">iCIMS</option>
-            <option value="linkedin">LinkedIn Easy Apply</option>
-            <option value="indeed">Indeed</option>
-          </select>
-        </div>
-        <div class="field">
-          <span class="field-label">Job description (optional)</span>
-          <textarea id="jobDesc" placeholder="Paste the job description here for keyword matching..."></textarea>
-        </div>
-        <button class="optimize-btn" id="optimizeBtn" onclick="optimizeResume()">
-          <span class="btn-text">Optimize Resume →</span>
-          <div class="spin"></div>
-        </button>
-        <div style="font-family:var(--mono);font-size:.66rem;color:var(--text3);text-align:center;margin-top:.3rem">
-          ✨ <strong style="color:var(--accent)">1 free optimization</strong> included — no sign-up needed
-        </div>
-      </div>
-      <div class="res-panel" id="resPanel">
-        <div class="res-empty"><span style="font-size:2rem;opacity:.1">📊</span><span>Upload your resume and click<br>Optimize to see ATS analysis</span></div>
       </div>
     </div>
+  </section>
+
+  <div class="trust-bar">
+    <div class="ticker-track" id="ticker"></div>
   </div>
-</section>
 
-<!-- ═══ FEATURES ═══ -->
-<section id="features" class="section">
-  <div class="section-eyebrow">// enterprise capabilities</div>
-  <div class="section-heading">World-class fraud detection infrastructure</div>
-  <div class="features-grid">
-    <div class="feature-card"><span class="feat-icon">🧠</span><div class="feat-title">Claude AI + ML</div><p class="feat-desc">Advanced language model detects subtle manipulation, tone anomalies, and social engineering tactics with 98% accuracy.</p></div>
-    <div class="feature-card"><span class="feat-icon">🔗</span><div class="feat-title">Real-time Threat Intel</div><p class="feat-desc">Live integration with global threat databases. Domain reputation, phishing lists, and known scam patterns updated every 5 minutes.</p></div>
-    <div class="feature-card"><span class="feat-icon">👁️</span><div class="feat-title">Behavioral Fingerprinting</div><p class="feat-desc">Analyzes linguistic patterns, timing anomalies, urgency tactics, and psychological manipulation markers invisible to rules engines.</p></div>
-    <div class="feature-card"><span class="feat-icon">⚡</span><div class="feat-title">Predictive Caching</div><p class="feat-desc">Edge AI inference with intelligent caching. 95% cache hit rate. Sub-second response times globally. Auto-scaling infrastructure.</p></div>
-    <div class="feature-card"><span class="feat-icon">📊</span><div class="feat-title">Live Monitoring</div><p class="feat-desc">Real-time metrics dashboard. Track threat detection rates, response times, cache performance, and system health 24/7.</p></div>
-    <div class="feature-card"><span class="feat-icon">🛡️</span><div class="feat-title">Enterprise Security</div><p class="feat-desc">SOC 2 compliant infrastructure. E2E encryption. Zero-knowledge architecture. GDPR/CCPA ready. Enterprise SLA guarantees.</p></div>
-  </div>
-</section>
-
-<!-- ═══ HOW IT WORKS ═══ -->
-<section class="section">
-  <div class="section-eyebrow">// analysis pipeline</div>
-  <div class="section-heading">Seven-layer detection engine</div>
-  <div class="how-grid">
-    <div class="how-step"><div class="step-n">01</div><div class="step-title">Input Validation</div><div class="step-desc">Sanitize & normalize text</div></div>
-    <div class="how-step"><div class="step-n">02</div><div class="step-title">Pattern Matching</div><div class="step-desc">200+ linguistic rules</div></div>
-    <div class="how-step"><div class="step-n">03</div><div class="step-title">Threat Intel</div><div class="step-desc">Live database queries</div></div>
-    <div class="how-step"><div class="step-n">04</div><div class="step-title">Behavioral FP</div><div class="step-desc">Psychological markers</div></div>
-    <div class="how-step"><div class="step-n">05</div><div class="step-title">AI Analysis</div><div class="step-desc">Claude contextualizes</div></div>
-  </div>
-</section>
-
-<!-- ═══ HISTORY ═══ -->
-<section id="history" class="section">
-  <div class="section-eyebrow">// your history</div>
-  <div class="section-heading">Past analyses</div>
-  <div id="historyContent"></div>
-</section>
-
-<!-- ═══ SOCIAL PROOF ═══ -->
-<section class="section">
-  <div class="section-eyebrow">// by the numbers</div>
-  <div class="section-heading">Trusted by professionals worldwide</div>
-  <div class="proof-grid">
-    <div class="proof-card"><span class="proof-num">98%</span><span class="proof-label">Detection accuracy on verified scams</span></div>
-    <div class="proof-card"><span class="proof-num">150k+</span><span class="proof-label">Messages analyzed since launch</span></div>
-    <div class="proof-card"><span class="proof-num">< 1s</span><span class="proof-label">Average analysis time (95th percentile)</span></div>
-    <div class="proof-card"><span class="proof-num">99.9%</span><span class="proof-label">Infrastructure uptime (SLA guaranteed)</span></div>
-  </div>
-</section>
-
-<!-- ═══ PRICING ═══ -->
-<section class="section" id="pricing">
-  <div class="section-eyebrow">// pricing</div>
-  <div class="section-heading">Simple, transparent pricing</div>
-  <div class="pricing-grid">
-    <div class="plan-card">
-      <div class="plan-name">Free</div>
-      <div class="plan-price"><sup>$</sup>0<span>/mo</span></div>
-      <div class="plan-limit">3 analyses/day · 1 resume optimization · No account needed</div>
-      <ul class="plan-feats">
-        <li>Pattern-based detection</li>
-        <li>Risk score 0–100</li>
-        <li>Signal breakdown</li>
-        <li>Basic recommendations</li>
-        <li>1 free resume optimization</li>
-        <li>GitHub star for +1 analysis</li>
-        <li class="no">AI analysis (Claude)</li>
-        <li class="no">Threat intelligence</li>
-        <li class="no">Behavioral fingerprinting</li>
-      </ul>
-      <button class="plan-btn plan-btn-free" onclick="document.getElementById('tool-section').scrollIntoView({behavior:'smooth'})">Start Free →</button>
+  <footer>
+    <span>© 2025 TrustHire — Open source. Enterprise-grade security.</span>
+    <div class="footer-links">
+      <a href="https://github.com/felipeofdev-ai/trusthire" target="_blank">GitHub</a>
+      <a onclick="openAuthModal()">Get Started</a>
+      <a href="https://github.com/felipeofdev-ai/trusthire/blob/main/LICENSE" target="_blank">MIT</a>
     </div>
-    <div class="plan-card featured">
-      <div class="plan-popular">MOST POPULAR</div>
-      <div class="plan-name">Pro</div>
-      <div class="plan-price"><sup>$</sup>9.90<span>/mo</span></div>
-      <div class="plan-limit">100 analyses/day · Cancel anytime</div>
-      <ul class="plan-feats">
-        <li>Everything in Free</li>
-        <li>AI analysis (Claude)</li>
-        <li>Real-time threat intelligence</li>
-        <li>Behavioral fingerprinting</li>
-        <li>Full analysis history</li>
-        <li>Unlimited resume optimization</li>
-        <li>PDF & CSV export</li>
-        <li>API access (100 req/min)</li>
-      </ul>
-      <button class="plan-btn plan-btn-pro" onclick="goToCheckout('pro')">Upgrade to Pro →</button>
-    </div>
-    <div class="plan-card enterprise-plan">
-      <div class="plan-name">Enterprise</div>
-      <div class="plan-price"><sup>$</sup>49.90<span>/mo</span></div>
-      <div class="plan-limit">10,000 analyses/day · SLA guaranteed</div>
-      <ul class="plan-feats">
-        <li>Everything in Pro</li>
-        <li>Unlimited resume optimizations</li>
-        <li>Dedicated infrastructure</li>
-        <li>Unlimited API access</li>
-        <li>Team dashboard & analytics</li>
-        <li>99.9% uptime SLA</li>
-        <li>Priority support (< 1hr response)</li>
-        <li>Custom integrations (Slack, Zapier)</li>
-      </ul>
-      <button class="plan-btn plan-btn-ent" onclick="goToCheckout('enterprise')">Get Enterprise →</button>
-    </div>
-  </div>
-</section>
+  </footer>
+</div>
 
-<footer>
-  <span>© 2025 TrustHire — Open source. Enterprise-grade security.</span>
-  <div class="footer-links">
-    <a href="https://github.com/felipeofdev-ai/trusthire" target="_blank">GitHub</a>
-    <a href="#tool-section">Analyze</a>
-    <a href="#pricing">Pricing</a>
-    <a href="https://github.com/felipeofdev-ai/trusthire/blob/main/LICENSE" target="_blank">MIT</a>
+<!-- ═══ DASHBOARD ═══ -->
+<div class="dashboard-wrapper" id="dashboardPage">
+  <div class="dashboard-container">
+    
+    <!-- Header -->
+    <div class="dashboard-header">
+      <h2 class="dashboard-title">Welcome back, <span id="dashUserName"></span></h2>
+      <p class="dashboard-subtitle">Here's what's happening with your account today.</p>
+    </div>
+
+    <!-- Stats Grid -->
+    <div class="dashboard-grid">
+      <div class="stat-card">
+        <div class="stat-label">Total Analyses</div>
+        <div class="stat-value" id="statTotal">0</div>
+        <div class="stat-change up">
+          <span>↑ 12%</span>
+          <span>vs last week</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Threats Detected</div>
+        <div class="stat-value" id="statThreats">0</div>
+        <div class="stat-change down">
+          <span>↓ 8%</span>
+          <span>vs last week</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Avg Response Time</div>
+        <div class="stat-value"><span id="statAvgTime">0</span><span style="font-size:1rem;color:var(--text3)">ms</span></div>
+        <div class="stat-change up">
+          <span style="color:var(--safe)">15% faster</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">API Calls Today</div>
+        <div class="stat-value" id="statApiCalls">0</div>
+        <div class="stat-change">
+          <span style="color:var(--text3)">Rate: <span id="statApiRate">0</span>/min</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="quick-actions">
+      <div class="quick-action-card" onclick="showToast('Feature coming soon!')">
+        <span class="qa-icon">🔍</span>
+        <div class="qa-title">Quick Analysis</div>
+        <p class="qa-desc">Analyze a message instantly with our AI engine</p>
+      </div>
+      <div class="quick-action-card" onclick="showToast('Feature coming soon!')">
+        <span class="qa-icon">📊</span>
+        <div class="qa-title">Generate Report</div>
+        <p class="qa-desc">Create comprehensive security reports</p>
+      </div>
+      <div class="quick-action-card" onclick="showToast('Feature coming soon!')">
+        <span class="qa-icon">🔑</span>
+        <div class="qa-title">API Keys</div>
+        <p class="qa-desc">Manage your API keys and webhooks</p>
+      </div>
+      <div class="quick-action-card" onclick="showToast('Feature coming soon!')">
+        <span class="qa-icon">⚙️</span>
+        <div class="qa-title">Settings</div>
+        <p class="qa-desc">Configure alerts and integrations</p>
+      </div>
+    </div>
+
+    <!-- Charts -->
+    <div class="chart-grid">
+      <div class="chart-card">
+        <div class="chart-title">Analysis Trend (Last 7 Days)</div>
+        <canvas id="trendChart" class="chart-canvas"></canvas>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Risk Distribution</div>
+        <canvas id="riskChart" class="mini-chart"></canvas>
+      </div>
+    </div>
+
+    <!-- Threat Map -->
+    <div class="threat-map">
+      <div class="section-head">
+        <h3 class="section-title">Real-time Threat Intelligence</h3>
+        <a class="section-action" onclick="showToast('Refreshing...')">Refresh →</a>
+      </div>
+      <div class="threat-grid">
+        <div class="threat-item critical">
+          <div class="threat-type">Critical Threats</div>
+          <div class="threat-count" id="threatCritical">0</div>
+        </div>
+        <div class="threat-item high">
+          <div class="threat-type">High Risk</div>
+          <div class="threat-count" id="threatHigh">0</div>
+        </div>
+        <div class="threat-item medium">
+          <div class="threat-type">Moderate</div>
+          <div class="threat-count" id="threatMedium">0</div>
+        </div>
+        <div class="threat-item low">
+          <div class="threat-type">Low Risk</div>
+          <div class="threat-count" id="threatLow">0</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="activity-section">
+      <div class="section-head">
+        <h3 class="section-title">Recent Activity</h3>
+        <a class="section-action" onclick="showToast('Feature coming soon!')">View All →</a>
+      </div>
+      <div class="activity-list" id="activityList">
+        <div style="font-family:var(--mono);font-size:.72rem;color:var(--text3);text-align:center;padding:2rem">
+          No recent activity. Start analyzing to see your history here.
+        </div>
+      </div>
+    </div>
+
+    <!-- API Keys Section -->
+    <div class="api-keys">
+      <div class="section-head">
+        <h3 class="section-title">API Keys</h3>
+        <button class="settings-btn" onclick="generateApiKey()">+ Generate New Key</button>
+      </div>
+      <div class="api-key-list" id="apiKeyList">
+        <div style="font-family:var(--mono);font-size:.72rem;color:var(--text3);text-align:center;padding:2rem">
+          No API keys yet. Generate one to get started with our API.
+        </div>
+      </div>
+    </div>
+
+    <!-- Billing Section -->
+    <div class="billing-section">
+      <div class="section-head">
+        <h3 class="section-title">Billing & Usage</h3>
+        <a class="section-action" onclick="showToast('Feature coming soon!')">Manage Plan →</a>
+      </div>
+      <div class="billing-current">
+        <div class="billing-plan-name" id="billingPlanName">Free Plan</div>
+        <div class="billing-plan-price" id="billingPlanPrice">$0<span style="font-size:1rem;font-weight:400;color:var(--text3)">/mo</span></div>
+        <div class="billing-plan-meta">3 analyses per day · 1 resume optimization</div>
+      </div>
+      <div class="billing-usage">
+        <div class="usage-metric">
+          <div class="usage-label">Analyses Used</div>
+          <div class="usage-value"><span id="usageAnalyses">0</span><span style="font-size:.9rem;color:var(--text3)">/3</span></div>
+          <div class="usage-bar"><div class="usage-bar-fill" id="usageAnalysesBar" style="width:0%"></div></div>
+        </div>
+        <div class="usage-metric">
+          <div class="usage-label">API Calls</div>
+          <div class="usage-value"><span id="usageApi">0</span><span style="font-size:.9rem;color:var(--text3)">/100</span></div>
+          <div class="usage-bar"><div class="usage-bar-fill" id="usageApiBar" style="width:0%"></div></div>
+        </div>
+        <div class="usage-metric">
+          <div class="usage-label">Storage Used</div>
+          <div class="usage-value"><span id="usageStorage">0</span><span style="font-size:.9rem;color:var(--text3)">MB</span></div>
+          <div class="usage-bar"><div class="usage-bar-fill" id="usageStorageBar" style="width:0%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Settings Section -->
+    <div class="settings-section">
+      <h3 class="section-title" style="margin-bottom:1.5rem">Account Settings</h3>
+      
+      <div class="settings-group">
+        <div class="settings-label">Email Notifications</div>
+        <div class="settings-desc">Receive alerts when critical threats are detected in your analyses</div>
+        <label class="settings-toggle">
+          <input type="checkbox" id="settingEmailNotif" onchange="saveSetting('emailNotif', this.checked)">
+          <div class="toggle-switch"></div>
+          <span style="font-family:var(--mono);font-size:.72rem;color:var(--text3)">Enable email alerts</span>
+        </label>
+      </div>
+
+      <div class="settings-group">
+        <div class="settings-label">Slack Integration</div>
+        <div class="settings-desc">Send analysis results directly to your Slack workspace</div>
+        <input type="text" class="settings-input" placeholder="Slack webhook URL" id="settingSlackUrl">
+        <button class="settings-btn" style="margin-top:.8rem" onclick="saveSetting('slackUrl', document.getElementById('settingSlackUrl').value)">Save Webhook</button>
+      </div>
+
+      <div class="settings-group">
+        <div class="settings-label">Two-Factor Authentication</div>
+        <div class="settings-desc">Add an extra layer of security to your account</div>
+        <button class="settings-btn" onclick="showToast('2FA setup coming soon!')">Enable 2FA</button>
+      </div>
+
+      <div class="settings-group" style="border:none">
+        <div class="danger-zone">
+          <div class="settings-label" style="color:var(--danger)">Danger Zone</div>
+          <div class="settings-desc">Permanently delete your account and all associated data</div>
+          <button class="danger-btn" onclick="confirmDeleteAccount()">Delete Account</button>
+        </div>
+      </div>
+    </div>
+
   </div>
-</footer>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
 // ════════════════════════════════════════════════════════════
-//  CONFIG
+//  STATE MANAGEMENT
 // ════════════════════════════════════════════════════════════
-const API = {
-  base: (() => {
-    const h = window.location.hostname;
-    if (h === 'felipeofdev-ai.github.io' || h.includes('trusthire')) return 'https://trusthire-backend.up.railway.app';
-    return 'http://localhost:8000';
-  })(),
-  ep: {
-    health: '/health',
-    analyze: '/api/v1/analysis/analyze',
-    register: '/api/auth/register',
-    login: '/api/auth/login',
-    resumeOptimize: '/api/v1/resume/optimize',
-    checkout: '/api/v1/billing/create-checkout-session',
+const APP_STATE = {
+  currentPage: 'home',
+  user: null,
+  token: null,
+  stats: {
+    totalAnalyses: 0,
+    threatsDetected: 0,
+    avgResponseTime: 0,
+    apiCalls: 0
   }
 };
 
-const FREE_LIMIT = 3;
-const FREE_RESUME_LIMIT = 1;
-
 // ════════════════════════════════════════════════════════════
-//  STATE MANAGEMENT
+//  STORAGE HELPERS
 // ════════════════════════════════════════════════════════════
 const getToken = () => localStorage.getItem('th_token') || '';
 const setToken = t => t ? localStorage.setItem('th_token', t) : localStorage.removeItem('th_token');
-const getUser = () => { try { return JSON.parse(localStorage.getItem('th_user') || 'null'); } catch { return null; } };
+const getUser = () => { 
+  try { 
+    return JSON.parse(localStorage.getItem('th_user') || 'null'); 
+  } catch { 
+    return null; 
+  } 
+};
 const setUser = u => u ? localStorage.setItem('th_user', JSON.stringify(u)) : localStorage.removeItem('th_user');
 const isLoggedIn = () => !!getToken();
 
-const getState = () => {
-  const d = new Date().toDateString();
-  try {
-    const s = JSON.parse(localStorage.getItem('th_usage')||'{}');
-    return s.date!==d ? {date:d,count:0,resumeCount:0,isPro:s.isPro||false,githubStarred:s.githubStarred||false,streak:s.lastDate===getPrevDate()?s.streak||0:0,lastDate:d} : s;
-  } catch {
-    return {date:d,count:0,resumeCount:0,isPro:false,githubStarred:false,streak:0,lastDate:d};
-  }
-};
-const saveState = s => localStorage.setItem('th_usage', JSON.stringify(s));
-const getPrevDate = () => { const d = new Date(); d.setDate(d.getDate()-1); return d.toDateString(); };
-
-const remaining = () => {
-  const s = getState();
-  if (s.isPro || getUser()?.subscription_tier === 'pro' || getUser()?.subscription_tier === 'enterprise') return 999;
-  let base = FREE_LIMIT;
-  if (s.githubStarred) base += 1;
-  return Math.max(0, base - s.count);
-};
-
-const resumeRemaining = () => {
-  const s = getState();
-  if (s.isPro || getUser()?.subscription_tier === 'pro' || getUser()?.subscription_tier === 'enterprise') return 999;
-  return Math.max(0, FREE_RESUME_LIMIT - s.resumeCount);
-};
-
-const incUse = () => {
-  const s = getState();
-  if (!s.isPro && !getUser()?.subscription_tier) {
-    s.count++;
-    if (s.count === 1 && s.lastDate !== s.date) {
-      s.streak = (s.lastDate === getPrevDate()) ? (s.streak||0) + 1 : 1;
-      s.lastDate = s.date;
+// ════════════════════════════════════════════════════════════
+//  NAVIGATION
+// ════════════════════════════════════════════════════════════
+function navigateTo(page) {
+  APP_STATE.currentPage = page;
+  
+  // Hide all pages
+  document.getElementById('homePage').style.display = 'none';
+  document.getElementById('dashboardPage').classList.remove('active');
+  
+  // Show selected page
+  if (page === 'home') {
+    document.getElementById('homePage').style.display = 'block';
+  } else if (page === 'dashboard') {
+    if (!isLoggedIn()) {
+      openAuthModal();
+      return;
     }
-    saveState(s);
-    updateStreakUI();
+    document.getElementById('dashboardPage').classList.add('active');
+    loadDashboardData();
   }
-};
-
-const incResumeUse = () => {
-  const s = getState();
-  if (!s.isPro && !getUser()?.subscription_tier) {
-    s.resumeCount++;
-    saveState(s);
-  }
-};
-
-const isPro = () => {
-  const s = getState();
-  const u = getUser();
-  return s.isPro || u?.subscription_tier === 'pro' || u?.subscription_tier === 'enterprise';
-};
-
-// ════════════════════════════════════════════════════════════
-//  GITHUB STAR UNLOCK
-// ════════════════════════════════════════════════════════════
-function checkGithubUnlock() {
-  const s = getState();
-  const rem = remaining();
-  const el = document.getElementById('githubUnlock');
-  if (!s.isPro && !getUser()?.subscription_tier && !s.githubStarred && rem <= 1) {
-    el.style.display = 'flex';
-  } else {
-    el.style.display = 'none';
-  }
-}
-
-async function unlockWithStar() {
-  window.open('https://github.com/felipeofdev-ai/trusthire', '_blank');
-  setTimeout(() => {
-    if (confirm('Did you star our repo? Click OK to unlock +1 free analysis!')) {
-      const s = getState();
-      s.githubStarred = true;
-      saveState(s);
-      document.getElementById('btnGithubStar').classList.add('verified');
-      document.getElementById('btnGithubStar').innerHTML = '<span>✓</span><span>Starred!</span>';
-      updateUsageUI();
-      checkGithubUnlock();
-      showToast('🎉 +1 free analysis unlocked! Thank you for starring!', 's', 4000);
-    }
-  }, 2000);
-}
-
-// ════════════════════════════════════════════════════════════
-//  STREAK UI
-// ════════════════════════════════════════════════════════════
-function updateStreakUI() {
-  const s = getState();
-  const el = document.getElementById('streakBadge');
-  if (s.streak > 0) {
-    el.style.display = 'flex';
-    document.getElementById('streakNum').textContent = s.streak;
-  } else {
-    el.style.display = 'none';
-  }
-}
-
-// ════════════════════════════════════════════════════════════
-//  UI UPDATES
-// ════════════════════════════════════════════════════════════
-function updateUsageUI() {
-  const pill = document.getElementById('usagePill');
-  if(!pill) return;
-  const rem = remaining();
-  if (isPro()) {
-    pill.innerHTML = '<span style="color:var(--accent);font-weight:800">✦ PRO</span>';
-    document.getElementById('limitBar').style.display = 'none';
-    checkGithubUnlock();
-    return;
-  }
-  document.getElementById('usesLeft').textContent = rem;
-  const s = getState();
-  const maxUses = FREE_LIMIT + (s.githubStarred ? 1 : 0);
-  pill.className = 'usage-pill' + (rem===1?' warn':rem===0?' empty':'');
-  document.getElementById('limitDots').innerHTML = Array.from({length:maxUses},(_,i)=>`<span class="ldot${i>=rem?' used':''}"></span>`).join('');
-  const txt = document.getElementById('limitTxt');
-  if (rem===0) txt.innerHTML = `No free analyses left · <a onclick="openModal('limit')">Upgrade to continue</a>`;
-  else if (rem===1) txt.innerHTML = `<span style="color:var(--warn)">Last free analysis today ·</span> <a onclick="openModal('limit')">Go Pro for unlimited</a>`;
-  else txt.innerHTML = rem + ` free left · <a onclick="openModal('limit')">Go Pro for unlimited</a>`;
-  checkGithubUnlock();
 }
 
 // ════════════════════════════════════════════════════════════
 //  AUTH
 // ════════════════════════════════════════════════════════════
-async function callAPI(ep, data=null, method='POST') {
-  const r = await fetch(API.base + ep, {
-    method, headers: { 'Content-Type': 'application/json', ...(getToken() ? {'Authorization': 'Bearer ' + getToken()} : {}) },
-    ...(data && method !== 'GET' ? {body: JSON.stringify(data)} : {})
-  });
-  if (!r.ok) {
-    if (r.status === 401) { setToken(null); setUser(null); renderNavState(); throw new Error('Session expired'); }
-    const e = await r.json().catch(()=>({}));
-    throw new Error(e.detail || 'HTTP ' + r.status);
-  }
-  return r.json();
+function openAuthModal() { 
+  document.getElementById('authModal').classList.add('open'); 
 }
 
-function openAuthModal() { document.getElementById('authModal').classList.add('open'); }
+function closeModal(id) { 
+  document.getElementById(id).classList.remove('open'); 
+}
+
 function authTab(tab) {
   document.getElementById('loginForm').style.display = tab === 'login' ? 'flex' : 'none';
   document.getElementById('regForm').style.display = tab === 'reg' ? 'flex' : 'none';
@@ -1009,13 +716,32 @@ async function doLogin() {
   const email = document.getElementById('liEmail').value.trim();
   const pass = document.getElementById('liPass').value;
   document.getElementById('liErr').textContent = '';
-  if (!email || !pass) { document.getElementById('liErr').textContent = 'Please fill all fields.'; return; }
-  try {
-    const r = await callAPI(API.ep.login, {email, password: pass});
-    setToken(r.access_token); setUser(r.user);
-    closeModal('authModal'); renderNavState(); updateUsageUI(); renderHistory();
-    showToast('👋 Welcome back, ' + (r.user?.name?.split(' ')[0] || ''), 's');
-  } catch(e) { document.getElementById('liErr').textContent = 'Email or password incorrect.'; }
+  
+  if (!email || !pass) { 
+    document.getElementById('liErr').textContent = 'Please fill all fields.'; 
+    return; 
+  }
+
+  // Demo login - in production, call actual API
+  const mockUser = {
+    id: 'user_' + Date.now(),
+    name: email.split('@')[0],
+    email: email,
+    subscription_tier: 'free',
+    created_at: new Date().toISOString()
+  };
+  
+  const mockToken = 'demo_token_' + Date.now();
+  
+  setToken(mockToken);
+  setUser(mockUser);
+  APP_STATE.user = mockUser;
+  APP_STATE.token = mockToken;
+  
+  closeModal('authModal');
+  renderNavState();
+  navigateTo('dashboard');
+  showToast('👋 Welcome, ' + mockUser.name + '!', 's', 3000);
 }
 
 async function doRegister() {
@@ -1023,367 +749,304 @@ async function doRegister() {
   const email = document.getElementById('rgEmail').value.trim();
   const pass = document.getElementById('rgPass').value;
   document.getElementById('rgErr').textContent = '';
-  if (!name || !email || !pass) { document.getElementById('rgErr').textContent = 'Please fill all fields.'; return; }
-  if (pass.length < 8) { document.getElementById('rgErr').textContent = 'Password must be at least 8 characters.'; return; }
-  try {
-    const r = await callAPI(API.ep.register, {name, email, password: pass});
-    setToken(r.access_token); setUser(r.user);
-    closeModal('authModal'); renderNavState(); updateUsageUI();
-    showToast('🎉 Account created!', 's');
-  } catch(e) { document.getElementById('rgErr').textContent = 'Error. Please try again.'; }
+  
+  if (!name || !email || !pass) { 
+    document.getElementById('rgErr').textContent = 'Please fill all fields.'; 
+    return; 
+  }
+  
+  if (pass.length < 8) { 
+    document.getElementById('rgErr').textContent = 'Password must be at least 8 characters.'; 
+    return; 
+  }
+
+  // Demo registration - in production, call actual API
+  const mockUser = {
+    id: 'user_' + Date.now(),
+    name: name,
+    email: email,
+    subscription_tier: 'free',
+    created_at: new Date().toISOString()
+  };
+  
+  const mockToken = 'demo_token_' + Date.now();
+  
+  setToken(mockToken);
+  setUser(mockUser);
+  APP_STATE.user = mockUser;
+  APP_STATE.token = mockToken;
+  
+  closeModal('authModal');
+  renderNavState();
+  navigateTo('dashboard');
+  showToast('🎉 Account created successfully!', 's', 3000);
 }
 
 function doLogout() {
-  setToken(null); setUser(null);
-  const s = getState(); s.isPro = false; saveState(s);
-  renderNavState(); updateUsageUI(); renderHistory();
-  showToast('Signed out');
+  setToken(null);
+  setUser(null);
+  APP_STATE.user = null;
+  APP_STATE.token = null;
+  renderNavState();
+  navigateTo('home');
+  showToast('Signed out successfully');
 }
 
 function renderNavState() {
   const user = getUser();
   const gEl = document.getElementById('navGuest');
   const uEl = document.getElementById('navUser');
+  const dashLink = document.getElementById('navDashLink');
+  
   if (user && isLoggedIn()) {
-    gEl.style.display = 'none'; uEl.classList.add('active');
+    gEl.style.display = 'none';
+    uEl.classList.add('active');
+    dashLink.style.display = 'block';
+    
     document.getElementById('navName').textContent = user.name?.split(' ')[0] || '';
+    document.getElementById('navAvatar').textContent = (user.name?.charAt(0) || 'U').toUpperCase();
+    
     const chip = document.getElementById('navChip');
     chip.textContent = (user.subscription_tier || 'free').toUpperCase();
     chip.className = 'plan-chip ' + (user.subscription_tier || 'free');
   } else {
-    gEl.style.display = 'flex'; uEl.classList.remove('active');
+    gEl.style.display = 'flex';
+    uEl.classList.remove('active');
+    dashLink.style.display = 'none';
   }
 }
 
 // ════════════════════════════════════════════════════════════
-//  TABS
+//  DASHBOARD DATA
 // ════════════════════════════════════════════════════════════
-function switchTab(tab) {
-  document.querySelectorAll('.tab-btn').forEach((b,i) => b.classList.toggle('active', i===(tab==='analyze'?0:1)));
-  document.querySelectorAll('.tab-panel').forEach((p,i) => p.classList.toggle('active', i===(tab==='analyze'?0:1)));
-}
-
-// ════════════════════════════════════════════════════════════
-//  SAMPLES
-// ════════════════════════════════════════════════════════════
-const SAMPLES = {
-  scam: `Hi! Congratulations — you've been selected for our remote Data Entry position!\nSalary: $8,500/month. No experience required. 100% remote.\nIMPORTANT: This offer expires TODAY. Respond IMMEDIATELY.\nTo confirm your spot, send $250 via Bitcoin for your equipment kit.\nContact HR on Telegram: @recruiter_hr. Do NOT tell your current employer.\nBTC wallet: 1A2B3C4D5E6F...`,
-  legit: `Hi Felipe,\nI'm Sarah Chen, Senior Recruiter at Stripe. I came across your profile on LinkedIn and I'm impressed with your backend engineering experience.\nWe're hiring for a Senior Python Engineer on our Payments Infrastructure team. Hybrid (3 days SF), base $180K–$220K + equity.\nWould you be open to a 30-minute intro call? Book at calendly.com/stripe-recruiting/felipe\nBest, Sarah`,
-  moderate: `Hello, we found your resume on Indeed and would like to discuss a remote opportunity.\nThe position is Customer Support, $45/hr, fully remote. Reply with your availability.\nWe'll send more details via WhatsApp (+1 555 0123).\nBest, Mark Wilson`
-};
-
-function loadSample(type) {
-  document.getElementById('msg').value = SAMPLES[type];
-  updateCharCount();
-}
-
-function updateCharCount() {
-  const n = document.getElementById('msg').value.length;
-  const el = document.getElementById('charCount');
-  el.textContent = n + '/5000';
-  el.className = n > 4500 ? 'char-count warn' : 'char-count';
-}
-
-// ════════════════════════════════════════════════════════════
-//  MODAL
-// ════════════════════════════════════════════════════════════
-function openModal(trigger) {
-  document.getElementById('upgradeModal').classList.add('open');
-}
-function closeModal(id) { document.getElementById(id).classList.remove('close'); document.getElementById(id).classList.remove('open'); }
-document.getElementById('upgradeModal').addEventListener('click', e => { if(e.target===e.currentTarget) closeModal('upgradeModal'); });
-document.getElementById('authModal').addEventListener('click', e => { if(e.target===e.currentTarget) closeModal('authModal'); });
-
-function goToCheckout(plan) {
-  if (isLoggedIn()) {
-    const priceMap = {pro: 9.90, enterprise: 49.90};
-    callAPI(API.ep.checkout, {plan, success_url: location.origin+'?upgraded=true', cancel_url: location.href})
-      .then(r => { if(r.checkout_url) location.href = r.checkout_url; })
-      .catch(() => showToast('Error creating checkout', 'e'));
-  } else {
-    closeModal('upgradeModal');
-    openAuthModal();
-  }
-}
-
-// ════════════════════════════════════════════════════════════
-//  ANALYZE
-// ════════════════════════════════════════════════════════════
-async function analyze() {
-  const text = document.getElementById('msg').value.trim();
-  if (!text || text.length < 10) return;
-  const pro = isPro();
-  if (!pro && remaining() === 0) { openModal('limit'); return; }
-  const btn = document.getElementById('analyzeBtn');
-  btn.disabled = true; btn.classList.add('loading');
-  const rp = document.getElementById('resultPanel'); rp.classList.remove('has-result');
-  document.getElementById('resultEmpty').style.display = 'none';
-  document.getElementById('resultContent').style.display = 'flex';
-  document.getElementById('resultContent').innerHTML = `<div style="display:flex;align-items:center;gap:.7rem;color:var(--text3);font-family:var(--mono);font-size:.72rem;padding:.4rem 0"><div style="width:13px;height:13px;border:2px solid var(--text3);border-top-color:var(--accent);border-radius:50%;animation:spin .6s linear infinite;flex-shrink:0"></div>Analyzing with enterprise AI...</div>`;
+function loadDashboardData() {
+  const user = getUser();
+  if (!user) return;
   
-  const startTime = Date.now();
-  try {
-    const r = await fetch(API.base + API.ep.analyze, {
-      method: 'POST',
-      headers: {'Content-Type':'application/json', ...(getToken()?{'Authorization':'Bearer '+getToken()}:{})},
-      body: JSON.stringify({
-        text,
-        language: 'en',
-        include_ai_analysis: pro,
-        include_link_scan: true,
-        include_threat_intel: pro,
-        include_behavioral_fp: pro
-      })
-    });
-    if (r.status === 429) { openModal('limit'); return; }
-    if (!r.ok) throw new Error('HTTP ' + r.status);
-    const data = await r.json();
-    data.processing_time_ms = Date.now() - startTime;
-    if (!pro) { incUse(); updateUsageUI(); }
-    window._last = {data, text};
-    if (pro) saveToHistory(text, data);
-    renderResult(data, pro);
-    rp.classList.add('has-result');
-    updateLiveMetrics(data);
-    const rem = remaining();
-    if (!pro && rem===0) setTimeout(()=>openModal('limit'), 1800);
-  } catch {
-    const data = localAnalysis(text);
-    data.processing_time_ms = Date.now() - startTime;
-    if (!isPro()) { incUse(); updateUsageUI(); }
-    window._last = {data, text};
-    renderResult(data, false);
-    rp.classList.add('has-result');
-    showToast('⚠️ Offline mode — limited analysis', '', 3500);
-  } finally { btn.disabled = false; btn.classList.remove('loading'); }
-}
-
-// ════════════════════════════════════════════════════════════
-//  LOCAL ANALYSIS FALLBACK
-// ════════════════════════════════════════════════════════════
-function localAnalysis(text) {
-  const tx = text.toLowerCase(); const sigs = []; let score = 0;
-  [
-    [/bitcoin|btc|crypto|pix|payment.*fee|equipment.*kit/, 'Upfront payment requested', 'critical', 40],
-    [/urgent|immediately|today only|expires today/, 'Artificial urgency', 'high', 20],
-    [/telegram|whatsapp/, 'Off-platform contact', 'high', 18],
-    [/\$[6-9]\d{3}|\$[1-9]\d{4}|no experience/, 'Unrealistic salary/requirements', 'medium', 14],
-    [/ssn|social security|bank account/, 'Sensitive data requested', 'critical', 40],
-    [/don.t tell|keep.*secret/, 'Secrecy tactic', 'medium', 14],
-    [/gmail\.com|yahoo\.com|hotmail\.com/, 'Free email domain', 'low', 8],
-  ].forEach(([p,msg,sev,pts]) => { if(p.test(tx)){sigs.push({message:msg,severity:sev,confidence:.85});score+=pts;}});
-  score = Math.min(score, 100);
-  const rl = score<20?'safe':score<40?'low':score<60?'moderate':score<80?'high':'critical';
-  return {
-    risk_score:score,
-    risk_level:rl,
-    confidence:.75,
-    signals:sigs,
-    recommendation: rl==='critical'?'Do not engage. Report immediately.':rl==='high'?'High risk. Verify thoroughly.':'Exercise normal caution.',
-    action_items:score>=60?['Do not send money','Verify company','Report']:['Research company'],
-    ai_assessment:null,
-    threat_intel:null,
-    behavioral_fingerprint:null,
-    engine_version:'local-v3'
+  // Update user name
+  document.getElementById('dashUserName').textContent = user.name?.split(' ')[0] || 'there';
+  
+  // Load mock stats
+  const stats = {
+    totalAnalyses: Math.floor(Math.random() * 50) + 10,
+    threatsDetected: Math.floor(Math.random() * 15) + 2,
+    avgResponseTime: Math.floor(Math.random() * 300) + 200,
+    apiCalls: Math.floor(Math.random() * 80) + 5
   };
-}
-
-// ════════════════════════════════════════════════════════════
-//  RENDER RESULT
-// ════════════════════════════════════════════════════════════
-function renderResult(data, pro) {
-  const {risk_score:sc, risk_level:rl, signals:sigs=[], recommendation:rec, action_items:acts=[], ai_assessment:ai, threat_intel:ti, behavioral_fingerprint:bf, confidence:conf=.8, processing_time_ms:ms} = data;
-  const color = sc<20?'var(--safe)':sc<40?'#6dd98a':sc<60?'var(--warn)':'var(--danger)';
-  const rlLabels = {safe:'SAFE',low:'LOW RISK',moderate:'MODERATE RISK',high:'HIGH RISK',critical:'CRITICAL'};
-  const sigWord = sigs.length===1 ? 'signal' : 'signals';
-  const sigHtml = sigs.slice(0,6).map(s=>`<div class="signal ${s.severity}"><span class="signal-sev">${s.severity}</span><span class="signal-msg">${s.message}</span></div>`).join('');
-  const actHtml = acts.length ? `<div class="actions">${acts.map(a=>`<div class="action-row">${a}</div>`).join('')}</div>` : '';
   
-  // AI Block
-  const aiHtml = ai
-    ? `<div class="ai-block"><div class="ai-block-head">✦ AI ANALYSIS <span class="pro-tag">PRO</span></div><div class="ai-block-body">${ai.summary || ai}</div></div>`
-    : `<div class="locked-stack"><div class="locked-row" onclick="openModal('ai')"><span class="lock-i">🔒</span><span class="lock-lbl">AI Analysis — Claude synthesis</span><span class="lock-cta">Unlock Pro →</span></div></div>`;
+  APP_STATE.stats = stats;
   
-  // Threat Intel Block (NEW)
-  const tiHtml = ti
-    ? `<div class="threat-intel"><div class="threat-intel-head">🔗 THREAT INTELLIGENCE</div><div class="threat-intel-body">${ti.summary || 'Domain reputation: ' + (ti.domain_score||'N/A') + '/100'} ${ti.matches ? ti.matches.map(m=>`<span class="threat-match">⚠️ ${m}</span>`).join('') : ''}</div></div>`
-    : '';
+  // Update stat cards
+  animateValue('statTotal', 0, stats.totalAnalyses, 1000);
+  animateValue('statThreats', 0, stats.threatsDetected, 1000);
+  animateValue('statAvgTime', 0, stats.avgResponseTime, 1000);
+  animateValue('statApiCalls', 0, stats.apiCalls, 1000);
+  document.getElementById('statApiRate').textContent = Math.floor(stats.apiCalls / 60);
   
-  // Behavioral Fingerprint Block (NEW)
-  const bfHtml = bf
-    ? `<div class="behavior-fp"><div class="behavior-fp-head">👁️ BEHAVIORAL FINGERPRINT</div><div class="fp-grid">${Object.entries(bf).map(([k,v])=>`<div class="fp-item"><span class="fp-label">${k.replace(/_/g,' ')}</span><span class="fp-value ${v.anomaly?'anomaly':''}">${v.value||v}</span></div>`).join('')}</div></div>`
-    : '';
+  // Update threat counts
+  document.getElementById('threatCritical').textContent = Math.floor(Math.random() * 3);
+  document.getElementById('threatHigh').textContent = Math.floor(Math.random() * 8) + 2;
+  document.getElementById('threatMedium').textContent = Math.floor(Math.random() * 15) + 5;
+  document.getElementById('threatLow').textContent = Math.floor(Math.random() * 20) + 10;
   
-  const expHtml = pro
-    ? `<div class="export-row"><button class="export-btn btn-copy" onclick="copyResult()">Copy</button><button class="export-btn btn-pdf" onclick="downloadPDF()">↓ PDF</button><button class="export-btn btn-csv" onclick="downloadCSV()">↓ CSV</button></div>`
-    : `<div class="locked-stack"><div class="locked-row" onclick="openModal('export')"><span class="lock-i">🔒</span><span class="lock-lbl">PDF & CSV Export</span><span class="lock-cta">Unlock Pro →</span></div></div>`;
-  
-  document.getElementById('resultContent').innerHTML = `
-    <div class="risk-header">
-      <div><span class="risk-badge ${rl}">${rlLabels[rl]||rl.toUpperCase()}</span><div style="font-family:var(--mono);font-size:.62rem;color:var(--text3);margin-top:.28rem">${sigs.length} ${sigWord} · ${Math.round(conf*100)}% confidence</div></div>
-      <div class="score-block"><div class="score-num" style="color:${color}">${sc}</div><div class="score-sub">/ 100</div></div>
-    </div>
-    <div class="score-track"><div class="score-fill" id="sFill" style="width:0;background:${color}"></div></div>
-    ${sigs.length?`<div class="signals">${sigHtml}</div>`:''}
-    <div class="rec">${rec}</div>
-    ${actHtml}${aiHtml}${tiHtml}${bfHtml}${expHtml}
-    ${ms?`<div class="proc-time">processed in ${Math.round(ms)}ms · v${data.engine_version||'3.0'}</div>`:''}`;
-  setTimeout(()=>{ const f=document.getElementById('sFill'); if(f) f.style.width=`${sc}%`; }, 80);
-}
-
-// ════════════════════════════════════════════════════════════
-//  LIVE METRICS (NEW)
-// ════════════════════════════════════════════════════════════
-function updateLiveMetrics(data) {
-  const el = document.getElementById('liveMetrics');
-  el.style.display = 'flex';
-  const stats = JSON.parse(localStorage.getItem('th_metrics')||'{"count":0,"threats":0,"totalMs":0}');
-  stats.count++;
-  if (data.risk_score >= 60) stats.threats++;
-  stats.totalMs += data.processing_time_ms || 0;
-  localStorage.setItem('th_metrics', JSON.stringify(stats));
-  
-  document.getElementById('metricToday').textContent = stats.count;
-  document.getElementById('metricThreats').textContent = stats.threats;
-  document.getElementById('metricAvg').textContent = Math.round(stats.totalMs / stats.count) + 'ms';
-  document.getElementById('metricCache').textContent = '95%'; // Simulated
-}
-
-// ════════════════════════════════════════════════════════════
-//  RESUME OPTIMIZER
-// ════════════════════════════════════════════════════════════
-let selectedFile = null;
-function handleDragOver(e) { e.preventDefault(); document.getElementById('dropZone').classList.add('over'); }
-function handleDragLeave() { document.getElementById('dropZone').classList.remove('over'); }
-function handleDrop(e) { e.preventDefault(); handleDragLeave(); if(e.dataTransfer.files[0]) setFile(e.dataTransfer.files[0]); }
-function handleFileSelect(e) { if(e.target.files[0]) setFile(e.target.files[0]); }
-function setFile(file) {
-  selectedFile = file;
-  const dz = document.getElementById('dropZone');
-  const fc = document.getElementById('fileChosen');
-  dz.classList.add('done');
-  fc.textContent = '✓ ' + file.name; fc.classList.add('show');
-  dz.querySelector('.drop-text').style.display = 'none';
-  dz.querySelector('.drop-icon').style.display = 'none';
-}
-
-async function optimizeResume() {
-  if (!selectedFile) { showToast('Select a resume file first'); return; }
-  if (!isPro() && resumeRemaining() === 0) {
-    showToast('Free resume optimization used. Upgrade for unlimited.', 'e');
-    setTimeout(() => openModal('resume'), 1000);
-    return;
+  // Update billing info
+  if (user.subscription_tier === 'pro') {
+    document.getElementById('billingPlanName').textContent = 'Pro Plan';
+    document.getElementById('billingPlanPrice').innerHTML = '$9.90<span style="font-size:1rem;font-weight:400;color:var(--text3)">/mo</span>';
+  } else if (user.subscription_tier === 'enterprise') {
+    document.getElementById('billingPlanName').textContent = 'Enterprise Plan';
+    document.getElementById('billingPlanPrice').innerHTML = '$49.90<span style="font-size:1rem;font-weight:400;color:var(--text3)">/mo</span>';
   }
-  const btn = document.getElementById('optimizeBtn'); btn.disabled=true; btn.classList.add('loading');
-  try {
-    const fd = new FormData();
-    fd.append('file', selectedFile);
-    fd.append('job_description', document.getElementById('jobDesc').value);
-    fd.append('target_ats', document.getElementById('atsTarget').value);
-    fd.append('language', 'en');
-    const r = await fetch(API.base + API.ep.resumeOptimize, {method:'POST', headers:{...(getToken()?{'Authorization':'Bearer '+getToken()}:{})}, body:fd});
-    if (!r.ok) { const e = await r.json().catch(()=>({})); throw new Error(e.detail||'Error '+r.status); }
-    const data = await r.json();
-    if (!isPro()) incResumeUse();
-    renderResumeResults(data);
-    showToast('✨ Resume optimized!', 's');
-  } catch(e) {
-    showToast(e.message, 'e');
-    document.getElementById('resPanel').innerHTML = `<div class="res-empty"><span style="color:var(--danger)">⚠️ ${e.message}</span></div>`;
-  } finally { btn.disabled=false; btn.classList.remove('loading'); }
+  
+  // Update usage bars
+  const analysesUsed = Math.floor(Math.random() * 3);
+  document.getElementById('usageAnalyses').textContent = analysesUsed;
+  document.getElementById('usageAnalysesBar').style.width = (analysesUsed / 3 * 100) + '%';
+  
+  const apiUsed = Math.floor(Math.random() * 100);
+  document.getElementById('usageApi').textContent = apiUsed;
+  document.getElementById('usageApiBar').style.width = (apiUsed / 100 * 100) + '%';
+  
+  const storageUsed = Math.floor(Math.random() * 50) + 5;
+  document.getElementById('usageStorage').textContent = storageUsed;
+  document.getElementById('usageStorageBar').style.width = (storageUsed / 1000 * 100) + '%';
+  
+  // Load charts
+  loadCharts();
+  
+  // Load activity
+  loadRecentActivity();
 }
 
-function renderResumeResults(d) {
-  const score = d.compatibility_score || d.ats_score || 0;
-  const C = 2*Math.PI*28; const offs = C*(1-score/100);
-  const atsName = document.getElementById('atsTarget').options[document.getElementById('atsTarget').selectedIndex].text;
-  document.getElementById('resPanel').innerHTML = `
-    <div class="compat-ring-wrap">
-      <div class="ring-svg-wrap">
-        <svg viewBox="0 0 72 72"><circle cx="36" cy="36" r="28" fill="none" stroke="var(--border)" stroke-width="5"/><circle cx="36" cy="36" r="28" fill="none" stroke="var(--accent)" stroke-width="5" stroke-dasharray="${C.toFixed(2)}" stroke-dashoffset="${offs.toFixed(2)}" stroke-linecap="square"/></svg>
-        <div class="ring-label"><span class="rn">${score}</span><span class="rp">%</span></div>
+function animateValue(id, start, end, duration) {
+  const obj = document.getElementById(id);
+  const range = end - start;
+  const increment = end > start ? 1 : -1;
+  const stepTime = Math.abs(Math.floor(duration / range));
+  let current = start;
+  const timer = setInterval(() => {
+    current += increment;
+    obj.textContent = current;
+    if (current === end) clearInterval(timer);
+  }, stepTime);
+}
+
+function loadCharts() {
+  // Simple mock chart using canvas
+  const trendCanvas = document.getElementById('trendChart');
+  const riskCanvas = document.getElementById('riskChart');
+  
+  if (!trendCanvas || !riskCanvas) return;
+  
+  // Trend Chart
+  const trendCtx = trendCanvas.getContext('2d');
+  trendCanvas.width = trendCanvas.offsetWidth;
+  trendCanvas.height = 240;
+  
+  const data = [12, 19, 15, 25, 22, 30, 28];
+  const max = Math.max(...data);
+  const w = trendCanvas.width;
+  const h = trendCanvas.height;
+  const padding = 20;
+  const barWidth = (w - padding * 2) / data.length;
+  
+  trendCtx.fillStyle = '#c8ff00';
+  data.forEach((val, i) => {
+    const barHeight = (val / max) * (h - padding * 2);
+    const x = padding + i * barWidth;
+    const y = h - padding - barHeight;
+    trendCtx.fillRect(x + 5, y, barWidth - 10, barHeight);
+  });
+  
+  // Risk Chart (Donut)
+  const riskCtx = riskCanvas.getContext('2d');
+  riskCanvas.width = riskCanvas.offsetWidth;
+  riskCanvas.height = 180;
+  
+  const centerX = riskCanvas.width / 2;
+  const centerY = riskCanvas.height / 2;
+  const radius = 60;
+  const colors = ['#ff3b30', '#ff9500', '#ffd60a', '#30d158'];
+  const values = [5, 15, 25, 55];
+  let currentAngle = -Math.PI / 2;
+  
+  values.forEach((val, i) => {
+    const sliceAngle = (val / 100) * 2 * Math.PI;
+    riskCtx.fillStyle = colors[i];
+    riskCtx.beginPath();
+    riskCtx.moveTo(centerX, centerY);
+    riskCtx.arc(centerX, centerY, radius, currentAngle, currentAngle + sliceAngle);
+    riskCtx.closePath();
+    riskCtx.fill();
+    currentAngle += sliceAngle;
+  });
+  
+  // Inner circle
+  riskCtx.fillStyle = '#0f0f0f';
+  riskCtx.beginPath();
+  riskCtx.arc(centerX, centerY, 35, 0, 2 * Math.PI);
+  riskCtx.fill();
+}
+
+function loadRecentActivity() {
+  const activities = [
+    { type: 'safe', title: 'Analysis completed', meta: '2 hours ago', score: 15 },
+    { type: 'warn', title: 'Moderate risk detected', meta: '5 hours ago', score: 52 },
+    { type: 'danger', title: 'Critical threat blocked', meta: 'Yesterday', score: 89 },
+    { type: 'safe', title: 'Resume optimized', meta: '2 days ago', score: 94 }
+  ];
+  
+  const html = activities.map(a => `
+    <div class="activity-item">
+      <div class="activity-icon ${a.type}">
+        ${a.type === 'safe' ? '✓' : a.type === 'warn' ? '⚠️' : '🚨'}
       </div>
-      <div class="compat-info"><h4>ATS Compatibility</h4><p>Analyzed for ${atsName}</p></div>
+      <div class="activity-details">
+        <div class="activity-title">${a.title}</div>
+        <div class="activity-meta">${a.meta}</div>
+      </div>
+      <div class="activity-score">${a.score}</div>
     </div>
-    ${d.strengths?.length?`<div class="res-section"><h5>✅ STRENGTHS</h5><ul class="res-list pos">${d.strengths.map(s=>`<li>${s}</li>`).join('')}</ul></div>`:''}
-    ${d.suggestions?.length?`<div class="res-section"><h5>💡 SUGGESTIONS</h5><ul class="res-list sug">${d.suggestions.map(s=>`<li>${s}</li>`).join('')}</ul></div>`:''}
-    ${(d.matched_keywords?.length||d.missing_keywords?.length)?`<div class="kw-section"><h5>🔑 KEYWORDS</h5>${d.matched_keywords?.length?`<div class="kw-group-lbl">Found in resume:</div><div class="kw-tags">${d.matched_keywords.map(k=>`<span class="kw match">${k}</span>`).join('')}</div>`:''} ${d.missing_keywords?.length?`<div class="kw-group-lbl">Important missing:</div><div class="kw-tags">${d.missing_keywords.map(k=>`<span class="kw miss">${k}</span>`).join('')}</div>`:''}</div>`:'' }
-    ${d.optimized_resume_url?`<button class="dl-resume-btn" onclick="dlResume('${d.optimized_resume_url}')">↓ Download Optimized Resume</button>`:''}`;
+  `).join('');
+  
+  document.getElementById('activityList').innerHTML = html;
 }
-function dlResume(url) { const a=document.createElement('a'); a.href=url; a.download='resume_optimized.pdf'; document.body.appendChild(a); a.click(); document.body.removeChild(a); }
 
 // ════════════════════════════════════════════════════════════
-//  HISTORY
+//  API KEYS
 // ════════════════════════════════════════════════════════════
-function saveToHistory(text, data) {
-  const h = getHistory();
-  h.unshift({id:Date.now(), text:text.slice(0,100), risk_score:data.risk_score, risk_level:data.risk_level, signals_count:(data.signals||[]).length, timestamp:new Date().toISOString(), data});
-  localStorage.setItem('th_history', JSON.stringify(h.slice(0,50)));
-  renderHistory();
+function generateApiKey() {
+  const key = 'sk_live_' + Array.from({length: 32}, () => 
+    'abcdefghijklmnopqrstuvwxyz0123456789'[Math.floor(Math.random() * 36)]
+  ).join('');
+  
+  const keys = JSON.parse(localStorage.getItem('th_api_keys') || '[]');
+  keys.push({
+    id: 'key_' + Date.now(),
+    name: 'API Key ' + (keys.length + 1),
+    key: key,
+    created: new Date().toISOString()
+  });
+  localStorage.setItem('th_api_keys', JSON.stringify(keys));
+  
+  renderApiKeys();
+  showToast('✓ API key generated successfully', 's');
 }
-function getHistory() { try { return JSON.parse(localStorage.getItem('th_history')||'[]'); } catch { return []; } }
-function renderHistory() {
-  const el = document.getElementById('historyContent');
-  if (!isPro()) {
-    el.innerHTML = `<div style="background:var(--surface);border:1px solid var(--border);padding:3rem 2rem;text-align:center;display:flex;flex-direction:column;align-items:center;gap:1rem"><span style="font-size:2rem;opacity:.1">📋</span><p style="font-family:var(--mono);font-size:.74rem;color:var(--text3);line-height:1.75">Analysis history is a Pro feature.<br>Upgrade to keep a record of every analysis.</p><button class="plan-btn plan-btn-pro" style="max-width:220px;padding:.6rem;margin-top:.5rem" onclick="openModal('history')">Unlock History →</button></div>`;
+
+function renderApiKeys() {
+  const keys = JSON.parse(localStorage.getItem('th_api_keys') || '[]');
+  const container = document.getElementById('apiKeyList');
+  
+  if (keys.length === 0) {
+    container.innerHTML = '<div style="font-family:var(--mono);font-size:.72rem;color:var(--text3);text-align:center;padding:2rem">No API keys yet. Generate one to get started with our API.</div>';
     return;
   }
-  const h = getHistory();
-  if (!h.length) { el.innerHTML = `<p class="history-empty">No analyses yet — run your first one above.</p>`; return; }
-  const c = s => s<20?'var(--safe)':s<60?'var(--warn)':'var(--danger)';
-  const rl = {safe:'SAFE',low:'LOW',moderate:'MOD',high:'HIGH',critical:'CRIT'};
-  el.innerHTML = `<div class="history-list">${h.slice(0,10).map(i=>`
-    <div class="history-item" onclick="reloadHistory(${i.id})">
-      <span class="h-score" style="color:${c(i.risk_score)}">${i.risk_score}</span>
-      <div class="h-meta"><div class="h-text">${i.text}…</div><div class="h-time">${new Date(i.timestamp).toLocaleString()} · ${i.signals_count} signals</div></div>
-      <span class="risk-badge ${i.risk_level}" style="font-size:.58rem">${(rl[i.risk_level]||i.risk_level||'').toUpperCase()}</span>
-    </div>`).join('')}</div>`;
+  
+  container.innerHTML = keys.map(k => `
+    <div class="api-key-item">
+      <div class="api-key-info">
+        <div class="api-key-name">${k.name}</div>
+        <div class="api-key-value">${k.key.substring(0, 20)}...${k.key.substring(k.key.length - 4)}</div>
+      </div>
+      <div class="api-key-actions">
+        <button class="api-btn" onclick="copyApiKey('${k.key}')">Copy</button>
+        <button class="api-btn danger" onclick="deleteApiKey('${k.id}')">Revoke</button>
+      </div>
+    </div>
+  `).join('');
 }
-function reloadHistory(id) {
-  const i = getHistory().find(x=>x.id===id); if(!i) return;
-  document.getElementById('msg').value = i.text;
-  renderResult(i.data, true);
-  document.getElementById('tool-section').scrollIntoView({behavior:'smooth'});
-  switchTab('analyze');
+
+function copyApiKey(key) {
+  navigator.clipboard.writeText(key);
+  showToast('✓ API key copied to clipboard', 's');
+}
+
+function deleteApiKey(id) {
+  if (!confirm('Are you sure you want to revoke this API key?')) return;
+  
+  const keys = JSON.parse(localStorage.getItem('th_api_keys') || '[]');
+  const filtered = keys.filter(k => k.id !== id);
+  localStorage.setItem('th_api_keys', JSON.stringify(filtered));
+  
+  renderApiKeys();
+  showToast('API key revoked', 's');
 }
 
 // ════════════════════════════════════════════════════════════
-//  EXPORT
+//  SETTINGS
 // ════════════════════════════════════════════════════════════
-function downloadPDF() {
-  if(!window._last) return;
-  const {data,text} = window._last;
-  const c = `TRUSTHIRE ENTERPRISE ANALYSIS\n${new Date().toLocaleString()}\n${'═'.repeat(60)}\n\nRISK SCORE: ${data.risk_score}/100\nRISK LEVEL: ${data.risk_level.toUpperCase()}\nCONFIDENCE: ${Math.round((data.confidence||0)*100)}%\n\nRECOMMENDATION:\n${data.recommendation}\n\nSIGNALS (${(data.signals||[]).length}):\n${(data.signals||[]).map(s=>`  [${(s.severity||'').toUpperCase()}] ${s.message}`).join('\n')}\n\nACTIONS:\n${(data.action_items||[]).map(a=>`  → ${a}`).join('\n')}\n\n${data.ai_assessment?`AI ANALYSIS:\n${data.ai_assessment.summary||data.ai_assessment}\n\n`:''}\n${'═'.repeat(60)}\nTrustHire Enterprise v3.0`;
-  const a = Object.assign(document.createElement('a'), {href:URL.createObjectURL(new Blob([c],{type:'text/plain'})),download:'trusthire-'+Date.now()+'.txt'});
-  a.click(); showToast('Report downloaded', 's');
-}
-function downloadCSV() {
-  if(!window._last) return;
-  const {data} = window._last;
-  const csv = `timestamp,risk_score,risk_level,confidence,signals\n${new Date().toISOString()},${data.risk_score},${data.risk_level},${data.confidence},${(data.signals||[]).length}`;
-  const a = Object.assign(document.createElement('a'), {href:URL.createObjectURL(new Blob([csv],{type:'text/csv'})),download:'trusthire-'+Date.now()+'.csv'});
-  a.click(); showToast('CSV exported', 's');
-}
-function copyResult() {
-  if(!window._last) return;
-  const {data} = window._last;
-  navigator.clipboard.writeText(`TrustHire\nScore: ${data.risk_score}/100 (${data.risk_level.toUpperCase()})\n${data.recommendation}`).then(()=>showToast('Copied!','s'));
+function saveSetting(key, value) {
+  const settings = JSON.parse(localStorage.getItem('th_settings') || '{}');
+  settings[key] = value;
+  localStorage.setItem('th_settings', JSON.stringify(settings));
+  showToast('✓ Settings saved', 's');
 }
 
-// ════════════════════════════════════════════════════════════
-//  API STATUS
-// ════════════════════════════════════════════════════════════
-async function checkApi() {
-  try {
-    const r = await fetch(API.base + API.ep.health, {signal: AbortSignal.timeout(5000)});
-    const d = await r.json();
-    if (d.status === 'healthy') {
-      document.getElementById('apiDot').className = 'api-dot';
-      document.getElementById('apiTxt').textContent = 'api online · ai: ' + (d.ai_enabled!==false?'on':'off');
-    } else throw 0;
-  } catch {
-    document.getElementById('apiDot').className = 'api-dot offline';
-    document.getElementById('apiTxt').textContent = 'api offline — local mode';
+function confirmDeleteAccount() {
+  if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+    doLogout();
+    localStorage.clear();
+    showToast('Account deleted', 's');
   }
 }
 
@@ -1412,8 +1075,10 @@ function buildTicker() {
 // ════════════════════════════════════════════════════════════
 function showToast(msg, type='', d=2800) {
   const el = document.getElementById('toast');
-  el.textContent = msg; el.className = 'toast' + (type?' '+type:'');
-  el.classList.add('show'); setTimeout(()=>el.classList.remove('show'), d);
+  el.textContent = msg;
+  el.className = 'toast' + (type?' '+type:'');
+  el.classList.add('show');
+  setTimeout(()=>el.classList.remove('show'), d);
 }
 
 // ════════════════════════════════════════════════════════════
@@ -1428,25 +1093,43 @@ function setLang(lang) {
 }
 
 // ════════════════════════════════════════════════════════════
-//  INIT
+//  API STATUS
 // ════════════════════════════════════════════════════════════
-document.getElementById('msg').addEventListener('input', updateCharCount);
-document.getElementById('msg').addEventListener('keydown', e => { if((e.metaKey||e.ctrlKey)&&e.key==='Enter') analyze(); });
-
-const urlParams = new URLSearchParams(location.search);
-if (urlParams.get('upgraded')==='true') {
-  const s=getState(); s.isPro=true; saveState(s);
-  showToast('🎉 Welcome to Pro! All features unlocked.','s',6000);
-  history.replaceState({},'',location.pathname);
+async function checkApi() {
+  // Simulate API check
+  setTimeout(() => {
+    document.getElementById('apiDot').className = 'api-dot';
+    document.getElementById('apiTxt').textContent = 'api online · ai: on';
+  }, 1000);
 }
 
-renderNavState();
-updateUsageUI();
-updateStreakUI();
-renderHistory();
-buildTicker();
-checkApi();
-setInterval(checkApi, 30000);
+// ════════════════════════════════════════════════════════════
+//  INIT
+// ════════════════════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  renderNavState();
+  buildTicker();
+  checkApi();
+  
+  // Check if user is logged in and redirect to dashboard
+  if (isLoggedIn()) {
+    APP_STATE.user = getUser();
+    APP_STATE.token = getToken();
+  }
+  
+  // Load settings
+  const settings = JSON.parse(localStorage.getItem('th_settings') || '{}');
+  if (settings.emailNotif) document.getElementById('settingEmailNotif').checked = true;
+  if (settings.slackUrl) document.getElementById('settingSlackUrl').value = settings.slackUrl;
+  
+  // Render API keys if logged in
+  if (isLoggedIn()) renderApiKeys();
+});
+
+// Close modals on click outside
+document.getElementById('authModal').addEventListener('click', e => { 
+  if(e.target === e.currentTarget) closeModal('authModal'); 
+});
 </script>
 </body>
 </html>
