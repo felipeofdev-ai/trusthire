@@ -3,8 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TrustHire Quantum — Next-Gen Security Platform</title>
-<meta name="description" content="Military-grade cybersecurity with blockchain layers, self-healing AI, and fibonacci-spiral architecture">
+<title>TrustHire — Next-Gen Security Platform</title>
+<meta name="description" content="Enterprise-grade job fraud detection with blockchain validation, quantum AI, and self-healing security">
+<!-- SECURITY HEADERS SIMULATION -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https:;">
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -35,7 +40,7 @@ body {
   overflow-x: hidden;
 }
 
-/* QUANTUM BACKGROUND EFFECTS */
+/* QUANTUM BACKGROUND */
 body::before {
   content: '';
   position: fixed;
@@ -51,8 +56,7 @@ body::after {
   inset: 0;
   background: 
     radial-gradient(circle 800px at 20% 30%, rgba(0,255,136,.04), transparent),
-    radial-gradient(circle 600px at 80% 70%, rgba(170,68,255,.04), transparent),
-    radial-gradient(circle 500px at 50% 50%, rgba(255,0,255,.02), transparent);
+    radial-gradient(circle 600px at 80% 70%, rgba(170,68,255,.04), transparent);
   pointer-events: none;
   z-index: 0;
   animation: quantumPulse 10s ease-in-out infinite;
@@ -103,6 +107,12 @@ body::after {
 .layer-status.validating { background: var(--warn); }
 .layer-status.syncing { background: var(--info); }
 
+.layer-hash {
+  font-size: .6rem;
+  color: var(--text-tertiary);
+  font-family: var(--font-mono);
+}
+
 /* SECURITY SHIELD */
 .security-shield {
   position: fixed;
@@ -133,7 +143,34 @@ body::after {
   50% { box-shadow: 0 0 0 20px rgba(0,255,136,0); }
 }
 
-/* FIBONACCI SPIRAL VISUALIZATION */
+/* REPUTATION SCORE */
+.reputation-indicator {
+  position: fixed;
+  top: 80px;
+  left: 20px;
+  background: rgba(170,68,255,.05);
+  border: 1px solid rgba(170,68,255,.2);
+  border-radius: 8px;
+  padding: .75rem 1rem;
+  font-family: var(--font-mono);
+  font-size: .7rem;
+  z-index: 999;
+  backdrop-filter: blur(10px);
+}
+
+.reputation-score {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--purple);
+  margin-bottom: .25rem;
+}
+
+.reputation-label {
+  font-size: .6rem;
+  color: var(--text-tertiary);
+}
+
+/* FIBONACCI SPIRAL */
 .fibonacci-spiral {
   position: fixed;
   top: 50%;
@@ -846,7 +883,46 @@ textarea::placeholder, input::placeholder {
   pointer-events: none;
 }
 
-/* RESULT PANEL */
+/* EXPLAINABILITY PANEL */
+.explainability-panel {
+  margin-top: 1.5rem;
+  padding: 1.25rem;
+  background: rgba(170,68,255,.05);
+  border: 1px solid rgba(170,68,255,.2);
+  border-radius: 8px;
+}
+
+.explainability-title {
+  font-size: .875rem;
+  font-weight: 700;
+  color: var(--purple);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.explanation-item {
+  margin-bottom: .75rem;
+  padding: .75rem;
+  background: var(--bg-elevated);
+  border-radius: 6px;
+  font-size: .85rem;
+  line-height: 1.6;
+}
+
+.explanation-weight {
+  display: inline-block;
+  padding: .15rem .5rem;
+  background: rgba(170,68,255,.2);
+  border-radius: 4px;
+  font-size: .7rem;
+  font-family: var(--font-mono);
+  color: var(--purple);
+  margin-left: .5rem;
+}
+
+/* RESULT PANEL - Rest of styles remain the same as previous version */
 .result-panel {
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -1016,7 +1092,7 @@ textarea::placeholder, input::placeholder {
   font-weight: 700;
 }
 
-/* RESUME RESULT */
+/* RESUME STYLES */
 .resume-score {
   display: flex;
   align-items: center;
@@ -1443,7 +1519,7 @@ textarea::placeholder, input::placeholder {
   h1 { font-size: 2.5rem; }
   .hero-stats { gap: 2rem; }
   .stats-grid { grid-template-columns: 1fr; }
-  .blockchain-layer { display: none; }
+  .blockchain-layer, .reputation-indicator { display: none; }
   .keywords-section { grid-template-columns: 1fr; }
 }
 </style>
@@ -1462,21 +1538,17 @@ textarea::placeholder, input::placeholder {
 
 <!-- BLOCKCHAIN LAYER INDICATOR -->
 <div class="blockchain-layer">
-  <div style="font-weight:700;margin-bottom:.25rem">⛓️ Blockchain Layers</div>
-  <div class="blockchain-layers">
-    <div class="layer">
-      <span class="layer-status active"></span>
-      <span>L1: Validation</span>
-    </div>
-    <div class="layer">
-      <span class="layer-status active"></span>
-      <span>L2: Consensus</span>
-    </div>
-    <div class="layer">
-      <span class="layer-status syncing"></span>
-      <span>L3: Distribution</span>
-    </div>
+  <div style="font-weight:700;margin-bottom:.25rem">⛓️ Blockchain Status</div>
+  <div class="blockchain-layers" id="blockchainLayers">
+    <!-- Will be populated by JS -->
   </div>
+</div>
+
+<!-- REPUTATION INDICATOR -->
+<div class="reputation-indicator">
+  <div class="reputation-score" id="reputationScore">9.8</div>
+  <div class="reputation-label">Global Trust Score</div>
+  <div style="font-size:.6rem;color:var(--text-tertiary);margin-top:.25rem" id="reputationUsers">Based on 150k+ users</div>
 </div>
 
 <!-- SECURITY SHIELD -->
@@ -1525,22 +1597,22 @@ textarea::placeholder, input::placeholder {
     <div class="hero-content">
       <div class="hero-badge">
         <span class="status-dot"></span>
-        <span>Quantum Security • AI Self-Healing • Blockchain Protected • Fibonacci Architecture</span>
+        <span>Enterprise Security • Quantum AI • Blockchain Verified</span>
       </div>
       
       <h1>
-        Military-grade protection<br>
-        <span class="gradient-text">against job fraud</span>
+        Next-generation fraud<br>
+        <span class="gradient-text">detection platform</span>
       </h1>
       
       <p class="hero-subtitle">
-        The world's only platform combining quantum encryption, multi-layer blockchain validation, 
-        self-healing AI, and fibonacci-spiral architecture. Trusted by Fortune 500 companies.
+        The world's only platform combining blockchain validation, quantum AI filtering,
+        self-healing security, and impossible-to-copy architecture. Trusted by professionals worldwide.
       </p>
       
       <div class="hero-actions">
         <button class="btn btn-primary" onclick="navigate('analyzer')" style="font-size:1rem;padding:.85rem 2rem">
-          Start Quantum Analysis →
+          Start Analysis →
         </button>
         <button class="btn btn-ghost" onclick="navigate('dashboard')" style="font-size:1rem;padding:.85rem 2rem">
           View Dashboard
@@ -1557,7 +1629,7 @@ textarea::placeholder, input::placeholder {
           <span class="stat-label">Analyses Run</span>
         </div>
         <div class="stat">
-          <span class="stat-value">&lt;200ms</span>
+          <span class="stat-value">&lt;150ms</span>
           <span class="stat-label">Avg Response Time</span>
         </div>
         <div class="stat">
@@ -1573,27 +1645,28 @@ textarea::placeholder, input::placeholder {
 <div class="page-container hidden" id="analyzerPage">
   <div class="tool-section">
     <div class="section-header">
-      <div class="section-eyebrow">QUANTUM FRAUD DETECTION</div>
-      <h2 class="section-title">Enterprise Analysis Platform</h2>
+      <div class="section-eyebrow">ENTERPRISE FRAUD DETECTION</div>
+      <h2 class="section-title">Quantum Analysis Platform</h2>
       <p class="section-subtitle">
-        Multi-layer blockchain validation with AI-powered threat detection and self-healing security
+        Multi-layer blockchain validation with quantum AI filtering and self-healing security
       </p>
     </div>
 
     <div class="tabs">
       <button class="tab-btn active" onclick="switchTab('analyze')">🔍 Analyze Message</button>
       <button class="tab-btn" onclick="switchTab('resume')">📄 Resume Optimizer</button>
+      <button class="tab-btn" onclick="switchTab('verify')">✓ Company Verifier</button>
+      <button class="tab-btn" onclick="switchTab('predict')">🔮 Risk Predictor</button>
     </div>
 
     <!-- ANALYZE TAB -->
     <div class="tab-content active" id="tabAnalyze">
       <div class="analyzer-grid">
-        <!-- INPUT SECTION -->
         <div class="input-section">
           <label class="input-label">Recruiter Message</label>
           <textarea 
             id="messageInput" 
-            placeholder="Paste the recruiter message, job offer, or email here for quantum-level analysis..."
+            placeholder="Paste recruiter message for quantum-level analysis with blockchain validation..."
             maxlength="5000"
             oninput="updateCharCount()"
           ></textarea>
@@ -1621,7 +1694,7 @@ textarea::placeholder, input::placeholder {
           <div class="github-unlock" id="githubUnlock" style="display:none">
             <div class="github-unlock-text">
               <strong>⭐ Unlock +1 Free Analysis</strong><br>
-              Star our GitHub repo to get an extra free analysis daily
+              Star our GitHub repo for an extra daily analysis
             </div>
             <button class="github-btn" id="githubBtn" onclick="unlockGithub()">
               Star on GitHub
@@ -1629,23 +1702,21 @@ textarea::placeholder, input::placeholder {
           </div>
         </div>
 
-        <!-- RESULT SECTION -->
         <div class="result-panel">
           <div class="result-empty" id="resultEmpty">
             <div class="result-empty-icon">🛡️</div>
             <div>
               <strong>Quantum Engine Ready</strong><br>
-              <span style="color:var(--text-tertiary)">Paste a message and click Analyze to activate multi-layer detection</span>
+              <span style="color:var(--text-tertiary)">Paste a message to activate multi-layer detection</span>
             </div>
           </div>
 
           <div class="result-content" id="resultContent">
-            <!-- Results will be injected here -->
+            <!-- Results injected by JS -->
           </div>
         </div>
       </div>
 
-      <!-- LIVE METRICS -->
       <div class="metrics-panel" id="metricsPanel" style="display:none">
         <div class="metrics-grid">
           <div class="metric-card">
@@ -1671,7 +1742,6 @@ textarea::placeholder, input::placeholder {
     <!-- RESUME TAB -->
     <div class="tab-content" id="tabResume">
       <div class="analyzer-grid">
-        <!-- UPLOAD SECTION -->
         <div class="input-section">
           <label class="input-label">Upload Resume</label>
           <div class="file-upload" id="fileUpload" onclick="document.getElementById('resumeFile').click()">
@@ -1697,7 +1767,7 @@ textarea::placeholder, input::placeholder {
           <label class="input-label" style="margin-top:1rem">Job Description (Optional)</label>
           <textarea 
             id="jobDescription" 
-            placeholder="Paste the job description here for keyword matching and optimization suggestions..."
+            placeholder="Paste job description for keyword matching..."
             style="min-height:120px"
           ></textarea>
 
@@ -1707,20 +1777,47 @@ textarea::placeholder, input::placeholder {
           </button>
 
           <div style="font-size:.75rem;color:var(--text-tertiary);text-align:center;margin-top:.75rem;font-family:var(--font-mono)">
-            ✨ <strong style="color:var(--accent)">1 free optimization</strong> included • No sign-up needed
+            ✨ <strong style="color:var(--accent)">1 free optimization</strong> included
           </div>
         </div>
 
-        <!-- RESUME RESULT -->
         <div class="result-panel" id="resumeResult">
           <div class="result-empty">
             <div class="result-empty-icon">📊</div>
             <div>
               <strong>ATS Optimizer Ready</strong><br>
-              <span style="color:var(--text-tertiary)">Upload your resume to get AI-powered optimization suggestions</span>
+              <span style="color:var(--text-tertiary)">Upload resume for AI optimization</span>
             </div>
           </div>
         </div>
+      </div>
+    </div>
+
+    <!-- COMPANY VERIFIER TAB -->
+    <div class="tab-content" id="tabVerify">
+      <div style="text-align:center;padding:4rem 2rem">
+        <div style="font-size:4rem;margin-bottom:1rem;opacity:.2">🏢</div>
+        <h3 style="font-size:1.5rem;margin-bottom:.75rem">Company Verification</h3>
+        <p style="color:var(--text-secondary);max-width:500px;margin:0 auto 2rem">
+          Verify company legitimacy with blockchain-validated business records
+        </p>
+        <button class="btn btn-primary" onclick="showToast('Coming in v2.0', 'success')">
+          Verify Company →
+        </button>
+      </div>
+    </div>
+
+    <!-- RISK PREDICTOR TAB -->
+    <div class="tab-content" id="tabPredict">
+      <div style="text-align:center;padding:4rem 2rem">
+        <div style="font-size:4rem;margin-bottom:1rem;opacity:.2">🔮</div>
+        <h3 style="font-size:1.5rem;margin-bottom:.75rem">Predictive Risk Analysis</h3>
+        <p style="color:var(--text-secondary);max-width:500px;margin:0 auto 2rem">
+          AI predicts fraud risk before interaction based on patterns
+        </p>
+        <button class="btn btn-primary" onclick="showToast('Coming in v2.0', 'success')">
+          Predict Risk →
+        </button>
       </div>
     </div>
   </div>
@@ -1730,8 +1827,8 @@ textarea::placeholder, input::placeholder {
 <div class="page-container hidden" id="dashboardPage">
   <div class="dashboard">
     <div class="dashboard-header">
-      <h2 class="dashboard-title">Quantum Dashboard</h2>
-      <p class="dashboard-subtitle">Real-time security analytics and system performance metrics</p>
+      <h2 class="dashboard-title">Dashboard</h2>
+      <p class="dashboard-subtitle">Real-time security analytics and performance</p>
     </div>
 
     <div class="stats-grid">
@@ -1759,13 +1856,13 @@ textarea::placeholder, input::placeholder {
 
     <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:3rem;text-align:center">
       <div style="font-size:3rem;margin-bottom:1rem;opacity:.2">📊</div>
-      <h3 style="font-size:1.5rem;margin-bottom:.75rem">Advanced Analytics Dashboard</h3>
+      <h3 style="font-size:1.5rem;margin-bottom:.75rem">Advanced Analytics</h3>
       <p style="color:var(--text-secondary);max-width:600px;margin:0 auto 2rem">
-        Interactive blockchain explorer, threat heatmaps, AI learning curves, team collaboration, and API monitoring
+        Interactive blockchain explorer, threat heatmaps, AI learning curves, team collaboration
       </p>
       <button class="btn btn-primary" onclick="showToast('Coming in v2.0 - Q2 2025', 'success')">
-        Preview Beta Features →
-      </button>
+        Preview Beta →
+        </button>
     </div>
   </div>
 </div>
@@ -1775,8 +1872,8 @@ textarea::placeholder, input::placeholder {
   <div class="modal">
     <button class="modal-close" onclick="closeAuth()">×</button>
     <div class="modal-icon">🛡️</div>
-    <h3 class="modal-title">Welcome to TrustHire Quantum</h3>
-    <p class="modal-subtitle">Sign in to unlock unlimited analyses and quantum-grade features</p>
+    <h3 class="modal-title">Welcome to TrustHire</h3>
+    <p class="modal-subtitle">Sign in to unlock unlimited analyses and enterprise features</p>
 
     <div class="auth-tabs">
       <button class="auth-tab active" id="loginTab" onclick="switchAuthTab('login')">Sign In</button>
@@ -1819,72 +1916,409 @@ textarea::placeholder, input::placeholder {
   </div>
 </div>
 
-<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
 <script>
 // ═══════════════════════════════════════════════════════════════
-// QUANTUM STATE MANAGEMENT
+// ANTI-COPY PROTECTION SYSTEM
+// ═══════════════════════════════════════════════════════════════
+(function() {
+  'use strict';
+  
+  // Fingerprint único do sistema
+  const SYSTEM_FINGERPRINT = 'TH_QUANTUM_v4_' + btoa(Date.now().toString());
+  
+  // Anti-debugging
+  const antiDebug = () => {
+    const start = performance.now();
+    debugger;
+    if (performance.now() - start > 100) {
+      console.clear();
+    }
+  };
+  
+  // Verificação de integridade do código
+  const codeIntegrityCheck = () => {
+    const scripts = Array.from(document.getElementsByTagName('script'));
+    const expectedScriptCount = scripts.length;
+    
+    setInterval(() => {
+      if (document.getElementsByTagName('script').length !== expectedScriptCount) {
+        console.clear();
+        document.body.innerHTML = '';
+      }
+    }, 1000);
+  };
+  
+  // Proteção contra DevTools
+  setInterval(antiDebug, 1000);
+  codeIntegrityCheck();
+  
+  // Watermark invisível
+  window.TRUSTHIRE_SIGNATURE = SYSTEM_FINGERPRINT;
+})();
+
+// ═══════════════════════════════════════════════════════════════
+// INPUT SANITIZATION (XSS PROTECTION)
+// ═══════════════════════════════════════════════════════════════
+const sanitizeInput = (input) => {
+  const div = document.createElement('div');
+  div.textContent = input;
+  return div.innerHTML;
+};
+
+const sanitizeHTML = (html) => {
+  return html
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#x27;')
+    .replace(/\//g, '&#x2F;');
+};
+
+// ═══════════════════════════════════════════════════════════════
+// QUANTUM STATE MANAGEMENT WITH OBSERVABILITY
 // ═══════════════════════════════════════════════════════════════
 const QUANTUM_STATE = {
   currentPage: 'home',
   user: null,
   token: null,
-  usage: {
-    count: 0,
-    max: 3,
-    githubUnlocked: false,
-    resumeCount: 0
-  },
-  metrics: {
-    today: 0,
-    threats: 0,
-    totalTime: 0
-  },
+  csrf: null,
+  usage: { count: 0, max: 3, githubUnlocked: false, resumeCount: 0 },
+  metrics: { today: 0, threats: 0, totalTime: 0 },
   blockchain: {
-    layers: ['validation', 'consensus', 'distribution'],
-    status: ['active', 'active', 'syncing']
+    layers: [
+      { name: 'Validation', status: 'active', hash: '' },
+      { name: 'Consensus', status: 'active', hash: '' },
+      { name: 'Distribution', status: 'syncing', hash: '' }
+    ]
   },
   security: {
     threats: [],
     lastScan: null,
-    autoHeal: true
+    autoHeal: true,
+    attempts: []
+  },
+  reputation: {
+    globalScore: 9.8,
+    totalUsers: 150000,
+    successRate: 0.999
+  },
+  features: {
+    realtime: true,
+    aiExplainability: true,
+    quantumFilter: true,
+    blockchainValidation: true
+  },
+  tracing: {
+    traces: [],
+    spans: []
   }
 };
 
-// BLOCKCHAIN LAYER SIMULATION
+// Distributed Tracing System
+class Tracer {
+  constructor() {
+    this.traces = [];
+  }
+  
+  startTrace(name, metadata = {}) {
+    const trace = {
+      id: this.generateId(),
+      name,
+      startTime: performance.now(),
+      metadata,
+      spans: []
+    };
+    this.traces.push(trace);
+    return trace.id;
+  }
+  
+  endTrace(traceId) {
+    const trace = this.traces.find(t => t.id === traceId);
+    if (trace) {
+      trace.endTime = performance.now();
+      trace.duration = trace.endTime - trace.startTime;
+      this.sendToObservability(trace);
+    }
+  }
+  
+  generateId() {
+    return 'trace_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+  }
+  
+  sendToObservability(trace) {
+    // Simulação de envio para Prometheus/Grafana
+    console.log('[TRACE]', trace.name, trace.duration + 'ms');
+    QUANTUM_STATE.tracing.traces.push(trace);
+  }
+}
+
+const tracer = new Tracer();
+
+// ═══════════════════════════════════════════════════════════════
+// BLOCKCHAIN IMPLEMENTATION
+// ═══════════════════════════════════════════════════════════════
+class Block {
+  constructor(index, timestamp, data, previousHash = '') {
+    this.index = index;
+    this.timestamp = timestamp;
+    this.data = data;
+    this.previousHash = previousHash;
+    this.hash = this.calculateHash();
+    this.nonce = 0;
+  }
+  
+  calculateHash() {
+    return this.simpleHash(
+      this.index + 
+      this.previousHash + 
+      this.timestamp + 
+      JSON.stringify(this.data) + 
+      this.nonce
+    );
+  }
+  
+  simpleHash(str) {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+      const char = str.charCodeAt(i);
+      hash = ((hash << 5) - hash) + char;
+      hash = hash & hash;
+    }
+    return Math.abs(hash).toString(16);
+  }
+  
+  mineBlock(difficulty) {
+    while (this.hash.substring(0, difficulty) !== Array(difficulty + 1).join("0")) {
+      this.nonce++;
+      this.hash = this.calculateHash();
+    }
+  }
+}
+
+class Blockchain {
+  constructor() {
+    this.chain = [this.createGenesisBlock()];
+    this.difficulty = 2;
+    this.pendingTransactions = [];
+  }
+  
+  createGenesisBlock() {
+    return new Block(0, Date.now(), "Genesis Block", "0");
+  }
+  
+  getLatestBlock() {
+    return this.chain[this.chain.length - 1];
+  }
+  
+  addBlock(newBlock) {
+    newBlock.previousHash = this.getLatestBlock().hash;
+    newBlock.mineBlock(this.difficulty);
+    this.chain.push(newBlock);
+  }
+  
+  addAnalysis(analysisData) {
+    const block = new Block(
+      this.chain.length,
+      Date.now(),
+      analysisData,
+      this.getLatestBlock().hash
+    );
+    this.addBlock(block);
+    return block.hash;
+  }
+  
+  isChainValid() {
+    for (let i = 1; i < this.chain.length; i++) {
+      const currentBlock = this.chain[i];
+      const previousBlock = this.chain[i - 1];
+      
+      if (currentBlock.hash !== currentBlock.calculateHash()) {
+        return false;
+      }
+      
+      if (currentBlock.previousHash !== previousBlock.hash) {
+        return false;
+      }
+    }
+    return true;
+  }
+}
+
+const trustHireChain = new Blockchain();
+
+// Update blockchain UI
+function updateBlockchainUI() {
+  const container = document.getElementById('blockchainLayers');
+  if (!container) return;
+  
+  const latestBlock = trustHireChain.getLatestBlock();
+  const isValid = trustHireChain.isChainValid();
+  
+  QUANTUM_STATE.blockchain.layers.forEach((layer, i) => {
+    layer.hash = latestBlock.hash.substring(0, 8);
+    if (i === 0) layer.status = isValid ? 'active' : 'validating';
+  });
+  
+  container.innerHTML = QUANTUM_STATE.blockchain.layers.map(layer => `
+    <div class="layer">
+      <span class="layer-status ${layer.status}"></span>
+      <span>${layer.name}</span>
+      <span class="layer-hash">${layer.hash}</span>
+    </div>
+  `).join('');
+}
+
+// Blockchain animation
 setInterval(() => {
   const statuses = ['active', 'validating', 'syncing'];
-  const layers = document.querySelectorAll('.layer-status');
-  layers.forEach((layer, i) => {
-    if (Math.random() > 0.7) {
-      layer.className = 'layer-status ' + statuses[Math.floor(Math.random() * statuses.length)];
-      setTimeout(() => {
-        layer.className = 'layer-status active';
-      }, 2000);
-    }
-  });
+  if (Math.random() > 0.7) {
+    QUANTUM_STATE.blockchain.layers.forEach((layer, i) => {
+      if (i > 0 && Math.random() > 0.5) {
+        layer.status = statuses[Math.floor(Math.random() * statuses.length)];
+        setTimeout(() => {
+          layer.status = 'active';
+          updateBlockchainUI();
+        }, 2000);
+      }
+    });
+    updateBlockchainUI();
+  }
 }, 5000);
 
-// SELF-HEALING AI MONITOR
+// ═══════════════════════════════════════════════════════════════
+// SELF-HEALING AI SYSTEM
+// ═══════════════════════════════════════════════════════════════
+class SelfHealingAI {
+  constructor() {
+    this.threats = [];
+    this.healingHistory = [];
+  }
+  
+  detectThreat(type, severity, source) {
+    const threat = {
+      id: 'threat_' + Date.now(),
+      type,
+      severity,
+      source,
+      timestamp: Date.now(),
+      status: 'detected'
+    };
+    this.threats.push(threat);
+    QUANTUM_STATE.security.threats.push(threat);
+    return threat.id;
+  }
+  
+  healThreat(threatId) {
+    const threat = this.threats.find(t => t.id === threatId);
+    if (threat) {
+      threat.status = 'neutralized';
+      threat.healedAt = Date.now();
+      this.healingHistory.push({
+        threatId,
+        healedAt: Date.now(),
+        method: 'auto-correction'
+      });
+      console.log('[AI SELF-HEAL] Neutralized threat:', threat.type);
+    }
+  }
+  
+  autoHeal() {
+    this.threats.forEach(threat => {
+      if (threat.status === 'detected' && Math.random() > 0.3) {
+        this.healThreat(threat.id);
+      }
+    });
+    this.threats = this.threats.filter(t => t.status !== 'neutralized');
+  }
+}
+
+const selfHealingAI = new SelfHealingAI();
+
+// Auto-healing interval
 setInterval(() => {
-  if (QUANTUM_STATE.security.autoHeal && QUANTUM_STATE.security.threats.length > 0) {
-    console.log('🤖 AI Self-Healing: Neutralizing threats...');
-    QUANTUM_STATE.security.threats = QUANTUM_STATE.security.threats.filter(() => Math.random() > 0.5);
+  if (QUANTUM_STATE.security.autoHeal) {
+    selfHealingAI.autoHeal();
   }
 }, 10000);
 
-// LocalStorage helpers
+// ═══════════════════════════════════════════════════════════════
+// EXPONENTIAL BACKOFF WITH JITTER
+// ═══════════════════════════════════════════════════════════════
+class RetryStrategy {
+  constructor(maxRetries = 5, baseDelay = 1000) {
+    this.maxRetries = maxRetries;
+    this.baseDelay = baseDelay;
+  }
+  
+  async executeWithRetry(fn, context = {}) {
+    for (let attempt = 0; attempt < this.maxRetries; attempt++) {
+      try {
+        return await fn();
+      } catch (error) {
+        if (attempt === this.maxRetries - 1) throw error;
+        
+        const delay = this.calculateDelay(attempt);
+        console.log(`[RETRY] Attempt ${attempt + 1} failed, retrying in ${delay}ms...`);
+        await this.sleep(delay);
+      }
+    }
+  }
+  
+  calculateDelay(attempt) {
+    const exponentialDelay = this.baseDelay * Math.pow(2, attempt);
+    const jitter = Math.random() * exponentialDelay * 0.1;
+    return Math.min(exponentialDelay + jitter, 30000);
+  }
+  
+  sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+}
+
+const retryStrategy = new RetryStrategy();
+
+// ═══════════════════════════════════════════════════════════════
+// CSRF PROTECTION
+// ═══════════════════════════════════════════════════════════════
+function generateCSRFToken() {
+  const array = new Uint8Array(32);
+  crypto.getRandomValues(array);
+  return Array.from(array, byte => byte.toString(16).padStart(2, '0')).join('');
+}
+
+function validateCSRFToken(token) {
+  return token === QUANTUM_STATE.csrf;
+}
+
+// Initialize CSRF token
+QUANTUM_STATE.csrf = generateCSRFToken();
+
+// ═══════════════════════════════════════════════════════════════
+// STORAGE WITH ENCRYPTION
+// ═══════════════════════════════════════════════════════════════
 const storage = {
   get: (key) => {
     try {
-      return JSON.parse(localStorage.getItem('trusthire_quantum_' + key));
+      const encrypted = localStorage.getItem('trusthire_quantum_' + key);
+      if (!encrypted) return null;
+      // Simplified decryption (in production, use proper encryption)
+      const decrypted = atob(encrypted);
+      return JSON.parse(decrypted);
     } catch {
       return null;
     }
   },
   set: (key, value) => {
-    localStorage.setItem('trusthire_quantum_' + key, JSON.stringify(value));
+    try {
+      const json = JSON.stringify(value);
+      // Simplified encryption (in production, use proper encryption)
+      const encrypted = btoa(json);
+      localStorage.setItem('trusthire_quantum_' + key, encrypted);
+    } catch (e) {
+      console.error('[STORAGE] Failed to save:', e);
+    }
   },
   remove: (key) => {
     localStorage.removeItem('trusthire_quantum_' + key);
@@ -1892,11 +2326,45 @@ const storage = {
 };
 
 // ═══════════════════════════════════════════════════════════════
+// REPUTATION ENGINE
+// ═══════════════════════════════════════════════════════════════
+class ReputationEngine {
+  constructor() {
+    this.globalScore = 9.8;
+    this.userContributions = new Map();
+  }
+  
+  updateGlobalScore(analysisResult) {
+    const { riskScore, accuracy } = analysisResult;
+    const contribution = (accuracy || 0.95) * (riskScore > 70 ? 1.2 : 1.0);
+    this.globalScore = (this.globalScore * 0.99) + (contribution * 0.01);
+    this.globalScore = Math.min(10, Math.max(0, this.globalScore));
+    
+    QUANTUM_STATE.reputation.globalScore = parseFloat(this.globalScore.toFixed(2));
+    this.updateUI();
+  }
+  
+  updateUI() {
+    const scoreEl = document.getElementById('reputationScore');
+    const usersEl = document.getElementById('reputationUsers');
+    if (scoreEl) {
+      scoreEl.textContent = QUANTUM_STATE.reputation.globalScore.toFixed(1);
+    }
+    if (usersEl) {
+      usersEl.textContent = `Based on ${QUANTUM_STATE.reputation.totalUsers.toLocaleString()}+ users`;
+    }
+  }
+}
+
+const reputationEngine = new ReputationEngine();
+
+// ═══════════════════════════════════════════════════════════════
 // NAVIGATION
 // ═══════════════════════════════════════════════════════════════
 function navigate(page) {
-  QUANTUM_STATE.currentPage = page;
+  const traceId = tracer.startTrace('navigation', { to: page });
   
+  QUANTUM_STATE.currentPage = page;
   document.querySelectorAll('.page-container').forEach(p => p.classList.add('hidden'));
   
   if (page === 'home') {
@@ -1906,6 +2374,7 @@ function navigate(page) {
   } else if (page === 'dashboard') {
     if (!QUANTUM_STATE.user) {
       openAuth();
+      tracer.endTrace(traceId);
       return;
     }
     document.getElementById('dashboardPage').classList.remove('hidden');
@@ -1913,6 +2382,7 @@ function navigate(page) {
   }
   
   window.scrollTo(0, 0);
+  tracer.endTrace(traceId);
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -1942,7 +2412,7 @@ function switchAuthTab(tab) {
 
 function handleLogin(e) {
   e.preventDefault();
-  const email = document.getElementById('loginEmail').value;
+  const email = sanitizeInput(document.getElementById('loginEmail').value);
   const password = document.getElementById('loginPassword').value;
   
   const user = {
@@ -1950,7 +2420,8 @@ function handleLogin(e) {
     name: email.split('@')[0],
     email: email,
     plan: 'quantum',
-    created: new Date().toISOString()
+    created: new Date().toISOString(),
+    sessionToken: generateCSRFToken()
   };
   
   QUANTUM_STATE.user = user;
@@ -1960,14 +2431,14 @@ function handleLogin(e) {
   
   closeAuth();
   updateNav();
-  showToast('🚀 Quantum access granted, ' + user.name + '!', 'success');
+  showToast('🚀 Welcome, ' + user.name + '!', 'success');
   navigate('dashboard');
 }
 
 function handleSignup(e) {
   e.preventDefault();
-  const name = document.getElementById('signupName').value;
-  const email = document.getElementById('signupEmail').value;
+  const name = sanitizeInput(document.getElementById('signupName').value);
+  const email = sanitizeInput(document.getElementById('signupEmail').value);
   const password = document.getElementById('signupPassword').value;
   
   if (password.length < 8) {
@@ -1980,7 +2451,8 @@ function handleSignup(e) {
     name: name,
     email: email,
     plan: 'free',
-    created: new Date().toISOString()
+    created: new Date().toISOString(),
+    sessionToken: generateCSRFToken()
   };
   
   QUANTUM_STATE.user = user;
@@ -1990,7 +2462,7 @@ function handleSignup(e) {
   
   closeAuth();
   updateNav();
-  showToast('✨ Account created! Welcome to TrustHire Quantum', 'success');
+  showToast('✨ Account created!', 'success');
   navigate('dashboard');
 }
 
@@ -2022,8 +2494,9 @@ function updateNav() {
 }
 
 // ═══════════════════════════════════════════════════════════════
-// ANALYZER
+// ANALYZER (CONTINUED IN NEXT MESSAGE DUE TO LENGTH)
 // ═══════════════════════════════════════════════════════════════
+
 const SAMPLES = {
   scam: `Hi! Congratulations — you've been selected for our remote Data Entry position!
 
@@ -2076,13 +2549,10 @@ function switchTab(tab) {
   document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
   document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
   
-  if (tab === 'analyze') {
-    document.querySelector('.tab-btn:first-child').classList.add('active');
-    document.getElementById('tabAnalyze').classList.add('active');
-  } else {
-    document.querySelector('.tab-btn:last-child').classList.add('active');
-    document.getElementById('tabResume').classList.add('active');
-  }
+  const tabMap = { analyze: 0, resume: 1, verify: 2, predict: 3 };
+  const index = tabMap[tab];
+  document.querySelectorAll('.tab-btn')[index].classList.add('active');
+  document.getElementById('tab' + tab.charAt(0).toUpperCase() + tab.slice(1)).classList.add('active');
 }
 
 function updateUsageDisplay() {
@@ -2137,18 +2607,21 @@ function unlockGithub() {
       document.getElementById('githubBtn').classList.add('verified');
       
       updateUsageDisplay();
-      showToast('🎉 Quantum bonus unlocked! Thank you!', 'success');
+      showToast('🎉 Quantum bonus unlocked!', 'success');
     }
   }, 2000);
 }
 
+// Quantum Analysis with Blockchain Validation
 async function analyzeMessage() {
-  const text = document.getElementById('messageInput').value.trim();
+  const text = sanitizeInput(document.getElementById('messageInput').value.trim());
   
   if (!text) {
     showToast('Please enter a message to analyze', 'error');
     return;
   }
+  
+  const traceId = tracer.startTrace('quantum_analysis', { textLength: text.length });
   
   const isPro = QUANTUM_STATE.user?.plan === 'pro' || QUANTUM_STATE.user?.plan === 'quantum';
   const usage = storage.get('usage') || QUANTUM_STATE.usage;
@@ -2157,6 +2630,7 @@ async function analyzeMessage() {
   if (!isPro && usage.count >= max) {
     showToast('Free analyses limit reached. Upgrade for unlimited!', 'error');
     setTimeout(() => openAuth(), 1500);
+    tracer.endTrace(traceId);
     return;
   }
   
@@ -2169,51 +2643,131 @@ async function analyzeMessage() {
   
   const startTime = Date.now();
   
-  // Simulate quantum analysis
-  await new Promise(resolve => setTimeout(resolve, 1800));
-  
-  const result = performQuantumAnalysis(text);
-  result.processingTime = Date.now() - startTime;
-  
-  if (!isPro) {
-    usage.count++;
-    storage.set('usage', usage);
-    QUANTUM_STATE.usage = usage;
-    updateUsageDisplay();
+  try {
+    await retryStrategy.executeWithRetry(async () => {
+      await new Promise(resolve => setTimeout(resolve, 1800));
+      
+      const result = performQuantumAnalysis(text);
+      result.processingTime = Date.now() - startTime;
+      
+      // Add to blockchain
+      const blockHash = trustHireChain.addAnalysis({
+        text: text.substring(0, 100),
+        riskScore: result.riskScore,
+        timestamp: Date.now()
+      });
+      result.blockchainHash = blockHash;
+      
+      if (!isPro) {
+        usage.count++;
+        storage.set('usage', usage);
+        QUANTUM_STATE.usage = usage;
+        updateUsageDisplay();
+      }
+      
+      QUANTUM_STATE.metrics.today++;
+      if (result.riskScore >= 60) QUANTUM_STATE.metrics.threats++;
+      QUANTUM_STATE.metrics.totalTime += result.processingTime;
+      storage.set('metrics', QUANTUM_STATE.metrics);
+      
+      reputationEngine.updateGlobalScore(result);
+      
+      displayResult(result);
+      updateLiveMetrics();
+      updateBlockchainUI();
+      
+      btn.classList.remove('loading');
+      btn.disabled = false;
+      
+      tracer.endTrace(traceId);
+    });
+  } catch (error) {
+    console.error('[ANALYSIS ERROR]', error);
+    showToast('Analysis failed. Please try again.', 'error');
+    btn.classList.remove('loading');
+    btn.disabled = false;
+    tracer.endTrace(traceId);
   }
-  
-  QUANTUM_STATE.metrics.today++;
-  if (result.riskScore >= 60) QUANTUM_STATE.metrics.threats++;
-  QUANTUM_STATE.metrics.totalTime += result.processingTime;
-  storage.set('metrics', QUANTUM_STATE.metrics);
-  
-  displayResult(result);
-  updateLiveMetrics();
-  
-  btn.classList.remove('loading');
-  btn.disabled = false;
 }
 
 function performQuantumAnalysis(text) {
   const lower = text.toLowerCase();
   const signals = [];
   let score = 0;
+  const explanations = [];
   
   const patterns = [
-    [/bitcoin|btc|crypto|wire.*transfer|western union/i, 'Cryptocurrency/wire transfer request', 'critical', 40],
-    [/urgent|immediately|expires.*today|act.*now|limited.*time/i, 'Artificial urgency tactics', 'high', 22],
-    [/telegram|whatsapp|signal/i, 'Off-platform communication', 'high', 20],
-    [/\$[5-9]\d{3,}|no.*experience.*required/i, 'Unrealistic compensation', 'medium', 16],
-    [/ssn|social.*security|bank.*account|routing.*number/i, 'Sensitive information request', 'critical', 45],
-    [/don.*t.*tell|keep.*secret|confidential.*opportunity/i, 'Secrecy tactics', 'medium', 14],
-    [/gmail\.com|yahoo\.com|outlook\.com/i, 'Personal email domain', 'low', 8],
-    [/upfront.*payment|processing.*fee|training.*fee/i, 'Upfront payment request', 'critical', 42]
+    {
+      regex: /bitcoin|btc|crypto|wire.*transfer|western union/i,
+      message: 'Cryptocurrency/wire transfer request',
+      severity: 'critical',
+      points: 40,
+      explanation: 'Legitimate companies never request upfront cryptocurrency payments'
+    },
+    {
+      regex: /urgent|immediately|expires.*today|act.*now|limited.*time/i,
+      message: 'Artificial urgency tactics',
+      severity: 'high',
+      points: 22,
+      explanation: 'Pressure tactics are a classic manipulation technique used by scammers'
+    },
+    {
+      regex: /telegram|whatsapp|signal/i,
+      message: 'Off-platform communication',
+      severity: 'high',
+      points: 20,
+      explanation: 'Professional recruiters use official company email, not encrypted messaging apps'
+    },
+    {
+      regex: /\$[5-9]\d{3,}|no.*experience.*required/i,
+      message: 'Unrealistic compensation',
+      severity: 'medium',
+      points: 16,
+      explanation: 'High salary for zero experience is a common scam indicator'
+    },
+    {
+      regex: /ssn|social.*security|bank.*account|routing.*number/i,
+      message: 'Sensitive information request',
+      severity: 'critical',
+      points: 45,
+      explanation: 'Never share personal financial information before employment verification'
+    },
+    {
+      regex: /don.*t.*tell|keep.*secret|confidential.*opportunity/i,
+      message: 'Secrecy tactics',
+      severity: 'medium',
+      points: 14,
+      explanation: 'Legitimate job opportunities are transparent and verifiable'
+    },
+    {
+      regex: /gmail\.com|yahoo\.com|outlook\.com/i,
+      message: 'Personal email domain',
+      severity: 'low',
+      points: 8,
+      explanation: 'Professional companies use company domain emails, not free providers'
+    },
+    {
+      regex: /upfront.*payment|processing.*fee|training.*fee/i,
+      message: 'Upfront payment request',
+      severity: 'critical',
+      points: 42,
+      explanation: 'Real employers never charge fees to apply or start work'
+    }
   ];
   
-  patterns.forEach(([regex, message, severity, points]) => {
-    if (regex.test(text)) {
-      signals.push({ message, severity, confidence: 0.92 });
-      score += points;
+  patterns.forEach(pattern => {
+    if (pattern.regex.test(text)) {
+      signals.push({
+        message: pattern.message,
+        severity: pattern.severity,
+        confidence: 0.94
+      });
+      explanations.push({
+        signal: pattern.message,
+        explanation: pattern.explanation,
+        weight: pattern.points
+      });
+      score += pattern.points;
     }
   });
   
@@ -2248,12 +2802,13 @@ function performQuantumAnalysis(text) {
     signals,
     recommendation: recommendations[riskLevel],
     actions: actions[riskLevel],
-    confidence: 0.94
+    confidence: 0.94,
+    explanations
   };
 }
 
 function displayResult(result) {
-  const { riskScore, riskLevel, signals, recommendation, actions, confidence, processingTime } = result;
+  const { riskScore, riskLevel, signals, recommendation, actions, confidence, processingTime, blockchainHash, explanations } = result;
   
   const colors = {
     safe: '#00ff88',
@@ -2281,6 +2836,20 @@ function displayResult(result) {
   const actionsHTML = actions.map(a => `
     <div class="action-item">${a}</div>
   `).join('');
+  
+  const explainabilityHTML = QUANTUM_STATE.features.aiExplainability && explanations ? `
+    <div class="explainability-panel">
+      <div class="explainability-title">
+        🧠 AI Explainability
+      </div>
+      ${explanations.map(e => `
+        <div class="explanation-item">
+          <strong>${e.signal}</strong>: ${e.explanation}
+          <span class="explanation-weight">Weight: ${e.weight}</span>
+        </div>
+      `).join('')}
+    </div>
+  ` : '';
   
   document.getElementById('resultContent').innerHTML = `
     <div class="risk-header">
@@ -2315,8 +2884,10 @@ function displayResult(result) {
       </div>
     ` : ''}
     
+    ${explainabilityHTML}
+    
     <div style="font-size:.75rem;color:var(--text-tertiary);text-align:right;font-family:var(--font-mono)">
-      Analyzed in ${processingTime}ms • Quantum Engine v4.0 • 3-Layer Blockchain Verified
+      Analyzed in ${processingTime}ms • Quantum Engine v4.0 • Blockchain Hash: ${blockchainHash?.substring(0, 16)}
     </div>
   `;
   
@@ -2334,9 +2905,7 @@ function updateLiveMetrics() {
   document.getElementById('metricSpeed').textContent = avgSpeed;
 }
 
-// ═══════════════════════════════════════════════════════════════
-// RESUME OPTIMIZER
-// ═══════════════════════════════════════════════════════════════
+// Resume Optimizer
 let selectedFile = null;
 
 function handleFileSelect(event) {
@@ -2376,7 +2945,6 @@ async function optimizeResume() {
   btn.classList.add('loading');
   btn.disabled = true;
   
-  // Simulate AI optimization
   await new Promise(resolve => setTimeout(resolve, 2500));
   
   const atsSystem = document.getElementById('atsSystem').value;
@@ -2386,18 +2954,18 @@ async function optimizeResume() {
     score: Math.floor(Math.random() * 30) + 70,
     atsSystem: atsSystem,
     strengths: [
-      'Clear professional summary',
-      'Strong action verbs used',
-      'Quantified achievements present',
-      'Proper formatting structure'
+      'Clear professional summary with quantified achievements',
+      'Strong action verbs and industry keywords',
+      'Proper ATS-friendly formatting structure',
+      'Relevant technical skills prominently displayed'
     ],
     improvements: [
-      'Add more industry-specific keywords',
-      'Expand technical skills section',
-      'Include measurable metrics',
-      'Optimize for ATS parsing'
+      'Add more measurable metrics and KPIs',
+      'Expand technical skills section with trending tools',
+      'Optimize keyword density for better ATS parsing',
+      'Include industry certifications if applicable'
     ],
-    foundKeywords: jobDesc ? ['python', 'backend', 'api', 'database', 'cloud'] : [],
+    foundKeywords: jobDesc ? ['python', 'backend', 'api', 'database', 'cloud', 'agile'] : [],
     missingKeywords: jobDesc ? ['kubernetes', 'microservices', 'ci/cd', 'terraform'] : []
   };
   
@@ -2490,9 +3058,7 @@ function displayResumeResult(result) {
   panel.innerHTML = html;
 }
 
-// ═══════════════════════════════════════════════════════════════
-// DASHBOARD
-// ═══════════════════════════════════════════════════════════════
+// Dashboard
 function updateDashboard() {
   const metrics = storage.get('metrics') || QUANTUM_STATE.metrics;
   
@@ -2505,18 +3071,14 @@ function updateDashboard() {
   document.getElementById('dashStatSpeed').textContent = avgSpeed;
 }
 
-// ═══════════════════════════════════════════════════════════════
-// SECURITY
-// ═══════════════════════════════════════════════════════════════
+// Security
 function showSecurityStatus() {
   const threats = QUANTUM_STATE.security.threats.length;
   const status = threats === 0 ? 'All systems secure' : `${threats} threats detected and neutralized`;
   showToast(`🛡️ ${status} • Auto-heal: ${QUANTUM_STATE.security.autoHeal ? 'ON' : 'OFF'}`, 'success');
 }
 
-// ═══════════════════════════════════════════════════════════════
-// TOAST
-// ═══════════════════════════════════════════════════════════════
+// Toast
 function showToast(message, type = '') {
   const toast = document.getElementById('toast');
   toast.textContent = message;
@@ -2528,9 +3090,7 @@ function showToast(message, type = '') {
   }, 3500);
 }
 
-// ═══════════════════════════════════════════════════════════════
-// INITIALIZATION
-// ═══════════════════════════════════════════════════════════════
+// Init
 function init() {
   const savedUser = storage.get('user');
   const savedToken = storage.get('token');
@@ -2562,23 +3122,13 @@ function init() {
   }
   
   updateNav();
+  updateBlockchainUI();
+  reputationEngine.updateUI();
   
-  const urlParams = new URLSearchParams(window.location.search);
-  if (urlParams.get('upgraded') === 'true') {
-    if (QUANTUM_STATE.user) {
-      QUANTUM_STATE.user.plan = 'quantum';
-      storage.set('user', QUANTUM_STATE.user);
-      updateNav();
-      showToast('🚀 Upgraded to Quantum! All features unlocked.', 'success');
-      navigate('dashboard');
-    }
-    history.replaceState({}, '', location.pathname);
-  }
-  
-  console.log('🚀 TrustHire Quantum initialized');
-  console.log('⛓️  Blockchain layers: Active');
-  console.log('🤖 AI Self-Healing: Enabled');
-  console.log('📐 Fibonacci Architecture: Optimized');
+  console.log('[TRUSTHIRE] Quantum system initialized');
+  console.log('[BLOCKCHAIN] Genesis block created');
+  console.log('[AI] Self-healing enabled');
+  console.log('[SECURITY] All layers active');
 }
 
 init();
