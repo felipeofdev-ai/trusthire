@@ -1,387 +1,794 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TrustHire — Verify before you trust</title>
-<meta name="description" content="Paste any recruiter message. AI detects job scams in seconds — risk score, signal breakdown, and actionable recommendations.">
+<title>TrustHire — Verifique antes de confiar</title>
+<meta name="description" content="Cole qualquer mensagem de recrutador. IA detecta golpes de emprego em segundos — score de risco, análise de sinais e recomendações. Otimize seu currículo para ATS.">
+<meta property="og:title" content="TrustHire — Verifique antes de confiar">
+<meta property="og:description" content="Detecta golpes de emprego com IA em segundos. Score de risco, análise de sinais e otimização de currículo ATS.">
+<meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
+/* ── TOKENS ─────────────────────────────────────────────── */
 :root {
-  --bg: #0a0a0a; --surface: #111111; --surface2: #161616;
-  --border: #1e1e1e; --accent: #e8ff47; --accent-dim: rgba(232,255,71,0.1);
-  --danger: #ff4747; --warn: #ff9f0a; --safe: #34c759;
-  --text: #f0f0f0; --muted: #666;
+  --bg: #0a0a0a; --surface: #111111; --surface2: #161616; --surface3: #1a1a1a;
+  --border: #1e1e1e; --border2: #252525;
+  --accent: #e8ff47; --accent-dim: rgba(232,255,71,0.08); --accent-glow: rgba(232,255,71,0.15);
+  --danger: #ff4747; --warn: #ff9f0a; --safe: #34c759; --info: #0a84ff;
+  --text: #f0f0f0; --muted: #555; --muted2: #3a3a3a;
   --mono: 'DM Mono', monospace; --sans: 'Syne', sans-serif;
+  --radius: 2px;
 }
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.6;overflow-x:hidden}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: var(--sans); line-height: 1.6; overflow-x: hidden; }
 
-nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;background:rgba(10,10,10,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
-.nav-logo{font-weight:800;font-size:1.1rem;letter-spacing:-.02em;color:var(--accent);text-decoration:none}
-.nav-links{display:flex;gap:2rem;list-style:none;align-items:center}
-.nav-links a{color:var(--muted);text-decoration:none;font-size:.8rem;font-family:var(--mono);transition:color .2s}
-.nav-links a:hover{color:var(--text)}
-.usage-pill{font-family:var(--mono);font-size:.72rem;background:var(--surface);border:1px solid var(--border);padding:.28rem .7rem;display:flex;align-items:center;gap:.4rem}
-.usage-pill .uses-left{color:var(--accent);font-weight:600}
-.usage-pill.warn .uses-left{color:var(--warn)}
-.usage-pill.empty .uses-left{color:var(--danger)}
-.nav-upgrade{background:var(--accent);color:#000;border:none;padding:.4rem 1rem;font-family:var(--mono);font-size:.76rem;font-weight:600;cursor:pointer;transition:opacity .2s}
-.nav-upgrade:hover{opacity:.85}
+/* ── NAV ──────────────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: .85rem 2rem;
+  background: rgba(10,10,10,.95); backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo { font-weight: 800; font-size: 1.05rem; letter-spacing: -.02em; color: var(--accent); text-decoration: none; display: flex; align-items: center; gap: .5rem; }
+.nav-logo-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); animation: blink 2.5s ease-in-out infinite; }
+.nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+.nav-links a { color: var(--muted); text-decoration: none; font-size: .75rem; font-family: var(--mono); transition: color .2s; }
+.nav-links a:hover { color: var(--text); }
+.nav-right { display: flex; align-items: center; gap: .6rem; }
 
-#hero{min-height:100vh;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:6rem 2rem 4rem;max-width:900px;margin:0 auto;position:relative}
-.hero-tag{font-family:var(--mono);font-size:.7rem;color:var(--accent);border:1px solid rgba(232,255,71,.3);padding:.3rem .8rem;margin-bottom:2rem;letter-spacing:.08em;opacity:0;animation:fadeUp .6s .2s forwards;display:inline-block}
-h1{font-size:clamp(2.8rem,7vw,5rem);font-weight:800;line-height:1.05;letter-spacing:-.04em;margin-bottom:1.5rem;opacity:0;animation:fadeUp .7s .4s forwards}
-h1 em{font-style:normal;color:var(--accent)}
-.hero-sub{font-size:1rem;color:var(--muted);max-width:500px;font-family:var(--mono);font-weight:300;opacity:0;animation:fadeUp .7s .6s forwards;margin-bottom:2.5rem;line-height:1.8}
-.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;opacity:0;animation:fadeUp .7s .8s forwards}
-.btn-primary{background:var(--accent);color:#000;border:none;padding:.75rem 1.75rem;font-family:var(--mono);font-weight:600;cursor:pointer;font-size:.86rem;transition:opacity .2s,transform .15s}
-.btn-primary:hover{opacity:.88;transform:translateY(-1px)}
-.btn-ghost{background:transparent;color:var(--text);border:1px solid var(--border);padding:.75rem 1.75rem;font-family:var(--mono);font-size:.86rem;cursor:pointer;transition:border-color .2s;text-decoration:none;display:inline-block}
-.btn-ghost:hover{border-color:var(--muted)}
-.api-status{position:absolute;bottom:2rem;display:flex;align-items:center;gap:.5rem;font-family:var(--mono);font-size:.7rem;color:var(--muted)}
-.status-dot{width:7px;height:7px;border-radius:50%;background:var(--safe);animation:blink 2s infinite}
-.status-dot.connecting{background:var(--warn)}
-.status-dot.offline{background:var(--danger);animation:none}
+/* Nav User State */
+.usage-pill { font-family: var(--mono); font-size: .7rem; background: var(--surface); border: 1px solid var(--border); padding: .28rem .75rem; display: flex; align-items: center; gap: .4rem; }
+.usage-pill .uses-left { color: var(--accent); font-weight: 600; }
+.usage-pill.warn .uses-left { color: var(--warn); }
+.usage-pill.empty .uses-left { color: var(--danger); }
+.nav-login-btn { background: transparent; color: var(--muted); border: 1px solid var(--border); padding: .35rem .9rem; font-family: var(--mono); font-size: .72rem; cursor: pointer; transition: all .2s; }
+.nav-login-btn:hover { border-color: var(--muted); color: var(--text); }
+.nav-upgrade { background: var(--accent); color: #000; border: none; padding: .38rem 1rem; font-family: var(--mono); font-size: .74rem; font-weight: 700; cursor: pointer; transition: opacity .2s; white-space: nowrap; }
+.nav-upgrade:hover { opacity: .85; }
+.nav-user { display: none; align-items: center; gap: .6rem; font-family: var(--mono); font-size: .72rem; }
+.nav-user.active { display: flex; }
+.nav-user .user-name { color: var(--text); }
+.nav-user .plan-badge { padding: .15rem .5rem; font-size: .6rem; font-weight: 700; letter-spacing: .06em; }
+.plan-badge.free { background: var(--surface2); color: var(--muted); border: 1px solid var(--border); }
+.plan-badge.pro { background: var(--accent); color: #000; }
+.plan-badge.enterprise { background: #a855f7; color: #fff; }
+.nav-user .btn-logout { background: none; border: none; color: var(--muted); font-family: var(--mono); font-size: .7rem; cursor: pointer; }
+.nav-user .btn-logout:hover { color: var(--danger); }
 
-.section{padding:5rem 2rem;max-width:900px;margin:0 auto;border-top:1px solid var(--border)}
-.section-label{font-family:var(--mono);font-size:.67rem;color:var(--accent);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.7rem}
-.section-title{font-size:clamp(1.5rem,3vw,2rem);font-weight:700;letter-spacing:-.03em;margin-bottom:1.75rem}
+/* ── HERO ─────────────────────────────────────────────────── */
+#hero {
+  min-height: 100vh; display: flex; flex-direction: column;
+  align-items: flex-start; justify-content: center;
+  padding: 7rem 2rem 4rem; max-width: 960px; margin: 0 auto; position: relative;
+}
+.hero-tag { font-family: var(--mono); font-size: .68rem; color: var(--accent); border: 1px solid rgba(232,255,71,.25); padding: .28rem .85rem; margin-bottom: 2rem; letter-spacing: .1em; opacity: 0; animation: fadeUp .6s .15s forwards; display: inline-block; }
+h1 { font-size: clamp(2.6rem, 7vw, 5rem); font-weight: 800; line-height: 1.04; letter-spacing: -.04em; margin-bottom: 1.5rem; opacity: 0; animation: fadeUp .7s .35s forwards; }
+h1 em { font-style: normal; color: var(--accent); }
+.hero-sub { font-size: .95rem; color: var(--muted); max-width: 520px; font-family: var(--mono); font-weight: 300; opacity: 0; animation: fadeUp .7s .55s forwards; margin-bottom: 2.5rem; line-height: 1.8; }
+.hero-btns { display: flex; gap: .9rem; flex-wrap: wrap; opacity: 0; animation: fadeUp .7s .7s forwards; }
+.btn-primary { background: var(--accent); color: #000; border: none; padding: .8rem 1.8rem; font-family: var(--mono); font-weight: 700; cursor: pointer; font-size: .84rem; transition: opacity .2s, transform .15s; }
+.btn-primary:hover { opacity: .88; transform: translateY(-1px); }
+.btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border); padding: .8rem 1.8rem; font-family: var(--mono); font-size: .84rem; cursor: pointer; transition: border-color .2s; text-decoration: none; display: inline-block; }
+.btn-ghost:hover { border-color: var(--muted); }
+.api-status { position: absolute; bottom: 2.5rem; display: flex; align-items: center; gap: .5rem; font-family: var(--mono); font-size: .68rem; color: var(--muted); }
+.status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--safe); animation: blink 2s infinite; }
+.status-dot.connecting { background: var(--warn); }
+.status-dot.offline { background: var(--danger); animation: none; }
 
-#analyzer{padding:5rem 2rem;max-width:900px;margin:0 auto}
-.analyzer-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
-@media(max-width:700px){.analyzer-grid{grid-template-columns:1fr}.nav-links{display:none}}
+/* ── SECTION BASE ─────────────────────────────────────────── */
+.section { padding: 5rem 2rem; max-width: 960px; margin: 0 auto; border-top: 1px solid var(--border); }
+.section-label { font-family: var(--mono); font-size: .65rem; color: var(--accent); letter-spacing: .14em; text-transform: uppercase; margin-bottom: .6rem; }
+.section-title { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700; letter-spacing: -.03em; margin-bottom: 1.75rem; }
 
-textarea#msg{width:100%;height:240px;resize:vertical;background:var(--surface);border:1px solid var(--border);color:var(--text);font-family:var(--mono);font-size:.82rem;padding:1rem;outline:none;line-height:1.7;transition:border-color .2s}
-textarea#msg:focus{border-color:var(--accent)}
-textarea#msg::placeholder{color:var(--muted)}
+/* ── TABS (ANALYZER / RESUME) ──────────────────────────────── */
+.tool-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 2rem; }
+.tab-btn { background: none; border: none; border-bottom: 2px solid transparent; color: var(--muted); font-family: var(--mono); font-size: .78rem; padding: .65rem 1.25rem; cursor: pointer; transition: all .2s; margin-bottom: -1px; }
+.tab-btn:hover { color: var(--text); }
+.tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
 
-.input-meta{display:flex;justify-content:space-between;align-items:center;margin-top:.55rem}
-.samples{display:flex;gap:.4rem;flex-wrap:wrap;align-items:center}
-.samples span{font-family:var(--mono);font-size:.68rem;color:var(--muted)}
-.sample-btn{background:transparent;border:1px solid var(--border);color:var(--muted);font-family:var(--mono);font-size:.68rem;padding:.22rem .55rem;cursor:pointer;transition:all .2s}
-.sample-btn:hover{border-color:var(--muted);color:var(--text)}
-.char-count{font-family:var(--mono);font-size:.7rem;color:var(--muted)}
-.char-count.warn{color:var(--warn)}
+/* ── ANALYZER ─────────────────────────────────────────────── */
+#analyzer { padding: 5rem 2rem; max-width: 960px; margin: 0 auto; }
+.analyzer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+@media(max-width: 720px) { .analyzer-grid { grid-template-columns: 1fr; } .nav-links { display: none; } }
 
-.analyze-btn{width:100%;background:var(--accent);color:#000;border:none;padding:.88rem;font-family:var(--mono);font-weight:600;font-size:.86rem;cursor:pointer;transition:opacity .2s;position:relative;overflow:hidden;margin-top:.7rem}
-.analyze-btn:disabled{opacity:.35;cursor:not-allowed}
-.analyze-btn:not(:disabled):hover{opacity:.88}
-.analyze-btn.loading .btn-text{visibility:hidden}
-.analyze-btn .spinner{display:none}
-.analyze-btn.loading .spinner{display:block;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:17px;height:17px;border:2px solid #000;border-top-color:transparent;border-radius:50%;animation:spin .7s linear infinite}
+/* Language Selector */
+.input-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: .5rem; }
+.input-label { font-family: var(--mono); font-size: .68rem; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; }
+.lang-select { background: var(--surface); border: 1px solid var(--border); color: var(--muted); font-family: var(--mono); font-size: .68rem; padding: .2rem .5rem; cursor: pointer; outline: none; }
+.lang-select:focus { border-color: var(--accent); color: var(--text); }
 
-.free-limit-bar{display:flex;align-items:center;gap:.75rem;margin-top:.65rem;font-family:var(--mono);font-size:.7rem;color:var(--muted)}
-.free-dots{display:flex;gap:.3rem}
-.free-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);transition:background .3s}
-.free-dot.used{background:var(--border)}
-.free-limit-bar a{color:var(--accent);text-decoration:none;cursor:pointer}
-.free-limit-bar a:hover{text-decoration:underline}
+textarea#msg {
+  width: 100%; height: 235px; resize: vertical;
+  background: var(--surface); border: 1px solid var(--border);
+  color: var(--text); font-family: var(--mono); font-size: .81rem;
+  padding: .95rem 1rem; outline: none; line-height: 1.75;
+  transition: border-color .2s; border-radius: var(--radius);
+}
+textarea#msg:focus { border-color: var(--accent); }
+textarea#msg::placeholder { color: var(--muted2); }
+.input-meta { display: flex; justify-content: space-between; align-items: center; margin-top: .5rem; }
+.samples { display: flex; gap: .4rem; flex-wrap: wrap; align-items: center; }
+.samples span { font-family: var(--mono); font-size: .66rem; color: var(--muted); }
+.sample-btn { background: transparent; border: 1px solid var(--border2); color: var(--muted); font-family: var(--mono); font-size: .66rem; padding: .2rem .55rem; cursor: pointer; transition: all .2s; }
+.sample-btn:hover { border-color: var(--muted); color: var(--text); }
+.char-count { font-family: var(--mono); font-size: .68rem; color: var(--muted); }
+.char-count.warn { color: var(--warn); }
 
-.result-panel{background:var(--surface);border:1px solid var(--border);padding:1.4rem;display:flex;flex-direction:column;gap:1.1rem;min-height:300px}
-.result-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:.7rem;color:var(--muted);font-family:var(--mono);font-size:.76rem;text-align:center;padding:2rem 0}
-.result-empty .icon{font-size:2rem;opacity:.2}
+.analyze-btn {
+  width: 100%; background: var(--accent); color: #000; border: none;
+  padding: .9rem; font-family: var(--mono); font-weight: 700; font-size: .85rem;
+  cursor: pointer; transition: opacity .2s; position: relative; overflow: hidden; margin-top: .65rem;
+}
+.analyze-btn:disabled { opacity: .35; cursor: not-allowed; }
+.analyze-btn:not(:disabled):hover { opacity: .88; }
+.analyze-btn.loading .btn-text { visibility: hidden; }
+.analyze-btn .spinner { display: none; }
+.analyze-btn.loading .spinner { display: block; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 16px; height: 16px; border: 2px solid #000; border-top-color: transparent; border-radius: 50%; animation: spin .7s linear infinite; }
 
-.risk-header{display:flex;justify-content:space-between;align-items:flex-start}
-.risk-badge{font-family:var(--mono);font-size:.7rem;font-weight:600;padding:.25rem .7rem;letter-spacing:.08em}
-.risk-badge.safe{background:rgba(52,199,89,.12);color:var(--safe);border:1px solid rgba(52,199,89,.25)}
-.risk-badge.low{background:rgba(52,199,89,.08);color:#7ecf8a;border:1px solid rgba(52,199,89,.15)}
-.risk-badge.moderate{background:rgba(255,159,10,.1);color:var(--warn);border:1px solid rgba(255,159,10,.25)}
-.risk-badge.high{background:rgba(255,71,71,.1);color:var(--danger);border:1px solid rgba(255,71,71,.25)}
-.risk-badge.critical{background:rgba(255,71,71,.18);color:var(--danger);border:1px solid var(--danger);animation:critPulse 1.5s infinite}
+.free-limit-bar { display: flex; align-items: center; gap: .75rem; margin-top: .6rem; font-family: var(--mono); font-size: .68rem; color: var(--muted); }
+.free-dots { display: flex; gap: .3rem; }
+.free-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); transition: background .3s; }
+.free-dot.used { background: var(--border); }
+.free-limit-bar a { color: var(--accent); text-decoration: none; cursor: pointer; }
+.free-limit-bar a:hover { text-decoration: underline; }
 
-.score-num{font-size:2.4rem;font-weight:800;line-height:1;text-align:right}
-.score-label{font-family:var(--mono);font-size:.66rem;color:var(--muted);text-align:right}
-.score-bar-track{height:3px;background:var(--border);overflow:hidden}
-.score-bar-fill{height:100%;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
+/* ── RESULT PANEL ─────────────────────────────────────────── */
+.result-panel { background: var(--surface); border: 1px solid var(--border); padding: 1.4rem; display: flex; flex-direction: column; gap: 1.1rem; min-height: 310px; }
+.result-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; gap: .7rem; color: var(--muted); font-family: var(--mono); font-size: .74rem; text-align: center; padding: 2rem 0; }
+.result-empty .icon { font-size: 2rem; opacity: .15; }
+.risk-header { display: flex; justify-content: space-between; align-items: flex-start; }
+.risk-badge { font-family: var(--mono); font-size: .68rem; font-weight: 600; padding: .22rem .65rem; letter-spacing: .08em; }
+.risk-badge.safe { background: rgba(52,199,89,.1); color: var(--safe); border: 1px solid rgba(52,199,89,.2); }
+.risk-badge.low { background: rgba(52,199,89,.07); color: #7ecf8a; border: 1px solid rgba(52,199,89,.15); }
+.risk-badge.moderate { background: rgba(255,159,10,.09); color: var(--warn); border: 1px solid rgba(255,159,10,.2); }
+.risk-badge.high { background: rgba(255,71,71,.09); color: var(--danger); border: 1px solid rgba(255,71,71,.2); }
+.risk-badge.critical { background: rgba(255,71,71,.16); color: var(--danger); border: 1px solid var(--danger); animation: critPulse 1.5s infinite; }
+.score-num { font-size: 2.5rem; font-weight: 800; line-height: 1; text-align: right; }
+.score-label { font-family: var(--mono); font-size: .64rem; color: var(--muted); text-align: right; }
+.score-bar-track { height: 2px; background: var(--border); overflow: hidden; }
+.score-bar-fill { height: 100%; transition: width 1.2s cubic-bezier(.4,0,.2,1); }
+.signals-list { display: flex; flex-direction: column; gap: .35rem; }
+.signal-item { display: flex; gap: .5rem; align-items: flex-start; font-family: var(--mono); font-size: .72rem; padding: .4rem .65rem; background: var(--bg); border-left: 2px solid transparent; }
+.signal-item.critical { border-color: var(--danger); }
+.signal-item.high { border-color: #ff8c00; }
+.signal-item.medium { border-color: var(--warn); }
+.signal-item.low { border-color: var(--safe); }
+.signal-sev { font-size: .58rem; opacity: .55; text-transform: uppercase; white-space: nowrap; margin-top: 1px; }
+.signal-msg { color: var(--text); flex: 1; line-height: 1.4; }
+.recommendation { font-family: var(--mono); font-size: .76rem; color: var(--text); background: var(--bg); padding: .7rem .95rem; border-left: 3px solid var(--accent); line-height: 1.65; }
+.action-items { display: flex; flex-direction: column; gap: .32rem; }
+.action-item { font-family: var(--mono); font-size: .71rem; display: flex; gap: .45rem; line-height: 1.4; }
+.action-item::before { content: '→'; color: var(--accent); flex-shrink: 0; }
+.pro-badge-inline { font-family: var(--mono); font-size: .58rem; background: var(--accent); color: #000; padding: .1rem .38rem; font-weight: 700; letter-spacing: .05em; vertical-align: middle; margin-left: .3rem; }
 
-.signals-list{display:flex;flex-direction:column;gap:.38rem}
-.signal-item{display:flex;gap:.55rem;align-items:flex-start;font-family:var(--mono);font-size:.74rem;padding:.42rem .65rem;background:var(--bg);border-left:2px solid transparent}
-.signal-item.critical{border-color:var(--danger)}
-.signal-item.high{border-color:#ff8c00}
-.signal-item.medium{border-color:var(--warn)}
-.signal-item.low{border-color:var(--safe)}
-.signal-sev{font-size:.6rem;opacity:.6;text-transform:uppercase;white-space:nowrap;margin-top:1px}
-.signal-msg{color:var(--text);flex:1;line-height:1.4}
+/* AI Block */
+.ai-result { font-family: var(--mono); font-size: .75rem; color: var(--text); background: var(--bg); padding: .85rem 1rem; border: 1px solid rgba(232,255,71,.15); line-height: 1.7; }
+.ai-result-header { font-size: .62rem; color: var(--accent); letter-spacing: .08em; margin-bottom: .5rem; display: flex; align-items: center; gap: .4rem; }
 
-.recommendation{font-family:var(--mono);font-size:.78rem;color:var(--text);background:var(--bg);padding:.72rem .95rem;border-left:3px solid var(--accent);line-height:1.65}
-.action-items{display:flex;flex-direction:column;gap:.32rem}
-.action-item{font-family:var(--mono);font-size:.72rem;display:flex;gap:.45rem}
-.action-item::before{content:'→';color:var(--accent);flex-shrink:0}
-.pro-badge-inline{font-family:var(--mono);font-size:.6rem;background:var(--accent);color:#000;padding:.12rem .4rem;font-weight:700;letter-spacing:.05em;vertical-align:middle;margin-left:.35rem}
+/* Locked rows */
+.locked-features { display: flex; flex-direction: column; gap: .35rem; }
+.locked-row { display: flex; align-items: center; justify-content: space-between; font-family: var(--mono); font-size: .72rem; background: var(--bg); padding: .5rem .85rem; border: 1px solid var(--border); cursor: pointer; transition: border-color .2s; }
+.locked-row:hover { border-color: var(--muted); }
+.lock-icon { color: var(--muted); font-size: .75rem; }
+.lock-label { flex: 1; margin-left: .5rem; color: var(--muted); }
+.lock-cta { color: var(--accent); font-size: .67rem; white-space: nowrap; }
+.result-actions { display: flex; gap: .45rem; margin-top: .3rem; }
+.result-action-btn { flex: 1; padding: .48rem; font-family: var(--mono); font-size: .7rem; cursor: pointer; border: none; transition: opacity .2s; }
+.copy-btn { background: var(--surface2); color: var(--text); border: 1px solid var(--border) !important; }
+.copy-btn:hover { opacity: .8; }
+.pdf-btn, .csv-btn { background: var(--accent-dim); color: var(--accent); border: 1px solid rgba(232,255,71,.18) !important; }
+.pdf-btn:hover, .csv-btn:hover { opacity: .8; }
 
-.locked-features{display:flex;flex-direction:column;gap:.4rem}
-.locked-row{display:flex;align-items:center;justify-content:space-between;font-family:var(--mono);font-size:.74rem;background:var(--bg);padding:.55rem .85rem;border:1px solid var(--border);cursor:pointer;transition:border-color .2s}
-.locked-row:hover{border-color:var(--muted)}
-.lock-icon{color:var(--muted);font-size:.78rem}
-.lock-label{flex:1;margin-left:.55rem;color:var(--muted)}
-.lock-cta{color:var(--accent);font-size:.68rem;white-space:nowrap}
+/* ── RESUME OPTIMIZER ─────────────────────────────────────── */
+.resume-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+@media(max-width: 720px) { .resume-grid { grid-template-columns: 1fr; } }
+.resume-form { display: flex; flex-direction: column; gap: .9rem; }
+.field-group { display: flex; flex-direction: column; gap: .4rem; }
+.field-label { font-family: var(--mono); font-size: .67rem; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; }
+.file-drop-zone {
+  border: 1px dashed var(--border2); background: var(--surface); padding: 1.5rem;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: .55rem; cursor: pointer; transition: border-color .2s; min-height: 110px; text-align: center;
+}
+.file-drop-zone:hover, .file-drop-zone.dragover { border-color: var(--accent); }
+.file-drop-zone.has-file { border-color: var(--safe); border-style: solid; }
+.file-drop-icon { font-size: 1.6rem; opacity: .35; }
+.file-drop-text { font-family: var(--mono); font-size: .72rem; color: var(--muted); line-height: 1.5; }
+.file-drop-text strong { color: var(--accent); }
+.file-name-display { font-family: var(--mono); font-size: .72rem; color: var(--safe); display: none; }
+.file-name-display.show { display: block; }
+.ats-select { background: var(--surface); border: 1px solid var(--border); color: var(--text); font-family: var(--mono); font-size: .76rem; padding: .55rem .75rem; outline: none; width: 100%; cursor: pointer; }
+.ats-select:focus { border-color: var(--accent); }
+textarea#jobDesc {
+  width: 100%; height: 140px; resize: vertical;
+  background: var(--surface); border: 1px solid var(--border);
+  color: var(--text); font-family: var(--mono); font-size: .78rem;
+  padding: .85rem .95rem; outline: none; line-height: 1.7;
+  transition: border-color .2s;
+}
+textarea#jobDesc:focus { border-color: var(--accent); }
+textarea#jobDesc::placeholder { color: var(--muted2); }
+.optimize-btn { width: 100%; background: var(--surface); color: var(--accent); border: 1px solid var(--accent); padding: .85rem; font-family: var(--mono); font-weight: 700; font-size: .82rem; cursor: pointer; transition: all .2s; position: relative; overflow: hidden; }
+.optimize-btn:not(:disabled):hover { background: var(--accent); color: #000; }
+.optimize-btn:disabled { opacity: .35; cursor: not-allowed; }
+.optimize-btn.loading .btn-text { visibility: hidden; }
+.optimize-btn .spinner { display: none; }
+.optimize-btn.loading .spinner { display: block; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 16px; height: 16px; border: 2px solid var(--accent); border-top-color: transparent; border-radius: 50%; animation: spin .7s linear infinite; }
+.resume-locked { display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--surface); border: 1px solid var(--border); padding: 3rem 2rem; gap: 1rem; text-align: center; min-height: 310px; }
+.resume-locked .lock-big { font-size: 2.2rem; opacity: .2; }
+.resume-locked p { font-family: var(--mono); font-size: .76rem; color: var(--muted); line-height: 1.7; }
+.resume-locked .btn-unlock { background: var(--accent); color: #000; border: none; padding: .65rem 1.5rem; font-family: var(--mono); font-weight: 700; font-size: .78rem; cursor: pointer; transition: opacity .2s; margin-top: .5rem; }
+.resume-locked .btn-unlock:hover { opacity: .85; }
 
-.result-actions{display:flex;gap:.45rem}
-.result-action-btn{flex:1;padding:.48rem;font-family:var(--mono);font-size:.72rem;cursor:pointer;border:none;transition:opacity .2s}
-.copy-btn{background:var(--surface2);color:var(--text);border:1px solid var(--border)!important;border:none}
-.copy-btn:hover{border-color:var(--muted)!important}
-.pdf-btn,.csv-btn{background:var(--accent-dim);color:var(--accent);border:1px solid rgba(232,255,71,.2)!important;border:none}
-.pdf-btn:hover,.csv-btn:hover{opacity:.8}
+/* Resume Results */
+.resume-results-panel { background: var(--surface); border: 1px solid var(--border); padding: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem; min-height: 310px; }
+.resume-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; gap: .7rem; color: var(--muted); font-family: var(--mono); font-size: .73rem; text-align: center; padding: 2rem; opacity: .6; }
+.compat-header { display: flex; align-items: center; gap: 1.2rem; }
+.compat-ring { position: relative; width: 72px; height: 72px; flex-shrink: 0; }
+.compat-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.compat-ring-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); text-align: center; }
+.compat-ring-text .num { font-size: 1.2rem; font-weight: 800; color: var(--accent); display: block; line-height: 1; }
+.compat-ring-text .pct { font-family: var(--mono); font-size: .55rem; color: var(--muted); }
+.compat-info h4 { font-size: .95rem; font-weight: 700; margin-bottom: .2rem; }
+.compat-info p { font-family: var(--mono); font-size: .68rem; color: var(--muted); line-height: 1.5; }
+.resume-section h5 { font-family: var(--mono); font-size: .65rem; color: var(--accent); letter-spacing: .1em; text-transform: uppercase; margin-bottom: .6rem; }
+.resume-list { list-style: none; display: flex; flex-direction: column; gap: .35rem; }
+.resume-list li { font-family: var(--mono); font-size: .72rem; display: flex; gap: .45rem; line-height: 1.4; }
+.resume-list li::before { content: '→'; flex-shrink: 0; }
+.resume-list.strengths li::before { color: var(--safe); }
+.resume-list.suggestions li::before { color: var(--warn); }
+.keywords-grid { display: flex; flex-direction: column; gap: .6rem; }
+.keyword-row-label { font-family: var(--mono); font-size: .63rem; color: var(--muted); margin-bottom: .3rem; }
+.kw-tags { display: flex; flex-wrap: wrap; gap: .35rem; }
+.kw-tag { font-family: var(--mono); font-size: .65rem; padding: .22rem .6rem; border-radius: 2px; }
+.kw-tag.matched { background: rgba(52,199,89,.1); border: 1px solid rgba(52,199,89,.2); color: var(--safe); }
+.kw-tag.missing { background: rgba(255,159,10,.08); border: 1px solid rgba(255,159,10,.18); color: var(--warn); }
+.download-resume-btn { display: flex; align-items: center; justify-content: center; gap: .55rem; width: 100%; background: var(--accent-dim); color: var(--accent); border: 1px solid rgba(232,255,71,.18); padding: .7rem; font-family: var(--mono); font-size: .76rem; font-weight: 600; cursor: pointer; transition: all .2s; }
+.download-resume-btn:hover { background: var(--accent); color: #000; }
 
-/* MODAL */
-.modal-overlay{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.88);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .25s}
-.modal-overlay.open{opacity:1;pointer-events:all}
-.modal{background:var(--surface);border:1px solid var(--border);max-width:440px;width:100%;padding:2.25rem;position:relative;transform:translateY(18px);transition:transform .25s}
-.modal-overlay.open .modal{transform:translateY(0)}
-.modal-close{position:absolute;top:.9rem;right:.9rem;background:none;border:none;color:var(--muted);font-size:1.2rem;cursor:pointer;padding:.2rem .45rem;line-height:1}
-.modal-close:hover{color:var(--text)}
-.modal-icon{font-size:2.2rem;margin-bottom:.9rem}
-.modal-title{font-size:1.45rem;font-weight:800;letter-spacing:-.03em;margin-bottom:.45rem}
-.modal-sub{font-family:var(--mono);font-size:.79rem;color:var(--muted);margin-bottom:1.5rem;line-height:1.75}
-.modal-features{list-style:none;margin-bottom:1.5rem;display:flex;flex-direction:column;gap:.45rem}
-.modal-features li{font-family:var(--mono);font-size:.78rem;display:flex;gap:.45rem}
-.modal-features li::before{content:'✓';color:var(--accent);flex-shrink:0}
-.modal-price{font-size:2rem;font-weight:800;color:var(--accent);letter-spacing:-.04em;margin-bottom:.2rem}
-.modal-price span{font-size:.85rem;color:var(--muted);font-weight:400}
-.modal-price-note{font-family:var(--mono);font-size:.7rem;color:var(--muted);margin-bottom:1.4rem}
-.modal-cta{width:100%;background:var(--accent);color:#000;border:none;padding:.95rem;font-family:var(--mono);font-weight:700;font-size:.9rem;cursor:pointer;transition:opacity .2s;margin-bottom:.65rem}
-.modal-cta:hover{opacity:.88}
-.modal-dismiss{width:100%;background:transparent;color:var(--muted);border:none;font-family:var(--mono);font-size:.72rem;cursor:pointer;padding:.25rem}
-.modal-dismiss:hover{color:var(--text)}
+/* ── HISTORY ──────────────────────────────────────────────── */
+.history-locked { display: flex; flex-direction: column; align-items: center; gap: .9rem; padding: 2.5rem; background: var(--surface); border: 1px solid var(--border); margin-top: 1.25rem; text-align: center; }
+.history-locked .lock-big { font-size: 1.8rem; opacity: .2; }
+.history-locked p { font-family: var(--mono); font-size: .76rem; color: var(--muted); line-height: 1.7; }
+.history-list { display: flex; flex-direction: column; gap: .4rem; margin-top: 1.25rem; }
+.history-item { display: flex; align-items: center; gap: 1rem; background: var(--surface); border: 1px solid var(--border); padding: .7rem .95rem; cursor: pointer; transition: border-color .2s; }
+.history-item:hover { border-color: var(--muted); }
+.history-score { font-weight: 800; font-size: 1.1rem; min-width: 2.5rem; }
+.history-meta { flex: 1; font-family: var(--mono); font-size: .72rem; }
+.h-text { color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 340px; }
+.h-time { color: var(--muted); font-size: .64rem; margin-top: .12rem; }
+.history-empty { font-family: var(--mono); font-size: .78rem; color: var(--muted); margin-top: 1rem; }
 
-/* HISTORY */
-.history-locked{display:flex;flex-direction:column;align-items:center;gap:.9rem;padding:2.25rem;background:var(--surface);border:1px solid var(--border);margin-top:1.25rem;text-align:center}
-.history-locked .lock-big{font-size:1.8rem;opacity:.25}
-.history-locked p{font-family:var(--mono);font-size:.78rem;color:var(--muted);line-height:1.7}
-.history-list{display:flex;flex-direction:column;gap:.4rem;margin-top:1.25rem}
-.history-item{display:flex;align-items:center;gap:1rem;background:var(--surface);border:1px solid var(--border);padding:.7rem .95rem;cursor:pointer;transition:border-color .2s}
-.history-item:hover{border-color:var(--muted)}
-.history-score{font-weight:800;font-size:1.1rem;min-width:2.5rem}
-.history-meta{flex:1;font-family:var(--mono);font-size:.74rem}
-.h-text{color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:380px}
-.h-time{color:var(--muted);font-size:.66rem;margin-top:.12rem}
-.history-empty{font-family:var(--mono);font-size:.8rem;color:var(--muted);margin-top:1rem}
+/* ── HOW IT WORKS ─────────────────────────────────────────── */
+.steps-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--border); margin-top: 1.5rem; }
+@media(max-width: 600px) { .steps-grid { grid-template-columns: 1fr 1fr; } }
+.step { background: var(--bg); padding: 1.4rem .9rem; }
+.step-num { font-family: var(--mono); font-size: .65rem; color: var(--accent); margin-bottom: .55rem; }
+.step-name { font-weight: 700; font-size: .84rem; margin-bottom: .28rem; }
+.step-desc { font-family: var(--mono); font-size: .66rem; color: var(--muted); line-height: 1.5; }
 
-/* HOW */
-.steps-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border);margin-top:1.5rem}
-@media(max-width:600px){.steps-grid{grid-template-columns:1fr 1fr}}
-.step{background:var(--bg);padding:1.4rem .95rem}
-.step-num{font-family:var(--mono);font-size:.67rem;color:var(--accent);margin-bottom:.55rem}
-.step-name{font-weight:700;font-size:.86rem;margin-bottom:.28rem}
-.step-desc{font-family:var(--mono);font-size:.68rem;color:var(--muted);line-height:1.5}
+/* ── PRICING ──────────────────────────────────────────────── */
+.pricing-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: var(--border); margin-top: 1.5rem; }
+@media(max-width: 700px) { .pricing-grid { grid-template-columns: 1fr; } }
+.plan-card { background: var(--surface); padding: 1.8rem 1.4rem; position: relative; }
+.plan-card.featured { background: #0b1200; }
+.plan-featured-badge { position: absolute; top: 0; right: 1.2rem; background: var(--accent); color: #000; font-family: var(--mono); font-size: .58rem; padding: .15rem .5rem; font-weight: 700; letter-spacing: .04em; }
+.plan-name { font-weight: 800; font-size: 1.15rem; margin-bottom: .4rem; }
+.plan-price { font-family: var(--mono); font-size: 1.9rem; font-weight: 500; color: var(--accent); line-height: 1; }
+.plan-price span { font-size: .8rem; color: var(--muted); }
+.plan-limit { font-family: var(--mono); font-size: .68rem; color: var(--muted); margin: .65rem 0 1.1rem; padding-bottom: 1.1rem; border-bottom: 1px solid var(--border); }
+.plan-features { list-style: none; display: flex; flex-direction: column; gap: .45rem; margin-bottom: 1.6rem; }
+.plan-features li { font-family: var(--mono); font-size: .72rem; display: flex; gap: .4rem; align-items: flex-start; }
+.plan-features li::before { content: '→'; color: var(--accent); flex-shrink: 0; }
+.plan-features li.no::before { content: '—'; color: var(--border); }
+.plan-features li.no { color: var(--muted); }
+.plan-btn { width: 100%; padding: .7rem; font-family: var(--mono); font-size: .78rem; cursor: pointer; font-weight: 700; transition: opacity .2s; border: none; }
+.free-btn { background: transparent; color: var(--text); border: 1px solid var(--border) !important; }
+.free-btn:hover { opacity: .8; }
+.pro-btn { background: var(--accent); color: #000; }
+.pro-btn:hover { opacity: .88; }
+.enterprise-btn { background: var(--surface2); color: var(--text); border: 1px solid var(--border) !important; }
+.enterprise-btn:hover { opacity: .8; }
 
-/* PRICING */
-.pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);margin-top:1.5rem}
-@media(max-width:600px){.pricing-grid{grid-template-columns:1fr}}
-.plan-card{background:var(--surface);padding:2rem 1.5rem;position:relative}
-.plan-card.featured{background:#0d1300}
-.plan-featured-badge{position:absolute;top:0;right:1.25rem;background:var(--accent);color:#000;font-family:var(--mono);font-size:.6rem;padding:.18rem .55rem;font-weight:700}
-.plan-name{font-weight:800;font-size:1.25rem;margin-bottom:.45rem}
-.plan-price{font-family:var(--mono);font-size:2.1rem;font-weight:500;color:var(--accent);line-height:1}
-.plan-price span{font-size:.82rem;color:var(--muted)}
-.plan-limit{font-family:var(--mono);font-size:.7rem;color:var(--muted);margin:.7rem 0 1.2rem;padding-bottom:1.2rem;border-bottom:1px solid var(--border)}
-.plan-features{list-style:none;display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.75rem}
-.plan-features li{font-family:var(--mono);font-size:.74rem;display:flex;gap:.4rem;align-items:flex-start}
-.plan-features li::before{content:'→';color:var(--accent);flex-shrink:0}
-.plan-features li.no::before{content:'—';color:var(--border)}
-.plan-features li.no{color:var(--muted)}
-.plan-btn{width:100%;padding:.72rem;font-family:var(--mono);font-size:.8rem;cursor:pointer;font-weight:600;transition:opacity .2s;border:none}
-.free-btn{background:transparent;color:var(--text);border:1px solid var(--border)!important;border:none}
-.free-btn:hover{opacity:.8}
-.pro-btn{background:var(--accent);color:#000}
-.pro-btn:hover{opacity:.88}
+/* ── MODALS ───────────────────────────────────────────────── */
+.modal-overlay { position: fixed; inset: 0; z-index: 500; background: rgba(0,0,0,.9); backdrop-filter: blur(12px); display: flex; align-items: center; justify-content: center; padding: 1rem; opacity: 0; pointer-events: none; transition: opacity .25s; }
+.modal-overlay.open { opacity: 1; pointer-events: all; }
+.modal { background: var(--surface); border: 1px solid var(--border); max-width: 440px; width: 100%; padding: 2.25rem; position: relative; transform: translateY(16px); transition: transform .25s; }
+.modal-overlay.open .modal { transform: translateY(0); }
+.modal-close { position: absolute; top: .9rem; right: .9rem; background: none; border: none; color: var(--muted); font-size: 1.1rem; cursor: pointer; padding: .2rem .45rem; line-height: 1; }
+.modal-close:hover { color: var(--text); }
+.modal-icon { font-size: 2.2rem; margin-bottom: .9rem; }
+.modal-title { font-size: 1.4rem; font-weight: 800; letter-spacing: -.03em; margin-bottom: .45rem; }
+.modal-sub { font-family: var(--mono); font-size: .77rem; color: var(--muted); margin-bottom: 1.5rem; line-height: 1.75; }
+.modal-features { list-style: none; margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: .42rem; }
+.modal-features li { font-family: var(--mono); font-size: .76rem; display: flex; gap: .45rem; }
+.modal-features li::before { content: '✓'; color: var(--accent); flex-shrink: 0; }
+.modal-price { font-size: 2rem; font-weight: 800; color: var(--accent); letter-spacing: -.04em; margin-bottom: .2rem; }
+.modal-price span { font-size: .82rem; color: var(--muted); font-weight: 400; }
+.modal-price-note { font-family: var(--mono); font-size: .68rem; color: var(--muted); margin-bottom: 1.35rem; }
+.modal-cta { width: 100%; background: var(--accent); color: #000; border: none; padding: .92rem; font-family: var(--mono); font-weight: 700; font-size: .88rem; cursor: pointer; transition: opacity .2s; margin-bottom: .6rem; }
+.modal-cta:hover { opacity: .88; }
+.modal-dismiss { width: 100%; background: transparent; color: var(--muted); border: none; font-family: var(--mono); font-size: .7rem; cursor: pointer; padding: .25rem; }
+.modal-dismiss:hover { color: var(--text); }
 
-footer{border-top:1px solid var(--border);padding:1.75rem 2rem;max-width:900px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:.7rem;color:var(--muted);flex-wrap:wrap;gap:1rem}
-footer a{color:var(--muted);text-decoration:none}
-footer a:hover{color:var(--text)}
+/* Auth Modal */
+.auth-tabs { display: flex; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
+.auth-tab { flex: 1; background: none; border: none; border-bottom: 2px solid transparent; color: var(--muted); font-family: var(--mono); font-size: .78rem; padding: .55rem; cursor: pointer; transition: all .2s; margin-bottom: -1px; }
+.auth-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+.auth-form { display: flex; flex-direction: column; gap: .85rem; }
+.auth-input { width: 100%; background: var(--bg); border: 1px solid var(--border); color: var(--text); font-family: var(--mono); font-size: .8rem; padding: .65rem .85rem; outline: none; transition: border-color .2s; }
+.auth-input:focus { border-color: var(--accent); }
+.auth-input::placeholder { color: var(--muted); }
+.auth-submit { width: 100%; background: var(--accent); color: #000; border: none; padding: .82rem; font-family: var(--mono); font-weight: 700; font-size: .84rem; cursor: pointer; transition: opacity .2s; }
+.auth-submit:hover { opacity: .88; }
+.auth-error { font-family: var(--mono); font-size: .7rem; color: var(--danger); text-align: center; }
 
-.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(3rem);z-index:600;background:var(--surface);border:1px solid var(--border);font-family:var(--mono);font-size:.76rem;padding:.6rem 1.2rem;opacity:0;transition:transform .3s,opacity .3s;white-space:nowrap}
-.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+/* ── FOOTER ───────────────────────────────────────────────── */
+footer { border-top: 1px solid var(--border); padding: 1.75rem 2rem; max-width: 960px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; font-family: var(--mono); font-size: .68rem; color: var(--muted); flex-wrap: wrap; gap: 1rem; }
+footer a { color: var(--muted); text-decoration: none; }
+footer a:hover { color: var(--text); }
 
-@keyframes fadeUp{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
-@keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-@keyframes critPulse{0%,100%{box-shadow:0 0 0 0 rgba(255,71,71,.3)}50%{box-shadow:0 0 0 5px rgba(255,71,71,0)}}
+/* ── TOAST ────────────────────────────────────────────────── */
+.toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(3rem); z-index: 600; background: var(--surface); border: 1px solid var(--border); font-family: var(--mono); font-size: .74rem; padding: .6rem 1.3rem; opacity: 0; transition: transform .3s, opacity .3s; white-space: nowrap; }
+.toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+.toast.success { border-color: var(--safe); }
+.toast.error { border-color: var(--danger); }
+
+/* ── KEYFRAMES ────────────────────────────────────────────── */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes spin { to { transform: translate(-50%,-50%) rotate(360deg); } }
+@keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: .3; } }
+@keyframes critPulse { 0%,100% { box-shadow: 0 0 0 0 rgba(255,71,71,.3); } 50% { box-shadow: 0 0 0 5px rgba(255,71,71,0); } }
 </style>
 </head>
 <body>
 
-<!-- UPGRADE MODAL -->
+<!-- ── UPGRADE MODAL ─────────────────────────────────────── -->
 <div class="modal-overlay" id="upgradeModal">
   <div class="modal">
-    <button class="modal-close" onclick="closeModal()">✕</button>
+    <button class="modal-close" onclick="closeModal('upgradeModal')">✕</button>
     <div class="modal-icon" id="modalIcon">🔒</div>
-    <div class="modal-title" id="modalTitle">Upgrade to Pro</div>
-    <p class="modal-sub" id="modalSub">You've used all 3 free analyses for today. Upgrade to Pro to keep going.</p>
+    <div class="modal-title" id="modalTitle">Upgrade para Pro</div>
+    <p class="modal-sub" id="modalSub">Você usou todas as 3 análises gratuitas de hoje. Faça upgrade para continuar.</p>
     <ul class="modal-features">
-      <li>100 analyses per day</li>
-      <li>AI analysis powered by Claude</li>
-      <li>Full analysis history</li>
-      <li>PDF report for each analysis</li>
-      <li>CSV export of results</li>
-      <li>Priority API access</li>
+      <li>100 análises por dia</li>
+      <li>Análise por IA (Claude)</li>
+      <li>Histórico completo de análises</li>
+      <li>Otimização de currículo ATS</li>
+      <li>Relatório PDF por análise</li>
+      <li>Exportação CSV</li>
+      <li>API prioritária (100 req/min)</li>
     </ul>
-    <div class="modal-price">$9.90<span>/month</span></div>
-    <div class="modal-price-note">Cancel anytime. No contracts. Instant access.</div>
-    <button class="modal-cta" onclick="goToCheckout()">Upgrade to Pro →</button>
-    <button class="modal-dismiss" onclick="closeModal()">Maybe later</button>
+    <div class="modal-price">$9.90<span>/mês</span></div>
+    <div class="modal-price-note">Cancele a qualquer momento. Sem contratos. Acesso imediato.</div>
+    <button class="modal-cta" onclick="goToCheckout()">Upgrade para Pro →</button>
+    <button class="modal-dismiss" onclick="closeModal('upgradeModal')">Talvez depois</button>
   </div>
 </div>
 
-<!-- NAV -->
+<!-- ── AUTH MODAL ─────────────────────────────────────────── -->
+<div class="modal-overlay" id="authModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('authModal')">✕</button>
+    <div class="modal-icon">🛡️</div>
+    <div class="modal-title">Entrar no TrustHire</div>
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="loginTab" onclick="switchAuthTab('login')">Entrar</button>
+      <button class="auth-tab" id="registerTab" onclick="switchAuthTab('register')">Criar conta</button>
+    </div>
+    <!-- Login Form -->
+    <div id="loginForm" class="auth-form">
+      <input class="auth-input" id="loginEmail" type="email" placeholder="seu@email.com">
+      <input class="auth-input" id="loginPassword" type="password" placeholder="Senha">
+      <p class="auth-error" id="loginError"></p>
+      <button class="auth-submit" onclick="handleLogin()">Entrar →</button>
+    </div>
+    <!-- Register Form -->
+    <div id="registerForm" class="auth-form" style="display:none">
+      <input class="auth-input" id="regName" type="text" placeholder="Seu nome">
+      <input class="auth-input" id="regEmail" type="email" placeholder="seu@email.com">
+      <input class="auth-input" id="regPassword" type="password" placeholder="Senha (mín. 8 caracteres)">
+      <p class="auth-error" id="registerError"></p>
+      <button class="auth-submit" onclick="handleRegister()">Criar conta →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── NAV ───────────────────────────────────────────────── -->
 <nav>
-  <a href="#" class="nav-logo">TrustHire</a>
+  <a href="#" class="nav-logo">
+    <span class="nav-logo-dot"></span>
+    TrustHire
+  </a>
   <ul class="nav-links">
-    <li><a href="#analyzer">Analyzer</a></li>
-    <li><a href="#history">History</a></li>
-    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#analyzer">Analisador</a></li>
+    <li><a href="#resume-section">Currículo</a></li>
+    <li><a href="#history">Histórico</a></li>
+    <li><a href="#pricing">Planos</a></li>
     <li><a href="https://github.com/felipeofdev-ai/trusthire" target="_blank">GitHub →</a></li>
   </ul>
-  <div style="display:flex;align-items:center;gap:.7rem">
-    <div class="usage-pill" id="usagePill">
-      <span class="uses-left" id="usesLeft">3</span>
-      <span>free left</span>
+  <div class="nav-right">
+    <!-- Logged OUT state -->
+    <div id="navGuest" style="display:flex;align-items:center;gap:.6rem">
+      <div class="usage-pill" id="usagePill">
+        <span class="uses-left" id="usesLeft">3</span>
+        <span>grátis restantes</span>
+      </div>
+      <button class="nav-login-btn" onclick="openAuthModal()">Entrar</button>
+      <button class="nav-upgrade" onclick="openModal('nav')">Pro — $9.90/mês</button>
     </div>
-    <button class="nav-upgrade" onclick="openModal('nav')">Pro — $9.90/mo</button>
+    <!-- Logged IN state -->
+    <div class="nav-user" id="navUser">
+      <span class="user-name" id="navUserName">Felipe</span>
+      <span class="plan-badge free" id="navPlanBadge">FREE</span>
+      <button class="btn-logout" onclick="logout()">Sair</button>
+    </div>
   </div>
 </nav>
 
-<!-- HERO -->
+<!-- ── HERO ──────────────────────────────────────────────── -->
 <section id="hero">
-  <div class="hero-tag">Open Source · AI-Powered · v2.0</div>
-  <h1>Verify every<br><em>job offer</em><br>before you trust.</h1>
-  <p class="hero-sub">Paste any recruiter message. Five intelligence layers detect fraud in seconds — pattern engine, link scan, social engineering, domain reputation, and Claude AI.</p>
+  <div class="hero-tag">Open Source · IA · v3.0 · Multi-idioma</div>
+  <h1>Verifique cada<br><em>vaga de emprego</em><br>antes de confiar.</h1>
+  <p class="hero-sub">Cole qualquer mensagem de recrutador. Cinco camadas de inteligência detectam fraudes em segundos — motor de padrões, análise de links, engenharia social, reputação de domínio e Claude AI.</p>
   <div class="hero-btns">
-    <button class="btn-primary" onclick="document.getElementById('analyzer').scrollIntoView({behavior:'smooth'})">Analyze a message →</button>
-    <a href="https://github.com/felipeofdev-ai/trusthire" class="btn-ghost" target="_blank">View on GitHub</a>
+    <button class="btn-primary" onclick="document.getElementById('analyzer').scrollIntoView({behavior:'smooth'})">Analisar mensagem →</button>
+    <a href="https://github.com/felipeofdev-ai/trusthire" class="btn-ghost" target="_blank">Ver no GitHub</a>
   </div>
   <div class="api-status">
     <span class="status-dot connecting" id="statusDot"></span>
-    <span id="statusText">connecting to api...</span>
+    <span id="statusText">conectando à api...</span>
   </div>
 </section>
 
-<!-- ANALYZER -->
-<section id="analyzer" style="padding:5rem 2rem;max-width:900px;margin:0 auto">
-  <div class="section-label">// live tool</div>
-  <div class="section-title">Analyze a recruiter message</div>
-  <div class="analyzer-grid">
-    <div>
-      <textarea id="msg" placeholder="Paste the recruiter message here...&#10;&#10;e.g. Hi! You've been selected. Salary $8,000/mo. Respond URGENTLY — send $200 via Bitcoin for your equipment kit." maxlength="5000"></textarea>
-      <div class="input-meta">
-        <div class="samples">
-          <span>Try:</span>
-          <button class="sample-btn" onclick="loadSample('scam')">🚨 Scam</button>
-          <button class="sample-btn" onclick="loadSample('legit')">✅ Legit</button>
-          <button class="sample-btn" onclick="loadSample('moderate')">⚠️ Moderate</button>
+<!-- ── ANALYZER + RESUME TABS ─────────────────────────────── -->
+<section id="analyzer" style="padding:5rem 2rem;max-width:960px;margin:0 auto">
+  <div class="section-label">// ferramenta ao vivo</div>
+  <div class="section-title">Análise inteligente de vagas</div>
+
+  <div class="tool-tabs">
+    <button class="tab-btn active" onclick="switchTab('analyze')">🔍 Analisar Mensagem</button>
+    <button class="tab-btn" onclick="switchTab('resume')" id="resumeTabBtn">📄 Otimizar Currículo <span class="pro-badge-inline" style="font-size:.55rem">PRO</span></button>
+  </div>
+
+  <!-- ── ANÁLISE TAB ─── -->
+  <div class="tab-panel active" id="tab-analyze">
+    <div class="analyzer-grid">
+      <div>
+        <div class="input-header">
+          <span class="input-label">Mensagem do recrutador</span>
+          <select class="lang-select" id="langSelect">
+            <option value="pt">🇧🇷 Português</option>
+            <option value="en">🇺🇸 English</option>
+            <option value="es">🇪🇸 Español</option>
+            <option value="fr">🇫🇷 Français</option>
+            <option value="de">🇩🇪 Deutsch</option>
+          </select>
         </div>
-        <span class="char-count" id="charCount">0/5000</span>
+        <textarea id="msg" placeholder="Cole aqui a mensagem do recrutador...&#10;&#10;Ex: Olá! Você foi selecionado para nossa vaga remota. Salário $8.000/mês. Responda URGENTEMENTE — envie R$200 via Pix para o kit de equipamentos." maxlength="5000"></textarea>
+        <div class="input-meta">
+          <div class="samples">
+            <span>Testar:</span>
+            <button class="sample-btn" onclick="loadSample('scam')">🚨 Golpe</button>
+            <button class="sample-btn" onclick="loadSample('legit')">✅ Legítima</button>
+            <button class="sample-btn" onclick="loadSample('moderate')">⚠️ Suspeita</button>
+          </div>
+          <span class="char-count" id="charCount">0/5000</span>
+        </div>
+        <button class="analyze-btn" id="analyzeBtn" onclick="analyze()">
+          <span class="btn-text">Analisar Mensagem</span>
+          <span class="spinner"></span>
+        </button>
+        <div class="free-limit-bar" id="freeLimitBar">
+          <div class="free-dots" id="freeDots"></div>
+          <span id="freeLimitText">3 análises gratuitas hoje · <a onclick="openModal('limit')">Pro para ilimitado</a></span>
+        </div>
       </div>
-      <button class="analyze-btn" id="analyzeBtn" onclick="analyze()">
-        <span class="btn-text">Analyze Message</span>
-        <span class="spinner"></span>
-      </button>
-      <div class="free-limit-bar" id="freeLimitBar">
-        <div class="free-dots" id="freeDots"></div>
-        <span id="freeLimitText">3 free analyses today · <a onclick="openModal('limit')">Go Pro for unlimited</a></span>
+      <div class="result-panel" id="resultPanel">
+        <div class="result-empty" id="resultEmpty">
+          <span class="icon">🛡</span>
+          <span>Cole uma mensagem e clique em Analisar<br>para ver sua avaliação de risco</span>
+        </div>
+        <div id="resultContent" style="display:none;flex-direction:column;gap:1.1rem"></div>
       </div>
     </div>
-    <div class="result-panel" id="resultPanel">
-      <div class="result-empty" id="resultEmpty">
-        <span class="icon">🛡</span>
-        <span>Paste a message and click Analyze<br>to see your risk assessment</span>
+  </div>
+
+  <!-- ── CURRÍCULO TAB ─── -->
+  <div class="tab-panel" id="tab-resume">
+    <div class="resume-grid" id="resumeContainer">
+      <!-- Form lado esquerdo -->
+      <div class="resume-form" id="resumeForm">
+        <div class="field-group">
+          <span class="field-label">Seu currículo (PDF, DOC, DOCX)</span>
+          <div class="file-drop-zone" id="dropZone" onclick="document.getElementById('resumeFile').click()" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)">
+            <input type="file" id="resumeFile" accept=".pdf,.doc,.docx" style="display:none" onchange="handleFileSelect(event)">
+            <span class="file-drop-icon">📄</span>
+            <div class="file-drop-text">
+              <strong>Clique para selecionar</strong> ou arraste o arquivo aqui<br>
+              PDF, DOC ou DOCX · Máx 10MB
+            </div>
+            <div class="file-name-display" id="fileNameDisplay"></div>
+          </div>
+        </div>
+        <div class="field-group">
+          <span class="field-label">Sistema ATS alvo</span>
+          <select class="ats-select" id="atsTarget">
+            <option value="generic">Genérico (compatível com todos)</option>
+            <option value="workday">Workday</option>
+            <option value="greenhouse">Greenhouse</option>
+            <option value="lever">Lever</option>
+            <option value="taleo">Oracle Taleo</option>
+            <option value="icims">iCIMS</option>
+            <option value="linkedin">LinkedIn Easy Apply</option>
+            <option value="indeed">Indeed</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <span class="field-label">Descrição da vaga (opcional)</span>
+          <textarea id="jobDesc" placeholder="Cole aqui a descrição da vaga para análise de compatibilidade e palavras-chave específicas..."></textarea>
+        </div>
+        <button class="optimize-btn" id="optimizeBtn" onclick="optimizeResume()">
+          <span class="btn-text">Otimizar Currículo →</span>
+          <span class="spinner"></span>
+        </button>
       </div>
-      <div id="resultContent" style="display:none;flex-direction:column;gap:1.1rem"></div>
+      <!-- Results lado direito -->
+      <div class="resume-results-panel" id="resumeResults">
+        <div class="resume-empty">
+          <span style="font-size:2rem;opacity:.15">📊</span>
+          <span>Envie seu currículo e clique em<br>Otimizar para ver a análise ATS</span>
+        </div>
+      </div>
+    </div>
+    <!-- Locked state (shown when not logged in as Pro) -->
+    <div class="resume-locked" id="resumeLocked" style="display:none">
+      <span class="lock-big">🔒</span>
+      <p>A otimização de currículo ATS é um recurso Pro.<br>Faça upgrade para desbloquear análise de compatibilidade,<br>sugestões personalizadas e palavras-chave por Claude AI.</p>
+      <button class="btn-unlock" onclick="openModal('locked_resume')">Desbloquear Pro →</button>
     </div>
   </div>
 </section>
 
-<!-- HISTORY -->
+<!-- ── HISTORY ────────────────────────────────────────────── -->
 <section id="history" class="section">
-  <div class="section-label">// your history</div>
-  <div class="section-title">Past analyses</div>
+  <div class="section-label">// seu histórico</div>
+  <div class="section-title">Análises anteriores</div>
   <div id="historyContent"></div>
 </section>
 
-<!-- HOW IT WORKS -->
-<section class="section" id="how">
-  <div class="section-label">// how it works</div>
-  <div class="section-title">Five layers of analysis.</div>
+<!-- ── HOW IT WORKS ───────────────────────────────────────── -->
+<section id="resume-section" class="section">
+  <div class="section-label">// como funciona</div>
+  <div class="section-title">Cinco camadas de análise.</div>
   <div class="steps-grid">
-    <div class="step"><div class="step-num">01</div><div class="step-name">Paste Message</div><div class="step-desc">Any recruiter text, email, or offer</div></div>
-    <div class="step"><div class="step-num">02</div><div class="step-name">Pattern Scan</div><div class="step-desc">100+ linguistic & structural rules</div></div>
-    <div class="step"><div class="step-num">03</div><div class="step-name">Signal Scoring</div><div class="step-desc">Signals weighted by severity</div></div>
-    <div class="step"><div class="step-num">04</div><div class="step-name">AI Heuristics</div><div class="step-desc">Claude contextualizes intent</div></div>
-    <div class="step"><div class="step-num">05</div><div class="step-name">Risk Report</div><div class="step-desc">Score + signals + actions</div></div>
+    <div class="step"><div class="step-num">01</div><div class="step-name">Cole a Mensagem</div><div class="step-desc">Qualquer texto, e-mail ou proposta de recrutador</div></div>
+    <div class="step"><div class="step-num">02</div><div class="step-name">Scan de Padrões</div><div class="step-desc">100+ regras linguísticas e estruturais</div></div>
+    <div class="step"><div class="step-num">03</div><div class="step-name">Score de Sinais</div><div class="step-desc">Sinais ponderados por severidade</div></div>
+    <div class="step"><div class="step-num">04</div><div class="step-name">IA com Claude</div><div class="step-desc">Claude contextualiza intenção e tom</div></div>
+    <div class="step"><div class="step-num">05</div><div class="step-name">Relatório de Risco</div><div class="step-desc">Score + sinais + ações recomendadas</div></div>
   </div>
 </section>
 
-<!-- PRICING -->
+<!-- ── PRICING ────────────────────────────────────────────── -->
 <section class="section" id="pricing">
-  <div class="section-label">// pricing</div>
-  <div class="section-title">Simple, honest pricing.</div>
+  <div class="section-label">// planos</div>
+  <div class="section-title">Preço simples e transparente.</div>
   <div class="pricing-grid">
     <div class="plan-card">
       <div class="plan-name">Free</div>
-      <div class="plan-price">$0<span>/mo</span></div>
-      <div class="plan-limit">3 analyses per day · No account needed</div>
+      <div class="plan-price">$0<span>/mês</span></div>
+      <div class="plan-limit">3 análises por dia · Sem conta necessária</div>
       <ul class="plan-features">
-        <li>Pattern-based detection</li>
-        <li>Risk score 0–100</li>
-        <li>Signal breakdown</li>
-        <li>Basic recommendations</li>
-        <li class="no">AI analysis (Claude)</li>
-        <li class="no">Analysis history</li>
-        <li class="no">PDF reports</li>
-        <li class="no">CSV export</li>
+        <li>Detecção por padrões</li>
+        <li>Score de risco 0–100</li>
+        <li>Análise de sinais</li>
+        <li>Recomendações básicas</li>
+        <li class="no">Análise por IA (Claude)</li>
+        <li class="no">Histórico de análises</li>
+        <li class="no">Otimização de currículo ATS</li>
+        <li class="no">Relatórios PDF</li>
       </ul>
-      <button class="plan-btn free-btn" style="border:1px solid var(--border)" onclick="document.getElementById('analyzer').scrollIntoView({behavior:'smooth'})">Start Free →</button>
+      <button class="plan-btn free-btn" style="border:1px solid var(--border)" onclick="document.getElementById('analyzer').scrollIntoView({behavior:'smooth'})">Começar grátis →</button>
     </div>
     <div class="plan-card featured">
-      <div class="plan-featured-badge">MOST POPULAR</div>
+      <div class="plan-featured-badge">MAIS POPULAR</div>
       <div class="plan-name">Pro</div>
-      <div class="plan-price">$9.90<span>/mo</span></div>
-      <div class="plan-limit">100 analyses per day · Cancel anytime</div>
+      <div class="plan-price">$9.90<span>/mês</span></div>
+      <div class="plan-limit">100 análises por dia · Cancele quando quiser</div>
       <ul class="plan-features">
-        <li>Everything in Free</li>
-        <li>AI analysis (Claude)</li>
-        <li>Full analysis history</li>
-        <li>PDF report per analysis</li>
-        <li>CSV export</li>
-        <li>Link & URL scanning</li>
-        <li>Social engineering detection</li>
-        <li>Priority API (100 req/min)</li>
+        <li>Tudo do Free</li>
+        <li>Análise por IA (Claude)</li>
+        <li>Histórico completo</li>
+        <li>Otimização de currículo ATS</li>
+        <li>Relatório PDF por análise</li>
+        <li>Exportação CSV</li>
+        <li>Scan de links e URLs</li>
+        <li>API prioritária (100 req/min)</li>
       </ul>
-      <button class="plan-btn pro-btn" onclick="openModal('pricing')">Upgrade to Pro →</button>
+      <button class="plan-btn pro-btn" onclick="openModal('pricing')">Upgrade para Pro →</button>
+    </div>
+    <div class="plan-card">
+      <div class="plan-name">Enterprise</div>
+      <div class="plan-price">$49<span>/mês</span></div>
+      <div class="plan-limit">10.000 análises por dia · SLA garantido</div>
+      <ul class="plan-features">
+        <li>Tudo do Pro</li>
+        <li>1.000 otimizações/mês</li>
+        <li>8 idiomas suportados</li>
+        <li>API sem limites</li>
+        <li>Dashboard de equipe</li>
+        <li>Suporte prioritário</li>
+        <li>Integrações (Slack, Zapier)</li>
+        <li>SLA 99.9% uptime</li>
+      </ul>
+      <button class="plan-btn enterprise-btn" style="border:1px solid var(--border)" onclick="openModal('enterprise')">Falar com equipe →</button>
     </div>
   </div>
-  <p style="font-family:var(--mono);font-size:.7rem;color:var(--muted);margin-top:.9rem">Need more? Enterprise plans available — <a href="mailto:hi@trusthire.dev" style="color:var(--accent)">contact us</a>.</p>
+  <p style="font-family:var(--mono);font-size:.68rem;color:var(--muted);margin-top:.9rem">Precisa de algo personalizado? <a href="mailto:hi@trusthire.dev" style="color:var(--accent)">Entre em contato</a>.</p>
 </section>
 
 <footer>
-  <span>© 2025 TrustHire — Open source. Built for professionals.</span>
+  <span>© 2025 TrustHire — Open source. Construído para profissionais.</span>
   <div style="display:flex;gap:1.5rem">
     <a href="https://github.com/felipeofdev-ai/trusthire" target="_blank">GitHub</a>
-    <a href="#analyzer">Try it</a>
-    <a href="#pricing">Pricing</a>
+    <a href="#analyzer">Analisar</a>
+    <a href="#pricing">Planos</a>
     <a href="https://github.com/felipeofdev-ai/trusthire/blob/main/LICENSE" target="_blank">MIT</a>
   </div>
 </footer>
 <div class="toast" id="toast"></div>
 
 <script>
-// ── CONFIG ────────────────────────────────────────────────────────────────
-const API_BASE = (() => {
-  if (window.location.hostname === 'felipeofdev-ai.github.io' || window.location.hostname === 'trusthire.dev')
-    return 'https://trusthire-api-production-c210.up.railway.app/api/v1';
-  return 'http://localhost:8000/api/v1';
-})();
+// ═══════════════════════════════════════════════════════════
+//  CONFIG — TrustHire Ultimate v3.0
+// ═══════════════════════════════════════════════════════════
+const API_CONFIG = {
+  // Auto-detecta ambiente
+  baseURL: (() => {
+    const h = window.location.hostname;
+    if (h === 'felipeofdev-ai.github.io' || h === 'trusthire.dev' || h === 'www.trusthire.dev')
+      return 'https://trusthire-backend.up.railway.app';
+    return 'http://localhost:8000';
+  })(),
+  endpoints: {
+    health:          '/health',
+    analyze:         '/api/v1/analysis/analyze',
+    authRegister:    '/api/auth/register',
+    authLogin:       '/api/auth/login',
+    resumeOptimize:  '/api/v1/resume/optimize',
+    billingCheckout: '/api/v1/billing/create-checkout-session',
+    billingStatus:   '/api/v1/billing/subscription-status',
+    billingPortal:   '/api/v1/billing/customer-portal',
+    feedback:        '/api/v1/feedback/submit',
+  }
+};
 
-// After creating your Stripe product, paste the Payment Link URL here:
-// Stripe Dashboard → Products → TrustHire Pro → Payment Link → Copy
+// Stripe Payment Link — substitua após configurar no dashboard
 const STRIPE_PAYMENT_LINK = 'https://buy.stripe.com/REPLACE_AFTER_STRIPE_SETUP';
-
 const FREE_LIMIT = 3;
 
-// ── FREEMIUM (localStorage) ───────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════
+//  AUTH — Token e Usuário
+// ═══════════════════════════════════════════════════════════
+function getToken()    { return localStorage.getItem('th_token') || ''; }
+function setToken(t)   { t ? localStorage.setItem('th_token', t) : localStorage.removeItem('th_token'); }
+function getUser()     { try { return JSON.parse(localStorage.getItem('th_user') || 'null'); } catch { return null; } }
+function setUser(u)    { u ? localStorage.setItem('th_user', JSON.stringify(u)) : localStorage.removeItem('th_user'); }
+function isLoggedIn()  { return !!getToken(); }
+
+async function callAPI(endpoint, data = null, method = 'POST') {
+  const url = `${API_CONFIG.baseURL}${endpoint}`;
+  const token = getToken();
+  const opts = {
+    method,
+    headers: { 'Content-Type': 'application/json' },
+  };
+  if (token) opts.headers['Authorization'] = `Bearer ${token}`;
+  if (data && method !== 'GET') opts.body = JSON.stringify(data);
+  const r = await fetch(url, opts);
+  if (!r.ok) {
+    if (r.status === 401) { setToken(null); setUser(null); renderNavState(); throw new Error('Sessão expirada. Faça login novamente.'); }
+    const err = await r.json().catch(() => ({}));
+    throw new Error(err.detail || `Erro HTTP ${r.status}`);
+  }
+  return r.json();
+}
+
+async function handleLogin() {
+  const email = document.getElementById('loginEmail').value.trim();
+  const password = document.getElementById('loginPassword').value;
+  document.getElementById('loginError').textContent = '';
+  if (!email || !password) { document.getElementById('loginError').textContent = 'Preencha e-mail e senha.'; return; }
+  try {
+    const result = await callAPI(API_CONFIG.endpoints.authLogin, { email, password });
+    setToken(result.access_token);
+    setUser(result.user);
+    closeModal('authModal');
+    renderNavState();
+    updateUsageUI();
+    renderHistory();
+    showToast('👋 Bem-vindo, ' + result.user.name + '!', 'success');
+  } catch(e) {
+    document.getElementById('loginError').textContent = e.message || 'E-mail ou senha incorretos.';
+  }
+}
+
+async function handleRegister() {
+  const name = document.getElementById('regName').value.trim();
+  const email = document.getElementById('regEmail').value.trim();
+  const password = document.getElementById('regPassword').value;
+  document.getElementById('registerError').textContent = '';
+  if (!name || !email || !password) { document.getElementById('registerError').textContent = 'Preencha todos os campos.'; return; }
+  if (password.length < 8) { document.getElementById('registerError').textContent = 'Senha deve ter pelo menos 8 caracteres.'; return; }
+  try {
+    const result = await callAPI(API_CONFIG.endpoints.authRegister, { name, email, password });
+    setToken(result.access_token);
+    setUser(result.user);
+    closeModal('authModal');
+    renderNavState();
+    updateUsageUI();
+    showToast('🎉 Conta criada com sucesso!', 'success');
+  } catch(e) {
+    document.getElementById('registerError').textContent = e.message || 'Erro ao criar conta.';
+  }
+}
+
+function logout() {
+  setToken(null); setUser(null);
+  const s = getState(); s.isPro = false; saveState(s);
+  renderNavState(); updateUsageUI(); renderHistory();
+  showToast('Você saiu da conta.');
+}
+
+function renderNavState() {
+  const user = getUser();
+  const guestEl = document.getElementById('navGuest');
+  const userEl = document.getElementById('navUser');
+  if (user && isLoggedIn()) {
+    guestEl.style.display = 'none';
+    userEl.classList.add('active');
+    document.getElementById('navUserName').textContent = user.name?.split(' ')[0] || 'Você';
+    const badge = document.getElementById('navPlanBadge');
+    badge.textContent = (user.subscription_tier || 'free').toUpperCase();
+    badge.className = 'plan-badge ' + (user.subscription_tier || 'free');
+    // Show/hide resume feature
+    const resumeLocked = document.getElementById('resumeLocked');
+    const resumeForm = document.getElementById('resumeForm');
+    const resumeResults = document.getElementById('resumeResults');
+    const isPro = user.subscription_tier === 'pro' || user.subscription_tier === 'enterprise';
+    resumeLocked.style.display = isPro ? 'none' : 'flex';
+    resumeForm.style.display = isPro ? 'flex' : 'none';
+    resumeResults.style.display = isPro ? 'flex' : 'none';
+  } else {
+    guestEl.style.display = 'flex';
+    userEl.classList.remove('active');
+    document.getElementById('resumeLocked').style.display = 'flex';
+    document.getElementById('resumeForm').style.display = 'none';
+    document.getElementById('resumeResults').style.display = 'none';
+  }
+}
+
+function openAuthModal() {
+  document.getElementById('authModal').classList.add('open');
+}
+
+function switchAuthTab(tab) {
+  document.getElementById('loginForm').style.display  = tab === 'login'    ? 'flex' : 'none';
+  document.getElementById('registerForm').style.display = tab === 'register' ? 'flex' : 'none';
+  document.getElementById('loginTab').classList.toggle('active', tab === 'login');
+  document.getElementById('registerTab').classList.toggle('active', tab === 'register');
+}
+
+// ═══════════════════════════════════════════════════════════
+//  FREEMIUM STATE
+// ═══════════════════════════════════════════════════════════
 function getState() {
   const today = new Date().toDateString();
   try {
@@ -391,13 +798,14 @@ function getState() {
   } catch { return { date: new Date().toDateString(), count: 0, isPro: false }; }
 }
 function saveState(s) { localStorage.setItem('th_usage', JSON.stringify(s)); }
-function remaining() { const s = getState(); return s.isPro ? 999 : Math.max(0, FREE_LIMIT - s.count); }
+function remaining()  { const s = getState(); return s.isPro ? 999 : Math.max(0, FREE_LIMIT - s.count); }
 function incrementUse() { const s = getState(); if (!s.isPro) { s.count++; saveState(s); } }
 
 function updateUsageUI() {
   const s = getState(); const rem = remaining();
   const pill = document.getElementById('usagePill');
-  if (s.isPro) {
+  if (!pill) return;
+  if (s.isPro || (isLoggedIn() && getUser()?.subscription_tier !== 'free')) {
     pill.innerHTML = '<span style="color:var(--accent);font-weight:700;">✦ PRO</span>';
     document.getElementById('freeLimitBar').style.display = 'none';
     return;
@@ -405,48 +813,51 @@ function updateUsageUI() {
   document.getElementById('usesLeft').textContent = rem;
   pill.className = 'usage-pill' + (rem === 1 ? ' warn' : rem === 0 ? ' empty' : '');
   const dots = document.getElementById('freeDots');
-  dots.innerHTML = Array.from({length:FREE_LIMIT}, (_,i) =>
+  dots.innerHTML = Array.from({length: FREE_LIMIT}, (_,i) =>
     `<span class="free-dot${i >= rem ? ' used' : ''}"></span>`).join('');
   const txt = document.getElementById('freeLimitText');
-  if (rem === 0) txt.innerHTML = 'No free analyses left today · <a onclick="openModal(\'limit\')">Upgrade to continue</a>';
-  else if (rem === 1) txt.innerHTML = '<span style="color:var(--warn)">Last free analysis today</span> · <a onclick="openModal(\'limit\')">Go Pro for unlimited</a>';
-  else txt.innerHTML = `${rem} free analyses today · <a onclick="openModal('limit')">Go Pro for unlimited</a>`;
+  if (rem === 0)      txt.innerHTML = 'Nenhuma análise gratuita hoje · <a onclick="openModal(\'limit\')">Upgrade para continuar</a>';
+  else if (rem === 1) txt.innerHTML = '<span style="color:var(--warn)">Última análise gratuita hoje</span> · <a onclick="openModal(\'limit\')">Pro para ilimitado</a>';
+  else                txt.innerHTML = `${rem} análises gratuitas hoje · <a onclick="openModal('limit')">Pro para ilimitado</a>`;
 }
 
-// ── SAMPLES ───────────────────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════
+//  TABS
+// ═══════════════════════════════════════════════════════════
+function switchTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach((b,i) => b.classList.toggle('active', i === (tab === 'analyze' ? 0 : 1)));
+  document.querySelectorAll('.tab-panel').forEach((p,i) => p.classList.toggle('active', i === (tab === 'analyze' ? 0 : 1)));
+}
+
+// ═══════════════════════════════════════════════════════════
+//  SAMPLES
+// ═══════════════════════════════════════════════════════════
 const SAMPLES = {
-  scam: `Hi! Congratulations — you've been selected for our remote Data Entry position!
-Salary: $8,500/month. No experience required. 100% remote.
-IMPORTANT: This offer expires TODAY. Respond IMMEDIATELY.
-To confirm your spot, send $250 via Bitcoin for your equipment kit.
-Contact HR on Telegram: @recruiter_hr. Do NOT tell your current employer yet.
-BTC wallet: 1A2B3C4D5E6F...`,
-  legit: `Hi Felipe,
-I'm Sarah Chen, Senior Recruiter at Stripe. I came across your profile on LinkedIn and I'm impressed with your backend engineering experience.
-We're hiring for a Senior Python Engineer on our Payments Infrastructure team. Hybrid (3 days SF), base $180K–$220K + equity.
-Would you be open to a 30-minute intro call this week? Book at calendly.com/stripe-recruiting/felipe
-LinkedIn: linkedin.com/in/sarahchen-stripe`,
-  moderate: `Hello, we found your resume on Indeed and would like to discuss a remote opportunity.
-The position is Customer Support, $45/hr, fully remote. Please reply with your availability for an interview.
-We will send more details via WhatsApp (+1 555 0123).
-Best, Mark Wilson — Global Staffing Solutions`
+  scam: `Olá! Parabéns — você foi selecionado para nossa vaga de Assistente Remoto!\nSalário: R$8.500/mês. Sem experiência necessária. 100% remoto.\nIMPORTANTE: Esta oferta expira HOJE. Responda IMEDIATAMENTE.\nPara confirmar sua vaga, envie R$250 via Pix para taxa de processamento.\nContato RH no Telegram: @recrutador_rh. NÃO conte para seu empregador atual.\nPix: 00000000000`,
+  legit: `Olá Felipe,\nSou Sarah Chen, Recrutadora Sênior da Stripe. Encontrei seu perfil no LinkedIn e fiquei impressionada com sua experiência em engenharia backend.\nEstamos contratando para Senior Python Engineer no time de Payments Infrastructure. Híbrido (3 dias São Paulo), salário R$180K–R$220K + equity.\nVocê estaria disponível para uma call de 30 minutos essa semana? Agende em calendly.com/stripe-recruiting/felipe\nLinkedIn: linkedin.com/in/sarahchen-stripe`,
+  moderate: `Olá, encontramos seu currículo no LinkedIn e gostaríamos de discutir uma oportunidade remota.\nA posição é Suporte ao Cliente, R$4.500/mês, 100% remoto. Por favor, responda com sua disponibilidade.\nEnviaremos mais detalhes via WhatsApp (+55 11 99999-9999).\nAtt, Mark Wilson — Global Staffing Solutions`
 };
 function loadSample(t) { document.getElementById('msg').value = SAMPLES[t]; updateCharCount(); }
 function updateCharCount() {
   const n = document.getElementById('msg').value.length;
   const el = document.getElementById('charCount');
-  el.textContent = `${n}/5000`; el.className = n > 4500 ? 'char-count warn' : 'char-count';
+  el.textContent = `${n}/5000`;
+  el.className = n > 4500 ? 'char-count warn' : 'char-count';
 }
 
-// ── MODAL ─────────────────────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════
+//  MODAL
+// ═══════════════════════════════════════════════════════════
 const MODAL_COPY = {
-  limit:          ['Daily limit reached', "You've used all 3 free analyses today. Upgrade to Pro to keep analyzing — plus unlock AI, history, PDF & CSV."],
-  nav:            ['Upgrade to Pro', 'Get 100 analyses/day, AI-powered insights, history, PDF reports, and CSV export.'],
-  pricing:        ['Upgrade to Pro', 'Get 100 analyses/day, AI-powered insights, history, PDF reports, and CSV export.'],
-  locked_ai:      ['Unlock AI Analysis', 'Claude analyzes context, tone, and intent beyond pattern rules — catches subtle scams.'],
-  locked_history: ['Unlock History', 'See every past analysis, revisit results, and track patterns over time.'],
-  locked_pdf:     ['Unlock PDF Reports', 'Download a professional report for each analysis — perfect for sharing or filing.'],
-  locked_csv:     ['Unlock CSV Export', 'Export all results to CSV for spreadsheet analysis and record-keeping.'],
+  limit:           ['Limite diário atingido', 'Você usou todas as 3 análises gratuitas de hoje. Faça upgrade para continuar — mais IA, histórico, PDF e CSV.'],
+  nav:             ['Upgrade para Pro', 'Obtenha 100 análises/dia, insights por IA, histórico, relatórios PDF e exportação CSV.'],
+  pricing:         ['Upgrade para Pro', 'Obtenha 100 análises/dia, insights por IA, histórico, relatórios PDF e exportação CSV.'],
+  enterprise:      ['Plano Enterprise', 'Entre em contato para acesso a 10.000 análises/dia, 1.000 otimizações de currículo, API sem limites e suporte dedicado.'],
+  locked_ai:       ['Desbloquear Análise IA', 'Claude analisa contexto, tom e intenção além das regras de padrão — detecta golpes sutis.'],
+  locked_history:  ['Desbloquear Histórico', 'Veja todas as análises anteriores, revisite resultados e acompanhe padrões ao longo do tempo.'],
+  locked_pdf:      ['Desbloquear Relatórios PDF', 'Baixe um relatório profissional para cada análise — perfeito para compartilhar ou arquivar.'],
+  locked_csv:      ['Desbloquear Exportação CSV', 'Exporte todos os resultados para CSV para análise em planilhas.'],
+  locked_resume:   ['Desbloquear Otimização de Currículo', 'Análise ATS completa, score de compatibilidade, keywords, sugestões personalizadas por Claude AI.'],
 };
 function openModal(trigger) {
   const [title, sub] = MODAL_COPY[trigger] || MODAL_COPY.nav;
@@ -454,210 +865,401 @@ function openModal(trigger) {
   document.getElementById('modalSub').textContent = sub;
   document.getElementById('upgradeModal').classList.add('open');
 }
-function closeModal() { document.getElementById('upgradeModal').classList.remove('open'); }
-document.getElementById('upgradeModal').addEventListener('click', e => { if(e.target===e.currentTarget) closeModal(); });
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+document.getElementById('upgradeModal').addEventListener('click', e => { if(e.target===e.currentTarget) closeModal('upgradeModal'); });
+document.getElementById('authModal').addEventListener('click', e => { if(e.target===e.currentTarget) closeModal('authModal'); });
+
 function goToCheckout() {
   if (STRIPE_PAYMENT_LINK && !STRIPE_PAYMENT_LINK.includes('REPLACE')) {
     window.open(STRIPE_PAYMENT_LINK, '_blank');
   } else {
-    closeModal();
-    document.getElementById('pricing').scrollIntoView({behavior:'smooth'});
-    showToast('Configure Stripe to activate payments — see RAILWAY_DEPLOY.md');
+    // Tenta via API se logado
+    if (isLoggedIn()) {
+      callAPI(API_CONFIG.endpoints.billingCheckout, {
+        plan: 'pro',
+        success_url: window.location.origin + '?upgraded=true',
+        cancel_url:  window.location.href,
+      }).then(r => { if(r.checkout_url) window.location.href = r.checkout_url; })
+        .catch(() => {
+          closeModal('upgradeModal');
+          document.getElementById('pricing').scrollIntoView({behavior:'smooth'});
+          showToast('Configure o Stripe para ativar pagamentos');
+        });
+    } else {
+      closeModal('upgradeModal');
+      document.getElementById('pricing').scrollIntoView({behavior:'smooth'});
+      showToast('Configure o Stripe — veja RAILWAY_DEPLOY.md');
+    }
   }
 }
 
-// ── ANALYZE ───────────────────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════
+//  ANALYZE
+// ═══════════════════════════════════════════════════════════
 async function analyze() {
   const text = document.getElementById('msg').value.trim();
-  if (!text || text.length < 10) { showToast('Paste a message first'); return; }
+  if (!text || text.length < 10) { showToast('Cole uma mensagem primeiro'); return; }
   const s = getState();
-  if (!s.isPro && s.count >= FREE_LIMIT) { openModal('limit'); return; }
+  const user = getUser();
+  const isPro = s.isPro || (user?.subscription_tier === 'pro' || user?.subscription_tier === 'enterprise');
+  if (!isPro && s.count >= FREE_LIMIT) { openModal('limit'); return; }
 
+  const lang = document.getElementById('langSelect').value;
   const btn = document.getElementById('analyzeBtn');
   btn.disabled = true; btn.classList.add('loading');
   document.getElementById('resultEmpty').style.display = 'none';
   document.getElementById('resultContent').style.display = 'flex';
   document.getElementById('resultContent').innerHTML =
-    `<div style="display:flex;align-items:center;gap:.7rem;color:var(--muted);font-family:var(--mono);font-size:.76rem;padding:.4rem 0">
+    `<div style="display:flex;align-items:center;gap:.7rem;color:var(--muted);font-family:var(--mono);font-size:.74rem;padding:.4rem 0">
       <div style="width:13px;height:13px;border:2px solid var(--muted);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0"></div>
-      Analyzing across 5 layers...
+      Analisando em 5 camadas...
     </div>`;
 
   try {
-    const r = await fetch(`${API_BASE}/analyze`, {
-      method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({text, include_ai_analysis: s.isPro, include_link_scan: true}),
+    const r = await fetch(`${API_CONFIG.baseURL}${API_CONFIG.endpoints.analyze}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        ...(getToken() ? { 'Authorization': `Bearer ${getToken()}` } : {})
+      },
+      body: JSON.stringify({ text, language: lang, include_ai_analysis: isPro, include_link_scan: true }),
     });
     if (r.status === 429) { openModal('limit'); return; }
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
     const data = await r.json();
-    incrementUse(); updateUsageUI();
+    if (!isPro) { incrementUse(); updateUsageUI(); }
     window._last = { data, text };
-    if (s.isPro) saveToHistory(text, data);
-    renderResult(data, s.isPro);
+    if (isPro) saveToHistory(text, data);
+    renderResult(data, isPro);
     const rem = remaining();
-    if (!s.isPro && rem === 0) setTimeout(() => openModal('limit'), 1800);
-    else if (!s.isPro && rem === 1) showToast('⚠️ Last free analysis today — upgrade for unlimited');
+    if (!isPro && rem === 0) setTimeout(() => openModal('limit'), 1800);
+    else if (!isPro && rem === 1) showToast('⚠️ Última análise gratuita hoje — upgrade para ilimitado');
   } catch(e) {
     const data = localAnalysis(text);
-    incrementUse(); updateUsageUI();
+    if (!getState().isPro) { incrementUse(); updateUsageUI(); }
     window._last = { data, text };
     renderResult(data, false);
-    showToast('⚠️ Local analysis — API offline', 3500);
+    showToast('⚠️ Análise local — API offline', 3500);
   } finally {
     btn.disabled = false; btn.classList.remove('loading');
   }
 }
 
-// ── LOCAL FALLBACK ────────────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════
+//  LOCAL FALLBACK
+// ═══════════════════════════════════════════════════════════
 function localAnalysis(text) {
   const t = text.toLowerCase(); const sigs = []; let score = 0;
   [
-    [/bitcoin|btc|crypto|ethereum|wallet\s*address/, 'Cryptocurrency payment requested', 'critical', 40],
-    [/send \$|pay \$|\$\d+.*fee|processing fee|registration fee|equipment fee/, 'Upfront payment required', 'critical', 35],
-    [/urgent|immediately|today only|act fast|expires today|respond now/, 'Artificial urgency', 'high', 20],
-    [/telegram|whatsapp|dm me/, 'Off-platform contact requested', 'high', 18],
-    [/\$[6-9]\d{3}|\$[1-9]\d{4}|no experience required/, 'Unrealistic salary/requirements', 'medium', 12],
-    [/ssn|social security|bank account|routing number/, 'Sensitive data requested', 'critical', 40],
-    [/don.t tell|keep.*secret|confidential/, 'Secrecy tactic', 'medium', 12],
-    [/gmail\.com|yahoo\.com|hotmail\.com/, 'Free email domain', 'low', 8],
-  ].forEach(([p,msg,sev,pts]) => { if(p.test(t)){sigs.push({message:msg,severity:sev,confidence:.85});score+=pts;} });
-  score = Math.min(score,100);
-  const rl = score<20?'safe':score<40?'low':score<60?'moderate':score<80?'high':'critical';
-  const recs = {safe:'No significant risk signals detected.',low:'Minor signals. Exercise normal caution.',moderate:'Multiple indicators. Verify company before proceeding.',high:'High risk. Do not share info or make payments.',critical:'Critical scam indicators. Do not engage.'};
-  return {risk_score:score,risk_level:rl,confidence:.75,signals:sigs,recommendation:recs[rl],action_items:score>=60?['Do not send any money','Verify company on official website','Report if suspicious']:['Research company on LinkedIn'],ai_assessment:null,engine_version:'local',processing_time_ms:1};
+    [/bitcoin|btc|crypto|ethereum|carteira\s*crypto|wallet\s*address/, 'Pagamento em criptomoeda solicitado', 'critical', 42],
+    [/envie?\s+r?\$|pix|pague?\s+r?\$|send\s+\$|taxa de processamento|taxa de cadastro|equipment\s+fee/, 'Pagamento antecipado exigido', 'critical', 38],
+    [/urgente|urgently|imediatamente|immediately|hoje\s+apenas|today\s+only|expira\s+hoje|expires\s+today|responda\s+agora|respond\s+now/, 'Urgência artificial criada', 'high', 22],
+    [/telegram|whatsapp|zap\s*zap|dm\s+me/, 'Contato fora da plataforma solicitado', 'high', 18],
+    [/r?\$\s*[6-9]\.\d{3}|r?\$\s*1\d\.\d{3}|\$[6-9]\d{3}|sem\s+experiência|no\s+experience\s+required/, 'Salário ou requisitos irreais', 'medium', 14],
+    [/cpf|rg|número\s+do\s+banco|conta\s+bancária|ssn|bank\s+account/, 'Dados pessoais sensíveis pedidos', 'critical', 42],
+    [/não\s+conte|não\s+fale|keep.*secret|ninguém\s+deve\s+saber|confidencial/, 'Tática de segredo', 'medium', 14],
+    [/gmail\.com|yahoo\.com|hotmail\.com|outlook\.com/, 'Email em domínio gratuito', 'low', 8],
+    [/kit\s+de\s+equipamento|equipment\s+kit|material\s+de\s+trabalho|work\s+kit/, 'Kit de trabalho suspeito', 'high', 25],
+  ].forEach(([p, msg, sev, pts]) => { if(p.test(t)) { sigs.push({ message: msg, severity: sev, confidence: .85 }); score += pts; } });
+  score = Math.min(score, 100);
+  const rl = score < 20 ? 'safe' : score < 40 ? 'low' : score < 60 ? 'moderate' : score < 80 ? 'high' : 'critical';
+  const recs = {
+    safe:     'Nenhum sinal de risco significativo detectado. A mensagem parece legítima.',
+    low:      'Sinais menores detectados. Exerça cautela normal e pesquise a empresa.',
+    moderate: 'Múltiplos indicadores suspeitos. Verifique a empresa antes de prosseguir.',
+    high:     'Alto risco. Não compartilhe dados pessoais nem faça pagamentos.',
+    critical: 'Indicadores críticos de golpe. Não engaje e reporte se possível.',
+  };
+  return { risk_score: score, risk_level: rl, confidence: .75, signals: sigs, recommendation: recs[rl], action_items: score >= 60 ? ['Não envie nenhum dinheiro ou dados', 'Verifique a empresa no site oficial', 'Reporte a vaga como suspeita'] : ['Pesquise a empresa no LinkedIn'], ai_assessment: null, engine_version: 'local', processing_time_ms: 1 };
 }
 
-// ── RENDER ────────────────────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════
+//  RENDER RESULT
+// ═══════════════════════════════════════════════════════════
 function renderResult(data, isPro) {
-  const { risk_score:sc, risk_level:rl, signals:sigs=[], recommendation:rec, action_items:acts=[], ai_assessment:ai, confidence:conf=.8, processing_time_ms:ms } = data;
-  const color = sc<20?'var(--safe)':sc<40?'#7ecf8a':sc<60?'var(--warn)':'var(--danger)';
+  const { risk_score: sc, risk_level: rl, signals: sigs = [], recommendation: rec, action_items: acts = [], ai_assessment: ai, confidence: conf = .8, processing_time_ms: ms } = data;
+  const color = sc < 20 ? 'var(--safe)' : sc < 40 ? '#7ecf8a' : sc < 60 ? 'var(--warn)' : 'var(--danger)';
 
-  const sigHtml = sigs.slice(0,6).map(s =>
-    `<div class="signal-item ${s.severity}"><span class="signal-sev">${s.severity}</span><span class="signal-msg">${s.message}</span></div>`).join('');
+  const sigHtml = sigs.slice(0, 6).map(s =>
+    `<div class="signal-item ${s.severity}"><span class="signal-sev">${s.severity}</span><span class="signal-msg">${s.message}</span></div>`
+  ).join('');
 
   const actHtml = acts.length
-    ? `<div class="action-items">${acts.map(a=>`<div class="action-item">${a}</div>`).join('')}</div>` : '';
+    ? `<div class="action-items">${acts.map(a => `<div class="action-item">${a}</div>`).join('')}</div>` : '';
 
   const aiHtml = ai
-    ? `<div class="recommendation" style="border-color:var(--accent)"><span style="font-size:.65rem;font-family:var(--mono);color:var(--accent)">✦ AI ANALYSIS<span class="pro-badge-inline">PRO</span></span><div style="margin-top:.45rem;font-size:.76rem">${ai.summary}</div></div>`
+    ? `<div class="ai-result">
+        <div class="ai-result-header">✦ ANÁLISE IA <span class="pro-badge-inline">PRO</span></div>
+        <div>${ai.summary}</div>
+       </div>`
     : `<div class="locked-features">
-        <div class="locked-row" onclick="openModal('locked_ai')"><span class="lock-icon">🔒</span><span class="lock-label">AI Analysis — Claude synthesis</span><span class="lock-cta">Unlock Pro →</span></div>
+        <div class="locked-row" onclick="openModal('locked_ai')"><span class="lock-icon">🔒</span><span class="lock-label">Análise IA — Claude contextualiza a mensagem</span><span class="lock-cta">Desbloquear Pro →</span></div>
        </div>`;
 
   const exportHtml = isPro
     ? `<div class="result-actions">
-        <button class="result-action-btn copy-btn" style="background:var(--surface2);border:1px solid var(--border)" onclick="copyResult()">Copy</button>
-        <button class="result-action-btn pdf-btn" style="background:var(--accent-dim);color:var(--accent);border:1px solid rgba(232,255,71,.2)" onclick="downloadPDF()">↓ PDF</button>
-        <button class="result-action-btn csv-btn" style="background:var(--accent-dim);color:var(--accent);border:1px solid rgba(232,255,71,.2)" onclick="downloadCSV()">↓ CSV</button>
+        <button class="result-action-btn copy-btn" style="background:var(--surface2);border:1px solid var(--border)" onclick="copyResult()">Copiar</button>
+        <button class="result-action-btn pdf-btn" style="background:var(--accent-dim);color:var(--accent);border:1px solid rgba(232,255,71,.18)" onclick="downloadPDF()">↓ PDF</button>
+        <button class="result-action-btn csv-btn" style="background:var(--accent-dim);color:var(--accent);border:1px solid rgba(232,255,71,.18)" onclick="downloadCSV()">↓ CSV</button>
        </div>`
     : `<div class="locked-features">
-        <div class="locked-row" onclick="openModal('locked_pdf')"><span class="lock-icon">🔒</span><span class="lock-label">PDF Report</span><span class="lock-cta">Unlock Pro →</span></div>
-        <div class="locked-row" onclick="openModal('locked_csv')"><span class="lock-icon">🔒</span><span class="lock-label">Export CSV</span><span class="lock-cta">Unlock Pro →</span></div>
+        <div class="locked-row" onclick="openModal('locked_pdf')"><span class="lock-icon">🔒</span><span class="lock-label">Relatório PDF</span><span class="lock-cta">Desbloquear Pro →</span></div>
+        <div class="locked-row" onclick="openModal('locked_csv')"><span class="lock-icon">🔒</span><span class="lock-label">Exportar CSV</span><span class="lock-cta">Desbloquear Pro →</span></div>
        </div>`;
 
   document.getElementById('resultContent').innerHTML = `
     <div class="risk-header">
       <div>
         <span class="risk-badge ${rl}">${rl.toUpperCase()}</span>
-        <div style="font-family:var(--mono);font-size:.66rem;color:var(--muted);margin-top:.3rem">${sigs.length} signal${sigs.length!==1?'s':''} · ${Math.round(conf*100)}% confidence</div>
+        <div style="font-family:var(--mono);font-size:.64rem;color:var(--muted);margin-top:.3rem">${sigs.length} sinal${sigs.length !== 1 ? 'is' : ''} · ${Math.round(conf * 100)}% confiança</div>
       </div>
       <div><div class="score-num" style="color:${color}">${sc}</div><div class="score-label">/ 100</div></div>
     </div>
     <div class="score-bar-track"><div class="score-bar-fill" id="scoreBar" style="width:0;background:${color}"></div></div>
-    ${sigs.length?`<div class="signals-list">${sigHtml}</div>`:''}
+    ${sigs.length ? `<div class="signals-list">${sigHtml}</div>` : ''}
     <div class="recommendation">${rec}</div>
     ${actHtml}${aiHtml}${exportHtml}
-    ${ms?`<div style="font-family:var(--mono);font-size:.66rem;color:var(--muted);text-align:right">processed in ${Math.round(ms)}ms</div>`:''}`;
+    ${ms ? `<div style="font-family:var(--mono);font-size:.63rem;color:var(--muted);text-align:right;margin-top:.2rem">processado em ${Math.round(ms)}ms · v${data.engine_version || '3.0'}</div>` : ''}`;
 
-  setTimeout(() => { const b=document.getElementById('scoreBar'); if(b) b.style.width=`${sc}%`; }, 80);
+  setTimeout(() => { const b = document.getElementById('scoreBar'); if(b) b.style.width = `${sc}%`; }, 80);
 }
 
-// ── HISTORY ───────────────────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════
+//  RESUME OPTIMIZER
+// ═══════════════════════════════════════════════════════════
+let selectedFile = null;
+
+function handleDragOver(e) { e.preventDefault(); document.getElementById('dropZone').classList.add('dragover'); }
+function handleDragLeave() { document.getElementById('dropZone').classList.remove('dragover'); }
+function handleDrop(e) {
+  e.preventDefault();
+  handleDragLeave();
+  const file = e.dataTransfer.files[0];
+  if (file) setSelectedFile(file);
+}
+function handleFileSelect(e) { if (e.target.files[0]) setSelectedFile(e.target.files[0]); }
+function setSelectedFile(file) {
+  selectedFile = file;
+  const dz = document.getElementById('dropZone');
+  const fn = document.getElementById('fileNameDisplay');
+  dz.classList.add('has-file');
+  fn.textContent = '✓ ' + file.name;
+  fn.classList.add('show');
+  dz.querySelector('.file-drop-text').style.display = 'none';
+  dz.querySelector('.file-drop-icon').style.display = 'none';
+}
+
+async function optimizeResume() {
+  if (!selectedFile) { showToast('Selecione um arquivo de currículo'); return; }
+  const jobDesc = document.getElementById('jobDesc').value.trim();
+  const atsTarget = document.getElementById('atsTarget').value;
+  const lang = document.getElementById('langSelect').value || 'pt';
+
+  const btn = document.getElementById('optimizeBtn');
+  btn.disabled = true; btn.classList.add('loading');
+
+  try {
+    const formData = new FormData();
+    formData.append('file', selectedFile);
+    formData.append('job_description', jobDesc);
+    formData.append('target_ats', atsTarget);
+    formData.append('language', lang);
+
+    const r = await fetch(`${API_CONFIG.baseURL}${API_CONFIG.endpoints.resumeOptimize}`, {
+      method: 'POST',
+      headers: { ...(getToken() ? { 'Authorization': `Bearer ${getToken()}` } : {}) },
+      body: formData,
+    });
+    if (!r.ok) { const e = await r.json().catch(() => ({})); throw new Error(e.detail || `Erro ${r.status}`); }
+    const data = await r.json();
+    renderResumeResults(data);
+  } catch(e) {
+    showToast('Erro ao otimizar: ' + e.message, 'error');
+    document.getElementById('resumeResults').innerHTML = `
+      <div class="resume-empty">
+        <span style="color:var(--danger);font-size:1.5rem">⚠️</span>
+        <span style="color:var(--danger)">${e.message}</span>
+      </div>`;
+  } finally {
+    btn.disabled = false; btn.classList.remove('loading');
+  }
+}
+
+function renderResumeResults(data) {
+  const panel = document.getElementById('resumeResults');
+  const score = data.compatibility_score || data.ats_score || 0;
+  const circleLen = 2 * Math.PI * 28; // r=28
+  const dashOffset = circleLen * (1 - score / 100);
+
+  panel.innerHTML = `
+    <div class="compat-header">
+      <div class="compat-ring">
+        <svg viewBox="0 0 72 72">
+          <circle cx="36" cy="36" r="28" fill="none" stroke="var(--border)" stroke-width="5"/>
+          <circle cx="36" cy="36" r="28" fill="none" stroke="var(--accent)" stroke-width="5"
+                  stroke-dasharray="${circleLen.toFixed(2)}"
+                  stroke-dashoffset="${dashOffset.toFixed(2)}"
+                  stroke-linecap="square"/>
+        </svg>
+        <div class="compat-ring-text">
+          <span class="num">${score}</span>
+          <span class="pct">%</span>
+        </div>
+      </div>
+      <div class="compat-info">
+        <h4>Compatibilidade ATS</h4>
+        <p>Currículo analisado para ${document.getElementById('atsTarget').options[document.getElementById('atsTarget').selectedIndex].text}</p>
+      </div>
+    </div>
+    ${(data.strengths?.length) ? `
+    <div class="resume-section">
+      <h5>✅ Pontos Fortes</h5>
+      <ul class="resume-list strengths">
+        ${data.strengths.map(s => `<li>${s}</li>`).join('')}
+      </ul>
+    </div>` : ''}
+    ${(data.suggestions?.length) ? `
+    <div class="resume-section">
+      <h5>💡 Sugestões</h5>
+      <ul class="resume-list suggestions">
+        ${data.suggestions.map(s => `<li>${s}</li>`).join('')}
+      </ul>
+    </div>` : ''}
+    ${(data.matched_keywords?.length || data.missing_keywords?.length) ? `
+    <div class="resume-section">
+      <h5>🔑 Palavras-chave</h5>
+      <div class="keywords-grid">
+        ${data.matched_keywords?.length ? `<div><div class="keyword-row-label">Encontradas no currículo:</div><div class="kw-tags">${data.matched_keywords.map(k => `<span class="kw-tag matched">${k}</span>`).join('')}</div></div>` : ''}
+        ${data.missing_keywords?.length ? `<div><div class="keyword-row-label">Importantes que faltam:</div><div class="kw-tags">${data.missing_keywords.map(k => `<span class="kw-tag missing">${k}</span>`).join('')}</div></div>` : ''}
+      </div>
+    </div>` : ''}
+    ${data.optimized_resume_url ? `
+    <button class="download-resume-btn" onclick="downloadResume('${data.optimized_resume_url}')">
+      ↓ Baixar Currículo Otimizado
+    </button>` : ''}`;
+}
+
+function downloadResume(url) {
+  const a = document.createElement('a'); a.href = url; a.download = 'curriculo_otimizado.pdf';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+}
+
+// ═══════════════════════════════════════════════════════════
+//  HISTORY
+// ═══════════════════════════════════════════════════════════
 function saveToHistory(text, data) {
   const h = getHistory();
-  h.unshift({id:Date.now(),text:text.slice(0,100),risk_score:data.risk_score,risk_level:data.risk_level,signals_count:(data.signals||[]).length,timestamp:new Date().toISOString(),data});
-  localStorage.setItem('th_history', JSON.stringify(h.slice(0,50)));
+  h.unshift({ id: Date.now(), text: text.slice(0,100), risk_score: data.risk_score, risk_level: data.risk_level, signals_count: (data.signals||[]).length, timestamp: new Date().toISOString(), data });
+  localStorage.setItem('th_history', JSON.stringify(h.slice(0, 50)));
   renderHistory();
 }
-function getHistory() { try{return JSON.parse(localStorage.getItem('th_history')||'[]');}catch{return[];} }
+function getHistory() { try { return JSON.parse(localStorage.getItem('th_history') || '[]'); } catch { return []; } }
 function renderHistory() {
   const el = document.getElementById('historyContent');
-  const s = getState();
-  if (!s.isPro) {
+  const user = getUser();
+  const isPro = getState().isPro || user?.subscription_tier === 'pro' || user?.subscription_tier === 'enterprise';
+  if (!isPro) {
     el.innerHTML = `<div class="history-locked">
       <span class="lock-big">🔒</span>
-      <p>Analysis history is a Pro feature.<br>Upgrade to keep a record of every analysis.</p>
-      <button class="plan-btn pro-btn" style="max-width:190px;padding:.55rem;margin-top:.25rem" onclick="openModal('locked_history')">Unlock History →</button>
+      <p>O histórico de análises é um recurso Pro.<br>Faça upgrade para manter um registro de cada análise.</p>
+      <button class="plan-btn pro-btn" style="max-width:200px;padding:.55rem;margin-top:.25rem" onclick="openModal('locked_history')">Desbloquear Histórico →</button>
     </div>`; return;
   }
   const h = getHistory();
-  if (!h.length) { el.innerHTML='<p class="history-empty">No analyses yet — run your first one above.</p>'; return; }
-  const c=s=>s<20?'var(--safe)':s<60?'var(--warn)':'var(--danger)';
+  if (!h.length) { el.innerHTML = '<p class="history-empty">Nenhuma análise ainda — faça a primeira acima.</p>'; return; }
+  const c = s => s < 20 ? 'var(--safe)' : s < 60 ? 'var(--warn)' : 'var(--danger)';
   el.innerHTML = `<div class="history-list">
-    ${h.slice(0,10).map(i=>`<div class="history-item" onclick="reloadHistory(${i.id})">
-      <span class="history-score" style="color:${c(i.risk_score)}">${i.risk_score}</span>
-      <div class="history-meta"><div class="h-text">${i.text}…</div><div class="h-time">${new Date(i.timestamp).toLocaleString()} · ${i.signals_count} signals</div></div>
-      <span class="risk-badge ${i.risk_level}" style="font-size:.6rem">${i.risk_level.toUpperCase()}</span>
-    </div>`).join('')}
+    ${h.slice(0, 10).map(i => `
+      <div class="history-item" onclick="reloadHistory(${i.id})">
+        <span class="history-score" style="color:${c(i.risk_score)}">${i.risk_score}</span>
+        <div class="history-meta">
+          <div class="h-text">${i.text}…</div>
+          <div class="h-time">${new Date(i.timestamp).toLocaleString('pt-BR')} · ${i.signals_count} sinais</div>
+        </div>
+        <span class="risk-badge ${i.risk_level}" style="font-size:.58rem">${i.risk_level.toUpperCase()}</span>
+      </div>`).join('')}
   </div>`;
 }
 function reloadHistory(id) {
-  const i = getHistory().find(x=>x.id===id); if(!i) return;
+  const i = getHistory().find(x => x.id === id); if(!i) return;
   document.getElementById('msg').value = i.text;
   renderResult(i.data, true);
   document.getElementById('analyzer').scrollIntoView({behavior:'smooth'});
+  switchTab('analyze');
 }
 
-// ── EXPORT ────────────────────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════
+//  EXPORT
+// ═══════════════════════════════════════════════════════════
 function downloadPDF() {
   if(!window._last) return;
-  const {data,text} = window._last;
-  const c=`TRUSTHIRE ANALYSIS REPORT\nGenerated: ${new Date().toLocaleString()}\n${'─'.repeat(48)}\n\nRISK SCORE: ${data.risk_score}/100\nRISK LEVEL: ${(data.risk_level||'').toUpperCase()}\nCONFIDENCE: ${Math.round((data.confidence||0)*100)}%\n\nRECOMMENDATION:\n${data.recommendation}\n\nSIGNALS DETECTED (${(data.signals||[]).length}):\n${(data.signals||[]).map(s=>`  [${(s.severity||'').toUpperCase()}] ${s.message}`).join('\n')}\n\nACTION ITEMS:\n${(data.action_items||[]).map(a=>`  → ${a}`).join('\n')}\n\n${data.ai_assessment?`AI ANALYSIS:\n${data.ai_assessment.summary}\n\n`:''}\nORIGINAL MESSAGE:\n${text}\n\n${'─'.repeat(48)}\nTrustHire v2.0 | trusthire.dev`;
-  const a=Object.assign(document.createElement('a'),{href:URL.createObjectURL(new Blob([c],{type:'text/plain'})),download:`trusthire-${Date.now()}.txt`});
-  a.click(); showToast('Report downloaded');
+  const {data, text} = window._last;
+  const content = `TRUSTHIRE — RELATÓRIO DE ANÁLISE\nGerado: ${new Date().toLocaleString('pt-BR')}\n${'─'.repeat(50)}\n\nSCORE DE RISCO: ${data.risk_score}/100\nNÍVEL: ${(data.risk_level||'').toUpperCase()}\nCONFIANÇA: ${Math.round((data.confidence||0)*100)}%\n\nRECOMENDAÇÃO:\n${data.recommendation}\n\nSINAIS DETECTADOS (${(data.signals||[]).length}):\n${(data.signals||[]).map(s=>`  [${(s.severity||'').toUpperCase()}] ${s.message}`).join('\n')}\n\nAÇÕES RECOMENDADAS:\n${(data.action_items||[]).map(a=>`  → ${a}`).join('\n')}\n\n${data.ai_assessment?`ANÁLISE IA:\n${data.ai_assessment.summary}\n\n`:''}\nMENSAGEM ORIGINAL:\n${text}\n\n${'─'.repeat(50)}\nTrustHire v3.0 · trusthire.dev`;
+  const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(new Blob([content], {type:'text/plain'})), download: `trusthire-${Date.now()}.txt` });
+  a.click(); showToast('Relatório baixado', 'success');
 }
 function downloadCSV() {
   if(!window._last) return;
   const {data} = window._last;
-  const csv=`timestamp,risk_score,risk_level,confidence,signals\n${new Date().toISOString()},${data.risk_score},${data.risk_level},${data.confidence},(${(data.signals||[]).length})`;
-  const a=Object.assign(document.createElement('a'),{href:URL.createObjectURL(new Blob([csv],{type:'text/csv'})),download:`trusthire-${Date.now()}.csv`});
-  a.click(); showToast('CSV exported');
+  const csv = `timestamp,risk_score,risk_level,confidence,signals_count\n${new Date().toISOString()},${data.risk_score},${data.risk_level},${data.confidence},${(data.signals||[]).length}`;
+  const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(new Blob([csv], {type:'text/csv'})), download: `trusthire-${Date.now()}.csv` });
+  a.click(); showToast('CSV exportado', 'success');
 }
 function copyResult() {
   if(!window._last) return;
-  const {data}=window._last;
-  navigator.clipboard.writeText(`TrustHire\nScore: ${data.risk_score}/100 (${data.risk_level})\n${data.recommendation}`).then(()=>showToast('Copied!'));
+  const {data} = window._last;
+  navigator.clipboard.writeText(`TrustHire\nScore: ${data.risk_score}/100 (${data.risk_level})\n${data.recommendation}`)
+    .then(() => showToast('Copiado!', 'success'));
 }
 
-// ── API STATUS ────────────────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════
+//  API STATUS
+// ═══════════════════════════════════════════════════════════
 async function checkApi() {
   try {
-    const r=await fetch(API_BASE.replace('/api/v1','/health'),{signal:AbortSignal.timeout(5000)});
-    const d=await r.json();
-    if(d.status==='healthy'){
-      document.getElementById('statusDot').className='status-dot';
-      document.getElementById('statusText').textContent=`api online · ai: ${d.ai_enabled?'on':'off'}`;
+    const r = await fetch(`${API_CONFIG.baseURL}${API_CONFIG.endpoints.health}`, { signal: AbortSignal.timeout(5000) });
+    const d = await r.json();
+    if (d.status === 'healthy') {
+      document.getElementById('statusDot').className = 'status-dot';
+      document.getElementById('statusText').textContent = `api online · ai: ${d.ai_enabled !== false ? 'ativo' : 'desativado'}`;
     } else throw 0;
   } catch {
-    document.getElementById('statusDot').className='status-dot offline';
-    document.getElementById('statusText').textContent='api offline — local mode';
+    document.getElementById('statusDot').className = 'status-dot offline';
+    document.getElementById('statusText').textContent = 'api offline — modo local';
   }
 }
 
-// ── TOAST ─────────────────────────────────────────────────────────────────
-function showToast(msg,d=2800){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),d);}
-
-// ── INIT ──────────────────────────────────────────────────────────────────
-document.getElementById('msg').addEventListener('input', updateCharCount);
-document.getElementById('msg').addEventListener('keydown', e=>{if((e.metaKey||e.ctrlKey)&&e.key==='Enter')analyze();});
-
-if(new URLSearchParams(window.location.search).get('upgraded')==='true'){
-  const s=getState();s.isPro=true;saveState(s);
-  showToast('🎉 Welcome to Pro! All features unlocked.',5000);
-  history.replaceState({},'',window.location.pathname);
+// ═══════════════════════════════════════════════════════════
+//  TOAST
+// ═══════════════════════════════════════════════════════════
+function showToast(msg, type = '', d = 2800) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast ' + type;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), d);
 }
 
+// ═══════════════════════════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════════════════════════
+document.getElementById('msg').addEventListener('input', updateCharCount);
+document.getElementById('msg').addEventListener('keydown', e => { if((e.metaKey||e.ctrlKey) && e.key === 'Enter') analyze(); });
+
+// URL Params
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.get('upgraded') === 'true') {
+  const s = getState(); s.isPro = true; saveState(s);
+  showToast('🎉 Bem-vindo ao Pro! Todos os recursos desbloqueados.', 'success', 6000);
+  history.replaceState({}, '', window.location.pathname);
+}
+if (urlParams.get('payment') === 'cancelled') {
+  showToast('Pagamento cancelado.', 'error');
+  history.replaceState({}, '', window.location.pathname);
+}
+
+// Restore session
+renderNavState();
 updateUsageUI();
 renderHistory();
 checkApi();
