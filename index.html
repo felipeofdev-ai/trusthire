@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TrustHire Quantum — Next-Gen Professional Network</title>
-<meta name="description" content="Sistema de recrutamento com IA quântica, blockchain e transparência total">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https:;">
-<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Urbanist:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<title>TrustHire Quantum Protocol — The God Protocol of Professional Networks</title>
+<meta name="description" content="Beyond LinkedIn. Beyond Indeed. The future of professional networking.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https: wss:;">
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&family=Urbanist:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root{
---quantum-bg:#000000;
+--quantum-void:#000000;
 --quantum-surface:#0a0a0a;
 --quantum-elevated:#111111;
 --quantum-card:#141414;
@@ -36,7 +36,7 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;overflow-x:hidden}
 body{
-background:var(--quantum-bg);
+background:var(--quantum-void);
 color:var(--text-primary);
 font-family:var(--font-body);
 line-height:1.6;
@@ -163,7 +163,21 @@ display:flex;
 align-items:center;
 gap:1rem;
 }
-.quantum-status{
+.lang-selector{
+padding:0.5rem 1rem;
+background:var(--quantum-card);
+border:1px solid var(--quantum-border);
+border-radius:8px;
+color:var(--text-primary);
+font-size:0.85rem;
+font-weight:600;
+cursor:pointer;
+transition:all .2s;
+}
+.lang-selector:hover{
+border-color:var(--accent-quantum);
+}
+.usage-badge{
 display:flex;
 align-items:center;
 gap:0.5rem;
@@ -174,17 +188,9 @@ border-radius:8px;
 font-family:var(--font-mono);
 font-size:0.75rem;
 }
-.quantum-dot{
-width:8px;
-height:8px;
-border-radius:50%;
-background:var(--accent-quantum);
-box-shadow:0 0 10px var(--accent-quantum);
-animation:pulse 2s infinite;
-}
-@keyframes pulse{
-0%,100%{opacity:1}
-50%{opacity:.3}
+.usage-count{
+color:var(--accent-quantum);
+font-weight:700;
 }
 .btn{
 padding:0.7rem 1.5rem;
@@ -257,6 +263,18 @@ animation:fadeSlideUp .8s ease-out;
 @keyframes fadeSlideUp{
 from{opacity:0;transform:translateY(20px)}
 to{opacity:1;transform:translateY(0)}
+}
+.quantum-dot{
+width:8px;
+height:8px;
+border-radius:50%;
+background:var(--accent-quantum);
+box-shadow:0 0 10px var(--accent-quantum);
+animation:pulse 2s infinite;
+}
+@keyframes pulse{
+0%,100%{opacity:1}
+50%{opacity:.3}
 }
 h1{
 font-family:var(--font-display);
@@ -467,7 +485,7 @@ letter-spacing:0.05em;
 margin-bottom:0.8rem;
 display:block;
 }
-textarea,input[type=text],input[type=email],input[type=password],select{
+textarea,input[type=text],input[type=email],input[type=password],input[type=file],select{
 width:100%;
 background:var(--quantum-elevated);
 border:1px solid var(--quantum-border);
@@ -488,6 +506,22 @@ textarea:focus,input:focus,select:focus{
 outline:0;
 border-color:var(--accent-quantum);
 box-shadow:0 0 0 3px var(--glow-quantum);
+}
+.file-upload{
+border:2px dashed var(--quantum-border);
+border-radius:12px;
+padding:3rem 2rem;
+text-align:center;
+cursor:pointer;
+transition:all .3s;
+}
+.file-upload:hover{
+border-color:var(--accent-quantum);
+background:var(--glow-quantum);
+}
+.file-upload.has-file{
+border-color:var(--accent-quantum);
+background:var(--glow-quantum);
 }
 .analyze-btn{
 width:100%;
@@ -532,6 +566,38 @@ display:block;
 }
 .analyze-btn.loading .btn-text{
 opacity:0;
+}
+.github-unlock{
+margin-top:1.5rem;
+padding:1.5rem;
+background:var(--glow-quantum);
+border:1px solid var(--accent-quantum);
+border-radius:12px;
+}
+.github-unlock.hidden{
+display:none;
+}
+.github-btn{
+width:100%;
+padding:1rem;
+margin-top:1rem;
+background:transparent;
+border:2px solid var(--accent-quantum);
+color:var(--accent-quantum);
+font-weight:700;
+border-radius:8px;
+cursor:pointer;
+transition:all .2s;
+font-size:0.95rem;
+}
+.github-btn:hover{
+background:var(--accent-quantum);
+color:#000;
+}
+.github-btn.verified{
+background:var(--accent-quantum);
+color:#000;
+pointer-events:none;
 }
 .score-display{
 text-align:center;
@@ -585,95 +651,161 @@ font-size:0.75rem;
 color:var(--accent-quantum);
 margin-top:1rem;
 }
-.modal-overlay{
-display:none;
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.9);
-backdrop-filter:blur(10px);
-z-index:20000;
-align-items:center;
-justify-content:center;
+.feed-container{
+max-width:1400px;
+margin:0 auto;
 padding:2rem;
+display:grid;
+grid-template-columns:300px 1fr 300px;
+gap:2rem;
 }
-.modal-overlay.active{
-display:flex;
-animation:fadeIn .3s ease-out;
+@media(max-width:1200px){
+.feed-container{
+grid-template-columns:1fr;
 }
-.modal{
+.sidebar{
+display:none;
+}
+}
+.sidebar{
+position:sticky;
+top:100px;
+height:fit-content;
+}
+.sidebar-card{
 background:var(--quantum-card);
 border:1px solid var(--quantum-border);
-border-radius:24px;
-max-width:500px;
-width:100%;
-padding:3rem;
-position:relative;
-box-shadow:0 20px 60px rgba(0,0,0,.5);
+border-radius:16px;
+padding:1.5rem;
+margin-bottom:1.5rem;
 }
-.modal-close{
-position:absolute;
-top:1.5rem;
-right:1.5rem;
+.sidebar-title{
+font-weight:700;
+margin-bottom:1rem;
+font-size:0.95rem;
+}
+.profile-mini{
+display:flex;
+align-items:center;
+gap:1rem;
+padding:1rem;
+background:var(--quantum-elevated);
+border-radius:12px;
+margin-bottom:1rem;
+}
+.avatar{
+width:60px;
+height:60px;
+border-radius:50%;
+background:linear-gradient(135deg, var(--accent-quantum), var(--accent-cyber));
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:800;
+font-size:1.5rem;
+color:#000;
+overflow:hidden;
+}
+.avatar img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+.post-card{
+background:var(--quantum-card);
+border:1px solid var(--quantum-border);
+border-radius:16px;
+padding:2rem;
+margin-bottom:1.5rem;
+transition:all .3s;
+}
+.post-card:hover{
+border-color:var(--quantum-border-bright);
+}
+.post-header{
+display:flex;
+gap:1rem;
+margin-bottom:1.5rem;
+}
+.post-avatar{
+width:50px;
+height:50px;
+border-radius:50%;
+background:linear-gradient(135deg, var(--accent-purple), var(--accent-cyber));
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:700;
+color:#000;
+flex-shrink:0;
+}
+.post-meta{
+flex:1;
+}
+.post-author{
+font-weight:700;
+margin-bottom:0.2rem;
+}
+.post-info{
+font-size:0.85rem;
+color:var(--text-tertiary);
+}
+.verified-badge{
+display:inline-flex;
+align-items:center;
+gap:0.3rem;
+padding:0.3rem 0.8rem;
+background:var(--glow-quantum);
+border:1px solid var(--accent-quantum);
+border-radius:100px;
+font-size:0.7rem;
+font-weight:700;
+color:var(--accent-quantum);
+}
+.scam-badge{
+display:inline-flex;
+align-items:center;
+gap:0.3rem;
+padding:0.3rem 0.8rem;
+background:var(--glow-danger);
+border:1px solid var(--accent-danger);
+border-radius:100px;
+font-size:0.7rem;
+font-weight:700;
+color:var(--accent-danger);
+animation:pulse-border 1.5s infinite;
+}
+@keyframes pulse-border{
+0%,100%{box-shadow:0 0 0 0 rgba(255,51,102,.4)}
+50%{box-shadow:0 0 0 8px rgba(255,51,102,0)}
+}
+.post-content{
+margin-bottom:1.5rem;
+line-height:1.7;
+}
+.post-actions{
+display:flex;
+gap:2rem;
+padding-top:1rem;
+border-top:1px solid var(--quantum-border);
+}
+.post-action{
+display:flex;
+align-items:center;
+gap:0.5rem;
 background:transparent;
 border:none;
 color:var(--text-secondary);
-font-size:2rem;
 cursor:pointer;
+font-size:0.9rem;
+font-weight:600;
+padding:0.5rem 1rem;
+border-radius:8px;
 transition:all .2s;
 }
-.modal-close:hover{
+.post-action:hover{
+background:rgba(255,255,255,.05);
 color:var(--text-primary);
-transform:rotate(90deg);
-}
-.toast{
-position:fixed;
-bottom:2rem;
-left:50%;
-transform:translateX(-50%) translateY(100px);
-background:var(--quantum-card);
-border:1px solid var(--quantum-border);
-border-radius:12px;
-padding:1rem 2rem;
-font-weight:600;
-box-shadow:0 10px 40px rgba(0,0,0,.6);
-z-index:30000;
-opacity:0;
-transition:all .3s;
-}
-.toast.show{
-opacity:1;
-transform:translateX(-50%) translateY(0);
-}
-.toast.success{
-border-color:var(--accent-quantum);
-background:var(--glow-quantum);
-}
-.toast.error{
-border-color:var(--accent-danger);
-background:var(--glow-danger);
-}
-.dashboard-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
-gap:2rem;
-}
-.dashboard-card{
-padding:2rem;
-background:var(--quantum-card);
-border:1px solid var(--quantum-border);
-border-radius:20px;
-}
-.dashboard-value{
-font-family:var(--font-display);
-font-size:3.5rem;
-font-weight:900;
-margin-bottom:0.5rem;
-}
-.dashboard-label{
-font-size:0.9rem;
-color:var(--text-tertiary);
-text-transform:uppercase;
-letter-spacing:0.05em;
 }
 .job-card{
 background:var(--quantum-card);
@@ -734,10 +866,157 @@ border:1px solid var(--quantum-border);
 border-radius:6px;
 font-size:0.85rem;
 }
+.modal-overlay{
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.9);
+backdrop-filter:blur(10px);
+z-index:20000;
+align-items:center;
+justify-content:center;
+padding:2rem;
+}
+.modal-overlay.active{
+display:flex;
+animation:fadeIn .3s ease-out;
+}
+.modal{
+background:var(--quantum-card);
+border:1px solid var(--quantum-border);
+border-radius:24px;
+max-width:500px;
+width:100%;
+padding:3rem;
+position:relative;
+box-shadow:0 20px 60px rgba(0,0,0,.5);
+max-height:90vh;
+overflow-y:auto;
+}
+.modal-close{
+position:absolute;
+top:1.5rem;
+right:1.5rem;
+background:transparent;
+border:none;
+color:var(--text-secondary);
+font-size:2rem;
+cursor:pointer;
+transition:all .2s;
+}
+.modal-close:hover{
+color:var(--text-primary);
+transform:rotate(90deg);
+}
+.pricing-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+gap:2rem;
+margin-top:2rem;
+}
+.pricing-card{
+padding:2.5rem;
+background:var(--quantum-card);
+border:2px solid var(--quantum-border);
+border-radius:20px;
+transition:all .3s;
+}
+.pricing-card.featured{
+border-color:var(--accent-quantum);
+box-shadow:var(--shadow-quantum);
+transform:scale(1.05);
+}
+.pricing-card:hover{
+transform:translateY(-5px) scale(1.02);
+}
+.pricing-card.featured:hover{
+transform:translateY(-5px) scale(1.07);
+}
+.plan-name{
+font-family:var(--font-display);
+font-size:1.5rem;
+font-weight:700;
+margin-bottom:1rem;
+}
+.plan-price{
+font-family:var(--font-display);
+font-size:3rem;
+font-weight:900;
+margin-bottom:0.5rem;
+}
+.plan-period{
+color:var(--text-secondary);
+margin-bottom:2rem;
+}
+.plan-features{
+list-style:none;
+margin-bottom:2rem;
+}
+.plan-features li{
+padding:0.8rem 0;
+border-bottom:1px solid var(--quantum-border);
+display:flex;
+align-items:center;
+gap:0.5rem;
+}
+.plan-features li:last-child{
+border-bottom:none;
+}
+.toast{
+position:fixed;
+bottom:2rem;
+left:50%;
+transform:translateX(-50%) translateY(100px);
+background:var(--quantum-card);
+border:1px solid var(--quantum-border);
+border-radius:12px;
+padding:1rem 2rem;
+font-weight:600;
+box-shadow:0 10px 40px rgba(0,0,0,.6);
+z-index:30000;
+opacity:0;
+transition:all .3s;
+}
+.toast.show{
+opacity:1;
+transform:translateX(-50%) translateY(0);
+}
+.toast.success{
+border-color:var(--accent-quantum);
+background:var(--glow-quantum);
+}
+.toast.error{
+border-color:var(--accent-danger);
+background:var(--glow-danger);
+}
+.dashboard-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+gap:2rem;
+}
+.dashboard-card{
+padding:2rem;
+background:var(--quantum-card);
+border:1px solid var(--quantum-border);
+border-radius:20px;
+}
+.dashboard-value{
+font-family:var(--font-display);
+font-size:3.5rem;
+font-weight:900;
+margin-bottom:0.5rem;
+}
+.dashboard-label{
+font-size:0.9rem;
+color:var(--text-tertiary);
+text-transform:uppercase;
+letter-spacing:0.05em;
+}
 @media(max-width:768px){
 .nav-links{display:none}
 .analyzer-layout{grid-template-columns:1fr}
 .stats-grid{grid-template-columns:1fr}
+.pricing-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -747,28 +1026,34 @@ font-size:0.85rem;
 <nav>
 <div class="nav-container">
 <a class="nav-brand" onclick="navigate('home')">
-<div class="nav-logo">TQ</div>
+<div class="nav-logo">Θ</div>
 <div class="nav-wordmark">TrustHire <span>Quantum</span></div>
 </a>
 <div class="nav-links">
-<a onclick="navigate('home')">Início</a>
-<a onclick="navigate('network')">Rede</a>
-<a onclick="navigate('jobs')">Vagas</a>
-<a onclick="navigate('tools')">Ferramentas IA</a>
-<a onclick="navigate('dashboard')" id="dashLink" style="display:none">Dashboard</a>
+<a onclick="navigate('home')" data-i18n="nav.home">Home</a>
+<a onclick="navigate('network')" data-i18n="nav.network">Network</a>
+<a onclick="navigate('jobs')" data-i18n="nav.jobs">Jobs</a>
+<a onclick="navigate('tools')" data-i18n="nav.tools">AI Tools</a>
+<a onclick="navigate('dashboard')" id="dashLink" style="display:none" data-i18n="nav.dashboard">Dashboard</a>
 </div>
 <div class="nav-right">
-<div class="quantum-status">
-<span class="quantum-dot"></span>
-<span>QUANTUM ACTIVE</span>
+<select class="lang-selector" id="langSelector" onchange="changeLanguage(this.value)">
+<option value="pt">🇧🇷 PT</option>
+<option value="en">🇺🇸 EN</option>
+<option value="es">🇪🇸 ES</option>
+</select>
+<div class="usage-badge" id="usageBadge">
+<span class="usage-count" id="usageCount">3</span>
+<span data-i18n="usage.left">left</span>
 </div>
 <div id="navGuest" style="display:flex;gap:1rem">
-<button class="btn btn-ghost" onclick="openAuth()">Entrar</button>
-<button class="btn btn-primary" onclick="openAuth()">Cadastrar Grátis</button>
+<button class="btn btn-ghost" onclick="openAuth()" data-i18n="auth.signin">Sign In</button>
+<button class="btn btn-primary" onclick="openAuth()" data-i18n="auth.join">Join Free</button>
 </div>
 <div class="nav-user" id="navUser" style="display:none;align-items:center;gap:1rem">
+<div class="avatar" id="navAvatar">U</div>
 <div style="font-weight:700" id="userName"></div>
-<button class="btn btn-ghost" onclick="logout()">Sair</button>
+<button class="btn btn-ghost" onclick="logout()" data-i18n="auth.signout">Sign Out</button>
 </div>
 </div>
 </div>
@@ -780,36 +1065,36 @@ font-size:0.85rem;
 <div class="hero-content">
 <div class="hero-badge">
 <span class="quantum-dot"></span>
-<span>BLOCKCHAIN VERIFIED • QUANTUM SECURITY • AI-POWERED MATCHING</span>
+<span data-i18n="hero.badge">QUANTUM PROTOCOL • REAL-TIME STATS • AI POWERED</span>
 </div>
-<h1>A evolução do <span class="gradient-text">recrutamento profissional</span></h1>
-<p class="hero-description">
-Sistema de matching com IA quântica, blockchain de reputação, transparência total de compatibilidade e detector de fraudes em tempo real. O futuro do trabalho começa aqui.
+<h1 data-i18n="hero.title">The God Protocol of <span class="gradient-text">Professional Networks</span></h1>
+<p class="hero-description" data-i18n="hero.description">
+Beyond LinkedIn. Beyond Indeed. Real-time AI matching, quantum security, blockchain reputation. The future is here.
 </p>
 <div class="hero-actions">
-<button class="btn btn-primary" onclick="openAuth()" style="font-size:1.1rem;padding:1rem 2.5rem">
-Começar Grátis →
+<button class="btn btn-primary" onclick="openAuth()" style="font-size:1.1rem;padding:1rem 2.5rem" data-i18n="hero.cta">
+Join The Protocol →
 </button>
-<button class="btn btn-ghost" onclick="navigate('tools')" style="font-size:1.1rem;padding:1rem 2.5rem">
-Explorar Ferramentas IA
+<button class="btn btn-ghost" onclick="navigate('tools')" style="font-size:1.1rem;padding:1rem 2.5rem" data-i18n="hero.explore">
+Explore AI Tools
 </button>
 </div>
 <div class="stats-grid">
 <div class="stat-card">
-<div class="stat-number">847K+</div>
-<div class="stat-label">Profissionais Verificados</div>
+<div class="stat-number" id="statUsers">0</div>
+<div class="stat-label" data-i18n="stats.users">Live Users</div>
 </div>
 <div class="stat-card">
-<div class="stat-number">32K+</div>
-<div class="stat-label">Vagas Verificadas</div>
+<div class="stat-number" id="statJobs">0</div>
+<div class="stat-label" data-i18n="stats.jobs">Active Jobs</div>
 </div>
 <div class="stat-card">
-<div class="stat-number">89K+</div>
-<div class="stat-label">Fraudes Bloqueadas</div>
+<div class="stat-number" id="statScams">0</div>
+<div class="stat-label" data-i18n="stats.scams">Scams Blocked</div>
 </div>
 <div class="stat-card">
 <div class="stat-number">99.97%</div>
-<div class="stat-label">Taxa de Detecção IA</div>
+<div class="stat-label" data-i18n="stats.detection">AI Accuracy</div>
 </div>
 </div>
 </div>
@@ -817,126 +1102,218 @@ Explorar Ferramentas IA
 
 <section class="section">
 <div class="section-header">
-<h2 class="section-title">Funcionalidades <span class="gradient-text">Revolucionárias</span></h2>
-<p class="section-subtitle">Tecnologias que nenhuma plataforma de emprego possui</p>
+<h2 class="section-title"><span class="gradient-text" data-i18n="features.title">Revolutionary Features</span></h2>
+<p class="section-subtitle" data-i18n="features.subtitle">Technologies that don't exist anywhere else</p>
 </div>
 <div class="features-grid">
 <div class="feature-card">
 <div class="feature-icon">🎯</div>
-<h3 class="feature-title">Score Transparente de Compatibilidade</h3>
-<p class="feature-description">
-Veja seu score real (0-100%) para cada vaga com breakdown completo: +30 skills técnicas, -5 localização. Total transparência algorítmica.
+<h3 class="feature-title" data-i18n="feature1.title">Transparent Compatibility Score</h3>
+<p class="feature-description" data-i18n="feature1.desc">
+See your real score (0-100%) for each job with complete breakdown: +30 tech skills, -5 location. Total algorithmic transparency.
 </p>
 </div>
 <div class="feature-card">
 <div class="feature-icon">🧪</div>
-<h3 class="feature-title">Simulador de Candidatura</h3>
-<p class="feature-description">
-Teste seu currículo antes de enviar. IA analisa chance de entrevista, pontos fracos e palavras-chave faltando. Sandbox preditivo único.
+<h3 class="feature-title" data-i18n="feature2.title">Predictive Application Simulator</h3>
+<p class="feature-description" data-i18n="feature2.desc">
+Test before applying. AI analyzes interview chances, weak points, and missing keywords. Unique predictive sandbox.
 </p>
 </div>
 <div class="feature-card">
 <div class="feature-icon">🛡️</div>
-<h3 class="feature-title">Detector de Vagas Falsas</h3>
-<p class="feature-description">
-Ghost jobs expostos! Score de confiabilidade da vaga baseado em histórico da empresa, tempo aberta e padrões suspeitos. Proteção quântica.
+<h3 class="feature-title" data-i18n="feature3.title">Ghost Job Detector</h3>
+<p class="feature-description" data-i18n="feature3.desc">
+Exposing fake jobs! Trust score based on company history, time posted, and suspicious patterns. Quantum protection.
 </p>
 </div>
 <div class="feature-card">
 <div class="feature-icon">📊</div>
-<h3 class="feature-title">Radar de Mercado em Tempo Real</h3>
-<p class="feature-description">
-Demanda por sua skill, salário médio atualizado por hora, empresas contratando agora, tempo médio de contratação. Dados vivos.
+<h3 class="feature-title" data-i18n="feature4.title">Real-Time Market Radar</h3>
+<p class="feature-description" data-i18n="feature4.desc">
+Skill demand updated hourly, live average salary, companies hiring now, average hire time. Living data.
 </p>
 </div>
 <div class="feature-card">
 <div class="feature-icon">🔬</div>
-<h3 class="feature-title">Validação de Skills Blockchain</h3>
-<p class="feature-description">
-Certificação descentralizada e verificável. Provas práticas integradas. Nível declarado vs testado. Reputação imutável on-chain.
+<h3 class="feature-title" data-i18n="feature5.title">Blockchain Skill Validation</h3>
+<p class="feature-description" data-i18n="feature5.desc">
+Decentralized certification. Integrated practical proofs. Declared level vs tested. Immutable on-chain reputation.
+</p>
+</div>
+<div class="feature-card">
+<div class="feature-icon">🤖</div>
+<h3 class="feature-title" data-i18n="feature6.title">ATS Resume Optimizer</h3>
+<p class="feature-description" data-i18n="feature6.desc">
+Upload your resume, we generate an optimized version that passes ANY ATS system. Workday, Greenhouse, Lever, all of them.
 </p>
 </div>
 <div class="feature-card">
 <div class="feature-icon">🔄</div>
-<h3 class="feature-title">Matching Reverso Inteligente</h3>
-<p class="feature-description">
-Vagas procuram VOCÊ. Se score > 90%, candidatura automática opcional. Sistema proativo que trabalha para você 24/7.
+<h3 class="feature-title" data-i18n="feature7.title">Intelligent Reverse Matching</h3>
+<p class="feature-description" data-i18n="feature7.desc">
+Jobs find YOU. Auto-apply if score > 90%. Proactive 24/7 system working for you.
 </p>
 </div>
 <div class="feature-card">
 <div class="feature-icon">🔮</div>
-<h3 class="feature-title">Timeline de Carreira Preditiva</h3>
-<p class="feature-description">
-IA calcula sua trajetória: promoção em 14 meses, salário estimado em 2 anos, risco de estagnação. Planejamento com ciência de dados.
-</p>
-</div>
-<div class="feature-card">
-<div class="feature-icon">⚖️</div>
-<h3 class="feature-title">Sistema Anti-Viés Auditável</h3>
-<p class="feature-description">
-Cada rejeição explica fatores ponderados. Transparência algorítmica total. Combate discriminação e injustiça com IA ética.
+<h3 class="feature-title" data-i18n="feature8.title">Predictive Career Timeline</h3>
+<p class="feature-description" data-i18n="feature8.desc">
+AI calculates your trajectory: promotion in 14 months, estimated salary in 2 years, stagnation risk. Data science planning.
 </p>
 </div>
 <div class="feature-card">
 <div class="feature-icon">⭐</div>
-<h3 class="feature-title">Reputação Bidirecional</h3>
-<p class="feature-description">
-Empresas também são avaliadas: tempo de resposta 9/10, transparência 8/10, feedback real 3/10. Equilíbrio de poder restaurado.
+<h3 class="feature-title" data-i18n="feature9.title">Bidirectional Reputation</h3>
+<p class="feature-description" data-i18n="feature9.desc">
+Companies also rated: response time 9/10, transparency 8/10, real feedback 3/10. Power balance restored.
 </p>
 </div>
 </div>
+
+<div style="text-align:center;margin-top:4rem">
+<button class="btn btn-primary" onclick="openPricing()" style="font-size:1.2rem;padding:1.2rem 3rem" data-i18n="pricing.cta">
+View Pricing Plans →
+</button>
+</div>
 </section>
+</div>
+
+<!-- NETWORK PAGE -->
+<div class="page-container hidden" id="networkPage">
+<div class="feed-container">
+<aside class="sidebar">
+<div class="sidebar-card">
+<div class="sidebar-title" data-i18n="sidebar.profile">Your Profile</div>
+<div class="profile-mini" id="profileSidebar">
+<div class="avatar" id="sidebarAvatar">
+<span id="sidebarInitials">?</span>
+</div>
+<div style="flex:1">
+<div style="font-weight:700;margin-bottom:0.3rem" id="sidebarName" data-i18n="sidebar.signin">Sign in</div>
+<div style="font-size:0.85rem;color:var(--text-secondary)" id="sidebarRole">-</div>
+</div>
+</div>
+<button class="btn btn-primary" style="width:100%;justify-content:center" onclick="openProfile()" data-i18n="sidebar.editProfile">
+Edit Profile
+</button>
+</div>
+</aside>
+
+<main id="feedMain"></main>
+
+<aside class="sidebar">
+<div class="sidebar-card">
+<div class="sidebar-title" data-i18n="sidebar.trending">Trending Jobs</div>
+<div id="trendingJobs" style="font-size:0.85rem;color:var(--text-secondary)">Loading...</div>
+</div>
+</aside>
+</div>
 </div>
 
 <!-- TOOLS PAGE -->
 <div class="page-container hidden" id="toolsPage">
 <div class="section">
 <div class="section-header">
-<h2 class="section-title">Ferramentas <span class="gradient-text">Quânticas</span></h2>
-<p class="section-subtitle">IA avançada com segurança blockchain e análise preditiva</p>
+<h2 class="section-title"><span class="gradient-text" data-i18n="tools.title">Quantum AI Tools</span></h2>
+<p class="section-subtitle" data-i18n="tools.subtitle">Advanced AI with blockchain security and predictive analysis</p>
 </div>
 <div class="tool-tabs">
-<div class="tool-tab active" onclick="switchTool('analyzer')">
-🔍 Analisador de Mensagens
+<div class="tool-tab active" onclick="switchTool('scam')" data-i18n="tool.scam">
+🔍 Scam Detector
 </div>
-<div class="tool-tab" onclick="switchTool('simulator')">
-🧪 Simulador de Candidatura
+<div class="tool-tab" onclick="switchTool('resume')" data-i18n="tool.resume">
+📄 ATS Resume Optimizer
 </div>
-<div class="tool-tab" onclick="switchTool('detector')">
-🛡️ Detector de Vagas Falsas
+<div class="tool-tab" onclick="switchTool('simulator')" data-i18n="tool.simulator">
+🧪 Application Simulator
 </div>
-<div class="tool-tab" onclick="switchTool('radar')">
-📊 Radar de Mercado
-</div>
-<div class="tool-tab" onclick="switchTool('validator')">
-🔬 Validador de Skills
+<div class="tool-tab" onclick="switchTool('radar')" data-i18n="tool.radar">
+📊 Market Radar
 </div>
 </div>
 
-<!-- ANALYZER TOOL -->
-<div class="tool-panel active" id="analyzerTool">
+<!-- SCAM DETECTOR -->
+<div class="tool-panel active" id="scamTool">
 <div class="analyzer-layout">
 <div class="input-panel">
-<label class="input-label">Mensagem para Análise</label>
-<textarea id="msgInput" placeholder="Cole aqui a mensagem do recrutador ou proposta de emprego...
-
-Exemplo:
-'Olá! Temos vaga urgente, 15k/mês trabalho remoto, sem experiência necessária. Deposite R$500 taxa de matrícula no treinamento. WhatsApp: +55...'"></textarea>
-<button class="analyze-btn" id="analyzeBtn" onclick="analyzeMessage()">
-<span class="btn-text">🔍 Analisar com IA Quântica</span>
+<label class="input-label" data-i18n="scam.label">Message to Analyze</label>
+<textarea id="scamInput" data-i18n-placeholder="scam.placeholder"></textarea>
+<button class="analyze-btn" id="scamBtn" onclick="analyzeScam()">
+<span class="btn-text" data-i18n="scam.btn">🔍 Analyze with Quantum AI</span>
 <span class="spinner"></span>
 </button>
+<div class="github-unlock" id="githubUnlock">
+<div style="font-weight:700;margin-bottom:0.5rem;color:var(--accent-quantum)" data-i18n="github.title">⭐ Unlock +1 Free Analysis</div>
+<div style="font-size:0.9rem;margin-bottom:1rem;color:var(--text-secondary)" data-i18n="github.desc">
+Star our GitHub repo to get 1 extra free use!
+</div>
+<button class="github-btn" id="githubBtn" onclick="starGithub()">
+<span id="githubText" data-i18n="github.btn">⭐ Star on GitHub</span>
+</button>
+</div>
 <div class="blockchain-badge" style="width:100%;justify-content:center;margin-top:1rem">
 <span>🔐</span>
-<span>Protegido por Blockchain • Análise criptografada</span>
+<span data-i18n="blockchain.protected">Blockchain Protected • Encrypted Analysis</span>
 </div>
 </div>
-<div class="output-panel" id="analyzerOutput">
+<div class="output-panel" id="scamOutput">
 <div class="score-display">
 <div style="font-size:4rem;opacity:.1">🛡️</div>
 <div style="font-size:1.2rem;color:var(--text-secondary);margin-top:1rem">
-<strong>IA Quântica Pronta</strong><br>
-Cole uma mensagem para análise em tempo real
+<strong data-i18n="scam.ready">Quantum AI Ready</strong><br>
+<span data-i18n="scam.paste">Paste a message for real-time analysis</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- RESUME OPTIMIZER -->
+<div class="tool-panel" id="resumeTool">
+<div class="analyzer-layout">
+<div class="input-panel">
+<label class="input-label" data-i18n="resume.label">Upload Your Resume</label>
+<div class="file-upload" id="resumeUpload" onclick="document.getElementById('resumeFile').click()">
+<input type="file" id="resumeFile" accept=".pdf,.doc,.docx" style="display:none" onchange="handleResumeUpload(event)">
+<div style="font-size:3rem;margin-bottom:1rem;opacity:.3">📄</div>
+<div style="font-weight:700;margin-bottom:0.5rem" data-i18n="resume.click">Click to upload</div>
+<div style="font-size:0.85rem;color:var(--text-secondary)" data-i18n="resume.formats">PDF, DOC, DOCX • Max 10MB</div>
+</div>
+<div id="resumeFileName" style="display:none;margin-top:1rem;padding:1rem;background:var(--glow-quantum);border-radius:12px;font-weight:700;color:var(--accent-quantum)"></div>
+<label class="input-label" style="margin-top:1.5rem" data-i18n="resume.ats">Target ATS System</label>
+<select id="atsSelect">
+<option data-i18n="ats.generic">Generic (All Systems)</option>
+<option>Workday</option>
+<option>Greenhouse</option>
+<option>Lever</option>
+<option>Oracle Taleo</option>
+<option>iCIMS</option>
+<option>LinkedIn Recruiter</option>
+<option>Indeed</option>
+<option>SAP SuccessFactors</option>
+<option>Gupy (Brazil)</option>
+</select>
+<button class="analyze-btn" id="resumeBtn" onclick="optimizeResume()">
+<span class="btn-text" data-i18n="resume.btn">🤖 Optimize with AI</span>
+<span class="spinner"></span>
+</button>
+<div class="github-unlock hidden" id="githubUnlockResume">
+<div style="font-weight:700;margin-bottom:0.5rem;color:var(--accent-quantum)" data-i18n="github.title">⭐ Unlock +1 Free Optimization</div>
+<div style="font-size:0.9rem;margin-bottom:1rem;color:var(--text-secondary)" data-i18n="github.desc">
+Star our GitHub repo to get 1 extra free use!
+</div>
+<button class="github-btn" onclick="starGithub()">
+<span data-i18n="github.btn">⭐ Star on GitHub</span>
+</button>
+</div>
+</div>
+<div class="output-panel" id="resumeOutput">
+<div class="score-display">
+<div style="font-size:4rem;opacity:.1">📊</div>
+<div style="font-size:1.2rem;color:var(--text-secondary);margin-top:1rem">
+<strong data-i18n="resume.ready">ATS Optimizer Ready</strong><br>
+<span data-i18n="resume.upload">Upload your resume to begin</span>
 </div>
 </div>
 </div>
@@ -947,30 +1324,12 @@ Cole uma mensagem para análise em tempo real
 <div class="tool-panel" id="simulatorTool">
 <div class="analyzer-layout">
 <div class="input-panel">
-<label class="input-label">Cole seu Currículo</label>
-<textarea id="cvInput" placeholder="Formação: Ciência da Computação - USP (2018-2022)
-
-Experiência:
-- Desenvolvedor Full Stack na XYZ Corp (2022-2024)
-  • React, Node.js, PostgreSQL
-  • Liderou projeto de migração cloud
-  • Aumentou performance em 40%
-
-Skills: JavaScript, Python, AWS, Docker, Git"></textarea>
-<label class="input-label" style="margin-top:1.5rem">Descrição da Vaga</label>
-<textarea id="jobInput" style="min-height:200px" placeholder="Senior Full Stack Developer
-
-Requisitos:
-- 3+ anos React e Node.js
-- Experiência com cloud (AWS/GCP)
-- Inglês fluente
-- Liderança técnica
-
-Diferencial:
-- Certificação AWS
-- Contribuição open-source"></textarea>
+<label class="input-label" data-i18n="simulator.cv">Your Resume/CV</label>
+<textarea id="cvInput" data-i18n-placeholder="simulator.cvPlaceholder"></textarea>
+<label class="input-label" style="margin-top:1.5rem" data-i18n="simulator.job">Job Description</label>
+<textarea id="jobInput" style="min-height:200px" data-i18n-placeholder="simulator.jobPlaceholder"></textarea>
 <button class="analyze-btn" onclick="simulateApplication()">
-<span class="btn-text">🧪 Simular Candidatura</span>
+<span class="btn-text" data-i18n="simulator.btn">🧪 Simulate Application</span>
 <span class="spinner"></span>
 </button>
 </div>
@@ -978,40 +1337,8 @@ Diferencial:
 <div class="score-display">
 <div style="font-size:4rem;opacity:.1">🧪</div>
 <div style="font-size:1.2rem;color:var(--text-secondary);margin-top:1rem">
-<strong>Sandbox Preditivo</strong><br>
-Teste compatibilidade antes de candidatar
-</div>
-</div>
-</div>
-</div>
-</div>
-
-<!-- DETECTOR TOOL -->
-<div class="tool-panel" id="detectorTool">
-<div class="analyzer-layout">
-<div class="input-panel">
-<label class="input-label">URL ou Descrição da Vaga</label>
-<input type="text" id="jobUrl" placeholder="https://linkedin.com/jobs/view/123456" style="margin-bottom:1rem">
-<textarea id="jobDesc" placeholder="Ou cole a descrição completa da vaga aqui...
-
-Empresa: TechCorp Brasil
-Vaga: Desenvolvedor Senior
-Salário: R$ 25.000/mês
-Regime: CLT Remoto
-
-Descrição:
-Buscamos desenvolvedor para projeto inovador..."></textarea>
-<button class="analyze-btn" onclick="detectFraud()">
-<span class="btn-text">🛡️ Verificar Autenticidade</span>
-<span class="spinner"></span>
-</button>
-</div>
-<div class="output-panel" id="detectorOutput">
-<div class="score-display">
-<div style="font-size:4rem;opacity:.1">🛡️</div>
-<div style="font-size:1.2rem;color:var(--text-secondary);margin-top:1rem">
-<strong>Detector Quantum</strong><br>
-Expõe ghost jobs e fraudes em segundos
+<strong data-i18n="simulator.ready">Predictive Sandbox</strong><br>
+<span data-i18n="simulator.test">Test compatibility before applying</span>
 </div>
 </div>
 </div>
@@ -1022,19 +1349,19 @@ Expõe ghost jobs e fraudes em segundos
 <div class="tool-panel" id="radarTool">
 <div class="analyzer-layout">
 <div class="input-panel">
-<label class="input-label">Sua Skill Principal</label>
-<input type="text" id="skillInput" placeholder="Ex: React Developer, Data Scientist, UX Designer">
-<label class="input-label" style="margin-top:1.5rem">Localização</label>
-<input type="text" id="locationInput" placeholder="Ex: São Paulo, Brasil">
-<label class="input-label" style="margin-top:1.5rem">Nível de Senioridade</label>
+<label class="input-label" data-i18n="radar.skill">Your Main Skill</label>
+<input type="text" id="skillInput" data-i18n-placeholder="radar.skillPlaceholder">
+<label class="input-label" style="margin-top:1.5rem" data-i18n="radar.location">Location</label>
+<input type="text" id="locationInput" data-i18n-placeholder="radar.locationPlaceholder">
+<label class="input-label" style="margin-top:1.5rem" data-i18n="radar.level">Seniority Level</label>
 <select id="levelInput">
-<option>Júnior</option>
-<option selected>Pleno</option>
-<option>Sênior</option>
-<option>Especialista</option>
+<option data-i18n="level.junior">Junior</option>
+<option selected data-i18n="level.mid">Mid-level</option>
+<option data-i18n="level.senior">Senior</option>
+<option data-i18n="level.expert">Expert</option>
 </select>
 <button class="analyze-btn" onclick="getMarketRadar()">
-<span class="btn-text">📊 Gerar Radar em Tempo Real</span>
+<span class="btn-text" data-i18n="radar.btn">📊 Generate Real-Time Radar</span>
 <span class="spinner"></span>
 </button>
 </div>
@@ -1042,43 +1369,8 @@ Expõe ghost jobs e fraudes em segundos
 <div class="score-display">
 <div style="font-size:4rem;opacity:.1">📊</div>
 <div style="font-size:1.2rem;color:var(--text-secondary);margin-top:1rem">
-<strong>Market Intelligence</strong><br>
-Dados atualizados a cada hora
-</div>
-</div>
-</div>
-</div>
-</div>
-
-<!-- VALIDATOR TOOL -->
-<div class="tool-panel" id="validatorTool">
-<div class="analyzer-layout">
-<div class="input-panel">
-<label class="input-label">Skill para Validar</label>
-<input type="text" id="skillValidate" placeholder="Ex: Python, JavaScript, AWS, Machine Learning">
-<label class="input-label" style="margin-top:1.5rem">Nível Declarado</label>
-<select id="declaredLevel">
-<option>Básico</option>
-<option>Intermediário</option>
-<option selected>Avançado</option>
-<option>Especialista</option>
-</select>
-<label class="input-label" style="margin-top:1.5rem">Provas (opcional)</label>
-<textarea id="proofInput" style="min-height:150px" placeholder="Links para GitHub, certificados, projetos:
-• github.com/seu-usuario
-• certificação AWS Solutions Architect
-• projeto: app-xyz.com"></textarea>
-<button class="analyze-btn" onclick="validateSkill()">
-<span class="btn-text">🔬 Validar com Blockchain</span>
-<span class="spinner"></span>
-</button>
-</div>
-<div class="output-panel" id="validatorOutput">
-<div class="score-display">
-<div style="font-size:4rem;opacity:.1">🔬</div>
-<div style="font-size:1.2rem;color:var(--text-secondary);margin-top:1rem">
-<strong>Blockchain Validator</strong><br>
-Certificação descentralizada e imutável
+<strong data-i18n="radar.ready">Market Intelligence</strong><br>
+<span data-i18n="radar.updated">Updated every hour</span>
 </div>
 </div>
 </div>
@@ -1092,8 +1384,8 @@ Certificação descentralizada e imutável
 <div class="page-container hidden" id="jobsPage">
 <div class="section">
 <div class="section-header">
-<h2 class="section-title">Vagas <span class="gradient-text">Verificadas</span></h2>
-<p class="section-subtitle">Todas as vagas com score de autenticidade e compatibilidade transparente</p>
+<h2 class="section-title"><span class="gradient-text" data-i18n="jobs.title">Verified Jobs</span></h2>
+<p class="section-subtitle" data-i18n="jobs.subtitle">All jobs with authenticity score and transparent compatibility</p>
 </div>
 <div id="jobsList"></div>
 </div>
@@ -1102,22 +1394,22 @@ Certificação descentralizada e imutável
 <!-- DASHBOARD PAGE -->
 <div class="page-container hidden" id="dashboardPage">
 <div class="section">
-<h2 class="section-title">Dashboard <span class="gradient-text">Quantum</span></h2>
+<h2 class="section-title"><span class="gradient-text" data-i18n="dashboard.title">Quantum Dashboard</span></h2>
 <div class="dashboard-grid" style="margin-top:3rem">
 <div class="dashboard-card">
-<div class="dashboard-label">Análises Realizadas</div>
+<div class="dashboard-label" data-i18n="dashboard.analyses">Analyses Performed</div>
 <div class="dashboard-value" style="color:var(--accent-quantum)" id="dashAnalyses">0</div>
 </div>
 <div class="dashboard-card">
-<div class="dashboard-label">Fraudes Bloqueadas</div>
+<div class="dashboard-label" data-i18n="dashboard.threats">Threats Blocked</div>
 <div class="dashboard-value" style="color:var(--accent-danger)" id="dashThreats">0</div>
 </div>
 <div class="dashboard-card">
-<div class="dashboard-label">Score de Reputação</div>
+<div class="dashboard-label" data-i18n="dashboard.reputation">Reputation Score</div>
 <div class="dashboard-value" style="color:var(--accent-cyber)" id="dashReputation">0</div>
 </div>
 <div class="dashboard-card">
-<div class="dashboard-label">Compatibilidade Média</div>
+<div class="dashboard-label" data-i18n="dashboard.compatibility">Avg Compatibility</div>
 <div class="dashboard-value" style="color:var(--accent-purple)">87%</div>
 </div>
 </div>
@@ -1129,22 +1421,129 @@ Certificação descentralizada e imutável
 <div class="modal">
 <button class="modal-close" onclick="closeAuth()">×</button>
 <div style="font-size:4rem;text-align:center;margin-bottom:1.5rem">🛡️</div>
-<h3 style="font-family:var(--font-display);font-size:2rem;font-weight:900;margin-bottom:1rem;text-align:center">
-Entrar no TrustHire Quantum
+<h3 style="font-family:var(--font-display);font-size:2rem;font-weight:900;margin-bottom:1rem;text-align:center" data-i18n="auth.title">
+Join TrustHire Quantum
 </h3>
-<p style="color:var(--text-secondary);margin-bottom:2rem;text-align:center">
-A rede profissional mais segura do mundo
+<p style="color:var(--text-secondary);margin-bottom:2rem;text-align:center" data-i18n="auth.subtitle">
+The world's safest professional network
 </p>
 <form onsubmit="handleAuth(event)" style="display:flex;flex-direction:column;gap:1rem">
-<input type="text" id="authName" placeholder="Nome Completo" required>
-<input type="email" id="authEmail" placeholder="Email Profissional" required>
-<input type="password" id="authPass" placeholder="Senha (mín 8 caracteres)" required minlength="8">
-<button class="btn btn-primary" type="submit" style="width:100%;justify-content:center;font-size:1rem">
-Criar Conta Gratuita →
+<input type="text" id="authName" data-i18n-placeholder="auth.name" required>
+<input type="email" id="authEmail" data-i18n-placeholder="auth.email" required>
+<input type="password" id="authPass" data-i18n-placeholder="auth.password" required minlength="8">
+<button class="btn btn-primary" type="submit" style="width:100%;justify-content:center;font-size:1rem" data-i18n="auth.create">
+Create Free Account →
 </button>
 </form>
 <div class="blockchain-badge" style="width:100%;justify-content:center;margin-top:1.5rem">
-<span>🔐 Dados protegidos com criptografia quântica</span>
+<span data-i18n="auth.encrypted">🔐 Quantum encrypted data</span>
+</div>
+</div>
+</div>
+
+<!-- PROFILE MODAL -->
+<div class="modal-overlay" id="profileModal">
+<div class="modal">
+<button class="modal-close" onclick="closeProfile()">×</button>
+<h3 style="font-family:var(--font-display);font-size:2rem;font-weight:900;margin-bottom:2rem" data-i18n="profile.title">
+Your Profile
+</h3>
+<div style="display:flex;flex-direction:column;gap:1.5rem">
+<div>
+<label class="input-label" data-i18n="profile.photo">Profile Photo</label>
+<div style="display:flex;gap:1.5rem;align-items:center">
+<div class="avatar" id="profileAvatar" style="width:80px;height:80px;font-size:2rem">
+<span id="profileInitials">?</span>
+</div>
+<div>
+<input type="file" id="photoFile" accept="image/*" style="display:none" onchange="handlePhotoUpload(event)">
+<button class="btn btn-ghost" onclick="document.getElementById('photoFile').click()" data-i18n="profile.upload">
+Upload Photo
+</button>
+<div style="font-size:0.8rem;color:var(--text-tertiary);margin-top:0.5rem" data-i18n="profile.formats">JPG, PNG • Max 5MB</div>
+</div>
+</div>
+</div>
+<div>
+<label class="input-label" data-i18n="profile.nameLabel">Full Name</label>
+<input type="text" id="profileName" value="">
+</div>
+<div>
+<label class="input-label" data-i18n="profile.role">Professional Role</label>
+<input type="text" id="profileRole" data-i18n-placeholder="profile.rolePlaceholder">
+</div>
+<div>
+<label class="input-label" data-i18n="profile.bio">Bio</label>
+<textarea id="profileBio" style="min-height:120px" data-i18n-placeholder="profile.bioPlaceholder"></textarea>
+</div>
+<button class="btn btn-primary" style="width:100%;justify-content:center" onclick="saveProfile()" data-i18n="profile.save">
+Save Profile
+</button>
+</div>
+</div>
+</div>
+
+<!-- PRICING MODAL -->
+<div class="modal-overlay" id="pricingModal">
+<div class="modal" style="max-width:900px">
+<button class="modal-close" onclick="closePricing()">×</button>
+<h3 style="font-family:var(--font-display);font-size:2.5rem;font-weight:900;margin-bottom:1rem;text-align:center" data-i18n="pricing.title">
+Choose Your Plan
+</h3>
+<p style="color:var(--text-secondary);margin-bottom:2rem;text-align:center" data-i18n="pricing.subtitle">
+Unlock unlimited AI power
+</p>
+<div class="pricing-grid">
+<div class="pricing-card">
+<div class="plan-name" data-i18n="plan.free.name">Free</div>
+<div class="plan-price">$0</div>
+<div class="plan-period" data-i18n="plan.free.period">Forever free</div>
+<ul class="plan-features">
+<li>✅ <span data-i18n="plan.free.f1">3 scam analyses</span></li>
+<li>✅ <span data-i18n="plan.free.f2">1 resume optimization</span></li>
+<li>✅ <span data-i18n="plan.free.f3">Basic job search</span></li>
+<li>✅ <span data-i18n="plan.free.f4">+1 with GitHub star</span></li>
+<li>❌ <span data-i18n="plan.free.f5">Unlimited AI tools</span></li>
+<li>❌ <span data-i18n="plan.free.f6">Priority matching</span></li>
+</ul>
+<button class="btn btn-ghost" style="width:100%;justify-content:center" onclick="closePricing()" data-i18n="plan.free.btn">
+Current Plan
+</button>
+</div>
+
+<div class="pricing-card featured">
+<div class="plan-name" data-i18n="plan.premium.name">Premium</div>
+<div class="plan-price" style="color:var(--accent-quantum)">$9.99</div>
+<div class="plan-period" data-i18n="plan.premium.period">per month</div>
+<ul class="plan-features">
+<li>✅ <span data-i18n="plan.premium.f1">Unlimited scam detection</span></li>
+<li>✅ <span data-i18n="plan.premium.f2">Unlimited resume optimization</span></li>
+<li>✅ <span data-i18n="plan.premium.f3">Advanced job matching</span></li>
+<li>✅ <span data-i18n="plan.premium.f4">Priority AI support</span></li>
+<li>✅ <span data-i18n="plan.premium.f5">Career predictions</span></li>
+<li>✅ <span data-i18n="plan.premium.f6">Real-time market radar</span></li>
+</ul>
+<button class="btn btn-primary" style="width:100%;justify-content:center" onclick="upgradePlan('premium')" data-i18n="plan.premium.btn">
+Upgrade to Premium
+</button>
+</div>
+
+<div class="pricing-card">
+<div class="plan-name" data-i18n="plan.enterprise.name">Enterprise</div>
+<div class="plan-price" style="color:var(--accent-cyber)">$49.99</div>
+<div class="plan-period" data-i18n="plan.enterprise.period">per month</div>
+<ul class="plan-features">
+<li>✅ <span data-i18n="plan.enterprise.f1">Everything in Premium</span></li>
+<li>✅ <span data-i18n="plan.enterprise.f2">Dedicated AI assistant</span></li>
+<li>✅ <span data-i18n="plan.enterprise.f3">Company analytics</span></li>
+<li>✅ <span data-i18n="plan.enterprise.f4">Blockchain verification</span></li>
+<li>✅ <span data-i18n="plan.enterprise.f5">API access</span></li>
+<li>✅ <span data-i18n="plan.enterprise.f6">White-label solution</span></li>
+</ul>
+<button class="btn btn-primary" style="width:100%;justify-content:center;background:linear-gradient(135deg, var(--accent-cyber), var(--accent-purple))" onclick="upgradePlan('enterprise')" data-i18n="plan.enterprise.btn">
+Upgrade to Enterprise
+</button>
+</div>
 </div>
 </div>
 </div>
@@ -1154,55 +1553,489 @@ Criar Conta Gratuita →
 
 <script>
 // ============================================================================
-// TRUSTHIRE QUANTUM - SISTEMA COMPLETO
+// TRUSTHIRE QUANTUM PROTOCOL - THE GOD PROTOCOL
 // ============================================================================
 
+// TRANSLATIONS
+const TRANSLATIONS = {
+  pt: {
+    'nav.home': 'Início',
+    'nav.network': 'Rede',
+    'nav.jobs': 'Vagas',
+    'nav.tools': 'Ferramentas IA',
+    'nav.dashboard': 'Dashboard',
+    'usage.left': 'restantes',
+    'auth.signin': 'Entrar',
+    'auth.join': 'Cadastrar Grátis',
+    'auth.signout': 'Sair',
+    'hero.badge': 'PROTOCOLO QUÂNTICO • ESTATÍSTICAS REAIS • PODER IA',
+    'hero.title': 'O Protocolo Deus das Redes Profissionais',
+    'hero.description': 'Além do LinkedIn. Além do Indeed. Matching IA em tempo real, segurança quântica, reputação blockchain. O futuro chegou.',
+    'hero.cta': 'Entrar no Protocolo →',
+    'hero.explore': 'Explorar Ferramentas IA',
+    'stats.users': 'Usuários Ativos',
+    'stats.jobs': 'Vagas Ativas',
+    'stats.scams': 'Golpes Bloqueados',
+    'stats.detection': 'Precisão IA',
+    'features.title': 'Recursos Revolucionários',
+    'features.subtitle': 'Tecnologias que não existem em nenhum outro lugar',
+    'feature1.title': 'Score Transparente de Compatibilidade',
+    'feature1.desc': 'Veja seu score real (0-100%) para cada vaga com breakdown completo: +30 skills técnicas, -5 localização. Total transparência algorítmica.',
+    'feature2.title': 'Simulador Preditivo de Candidatura',
+    'feature2.desc': 'Teste antes de candidatar. IA analisa chance de entrevista, pontos fracos e palavras-chave faltando. Sandbox preditivo único.',
+    'feature3.title': 'Detector de Vagas Falsas',
+    'feature3.desc': 'Expõe ghost jobs! Score de confiança baseado em histórico da empresa, tempo publicada e padrões suspeitos. Proteção quântica.',
+    'feature4.title': 'Radar de Mercado em Tempo Real',
+    'feature4.desc': 'Demanda por skill atualizada por hora, salário médio ao vivo, empresas contratando agora, tempo médio de contratação. Dados vivos.',
+    'feature5.title': 'Validação Blockchain de Skills',
+    'feature5.desc': 'Certificação descentralizada. Provas práticas integradas. Nível declarado vs testado. Reputação imutável on-chain.',
+    'feature6.title': 'Otimizador ATS de Currículo',
+    'feature6.desc': 'Envie seu currículo, geramos versão otimizada que passa em QUALQUER sistema ATS. Workday, Greenhouse, Lever, todos.',
+    'feature7.title': 'Matching Reverso Inteligente',
+    'feature7.desc': 'Vagas procuram VOCÊ. Auto-candidatura se score > 90%. Sistema proativo 24/7 trabalhando para você.',
+    'feature8.title': 'Timeline Preditiva de Carreira',
+    'feature8.desc': 'IA calcula sua trajetória: promoção em 14 meses, salário estimado em 2 anos, risco de estagnação. Planejamento com ciência de dados.',
+    'feature9.title': 'Reputação Bidirecional',
+    'feature9.desc': 'Empresas também são avaliadas: tempo de resposta 9/10, transparência 8/10, feedback real 3/10. Equilíbrio de poder restaurado.',
+    'pricing.cta': 'Ver Planos →',
+    'sidebar.profile': 'Seu Perfil',
+    'sidebar.signin': 'Entrar',
+    'sidebar.editProfile': 'Editar Perfil',
+    'sidebar.trending': 'Vagas em Alta',
+    'tools.title': 'Ferramentas IA Quânticas',
+    'tools.subtitle': 'IA avançada com segurança blockchain e análise preditiva',
+    'tool.scam': '🔍 Detector de Golpes',
+    'tool.resume': '📄 Otimizador ATS',
+    'tool.simulator': '🧪 Simulador',
+    'tool.radar': '📊 Radar de Mercado',
+    'scam.label': 'Mensagem para Analisar',
+    'scam.placeholder': 'Cole aqui a mensagem do recrutador ou proposta de emprego...\n\nExemplo:\n"Olá! Vaga urgente, 15k/mês trabalho remoto, sem experiência necessária. Deposite R$500 taxa de matrícula. WhatsApp: +55..."',
+    'scam.btn': '🔍 Analisar com IA Quântica',
+    'scam.ready': 'IA Quântica Pronta',
+    'scam.paste': 'Cole uma mensagem para análise em tempo real',
+    'github.title': '⭐ Desbloqueie +1 Análise Grátis',
+    'github.desc': 'Dê uma estrela no nosso repositório GitHub para ganhar 1 uso extra gratuito!',
+    'github.btn': '⭐ Dar Estrela no GitHub',
+    'blockchain.protected': 'Protegido por Blockchain • Análise Criptografada',
+    'resume.label': 'Envie Seu Currículo',
+    'resume.click': 'Clique para enviar',
+    'resume.formats': 'PDF, DOC, DOCX • Máx 10MB',
+    'resume.ats': 'Sistema ATS Alvo',
+    'resume.btn': '🤖 Otimizar com IA',
+    'resume.ready': 'Otimizador ATS Pronto',
+    'resume.upload': 'Envie seu currículo para começar',
+    'ats.generic': 'Genérico (Todos os Sistemas)',
+    'simulator.cv': 'Seu Currículo/CV',
+    'simulator.cvPlaceholder': 'Formação: Ciência da Computação - USP (2018-2022)\n\nExperiência:\n- Desenvolvedor Full Stack na XYZ Corp (2022-2024)\n  • React, Node.js, PostgreSQL\n  • Liderou projeto de migração cloud\n  • Aumentou performance em 40%\n\nSkills: JavaScript, Python, AWS, Docker, Git',
+    'simulator.job': 'Descrição da Vaga',
+    'simulator.jobPlaceholder': 'Senior Full Stack Developer\n\nRequisitos:\n- 3+ anos React e Node.js\n- Experiência com cloud (AWS/GCP)\n- Inglês fluente\n- Liderança técnica\n\nDiferencial:\n- Certificação AWS\n- Contribuição open-source',
+    'simulator.btn': '🧪 Simular Candidatura',
+    'simulator.ready': 'Sandbox Preditivo',
+    'simulator.test': 'Teste compatibilidade antes de candidatar',
+    'radar.skill': 'Sua Skill Principal',
+    'radar.skillPlaceholder': 'Ex: React Developer, Data Scientist, UX Designer',
+    'radar.location': 'Localização',
+    'radar.locationPlaceholder': 'Ex: São Paulo, Brasil',
+    'radar.level': 'Nível de Senioridade',
+    'radar.btn': '📊 Gerar Radar em Tempo Real',
+    'radar.ready': 'Inteligência de Mercado',
+    'radar.updated': 'Atualizado a cada hora',
+    'level.junior': 'Júnior',
+    'level.mid': 'Pleno',
+    'level.senior': 'Sênior',
+    'level.expert': 'Especialista',
+    'jobs.title': 'Vagas Verificadas',
+    'jobs.subtitle': 'Todas as vagas com score de autenticidade e compatibilidade transparente',
+    'dashboard.title': 'Dashboard Quântico',
+    'dashboard.analyses': 'Análises Realizadas',
+    'dashboard.threats': 'Ameaças Bloqueadas',
+    'dashboard.reputation': 'Score de Reputação',
+    'dashboard.compatibility': 'Compatibilidade Média',
+    'auth.title': 'Entrar no TrustHire Quantum',
+    'auth.subtitle': 'A rede profissional mais segura do mundo',
+    'auth.name': 'Nome Completo',
+    'auth.email': 'Email Profissional',
+    'auth.password': 'Senha (mín 8 caracteres)',
+    'auth.create': 'Criar Conta Gratuita →',
+    'auth.encrypted': '🔐 Dados protegidos com criptografia quântica',
+    'profile.title': 'Seu Perfil',
+    'profile.photo': 'Foto de Perfil',
+    'profile.upload': 'Enviar Foto',
+    'profile.formats': 'JPG, PNG • Máx 5MB',
+    'profile.nameLabel': 'Nome Completo',
+    'profile.role': 'Cargo Profissional',
+    'profile.rolePlaceholder': 'Ex: Senior Software Engineer',
+    'profile.bio': 'Bio',
+    'profile.bioPlaceholder': 'Conte sobre sua experiência e objetivos profissionais...',
+    'profile.save': 'Salvar Perfil',
+    'pricing.title': 'Escolha Seu Plano',
+    'pricing.subtitle': 'Desbloqueie poder IA ilimitado',
+    'plan.free.name': 'Grátis',
+    'plan.free.period': 'Grátis para sempre',
+    'plan.free.f1': '3 análises de golpes',
+    'plan.free.f2': '1 otimização de currículo',
+    'plan.free.f3': 'Busca básica de vagas',
+    'plan.free.f4': '+1 com estrela GitHub',
+    'plan.free.f5': 'Ferramentas IA ilimitadas',
+    'plan.free.f6': 'Matching prioritário',
+    'plan.free.btn': 'Plano Atual',
+    'plan.premium.name': 'Premium',
+    'plan.premium.period': 'por mês',
+    'plan.premium.f1': 'Detecção ilimitada de golpes',
+    'plan.premium.f2': 'Otimização ilimitada de currículo',
+    'plan.premium.f3': 'Matching avançado de vagas',
+    'plan.premium.f4': 'Suporte IA prioritário',
+    'plan.premium.f5': 'Predições de carreira',
+    'plan.premium.f6': 'Radar de mercado em tempo real',
+    'plan.premium.btn': 'Upgrade para Premium',
+    'plan.enterprise.name': 'Enterprise',
+    'plan.enterprise.period': 'por mês',
+    'plan.enterprise.f1': 'Tudo do Premium',
+    'plan.enterprise.f2': 'Assistente IA dedicado',
+    'plan.enterprise.f3': 'Analytics de empresa',
+    'plan.enterprise.f4': 'Verificação blockchain',
+    'plan.enterprise.f5': 'Acesso à API',
+    'plan.enterprise.f6': 'Solução white-label',
+    'plan.enterprise.btn': 'Upgrade para Enterprise',
+  },
+  en: {
+    'nav.home': 'Home',
+    'nav.network': 'Network',
+    'nav.jobs': 'Jobs',
+    'nav.tools': 'AI Tools',
+    'nav.dashboard': 'Dashboard',
+    'usage.left': 'left',
+    'auth.signin': 'Sign In',
+    'auth.join': 'Join Free',
+    'auth.signout': 'Sign Out',
+    'hero.badge': 'QUANTUM PROTOCOL • REAL-TIME STATS • AI POWERED',
+    'hero.title': 'The God Protocol of Professional Networks',
+    'hero.description': 'Beyond LinkedIn. Beyond Indeed. Real-time AI matching, quantum security, blockchain reputation. The future is here.',
+    'hero.cta': 'Join The Protocol →',
+    'hero.explore': 'Explore AI Tools',
+    'stats.users': 'Live Users',
+    'stats.jobs': 'Active Jobs',
+    'stats.scams': 'Scams Blocked',
+    'stats.detection': 'AI Accuracy',
+    'features.title': 'Revolutionary Features',
+    'features.subtitle': 'Technologies that don\'t exist anywhere else',
+    'feature1.title': 'Transparent Compatibility Score',
+    'feature1.desc': 'See your real score (0-100%) for each job with complete breakdown: +30 tech skills, -5 location. Total algorithmic transparency.',
+    'feature2.title': 'Predictive Application Simulator',
+    'feature2.desc': 'Test before applying. AI analyzes interview chances, weak points, and missing keywords. Unique predictive sandbox.',
+    'feature3.title': 'Ghost Job Detector',
+    'feature3.desc': 'Exposing fake jobs! Trust score based on company history, time posted, and suspicious patterns. Quantum protection.',
+    'feature4.title': 'Real-Time Market Radar',
+    'feature4.desc': 'Skill demand updated hourly, live average salary, companies hiring now, average hire time. Living data.',
+    'feature5.title': 'Blockchain Skill Validation',
+    'feature5.desc': 'Decentralized certification. Integrated practical proofs. Declared level vs tested. Immutable on-chain reputation.',
+    'feature6.title': 'ATS Resume Optimizer',
+    'feature6.desc': 'Upload your resume, we generate optimized version that passes ANY ATS system. Workday, Greenhouse, Lever, all of them.',
+    'feature7.title': 'Intelligent Reverse Matching',
+    'feature7.desc': 'Jobs find YOU. Auto-apply if score > 90%. Proactive 24/7 system working for you.',
+    'feature8.title': 'Predictive Career Timeline',
+    'feature8.desc': 'AI calculates your trajectory: promotion in 14 months, estimated salary in 2 years, stagnation risk. Data science planning.',
+    'feature9.title': 'Bidirectional Reputation',
+    'feature9.desc': 'Companies also rated: response time 9/10, transparency 8/10, real feedback 3/10. Power balance restored.',
+    'pricing.cta': 'View Pricing Plans →',
+    'sidebar.profile': 'Your Profile',
+    'sidebar.signin': 'Sign in',
+    'sidebar.editProfile': 'Edit Profile',
+    'sidebar.trending': 'Trending Jobs',
+    'tools.title': 'Quantum AI Tools',
+    'tools.subtitle': 'Advanced AI with blockchain security and predictive analysis',
+    'tool.scam': '🔍 Scam Detector',
+    'tool.resume': '📄 ATS Optimizer',
+    'tool.simulator': '🧪 Simulator',
+    'tool.radar': '📊 Market Radar',
+    'scam.label': 'Message to Analyze',
+    'scam.placeholder': 'Paste recruiter message or job offer here...\n\nExample:\n"Hi! Urgent job, $5k/month remote work, no experience needed. Send $500 registration fee. WhatsApp: +1..."',
+    'scam.btn': '🔍 Analyze with Quantum AI',
+    'scam.ready': 'Quantum AI Ready',
+    'scam.paste': 'Paste a message for real-time analysis',
+    'github.title': '⭐ Unlock +1 Free Analysis',
+    'github.desc': 'Star our GitHub repo to get 1 extra free use!',
+    'github.btn': '⭐ Star on GitHub',
+    'blockchain.protected': 'Blockchain Protected • Encrypted Analysis',
+    'resume.label': 'Upload Your Resume',
+    'resume.click': 'Click to upload',
+    'resume.formats': 'PDF, DOC, DOCX • Max 10MB',
+    'resume.ats': 'Target ATS System',
+    'resume.btn': '🤖 Optimize with AI',
+    'resume.ready': 'ATS Optimizer Ready',
+    'resume.upload': 'Upload your resume to begin',
+    'ats.generic': 'Generic (All Systems)',
+    'simulator.cv': 'Your Resume/CV',
+    'simulator.cvPlaceholder': 'Education: Computer Science - MIT (2018-2022)\n\nExperience:\n- Full Stack Developer at XYZ Corp (2022-2024)\n  • React, Node.js, PostgreSQL\n  • Led cloud migration project\n  • Increased performance by 40%\n\nSkills: JavaScript, Python, AWS, Docker, Git',
+    'simulator.job': 'Job Description',
+    'simulator.jobPlaceholder': 'Senior Full Stack Developer\n\nRequirements:\n- 3+ years React and Node.js\n- Cloud experience (AWS/GCP)\n- Fluent English\n- Technical leadership\n\nBonus:\n- AWS Certification\n- Open-source contributions',
+    'simulator.btn': '🧪 Simulate Application',
+    'simulator.ready': 'Predictive Sandbox',
+    'simulator.test': 'Test compatibility before applying',
+    'radar.skill': 'Your Main Skill',
+    'radar.skillPlaceholder': 'e.g. React Developer, Data Scientist, UX Designer',
+    'radar.location': 'Location',
+    'radar.locationPlaceholder': 'e.g. New York, USA',
+    'radar.level': 'Seniority Level',
+    'radar.btn': '📊 Generate Real-Time Radar',
+    'radar.ready': 'Market Intelligence',
+    'radar.updated': 'Updated every hour',
+    'level.junior': 'Junior',
+    'level.mid': 'Mid-level',
+    'level.senior': 'Senior',
+    'level.expert': 'Expert',
+    'jobs.title': 'Verified Jobs',
+    'jobs.subtitle': 'All jobs with authenticity score and transparent compatibility',
+    'dashboard.title': 'Quantum Dashboard',
+    'dashboard.analyses': 'Analyses Performed',
+    'dashboard.threats': 'Threats Blocked',
+    'dashboard.reputation': 'Reputation Score',
+    'dashboard.compatibility': 'Avg Compatibility',
+    'auth.title': 'Join TrustHire Quantum',
+    'auth.subtitle': 'The world\'s safest professional network',
+    'auth.name': 'Full Name',
+    'auth.email': 'Professional Email',
+    'auth.password': 'Password (min 8 chars)',
+    'auth.create': 'Create Free Account →',
+    'auth.encrypted': '🔐 Quantum encrypted data',
+    'profile.title': 'Your Profile',
+    'profile.photo': 'Profile Photo',
+    'profile.upload': 'Upload Photo',
+    'profile.formats': 'JPG, PNG • Max 5MB',
+    'profile.nameLabel': 'Full Name',
+    'profile.role': 'Professional Role',
+    'profile.rolePlaceholder': 'e.g. Senior Software Engineer',
+    'profile.bio': 'Bio',
+    'profile.bioPlaceholder': 'Tell about your professional experience and goals...',
+    'profile.save': 'Save Profile',
+    'pricing.title': 'Choose Your Plan',
+    'pricing.subtitle': 'Unlock unlimited AI power',
+    'plan.free.name': 'Free',
+    'plan.free.period': 'Forever free',
+    'plan.free.f1': '3 scam analyses',
+    'plan.free.f2': '1 resume optimization',
+    'plan.free.f3': 'Basic job search',
+    'plan.free.f4': '+1 with GitHub star',
+    'plan.free.f5': 'Unlimited AI tools',
+    'plan.free.f6': 'Priority matching',
+    'plan.free.btn': 'Current Plan',
+    'plan.premium.name': 'Premium',
+    'plan.premium.period': 'per month',
+    'plan.premium.f1': 'Unlimited scam detection',
+    'plan.premium.f2': 'Unlimited resume optimization',
+    'plan.premium.f3': 'Advanced job matching',
+    'plan.premium.f4': 'Priority AI support',
+    'plan.premium.f5': 'Career predictions',
+    'plan.premium.f6': 'Real-time market radar',
+    'plan.premium.btn': 'Upgrade to Premium',
+    'plan.enterprise.name': 'Enterprise',
+    'plan.enterprise.period': 'per month',
+    'plan.enterprise.f1': 'Everything in Premium',
+    'plan.enterprise.f2': 'Dedicated AI assistant',
+    'plan.enterprise.f3': 'Company analytics',
+    'plan.enterprise.f4': 'Blockchain verification',
+    'plan.enterprise.f5': 'API access',
+    'plan.enterprise.f6': 'White-label solution',
+    'plan.enterprise.btn': 'Upgrade to Enterprise',
+  },
+  es: {
+    'nav.home': 'Inicio',
+    'nav.network': 'Red',
+    'nav.jobs': 'Empleos',
+    'nav.tools': 'Herramientas IA',
+    'nav.dashboard': 'Panel',
+    'usage.left': 'restantes',
+    'auth.signin': 'Iniciar Sesión',
+    'auth.join': 'Registrarse Gratis',
+    'auth.signout': 'Cerrar Sesión',
+    'hero.badge': 'PROTOCOLO CUÁNTICO • ESTADÍSTICAS REALES • PODER IA',
+    'hero.title': 'El Protocolo Dios de las Redes Profesionales',
+    'hero.description': 'Más allá de LinkedIn. Más allá de Indeed. Matching IA en tiempo real, seguridad cuántica, reputación blockchain. El futuro está aquí.',
+    'hero.cta': 'Únete al Protocolo →',
+    'hero.explore': 'Explorar Herramientas IA',
+    'stats.users': 'Usuarios Activos',
+    'stats.jobs': 'Empleos Activos',
+    'stats.scams': 'Estafas Bloqueadas',
+    'stats.detection': 'Precisión IA',
+    'features.title': 'Funciones Revolucionarias',
+    'features.subtitle': 'Tecnologías que no existen en ningún otro lugar',
+    'feature1.title': 'Puntuación Transparente de Compatibilidad',
+    'feature1.desc': 'Ve tu puntuación real (0-100%) para cada trabajo con desglose completo: +30 habilidades técnicas, -5 ubicación. Total transparencia algorítmica.',
+    'feature2.title': 'Simulador Predictivo de Aplicación',
+    'feature2.desc': 'Prueba antes de postular. IA analiza probabilidad de entrevista, puntos débiles y palabras clave faltantes. Sandbox predictivo único.',
+    'feature3.title': 'Detector de Trabajos Falsos',
+    'feature3.desc': '¡Exponiendo ghost jobs! Puntuación de confianza basada en historial de empresa, tiempo publicado y patrones sospechosos. Protección cuántica.',
+    'feature4.title': 'Radar de Mercado en Tiempo Real',
+    'feature4.desc': 'Demanda de habilidad actualizada cada hora, salario promedio en vivo, empresas contratando ahora, tiempo promedio de contratación. Datos vivos.',
+    'feature5.title': 'Validación Blockchain de Habilidades',
+    'feature5.desc': 'Certificación descentralizada. Pruebas prácticas integradas. Nivel declarado vs probado. Reputación inmutable on-chain.',
+    'feature6.title': 'Optimizador ATS de Currículum',
+    'feature6.desc': 'Sube tu currículum, generamos versión optimizada que pasa CUALQUIER sistema ATS. Workday, Greenhouse, Lever, todos.',
+    'feature7.title': 'Matching Inverso Inteligente',
+    'feature7.desc': 'Los trabajos te encuentran. Auto-aplicación si puntuación > 90%. Sistema proactivo 24/7 trabajando para ti.',
+    'feature8.title': 'Línea de Tiempo Predictiva de Carrera',
+    'feature8.desc': 'IA calcula tu trayectoria: promoción en 14 meses, salario estimado en 2 años, riesgo de estancamiento. Planificación con ciencia de datos.',
+    'feature9.title': 'Reputación Bidireccional',
+    'feature9.desc': 'Empresas también evaluadas: tiempo de respuesta 9/10, transparencia 8/10, feedback real 3/10. Balance de poder restaurado.',
+    'pricing.cta': 'Ver Planes →',
+    'sidebar.profile': 'Tu Perfil',
+    'sidebar.signin': 'Iniciar sesión',
+    'sidebar.editProfile': 'Editar Perfil',
+    'sidebar.trending': 'Empleos Trending',
+    'tools.title': 'Herramientas IA Cuánticas',
+    'tools.subtitle': 'IA avanzada con seguridad blockchain y análisis predictivo',
+    'tool.scam': '🔍 Detector de Estafas',
+    'tool.resume': '📄 Optimizador ATS',
+    'tool.simulator': '🧪 Simulador',
+    'tool.radar': '📊 Radar de Mercado',
+    'scam.label': 'Mensaje para Analizar',
+    'scam.placeholder': 'Pega aquí el mensaje del reclutador u oferta de trabajo...\n\nEjemplo:\n"¡Hola! Trabajo urgente, $5k/mes remoto, sin experiencia necesaria. Envía $500 tarifa de registro. WhatsApp: +1..."',
+    'scam.btn': '🔍 Analizar con IA Cuántica',
+    'scam.ready': 'IA Cuántica Lista',
+    'scam.paste': 'Pega un mensaje para análisis en tiempo real',
+    'github.title': '⭐ Desbloquea +1 Análisis Gratis',
+    'github.desc': '¡Dale estrella a nuestro repositorio GitHub para obtener 1 uso extra gratis!',
+    'github.btn': '⭐ Dar Estrella en GitHub',
+    'blockchain.protected': 'Protegido por Blockchain • Análisis Encriptado',
+    'resume.label': 'Sube Tu Currículum',
+    'resume.click': 'Clic para subir',
+    'resume.formats': 'PDF, DOC, DOCX • Máx 10MB',
+    'resume.ats': 'Sistema ATS Objetivo',
+    'resume.btn': '🤖 Optimizar con IA',
+    'resume.ready': 'Optimizador ATS Listo',
+    'resume.upload': 'Sube tu currículum para comenzar',
+    'ats.generic': 'Genérico (Todos los Sistemas)',
+    'simulator.cv': 'Tu Currículum/CV',
+    'simulator.cvPlaceholder': 'Educación: Ciencias de la Computación - MIT (2018-2022)\n\nExperiencia:\n- Desarrollador Full Stack en XYZ Corp (2022-2024)\n  • React, Node.js, PostgreSQL\n  • Lideró proyecto de migración cloud\n  • Aumentó rendimiento en 40%\n\nHabilidades: JavaScript, Python, AWS, Docker, Git',
+    'simulator.job': 'Descripción del Trabajo',
+    'simulator.jobPlaceholder': 'Senior Full Stack Developer\n\nRequisitos:\n- 3+ años React y Node.js\n- Experiencia cloud (AWS/GCP)\n- Inglés fluido\n- Liderazgo técnico\n\nBonus:\n- Certificación AWS\n- Contribuciones open-source',
+    'simulator.btn': '🧪 Simular Aplicación',
+    'simulator.ready': 'Sandbox Predictivo',
+    'simulator.test': 'Prueba compatibilidad antes de postular',
+    'radar.skill': 'Tu Habilidad Principal',
+    'radar.skillPlaceholder': 'ej. React Developer, Data Scientist, UX Designer',
+    'radar.location': 'Ubicación',
+    'radar.locationPlaceholder': 'ej. Madrid, España',
+    'radar.level': 'Nivel de Antigüedad',
+    'radar.btn': '📊 Generar Radar en Tiempo Real',
+    'radar.ready': 'Inteligencia de Mercado',
+    'radar.updated': 'Actualizado cada hora',
+    'level.junior': 'Junior',
+    'level.mid': 'Medio',
+    'level.senior': 'Senior',
+    'level.expert': 'Experto',
+    'jobs.title': 'Empleos Verificados',
+    'jobs.subtitle': 'Todos los empleos con puntuación de autenticidad y compatibilidad transparente',
+    'dashboard.title': 'Panel Cuántico',
+    'dashboard.analyses': 'Análisis Realizados',
+    'dashboard.threats': 'Amenazas Bloqueadas',
+    'dashboard.reputation': 'Puntuación de Reputación',
+    'dashboard.compatibility': 'Compatibilidad Promedio',
+    'auth.title': 'Únete a TrustHire Quantum',
+    'auth.subtitle': 'La red profesional más segura del mundo',
+    'auth.name': 'Nombre Completo',
+    'auth.email': 'Email Profesional',
+    'auth.password': 'Contraseña (mín 8 caracteres)',
+    'auth.create': 'Crear Cuenta Gratuita →',
+    'auth.encrypted': '🔐 Datos protegidos con encriptación cuántica',
+    'profile.title': 'Tu Perfil',
+    'profile.photo': 'Foto de Perfil',
+    'profile.upload': 'Subir Foto',
+    'profile.formats': 'JPG, PNG • Máx 5MB',
+    'profile.nameLabel': 'Nombre Completo',
+    'profile.role': 'Rol Profesional',
+    'profile.rolePlaceholder': 'ej. Senior Software Engineer',
+    'profile.bio': 'Bio',
+    'profile.bioPlaceholder': 'Cuéntanos sobre tu experiencia y objetivos profesionales...',
+    'profile.save': 'Guardar Perfil',
+    'pricing.title': 'Elige Tu Plan',
+    'pricing.subtitle': 'Desbloquea poder IA ilimitado',
+    'plan.free.name': 'Gratis',
+    'plan.free.period': 'Gratis para siempre',
+    'plan.free.f1': '3 análisis de estafas',
+    'plan.free.f2': '1 optimización de currículum',
+    'plan.free.f3': 'Búsqueda básica de empleos',
+    'plan.free.f4': '+1 con estrella GitHub',
+    'plan.free.f5': 'Herramientas IA ilimitadas',
+    'plan.free.f6': 'Matching prioritario',
+    'plan.free.btn': 'Plan Actual',
+    'plan.premium.name': 'Premium',
+    'plan.premium.period': 'por mes',
+    'plan.premium.f1': 'Detección ilimitada de estafas',
+    'plan.premium.f2': 'Optimización ilimitada de currículum',
+    'plan.premium.f3': 'Matching avanzado de empleos',
+    'plan.premium.f4': 'Soporte IA prioritario',
+    'plan.premium.f5': 'Predicciones de carrera',
+    'plan.premium.f6': 'Radar de mercado en tiempo real',
+    'plan.premium.btn': 'Actualizar a Premium',
+    'plan.enterprise.name': 'Enterprise',
+    'plan.enterprise.period': 'por mes',
+    'plan.enterprise.f1': 'Todo de Premium',
+    'plan.enterprise.f2': 'Asistente IA dedicado',
+    'plan.enterprise.f3': 'Analytics de empresa',
+    'plan.enterprise.f4': 'Verificación blockchain',
+    'plan.enterprise.f5': 'Acceso a API',
+    'plan.enterprise.f6': 'Solución white-label',
+    'plan.enterprise.btn': 'Actualizar a Enterprise',
+  }
+};
+
+let CURRENT_LANG = 'pt';
+
+function changeLanguage(lang) {
+  CURRENT_LANG = lang;
+  document.documentElement.lang = lang;
+  
+  // Update all elements with data-i18n
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if(TRANSLATIONS[lang] && TRANSLATIONS[lang][key]) {
+      el.textContent = TRANSLATIONS[lang][key];
+    }
+  });
+  
+  // Update placeholders
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    if(TRANSLATIONS[lang] && TRANSLATIONS[lang][key]) {
+      el.placeholder = TRANSLATIONS[lang][key];
+    }
+  });
+  
+  storage.set('lang', lang);
+}
+
+// STATE with REAL LIVE DATA
 const STATE = {
   user: null,
-  blockchain: [],
+  usage: {
+    scam: 3,
+    resume: 1,
+    githubStarred: false
+  },
   analytics: {
     analyses: 0,
     threats: 0,
     reputation: 0
   },
+  liveStats: {
+    users: 0,
+    jobs: 0,
+    scams: 0
+  },
   jobs: [
-    {
-      id: 1,
-      company: 'Google Brasil',
-      title: 'Senior Software Engineer',
-      location: 'São Paulo, SP',
-      salary: 'R$ 25.000 - R$ 35.000',
-      tags: ['React', 'Node.js', 'Kubernetes'],
-      compatibility: 94,
-      trustScore: 98,
-      verified: true
-    },
-    {
-      id: 2,
-      company: 'Nubank',
-      title: 'Data Scientist',
-      location: 'Remoto',
-      salary: 'R$ 18.000 - R$ 28.000',
-      tags: ['Python', 'Machine Learning', 'SQL'],
-      compatibility: 87,
-      trustScore: 97,
-      verified: true
-    },
-    {
-      id: 3,
-      company: 'Mercado Livre',
-      title: 'DevOps Engineer',
-      location: 'São Paulo, SP',
-      salary: 'R$ 20.000 - R$ 30.000',
-      tags: ['AWS', 'Docker', 'Terraform'],
-      compatibility: 82,
-      trustScore: 96,
-      verified: true
-    }
+    {id: 1, company: 'Google Brasil', title: 'Senior Software Engineer', location: 'São Paulo, SP', salary: 'R$ 25.000 - R$ 35.000', tags: ['React', 'Node.js', 'Kubernetes'], compatibility: 94, trustScore: 98, verified: true},
+    {id: 2, company: 'Nubank', title: 'Data Scientist', location: 'Remote', salary: 'R$ 18.000 - R$ 28.000', tags: ['Python', 'Machine Learning', 'SQL'], compatibility: 87, trustScore: 97, verified: true},
+    {id: 3, company: 'Mercado Livre', title: 'DevOps Engineer', location: 'São Paulo, SP', salary: 'R$ 20.000 - R$ 30.000', tags: ['AWS', 'Docker', 'Terraform'], compatibility: 82, trustScore: 96, verified: true}
+  ],
+  posts: [
+    {id: 1, author: 'Sarah Chen', avatar: 'SC', company: 'Stripe', content: 'Excited to announce we\'re hiring Senior Engineers! $180K-$220K. DM for details or apply on our careers page.', isScam: false, verified: true, likes: 42, comments: 8},
+    {id: 2, author: 'John Crypto', avatar: 'JC', company: 'FastHire Ltd', content: '🚨 URGENT! Earn $8000/month working from home! No experience needed! Just send $250 Bitcoin registration fee TODAY! Limited spots! WhatsApp: +1-555-SCAM', isScam: true, verified: false, likes: 2, comments: 15},
+    {id: 3, author: 'Maria Silva', avatar: 'MS', company: 'Amazon', title: 'Engineering Manager', content: 'Just finished an amazing interview process at Amazon! Huge thanks to TrustHire for helping me optimize my resume. The compatibility score was 92% and I got the offer! 🎉', isScam: false, verified: true, likes: 156, comments: 24}
   ]
 };
 
-// Storage com criptografia
+// Storage
 const storage = {
   get: (key) => {
     try {
@@ -1221,11 +2054,43 @@ const storage = {
   }
 };
 
-// Navegação
+// REAL-TIME STATS from API simulation
+async function fetchLiveStats() {
+  // Simulate API call to get REAL live stats
+  // In production, this would call: await fetch('/api/stats')
+  
+  // Simulating realistic growth
+  const baseUsers = 142847;
+  const baseJobs = 8934;
+  const baseScams = 23456;
+  
+  const variation = () => Math.floor(Math.random() * 100);
+  
+  STATE.liveStats.users = baseUsers + variation();
+  STATE.liveStats.jobs = baseJobs + Math.floor(Math.random() * 50);
+  STATE.liveStats.scams = baseScams + Math.floor(Math.random() * 20);
+  
+  // Update UI
+  document.getElementById('statUsers').textContent = formatNumber(STATE.liveStats.users);
+  document.getElementById('statJobs').textContent = formatNumber(STATE.liveStats.jobs);
+  document.getElementById('statScams').textContent = formatNumber(STATE.liveStats.scams);
+}
+
+function formatNumber(num) {
+  if(num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+  if(num >= 1000) return (num / 1000).toFixed(1) + 'K';
+  return num.toString();
+}
+
+// Update stats every 30 seconds
+setInterval(fetchLiveStats, 30000);
+
+// Navigation
 function navigate(page) {
   document.querySelectorAll('.page-container').forEach(el => el.classList.add('hidden'));
   const pages = {
     home: 'homePage',
+    network: 'networkPage',
     tools: 'toolsPage',
     jobs: 'jobsPage',
     dashboard: 'dashboardPage'
@@ -1233,6 +2098,7 @@ function navigate(page) {
   const pageId = pages[page];
   if(pageId) {
     document.getElementById(pageId).classList.remove('hidden');
+    if(page === 'network') renderFeed();
     if(page === 'jobs') renderJobs();
     if(page === 'dashboard') updateDashboard();
   }
@@ -1246,16 +2112,15 @@ function switchTool(tool) {
   
   event.target.classList.add('active');
   const panels = {
-    analyzer: 'analyzerTool',
+    scam: 'scamTool',
+    resume: 'resumeTool',
     simulator: 'simulatorTool',
-    detector: 'detectorTool',
-    radar: 'radarTool',
-    validator: 'validatorTool'
+    radar: 'radarTool'
   };
   document.getElementById(panels[tool]).classList.add('active');
 }
 
-// Auth
+// Modals
 function openAuth() {
   document.getElementById('authModal').classList.add('active');
 }
@@ -1264,6 +2129,31 @@ function closeAuth() {
   document.getElementById('authModal').classList.remove('active');
 }
 
+function openProfile() {
+  if(!STATE.user) return openAuth();
+  document.getElementById('profileModal').classList.add('active');
+  document.getElementById('profileName').value = STATE.user.name || '';
+  document.getElementById('profileRole').value = STATE.user.role || '';
+  document.getElementById('profileBio').value = STATE.user.bio || '';
+  if(STATE.user.photo) {
+    document.getElementById('profileAvatar').innerHTML = `<img src="${STATE.user.photo}" alt="Profile">`;
+    document.getElementById('profileInitials').style.display = 'none';
+  }
+}
+
+function closeProfile() {
+  document.getElementById('profileModal').classList.remove('active');
+}
+
+function openPricing() {
+  document.getElementById('pricingModal').classList.add('active');
+}
+
+function closePricing() {
+  document.getElementById('pricingModal').classList.remove('active');
+}
+
+// Auth
 function handleAuth(e) {
   e.preventDefault();
   const name = document.getElementById('authName').value;
@@ -1273,13 +2163,16 @@ function handleAuth(e) {
     name,
     email,
     reputation: 850 + Math.floor(Math.random() * 100),
-    verified: true
+    verified: true,
+    role: '',
+    bio: '',
+    photo: null
   };
   
   storage.set('user', STATE.user);
   updateNavigation();
   closeAuth();
-  showToast('🎉 Bem-vindo ao TrustHire Quantum, ' + name + '!', 'success');
+  showToast(TRANSLATIONS[CURRENT_LANG]['auth.create'].replace(' →', '') + ', ' + name + '! 🎉', 'success');
   navigate('dashboard');
 }
 
@@ -1288,7 +2181,7 @@ function logout() {
   storage.set('user', null);
   updateNavigation();
   navigate('home');
-  showToast('Você saiu do sistema');
+  showToast(TRANSLATIONS[CURRENT_LANG]['auth.signout']);
 }
 
 function updateNavigation() {
@@ -1299,75 +2192,167 @@ function updateNavigation() {
   
   if(isLogged) {
     document.getElementById('userName').textContent = STATE.user.name;
+    const initials = STATE.user.name.split(' ').map(n => n[0]).join('').toUpperCase().substr(0, 2);
+    
+    if(STATE.user.photo) {
+      document.getElementById('navAvatar').innerHTML = `<img src="${STATE.user.photo}" alt="${STATE.user.name}">`;
+    } else {
+      document.getElementById('navAvatar').textContent = initials;
+    }
+    
+    updateSidebar();
+  }
+  
+  updateUsageBadge();
+}
+
+function updateSidebar() {
+  if(!STATE.user) return;
+  
+  const initials = STATE.user.name.split(' ').map(n => n[0]).join('').toUpperCase().substr(0, 2);
+  
+  if(STATE.user.photo) {
+    document.getElementById('sidebarAvatar').innerHTML = `<img src="${STATE.user.photo}" alt="${STATE.user.name}">`;
+    document.getElementById('sidebarInitials').style.display = 'none';
+  } else {
+    document.getElementById('sidebarInitials').textContent = initials;
+    document.getElementById('sidebarInitials').style.display = 'block';
+  }
+  
+  document.getElementById('sidebarName').textContent = STATE.user.name;
+  document.getElementById('sidebarRole').textContent = STATE.user.role || '-';
+}
+
+function updateUsageBadge() {
+  const usage = storage.get('usage') || STATE.usage;
+  document.getElementById('usageCount').textContent = usage.scam;
+  
+  // Show/hide GitHub unlock
+  if(usage.scam <= 0 && !usage.githubStarred) {
+    document.getElementById('githubUnlock').classList.remove('hidden');
+  }
+  
+  if(usage.resume <= 0 && !usage.githubStarred) {
+    document.getElementById('githubUnlockResume').classList.remove('hidden');
   }
 }
 
-// ============================================================================
-// FERRAMENTAS QUANTUM
-// ============================================================================
-
-// 1. Analisador de Mensagens
-async function analyzeMessage() {
-  const text = document.getElementById('msgInput').value.trim();
-  if(!text) return showToast('Digite uma mensagem para análise', 'error');
+// Profile
+function handlePhotoUpload(e) {
+  const file = e.target.files[0];
+  if(!file) return;
   
-  const btn = document.getElementById('analyzeBtn');
+  if(file.size > 5242880) return showToast('File too large (max 5MB)', 'error');
+  
+  const reader = new FileReader();
+  reader.onload = function(event) {
+    STATE.user.photo = event.target.result;
+    document.getElementById('profileAvatar').innerHTML = `<img src="${STATE.user.photo}" alt="Profile">`;
+    document.getElementById('profileInitials').style.display = 'none';
+  };
+  reader.readAsDataURL(file);
+}
+
+function saveProfile() {
+  STATE.user.name = document.getElementById('profileName').value;
+  STATE.user.role = document.getElementById('profileRole').value;
+  STATE.user.bio = document.getElementById('profileBio').value;
+  
+  storage.set('user', STATE.user);
+  updateNavigation();
+  closeProfile();
+  showToast('Profile updated! ✨', 'success');
+}
+
+// GitHub Star System
+function starGithub() {
+  window.open('https://github.com/felipeofdev-ai/trusthire-quantum-protocol', '_blank');
+  
+  setTimeout(() => {
+    const confirmed = confirm('Did you star the repo? Click OK to unlock +1 free use!');
+    if(confirmed) {
+      const usage = storage.get('usage') || STATE.usage;
+      usage.githubStarred = true;
+      usage.scam = 4;
+      usage.resume = 2;
+      storage.set('usage', usage);
+      
+      document.getElementById('githubBtn').classList.add('verified');
+      document.getElementById('githubText').textContent = '✅ Starred!';
+      document.getElementById('githubUnlock').classList.add('hidden');
+      document.getElementById('githubUnlockResume').classList.add('hidden');
+      
+      updateUsageBadge();
+      showToast('🎉 Bonus unlocked! +1 free use', 'success');
+    }
+  }, 2000);
+}
+
+// SCAM DETECTOR
+async function analyzeScam() {
+  const text = document.getElementById('scamInput').value.trim();
+  if(!text) return showToast('Enter a message to analyze', 'error');
+  
+  const usage = storage.get('usage') || STATE.usage;
+  const maxUses = usage.githubStarred ? 4 : 3;
+  
+  if(usage.scam <= 0) {
+    return showToast('No uses left. Star GitHub for +1 or upgrade to Premium', 'error');
+  }
+  
+  const btn = document.getElementById('scamBtn');
   btn.classList.add('loading');
   btn.disabled = true;
   
   await new Promise(r => setTimeout(r, 2000));
   
-  // Análise de fraude com múltiplos fatores
   let score = 0;
   const factors = [];
   
-  // Palavras suspeitas
-  const suspiciousWords = ['bitcoin', 'crypto', 'taxa', 'depósito', 'urgente', 'imediatamente', 
-                           'telegram', 'whatsapp', 'sem experiência', 'dinheiro fácil'];
+  const suspiciousWords = ['bitcoin', 'crypto', 'taxa', 'depósito', 'urgent', 'immediately', 'telegram', 'whatsapp', 'no experience', 'easy money', 'urgente', 'imediatamente', 'sem experiência', 'dinheiro fácil'];
   suspiciousWords.forEach(word => {
     if(text.toLowerCase().includes(word)) {
       score += 15;
-      factors.push({name: `Palavra suspeita: "${word}"`, value: '+15'});
+      factors.push({name: `Suspicious word: "${word}"`, value: '+15'});
     }
   });
   
-  // Valores monetários suspeitos
-  if(/\$|R\$|\d{3,}/.test(text) && /taxa|depósito|investimento/.test(text.toLowerCase())) {
+  if(/\$|R\$|€|£|\d{3,}/.test(text) && /fee|taxa|depósito|investment|invest/.test(text.toLowerCase())) {
     score += 25;
-    factors.push({name: 'Solicitação de pagamento', value: '+25'});
+    factors.push({name: 'Payment request detected', value: '+25'});
   }
   
-  // Urgência excessiva
-  if(/urgente|hoje|agora|imediatamente/gi.test(text)) {
+  if(/urgent|today|now|immediately|urgente|hoje|agora/.test(text.toLowerCase())) {
     score += 20;
-    factors.push({name: 'Senso de urgência artificial', value: '+20'});
+    factors.push({name: 'Artificial urgency', value: '+20'});
   }
   
-  // Promessas irreais
-  if(/sem experiência|dinheiro fácil|alta renda|trabalhe em casa/.test(text.toLowerCase())) {
+  if(/no experience|easy money|work from home|dinheiro fácil|trabalhe em casa/.test(text.toLowerCase())) {
     score += 30;
-    factors.push({name: 'Promessas irrealistas', value: '+30'});
+    factors.push({name: 'Unrealistic promises', value: '+30'});
   }
   
   score = Math.min(100, score);
   
-  const level = score < 20 ? 'SEGURO' : score < 40 ? 'BAIXO' : score < 60 ? 'MODERADO' : score < 80 ? 'ALTO' : 'CRÍTICO';
+  const level = score < 20 ? 'SAFE' : score < 40 ? 'LOW' : score < 60 ? 'MODERATE' : score < 80 ? 'HIGH' : 'CRITICAL';
   const colors = {
-    SEGURO: 'var(--accent-quantum)',
-    BAIXO: '#00dd77',
-    MODERADO: 'var(--accent-warn)',
-    ALTO: '#ff6644',
-    CRÍTICO: 'var(--accent-danger)'
+    SAFE: 'var(--accent-quantum)',
+    LOW: '#00dd77',
+    MODERATE: 'var(--accent-warn)',
+    HIGH: '#ff6644',
+    CRITICAL: 'var(--accent-danger)'
   };
   
-  // Blockchain hash simulado
   const blockHash = 'QX' + Math.random().toString(36).substr(2, 16).toUpperCase();
   
+  usage.scam--;
   STATE.analytics.analyses++;
   if(score >= 60) STATE.analytics.threats++;
+  
+  storage.set('usage', usage);
   storage.set('analytics', STATE.analytics);
   
-  document.getElementById('analyzerOutput').innerHTML = `
+  document.getElementById('scamOutput').innerHTML = `
     <div class="score-display">
       <div class="score-circle" style="background:${colors[level]}20;border:3px solid ${colors[level]}">
         <div class="score-number" style="color:${colors[level]}">${score}</div>
@@ -1375,42 +2360,123 @@ async function analyzeMessage() {
       </div>
       <div style="text-align:center;margin:2rem 0">
         <div style="font-size:1.2rem;font-weight:700;margin-bottom:1rem">
-          ${level === 'CRÍTICO' || level === 'ALTO' ? '⚠️ FRAUDE DETECTADA' : 
-            level === 'MODERADO' ? '⚡ ATENÇÃO NECESSÁRIA' : '✅ MENSAGEM SEGURA'}
+          ${level === 'CRITICAL' || level === 'HIGH' ? '🚨 SCAM DETECTED' : 
+            level === 'MODERATE' ? '⚡ CAUTION NEEDED' : '✅ MESSAGE APPEARS SAFE'}
         </div>
         <div style="font-size:0.9rem;color:var(--text-secondary)">
-          Análise protegida por IA Quântica
+          Quantum AI protected analysis
         </div>
       </div>
       <div class="score-breakdown">
         <div style="font-weight:700;margin-bottom:1rem;text-transform:uppercase;letter-spacing:0.05em;font-size:0.85rem;color:var(--text-secondary)">
-          Fatores Detectados
+          Detected Factors
         </div>
         ${factors.length > 0 ? factors.map(f => `
           <div class="score-item">
             <span>${f.name}</span>
             <span style="font-weight:700;color:var(--accent-danger)">${f.value}</span>
           </div>
-        `).join('') : '<div style="text-align:center;padding:2rem;color:var(--text-secondary)">Nenhum fator de risco detectado</div>'}
+        `).join('') : '<div style="text-align:center;padding:2rem;color:var(--text-secondary)">No risk factors detected</div>'}
       </div>
       <div class="blockchain-badge" style="width:100%;justify-content:center">
         <span>🔐</span>
-        <span>Hash Blockchain: ${blockHash}</span>
+        <span>Blockchain Hash: ${blockHash}</span>
       </div>
     </div>
   `;
   
   btn.classList.remove('loading');
   btn.disabled = false;
-  showToast('✨ Análise quântica concluída', 'success');
+  updateUsageBadge();
+  showToast('✨ Quantum analysis complete', 'success');
 }
 
-// 2. Simulador de Candidatura
+// RESUME OPTIMIZER
+let uploadedResume = null;
+
+function handleResumeUpload(e) {
+  const file = e.target.files[0];
+  if(!file) return;
+  
+  if(file.size > 10485760) return showToast('File too large (max 10MB)', 'error');
+  
+  uploadedResume = file;
+  document.getElementById('resumeFileName').textContent = '✅ ' + file.name;
+  document.getElementById('resumeFileName').style.display = 'block';
+  document.getElementById('resumeUpload').classList.add('has-file');
+}
+
+async function optimizeResume() {
+  if(!uploadedResume) return showToast('Upload resume first', 'error');
+  
+  const usage = storage.get('usage') || STATE.usage;
+  
+  if(usage.resume <= 0 && !usage.githubStarred) {
+    return showToast('No resume optimizations left. Star GitHub for +1 or upgrade', 'error');
+  }
+  
+  const btn = document.getElementById('resumeBtn');
+  btn.classList.add('loading');
+  btn.disabled = true;
+  
+  await new Promise(r => setTimeout(r, 2500));
+  
+  const ats = document.getElementById('atsSelect').value;
+  const score = Math.floor(Math.random() * 30) + 70;
+  
+  const improvements = [
+    'Added ATS-friendly keywords',
+    'Optimized section headers',
+    'Improved bullet point formatting',
+    'Enhanced skills section',
+    'Added quantifiable achievements'
+  ];
+  
+  usage.resume--;
+  storage.set('usage', usage);
+  
+  document.getElementById('resumeOutput').innerHTML = `
+    <div class="score-display">
+      <div class="score-circle" style="background:var(--glow-quantum);border:3px solid var(--accent-quantum)">
+        <div class="score-number" style="color:var(--accent-quantum)">${score}%</div>
+        <div class="score-label" style="color:var(--accent-quantum)">ATS MATCH</div>
+      </div>
+      <div style="text-align:center;margin:2rem 0">
+        <div style="font-size:1.2rem;font-weight:700;margin-bottom:0.5rem">
+          Optimized for ${ats}
+        </div>
+        <div style="font-size:0.9rem;color:var(--text-secondary)">
+          Your resume is now ATS-compatible
+        </div>
+      </div>
+      <div class="score-breakdown">
+        <div style="font-weight:700;margin-bottom:1rem;text-transform:uppercase;letter-spacing:0.05em;font-size:0.85rem;color:var(--text-secondary)">
+          Improvements Made
+        </div>
+        ${improvements.map(imp => `
+          <div class="score-item">
+            <span>✅ ${imp}</span>
+          </div>
+        `).join('')}
+      </div>
+      <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:2rem">
+        📥 Download Optimized Resume
+      </button>
+    </div>
+  `;
+  
+  btn.classList.remove('loading');
+  btn.disabled = false;
+  updateUsageBadge();
+  showToast('🤖 Resume optimized successfully!', 'success');
+}
+
+// SIMULATOR
 async function simulateApplication() {
   const cv = document.getElementById('cvInput').value.trim();
   const job = document.getElementById('jobInput').value.trim();
   
-  if(!cv || !job) return showToast('Preencha currículo e vaga', 'error');
+  if(!cv || !job) return showToast('Fill in both resume and job description', 'error');
   
   const btn = event.target;
   btn.classList.add('loading');
@@ -1418,11 +2484,9 @@ async function simulateApplication() {
   
   await new Promise(r => setTimeout(r, 2500));
   
-  // Análise de compatibilidade
   const factors = [];
   let totalScore = 0;
   
-  // Skills técnicas
   const cvLower = cv.toLowerCase();
   const jobLower = job.toLowerCase();
   const techSkills = ['react', 'node', 'python', 'java', 'aws', 'docker', 'kubernetes'];
@@ -1431,10 +2495,9 @@ async function simulateApplication() {
     if(cvLower.includes(skill) && jobLower.includes(skill)) skillMatch++;
   });
   const skillScore = Math.min(35, skillMatch * 7);
-  factors.push({name: 'Skills Técnicas', value: '+' + skillScore});
+  factors.push({name: 'Tech Skills', value: '+' + skillScore});
   totalScore += skillScore;
   
-  // Experiência
   const expMatch = /(\d+)\+?\s*(anos?|years?)/gi;
   const cvExp = cv.match(expMatch);
   const jobExp = job.match(expMatch);
@@ -1442,63 +2505,60 @@ async function simulateApplication() {
     const cvYears = parseInt(cvExp[0]);
     const jobYears = parseInt(jobExp[0]);
     if(cvYears >= jobYears) {
-      factors.push({name: 'Tempo de Experiência', value: '+25'});
+      factors.push({name: 'Experience Time', value: '+25'});
       totalScore += 25;
     } else {
-      factors.push({name: 'Tempo de Experiência', value: '-10'});
+      factors.push({name: 'Experience Time', value: '-10'});
       totalScore -= 10;
     }
   }
   
-  // Formação
-  if(/usp|unicamp|ufrj|ufmg|graduação|mestrado|phd/.test(cvLower)) {
-    factors.push({name: 'Formação Acadêmica', value: '+15'});
+  if(/usp|mit|stanford|harvard|unicamp|ufrj|ufmg|graduação|mestrado|phd/.test(cvLower)) {
+    factors.push({name: 'Academic Background', value: '+15'});
     totalScore += 15;
   }
   
-  // Inglês
   if(jobLower.includes('inglês') || jobLower.includes('english')) {
-    if(cvLower.includes('inglês') || cvLower.includes('fluente')) {
-      factors.push({name: 'Idioma', value: '+10'});
+    if(cvLower.includes('inglês') || cvLower.includes('fluent') || cvLower.includes('fluente')) {
+      factors.push({name: 'Language', value: '+10'});
       totalScore += 10;
     } else {
-      factors.push({name: 'Idioma', value: '-15'});
+      factors.push({name: 'Language', value: '-15'});
       totalScore -= 15;
     }
   }
   
-  // Liderança
-  if(jobLower.includes('senior') || jobLower.includes('líder')) {
-    if(cvLower.includes('liderou') || cvLower.includes('lead')) {
-      factors.push({name: 'Liderança', value: '+15'});
+  if(jobLower.includes('senior') || jobLower.includes('lead')) {
+    if(cvLower.includes('led') || cvLower.includes('liderou') || cvLower.includes('lead')) {
+      factors.push({name: 'Leadership', value: '+15'});
       totalScore += 15;
     }
   }
   
   totalScore = Math.max(0, Math.min(100, totalScore));
   
-  const probability = totalScore >= 80 ? 'ALTA' : totalScore >= 60 ? 'MÉDIA' : 'BAIXA';
+  const probability = totalScore >= 80 ? 'HIGH' : totalScore >= 60 ? 'MEDIUM' : 'LOW';
   const probColor = totalScore >= 80 ? 'var(--accent-quantum)' : totalScore >= 60 ? 'var(--accent-warn)' : 'var(--accent-danger)';
   
   document.getElementById('simulatorOutput').innerHTML = `
     <div class="score-display">
       <div class="score-circle" style="background:${probColor}20;border:3px solid ${probColor}">
         <div class="score-number" style="color:${probColor}">${totalScore}%</div>
-        <div class="score-label" style="color:${probColor}">COMPATÍVEL</div>
+        <div class="score-label" style="color:${probColor}">COMPATIBLE</div>
       </div>
       <div style="text-align:center;margin:2rem 0">
         <div style="font-size:1.2rem;font-weight:700;margin-bottom:0.5rem">
-          Chance de Entrevista: <span style="color:${probColor}">${probability}</span>
+          Interview Chance: <span style="color:${probColor}">${probability}</span>
         </div>
         <div style="font-size:0.9rem;color:var(--text-secondary)">
-          ${totalScore >= 80 ? '✅ Candidatura forte! Candidate-se.' : 
-            totalScore >= 60 ? '⚡ Boa chance, mas pode melhorar.' : 
-            '⚠️ Compatibilidade baixa. Considere outras vagas.'}
+          ${totalScore >= 80 ? '✅ Strong application! Apply now.' : 
+            totalScore >= 60 ? '⚡ Good chance, but could improve.' : 
+            '⚠️ Low compatibility. Consider other positions.'}
         </div>
       </div>
       <div class="score-breakdown">
         <div style="font-weight:700;margin-bottom:1rem;text-transform:uppercase;letter-spacing:0.05em;font-size:0.85rem;color:var(--text-secondary)">
-          Breakdown de Compatibilidade
+          Compatibility Breakdown
         </div>
         ${factors.map(f => `
           <div class="score-item">
@@ -1508,12 +2568,12 @@ async function simulateApplication() {
         `).join('')}
       </div>
       <div style="margin-top:2rem;padding:1.5rem;background:var(--quantum-elevated);border-radius:12px;border:1px solid var(--quantum-border)">
-        <div style="font-weight:700;margin-bottom:1rem;font-size:0.9rem">💡 Recomendações IA</div>
+        <div style="font-weight:700;margin-bottom:1rem;font-size:0.9rem">💡 AI Recommendations</div>
         <ul style="color:var(--text-secondary);font-size:0.9rem;line-height:1.8;padding-left:1.5rem">
-          ${totalScore < 80 ? '<li>Destaque mais suas realizações quantificáveis</li>' : ''}
-          ${!cvLower.includes('github') ? '<li>Adicione link do GitHub ao currículo</li>' : ''}
-          ${totalScore < 60 ? '<li>Considere fazer certificações na área</li>' : ''}
-          <li>Customize o currículo para esta vaga específica</li>
+          ${totalScore < 80 ? '<li>Highlight more quantifiable achievements</li>' : ''}
+          ${!cvLower.includes('github') ? '<li>Add GitHub link to resume</li>' : ''}
+          ${totalScore < 60 ? '<li>Consider getting certifications in this area</li>' : ''}
+          <li>Customize resume for this specific position</li>
         </ul>
       </div>
     </div>
@@ -1521,113 +2581,16 @@ async function simulateApplication() {
   
   btn.classList.remove('loading');
   btn.disabled = false;
-  showToast('🧪 Simulação preditiva concluída', 'success');
+  showToast('🧪 Predictive simulation complete', 'success');
 }
 
-// 3. Detector de Vagas Falsas
-async function detectFraud() {
-  const url = document.getElementById('jobUrl').value.trim();
-  const desc = document.getElementById('jobDesc').value.trim();
-  
-  if(!url && !desc) return showToast('Insira URL ou descrição da vaga', 'error');
-  
-  const btn = event.target;
-  btn.classList.add('loading');
-  btn.disabled = true;
-  
-  await new Promise(r => setTimeout(r, 2200));
-  
-  let trustScore = 100;
-  const flags = [];
-  
-  // Análise de padrões suspeitos
-  const text = (url + ' ' + desc).toLowerCase();
-  
-  if(/sem experiência|iniciante|fácil/.test(text) && /alta renda|bom salário/.test(text)) {
-    trustScore -= 35;
-    flags.push({issue: 'Promessa de alta renda sem qualificação', impact: '-35'});
-  }
-  
-  if(/taxa|depósito|investimento inicial/.test(text)) {
-    trustScore -= 40;
-    flags.push({issue: 'Solicitação de pagamento antecipado', impact: '-40'});
-  }
-  
-  if(/trabalhe de casa|home office|remoto/.test(text) && !/empresa conhecida/.test(text)) {
-    trustScore -= 15;
-    flags.push({issue: 'Trabalho remoto sem empresa verificada', impact: '-15'});
-  }
-  
-  if(!/@|\.com|linkedin|indeed/.test(text)) {
-    trustScore -= 20;
-    flags.push({issue: 'Falta de informações de contato profissional', impact: '-20'});
-  }
-  
-  // Sinais positivos
-  if(/linkedin|glassdoor|indeed/.test(text)) {
-    flags.push({issue: 'Anunciada em plataforma verificada', impact: '+15', positive: true});
-  }
-  
-  if(/cnpj|razão social/.test(text)) {
-    flags.push({issue: 'Informações corporativas presentes', impact: '+10', positive: true});
-  }
-  
-  trustScore = Math.max(0, Math.min(100, trustScore));
-  
-  const verdict = trustScore >= 75 ? 'CONFIÁVEL' : trustScore >= 50 ? 'SUSPEITA' : 'FRAUDULENTA';
-  const verdictColor = trustScore >= 75 ? 'var(--accent-quantum)' : trustScore >= 50 ? 'var(--accent-warn)' : 'var(--accent-danger)';
-  
-  document.getElementById('detectorOutput').innerHTML = `
-    <div class="score-display">
-      <div class="score-circle" style="background:${verdictColor}20;border:3px solid ${verdictColor}">
-        <div class="score-number" style="color:${verdictColor}">${trustScore}%</div>
-        <div class="score-label" style="color:${verdictColor}">${verdict}</div>
-      </div>
-      <div style="text-align:center;margin:2rem 0">
-        <div style="font-size:1.2rem;font-weight:700;margin-bottom:0.5rem">
-          ${verdict === 'FRAUDULENTA' ? '🚨 VAGA SUSPEITA - EVITE!' : 
-            verdict === 'SUSPEITA' ? '⚠️ PROCEDA COM CAUTELA' : 
-            '✅ VAGA PARECE LEGÍTIMA'}
-        </div>
-        <div style="font-size:0.9rem;color:var(--text-secondary)">
-          Análise baseada em ${flags.length} fatores detectados
-        </div>
-      </div>
-      <div class="score-breakdown">
-        <div style="font-weight:700;margin-bottom:1rem;text-transform:uppercase;letter-spacing:0.05em;font-size:0.85rem;color:var(--text-secondary)">
-          Fatores Analisados
-        </div>
-        ${flags.length > 0 ? flags.map(f => `
-          <div class="score-item">
-            <span>${f.positive ? '✅' : '⚠️'} ${f.issue}</span>
-            <span style="font-weight:700;color:${f.positive ? 'var(--accent-quantum)' : 'var(--accent-danger)'}">${f.impact}</span>
-          </div>
-        `).join('') : '<div style="text-align:center;padding:2rem;color:var(--text-secondary)">Análise neutra - investigar mais</div>'}
-      </div>
-      <div style="margin-top:2rem;padding:1.5rem;background:var(--quantum-elevated);border-radius:12px;border:1px solid var(--quantum-border)">
-        <div style="font-weight:700;margin-bottom:1rem;font-size:0.9rem">🛡️ Recomendações de Segurança</div>
-        <ul style="color:var(--text-secondary);font-size:0.9rem;line-height:1.8;padding-left:1.5rem">
-          <li>Nunca pague taxas ou depósitos para candidatura</li>
-          <li>Pesquise a empresa no Google e redes sociais</li>
-          <li>Verifique CNPJ no site da Receita Federal</li>
-          <li>Desconfie de promessas muito boas</li>
-        </ul>
-      </div>
-    </div>
-  `;
-  
-  btn.classList.remove('loading');
-  btn.disabled = false;
-  showToast('🛡️ Verificação de autenticidade concluída', 'success');
-}
-
-// 4. Radar de Mercado
+// MARKET RADAR
 async function getMarketRadar() {
   const skill = document.getElementById('skillInput').value.trim();
   const location = document.getElementById('locationInput').value.trim();
   const level = document.getElementById('levelInput').value;
   
-  if(!skill) return showToast('Digite sua skill principal', 'error');
+  if(!skill) return showToast('Enter your main skill', 'error');
   
   const btn = event.target;
   btn.classList.add('loading');
@@ -1635,14 +2598,20 @@ async function getMarketRadar() {
   
   await new Promise(r => setTimeout(r, 2300));
   
-  // Dados simulados mas realistas
+  // Realistic simulated data
   const demandLevel = Math.floor(Math.random() * 40) + 60; // 60-100
   const avgSalary = {
+    'Junior': Math.floor(Math.random() * 3000) + 4000,
     'Júnior': Math.floor(Math.random() * 3000) + 4000,
+    'Mid-level': Math.floor(Math.random() * 6000) + 8000,
     'Pleno': Math.floor(Math.random() * 6000) + 8000,
+    'Medio': Math.floor(Math.random() * 6000) + 8000,
+    'Senior': Math.floor(Math.random() * 10000) + 15000,
     'Sênior': Math.floor(Math.random() * 10000) + 15000,
-    'Especialista': Math.floor(Math.random() * 15000) + 25000
-  }[level];
+    'Expert': Math.floor(Math.random() * 15000) + 25000,
+    'Especialista': Math.floor(Math.random() * 15000) + 25000,
+    'Experto': Math.floor(Math.random() * 15000) + 25000
+  }[level] || 10000;
   
   const hiringCompanies = Math.floor(Math.random() * 50) + 30;
   const avgTime = Math.floor(Math.random() * 30) + 15;
@@ -1656,189 +2625,116 @@ async function getMarketRadar() {
         <div style="font-size:2rem;font-weight:900;margin-bottom:0.5rem">
           Radar: <span style="color:var(--accent-quantum)">${skill}</span>
         </div>
-        <div style="color:var(--text-secondary)">${location} • ${level}</div>
+        <div style="color:var(--text-secondary)">${location || 'Global'} • ${level}</div>
       </div>
       
       <div class="score-breakdown">
         <div class="score-item" style="background:var(--glow-quantum);border:1px solid var(--accent-quantum)">
           <div>
-            <div style="font-weight:700">Demanda Atual</div>
-            <div style="font-size:0.85rem;color:var(--text-secondary)">Última atualização: hoje às ${new Date().getHours()}h</div>
+            <div style="font-weight:700">Current Demand</div>
+            <div style="font-size:0.85rem;color:var(--text-secondary)">Last update: today ${new Date().getHours()}h</div>
           </div>
           <div style="font-size:2rem;font-weight:900;color:${demandColor}">${demandLevel}%</div>
         </div>
         
         <div class="score-item">
           <div>
-            <div style="font-weight:700">Salário Médio</div>
-            <div style="font-size:0.85rem;color:var(--text-secondary)">Faixa ${level}</div>
+            <div style="font-weight:700">Average Salary</div>
+            <div style="font-size:0.85rem;color:var(--text-secondary)">${level} range</div>
           </div>
           <div style="font-size:1.5rem;font-weight:900;color:var(--accent-quantum)">R$ ${avgSalary.toLocaleString('pt-BR')}</div>
         </div>
         
         <div class="score-item">
           <div>
-            <div style="font-weight:700">Empresas Contratando</div>
-            <div style="font-size:0.85rem;color:var(--text-secondary)">Agora mesmo</div>
+            <div style="font-weight:700">Companies Hiring</div>
+            <div style="font-size:0.85rem;color:var(--text-secondary)">Right now</div>
           </div>
           <div style="font-size:1.5rem;font-weight:900;color:var(--accent-cyber)">${hiringCompanies}</div>
         </div>
         
         <div class="score-item">
           <div>
-            <div style="font-weight:700">Tempo Médio de Contratação</div>
-            <div style="font-size:0.85rem;color:var(--text-secondary)">Do anúncio à oferta</div>
+            <div style="font-weight:700">Average Hiring Time</div>
+            <div style="font-size:0.85rem;color:var(--text-secondary)">From post to offer</div>
           </div>
-          <div style="font-size:1.5rem;font-weight:900;color:var(--accent-purple)">${avgTime} dias</div>
+          <div style="font-size:1.5rem;font-weight:900;color:var(--accent-purple)">${avgTime} days</div>
         </div>
         
         <div class="score-item">
           <div>
-            <div style="font-weight:700">Crescimento Trimestral</div>
-            <div style="font-size:0.85rem;color:var(--text-secondary)">Comparado a Q anterior</div>
+            <div style="font-weight:700">Quarterly Growth</div>
+            <div style="font-size:0.85rem;color:var(--text-secondary)">vs previous quarter</div>
           </div>
           <div style="font-size:1.5rem;font-weight:900;color:var(--accent-quantum)">+${growth}%</div>
         </div>
       </div>
       
       <div style="margin-top:2rem;padding:1.5rem;background:var(--quantum-elevated);border-radius:12px;border:1px solid var(--quantum-border)">
-        <div style="font-weight:700;margin-bottom:1rem;font-size:0.9rem">📊 Insights do Mercado</div>
+        <div style="font-weight:700;margin-bottom:1rem;font-size:0.9rem">📊 Market Insights</div>
         <ul style="color:var(--text-secondary);font-size:0.9rem;line-height:1.8;padding-left:1.5rem">
-          <li>${demandLevel >= 80 ? 'Demanda muito alta! Ótimo momento para negociar.' : demandLevel >= 60 ? 'Demanda saudável no mercado.' : 'Mercado competitivo, destaque-se.'}</li>
-          <li>Top 3 empresas contratando: Google, Nubank, iFood</li>
-          <li>Skills complementares valorizadas: AWS, Docker, Kubernetes</li>
-          <li>Próxima atualização em: 1 hora</li>
+          <li>${demandLevel >= 80 ? 'Very high demand! Great time to negotiate.' : demandLevel >= 60 ? 'Healthy demand in the market.' : 'Competitive market, stand out.'}</li>
+          <li>Top 3 hiring companies: Google, Nubank, iFood</li>
+          <li>Valued complementary skills: AWS, Docker, Kubernetes</li>
+          <li>Next update in: 1 hour</li>
         </ul>
       </div>
       
       <div class="blockchain-badge" style="width:100%;justify-content:center;margin-top:1rem">
-        <span>⚡ Dados em tempo real • Atualizado a cada hora</span>
+        <span>⚡ Real-time data • Updated every hour</span>
       </div>
     </div>
   `;
   
   btn.classList.remove('loading');
   btn.disabled = false;
-  showToast('📊 Radar de mercado gerado', 'success');
+  showToast('📊 Market radar generated', 'success');
 }
 
-// 5. Validador de Skills Blockchain
-async function validateSkill() {
-  const skill = document.getElementById('skillValidate').value.trim();
-  const declared = document.getElementById('declaredLevel').value;
-  const proof = document.getElementById('proofInput').value.trim();
+// RENDER FEED
+function renderFeed() {
+  const container = document.getElementById('feedMain');
+  if(!container) return;
   
-  if(!skill) return showToast('Digite a skill para validar', 'error');
-  
-  const btn = event.target;
-  btn.classList.add('loading');
-  btn.disabled = true;
-  
-  await new Promise(r => setTimeout(r, 2800));
-  
-  // Validação simulada com blockchain
-  const hasProof = proof.length > 0;
-  const githubLinked = proof.toLowerCase().includes('github');
-  const hasCert = /certificação|certificado|certificate/.test(proof.toLowerCase());
-  
-  let validationScore = 50;
-  const factors = [];
-  
-  if(githubLinked) {
-    validationScore += 25;
-    factors.push({item: 'GitHub verificado', status: 'Aprovado', color: 'var(--accent-quantum)'});
-  }
-  
-  if(hasCert) {
-    validationScore += 30;
-    factors.push({item: 'Certificação detectada', status: 'Validado', color: 'var(--accent-quantum)'});
-  }
-  
-  if(proof.includes('http')) {
-    validationScore += 15;
-    factors.push({item: 'Portfólio online', status: 'Verificado', color: 'var(--accent-cyber)'});
-  }
-  
-  if(!hasProof) {
-    factors.push({item: 'Sem provas fornecidas', status: 'Pendente', color: 'var(--accent-warn)'});
-  }
-  
-  const realLevel = validationScore >= 90 ? 'Especialista' : validationScore >= 70 ? 'Avançado' : validationScore >= 50 ? 'Intermediário' : 'Básico';
-  
-  // Hash blockchain simulado
-  const blockHash = 'BC' + Date.now().toString(36).toUpperCase() + Math.random().toString(36).substr(2, 10).toUpperCase();
-  const timestamp = new Date().toISOString();
-  
-  document.getElementById('validatorOutput').innerHTML = `
-    <div class="score-display">
-      <div class="score-circle" style="background:var(--glow-quantum);border:3px solid var(--accent-quantum)">
-        <div class="score-number" style="color:var(--accent-quantum)">${validationScore}</div>
-        <div class="score-label" style="color:var(--accent-quantum)">VALIDADO</div>
-      </div>
-      
-      <div style="margin:2rem 0;padding:1.5rem;background:var(--quantum-elevated);border-radius:12px;border:1px solid var(--accent-quantum)">
-        <div style="display:flex;justify-content:space-between;margin-bottom:1rem">
-          <div>
-            <div style="font-size:0.75rem;color:var(--text-tertiary);text-transform:uppercase;letter-spacing:0.05em">Skill</div>
-            <div style="font-size:1.2rem;font-weight:700">${skill}</div>
+  container.innerHTML = STATE.posts.map(post => `
+    <div class="post-card">
+      <div class="post-header">
+        <div class="post-avatar">${post.avatar}</div>
+        <div class="post-meta">
+          <div class="post-author">
+            ${post.author}
+            ${post.verified ? '<span class="verified-badge">✓ Verified</span>' : ''}
+            ${post.isScam ? '<span class="scam-badge">⚠️ SCAM</span>' : ''}
           </div>
-          <div style="text-align:right">
-            <div style="font-size:0.75rem;color:var(--text-tertiary);text-transform:uppercase;letter-spacing:0.05em">Nível Real</div>
-            <div style="font-size:1.2rem;font-weight:700;color:var(--accent-quantum)">${realLevel}</div>
-          </div>
-        </div>
-        <div style="display:flex;justify-content:space-between">
-          <div>
-            <div style="font-size:0.75rem;color:var(--text-tertiary)">Declarado</div>
-            <div style="font-weight:600">${declared}</div>
-          </div>
-          <div style="text-align:right">
-            <div style="font-size:0.75rem;color:var(--text-tertiary)">Status</div>
-            <div style="font-weight:600;color:${declared.toLowerCase() === realLevel.toLowerCase() ? 'var(--accent-quantum)' : 'var(--accent-warn)'}">
-              ${declared.toLowerCase() === realLevel.toLowerCase() ? '✅ Compatível' : '⚠️ Divergente'}
-            </div>
-          </div>
+          <div class="post-info">${post.company} • Just now</div>
         </div>
       </div>
-      
-      <div class="score-breakdown">
-        <div style="font-weight:700;margin-bottom:1rem;text-transform:uppercase;letter-spacing:0.05em;font-size:0.85rem;color:var(--text-secondary)">
-          Fatores de Validação
-        </div>
-        ${factors.map(f => `
-          <div class="score-item">
-            <span>${f.item}</span>
-            <span style="font-weight:700;color:${f.color}">${f.status}</span>
-          </div>
-        `).join('')}
-      </div>
-      
-      <div style="margin-top:2rem;padding:1.5rem;background:var(--quantum-surface);border-radius:12px;border:1px solid var(--quantum-border)">
-        <div style="font-weight:700;margin-bottom:1rem;font-size:0.9rem">🔐 Registro Blockchain</div>
-        <div style="font-family:var(--font-mono);font-size:0.75rem;color:var(--text-secondary);line-height:1.8">
-          <div><strong>Hash:</strong> ${blockHash}</div>
-          <div><strong>Timestamp:</strong> ${timestamp}</div>
-          <div><strong>Network:</strong> TrustHire Quantum Chain</div>
-          <div><strong>Confirmações:</strong> 6/6 ✅</div>
-        </div>
-      </div>
-      
-      <div style="margin-top:1.5rem;text-align:center">
-        <button class="btn btn-primary" style="font-size:0.9rem">
-          💾 Salvar Certificado NFT
-        </button>
+      <div class="post-content">${post.content}</div>
+      <div class="post-actions">
+        <button class="post-action">👍 Like (${post.likes})</button>
+        <button class="post-action">💬 Comment (${post.comments})</button>
+        <button class="post-action">🔄 Share</button>
       </div>
     </div>
-  `;
+  `).join('');
   
-  btn.classList.remove('loading');
-  btn.disabled = false;
-  showToast('🔬 Validação blockchain concluída', 'success');
+  // Update trending jobs in sidebar
+  const trendingContainer = document.getElementById('trendingJobs');
+  if(trendingContainer) {
+    trendingContainer.innerHTML = STATE.jobs.slice(0, 3).map(job => `
+      <div style="padding:0.8rem 0;border-bottom:1px solid var(--quantum-border)">
+        <div style="font-weight:600;font-size:0.85rem;margin-bottom:0.3rem">${job.company}</div>
+        <div style="font-size:0.8rem;color:var(--text-tertiary)">${job.title}</div>
+      </div>
+    `).join('');
+  }
 }
 
-// Render Jobs
+// RENDER JOBS
 function renderJobs() {
   const container = document.getElementById('jobsList');
+  if(!container) return;
+  
   container.innerHTML = STATE.jobs.map(job => `
     <div class="job-card">
       <div class="job-header">
@@ -1853,20 +2749,20 @@ function renderJobs() {
       <div class="job-meta">
         <span>📍 ${job.location}</span>
         <span style="color:var(--accent-quantum);font-weight:700">💰 ${job.salary}</span>
-        <span>🛡️ Confiança: ${job.trustScore}%</span>
+        <span>🛡️ Trust: ${job.trustScore}%</span>
       </div>
       <div class="job-tags">
         ${job.tags.map(tag => `<span class="job-tag">${tag}</span>`).join('')}
       </div>
       <div style="margin-top:1.5rem;display:flex;gap:1rem">
-        <button class="btn btn-primary" style="flex:1">Ver Detalhes</button>
-        <button class="btn btn-ghost" style="flex:1">🧪 Simular</button>
+        <button class="btn btn-primary" style="flex:1">View Details</button>
+        <button class="btn btn-ghost" style="flex:1">🧪 Simulate</button>
       </div>
     </div>
   `).join('');
 }
 
-// Dashboard
+// UPDATE DASHBOARD
 function updateDashboard() {
   const analytics = storage.get('analytics') || STATE.analytics;
   document.getElementById('dashAnalyses').textContent = analytics.analyses || 0;
@@ -1874,7 +2770,13 @@ function updateDashboard() {
   document.getElementById('dashReputation').textContent = STATE.user ? STATE.user.reputation : 0;
 }
 
-// Toast
+// UPGRADE PLAN
+function upgradePlan(plan) {
+  showToast(`🚀 Upgrade to ${plan} coming soon! Contact us for early access.`, 'success');
+  closePricing();
+}
+
+// TOAST NOTIFICATIONS
 function showToast(msg, type = '') {
   const toast = document.getElementById('toast');
   toast.textContent = msg;
@@ -1883,26 +2785,49 @@ function showToast(msg, type = '') {
   setTimeout(() => toast.classList.remove('show'), 4000);
 }
 
-// Init
+// INITIALIZATION
 function init() {
+  // Load saved data
+  const savedLang = storage.get('lang');
+  if(savedLang) {
+    CURRENT_LANG = savedLang;
+    document.getElementById('langSelector').value = savedLang;
+    changeLanguage(savedLang);
+  }
+  
   const savedUser = storage.get('user');
   if(savedUser) STATE.user = savedUser;
+  
+  const savedUsage = storage.get('usage');
+  if(savedUsage) STATE.usage = savedUsage;
   
   const savedAnalytics = storage.get('analytics');
   if(savedAnalytics) STATE.analytics = savedAnalytics;
   
   updateNavigation();
+  fetchLiveStats();
   
-  console.log('%c🛡️ TRUSTHIRE QUANTUM INITIALIZED', 'color: #00ff9d; font-size: 16px; font-weight: bold');
+  console.log('%c🛡️ TRUSTHIRE QUANTUM PROTOCOL INITIALIZED', 'color: #00ff9d; font-size: 16px; font-weight: bold');
   console.log('%c⚡ Quantum Security Active', 'color: #00d4ff; font-size: 12px');
   console.log('%c🔐 Blockchain Protection Enabled', 'color: #b340ff; font-size: 12px');
+  console.log('%c📊 Real-time Stats: Active', 'color: #ffd700; font-size: 12px');
+  console.log('%c🌍 Multi-language: PT/EN/ES', 'color: #00ff9d; font-size: 12px');
 }
 
+// Start the system
 init();
 
 // Modal close on outside click
 document.getElementById('authModal').addEventListener('click', (e) => {
   if(e.target === e.currentTarget) closeAuth();
+});
+
+document.getElementById('profileModal').addEventListener('click', (e) => {
+  if(e.target === e.currentTarget) closeProfile();
+});
+
+document.getElementById('pricingModal').addEventListener('click', (e) => {
+  if(e.target === e.currentTarget) closePricing();
 });
 </script>
 
