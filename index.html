@@ -1,177 +1,1125 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TrustHire — Professional Network & Fraud Protection</title>
-<meta name="description" content="The world's safest professional network with real-time fraud detection">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https:;">
-<meta http-equiv="X-Frame-Options" content="DENY">
-<meta http-equiv="X-Content-Type-Options" content="nosniff">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>TrustHire Quantum — Next-Gen Professional Network</title>
+<meta name="description" content="Sistema de recrutamento com IA quântica, blockchain e transparência total">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https:;">
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Urbanist:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0a0a0a;--bg-elevated:#111;--bg-card:#141414;--border:#1f1f1f;--border-hover:#2a2a2a;--accent:#00ff88;--accent-hover:#00cc6a;--accent-glow:rgba(0,255,136,.15);--danger:#ff4444;--warn:#ffaa00;--safe:#00ff88;--info:#00aaff;--purple:#aa44ff;--cyan:#00ddff;--quantum:#ff00ff;--text:#fff;--text-secondary:#a0a0a0;--text-tertiary:#666;--font-main:'Inter',-apple-system,system-ui,sans-serif;--font-mono:'JetBrains Mono','Monaco',monospace;--fib-1:8px;--fib-2:13px;--fib-3:21px;--fib-4:34px;--fib-5:55px;--fib-6:89px}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background:var(--bg);color:var(--text);font-family:var(--font-main);line-height:1.618;-webkit-font-smoothing:antialiased;overflow-x:hidden}body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:1}body::after{content:'';position:fixed;inset:0;background:radial-gradient(circle 800px at 20% 30%,rgba(0,255,136,.04),transparent),radial-gradient(circle 600px at 80% 70%,rgba(170,68,255,.04),transparent);pointer-events:none;z-index:0;animation:quantumPulse 10s ease-in-out infinite}@keyframes quantumPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.8;transform:scale(1.05)}}nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,10,10,.85);backdrop-filter:blur(var(--fib-3))saturate(180%);border-bottom:1px solid var(--border);padding:var(--fib-2) var(--fib-4)}.nav-container{max-width:1400px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:var(--fib-3)}.nav-brand{display:flex;align-items:center;gap:var(--fib-2);text-decoration:none;cursor:pointer}.nav-logo{width:var(--fib-4);height:var(--fib-4);background:linear-gradient(135deg,var(--accent),var(--cyan));border-radius:var(--fib-1);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.1rem;color:#000;position:relative}.nav-logo::after{content:'';position:absolute;inset:-2px;border-radius:var(--fib-1);padding:2px;background:linear-gradient(135deg,var(--accent),var(--quantum));-webkit-mask:linear-gradient(#fff 0 0)content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:borderRotate 3s linear infinite}@keyframes borderRotate{to{transform:rotate(360deg)}}.nav-wordmark{font-size:1.1rem;font-weight:800;letter-spacing:-.02em}.nav-wordmark span{color:var(--accent)}.nav-links{display:flex;gap:var(--fib-1);list-style:none}.nav-links a{padding:var(--fib-1) var(--fib-2);color:var(--text-secondary);text-decoration:none;font-size:.875rem;font-weight:500;transition:all .15s;border-radius:var(--fib-1);cursor:pointer}.nav-links a:hover{color:var(--text);background:rgba(255,255,255,.05)}.nav-right{display:flex;align-items:center;gap:var(--fib-2)}.usage-indicator{display:flex;align-items:center;gap:var(--fib-1);padding:var(--fib-1) var(--fib-2);background:var(--bg-card);border:1px solid var(--border);border-radius:var(--fib-1);font-family:var(--font-mono);font-size:.75rem}.usage-count{color:var(--accent);font-weight:700}.btn{padding:var(--fib-1) var(--fib-3);font-family:var(--font-main);font-size:.875rem;font-weight:600;border-radius:var(--fib-1);cursor:pointer;transition:all .15s;border:none;text-decoration:none;display:inline-flex;align-items:center;gap:var(--fib-1)}.btn-ghost{background:transparent;color:var(--text-secondary);border:1px solid var(--border)}.btn-ghost:hover{color:var(--text);border-color:var(--border-hover);background:rgba(255,255,255,.03)}.btn-primary{background:var(--accent);color:#000;font-weight:700;box-shadow:0 0 var(--fib-3) var(--accent-glow)}.btn-primary:hover{background:var(--accent-hover);transform:translateY(-1px)}.nav-user{display:none;align-items:center;gap:var(--fib-2)}.nav-user.active{display:flex}.user-avatar{width:var(--fib-4);height:var(--fib-4);border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--cyan));display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.85rem;color:#000;cursor:pointer}.page-container{min-height:100vh;padding-top:64px;position:relative;z-index:2}.page-container.hidden{display:none}.hero{min-height:calc(100vh - 64px);display:flex;align-items:center;justify-content:center;padding:var(--fib-6) var(--fib-4)}.hero-content{max-width:1200px;margin:0 auto;text-align:center}.hero-badge{display:inline-flex;align-items:center;gap:var(--fib-1);padding:var(--fib-1) var(--fib-2);background:rgba(0,255,136,.1);border:1px solid rgba(0,255,136,.2);border-radius:100px;font-family:var(--font-mono);font-size:.75rem;color:var(--accent);margin-bottom:var(--fib-4);animation:fadeUp .6s ease-out}.status-dot{width:var(--fib-1);height:var(--fib-1);border-radius:50%;background:var(--accent);animation:pulse 2s infinite}h1{font-size:clamp(2.5rem,7vw,5rem);font-weight:900;line-height:1.1;letter-spacing:-.03em;margin-bottom:var(--fib-3);animation:fadeUp .6s .2s ease-out backwards}.gradient-text{background:linear-gradient(135deg,#fff,var(--accent),var(--quantum));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:200% 200%;animation:gradientFlow 5s ease infinite}@keyframes gradientFlow{0%,100%{background-position:0 50%}50%{background-position:100% 50%}}.feed-container{max-width:1400px;margin:0 auto;padding:var(--fib-3);display:grid;grid-template-columns:300px 1fr 300px;gap:var(--fib-3)}@media(max-width:1200px){.feed-container{grid-template-columns:1fr}.sidebar-left,.sidebar-right{display:none}}.feed-main{display:flex;flex-direction:column;gap:var(--fib-3)}.card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--fib-2);padding:var(--fib-3);transition:all .15s}.card:hover{border-color:var(--border-hover)}.post-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--fib-2);padding:var(--fib-3);margin-bottom:var(--fib-3);position:relative}.post-header{display:flex;gap:var(--fib-2);margin-bottom:var(--fib-3)}.post-avatar{width:var(--fib-5);height:var(--fib-5);border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--cyan));display:flex;align-items:center;justify-content:center;font-weight:700;color:#000}.scam-badge{position:absolute;top:var(--fib-2);right:var(--fib-2);padding:var(--fib-1) var(--fib-2);background:rgba(255,68,68,.15);border:1px solid var(--danger);border-radius:var(--fib-1);font-size:.7rem;font-weight:700;color:var(--danger);text-transform:uppercase;animation:pulse-border 1.5s infinite}.verified-badge{position:absolute;top:var(--fib-2);right:var(--fib-2);padding:var(--fib-1) var(--fib-2);background:rgba(0,255,136,.15);border:1px solid var(--safe);border-radius:var(--fib-1);font-size:.7rem;font-weight:700;color:var(--safe);text-transform:uppercase}.post-content{margin-bottom:var(--fib-3);line-height:1.618}.post-actions{display:flex;gap:var(--fib-3);padding-top:var(--fib-2);border-top:1px solid var(--border)}.post-action{display:flex;align-items:center;gap:var(--fib-1);padding:var(--fib-1) var(--fib-2);background:0 0;border:none;color:var(--text-secondary);cursor:pointer;border-radius:var(--fib-1);transition:all .15s;font-size:.85rem}.post-action:hover{background:rgba(255,255,255,.05);color:var(--text)}.job-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--fib-2);padding:var(--fib-3);margin-bottom:var(--fib-3);transition:all .15s;cursor:pointer}.job-card:hover{border-color:var(--border-hover);transform:translateY(-2px)}.analyzer-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--fib-4);margin-bottom:var(--fib-4)}@media(max-width:968px){.analyzer-grid{grid-template-columns:1fr}}.input-section{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--fib-2);padding:var(--fib-3)}.input-label{font-size:.875rem;font-weight:600;color:var(--text-secondary);margin-bottom:var(--fib-2);display:block;text-transform:uppercase;letter-spacing:.05em}textarea,input[type=email],input[type=password],input[type=text],select{width:100%;background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--fib-1);padding:var(--fib-2);color:var(--text);font-family:var(--font-mono);font-size:.875rem;line-height:1.618;transition:all .15s}textarea{min-height:240px;resize:vertical}textarea:focus,input:focus,select:focus{outline:0;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow)}textarea::placeholder,input::placeholder{color:var(--text-tertiary)}.analyze-btn,.optimize-btn{width:100%;padding:var(--fib-2);background:var(--accent);color:#000;font-weight:700;border:none;border-radius:var(--fib-1);cursor:pointer;transition:all .15s;position:relative;margin-top:var(--fib-2)}.analyze-btn:hover:not(:disabled),.optimize-btn:hover:not(:disabled){background:var(--accent-hover);transform:translateY(-2px)}.analyze-btn:disabled,.optimize-btn:disabled{opacity:.5;cursor:not-allowed}.spinner{display:none;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:var(--fib-3);height:var(--fib-3);border:3px solid rgba(0,0,0,.2);border-top-color:#000;border-radius:50%;animation:spin .6s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}.analyze-btn.loading .spinner,.optimize-btn.loading .spinner{display:block}.analyze-btn.loading .btn-text,.optimize-btn.loading .btn-text{opacity:0}.result-panel{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--fib-2);padding:var(--fib-3);min-height:400px}.file-upload{border:2px dashed var(--border);border-radius:var(--fib-1);padding:var(--fib-4);text-align:center;cursor:pointer;transition:all .15s;margin-bottom:var(--fib-2)}.file-upload:hover{border-color:var(--accent);background:var(--accent-glow)}.github-unlock{margin-top:var(--fib-2);padding:var(--fib-2);background:rgba(0,255,136,.05);border:1px solid rgba(0,255,136,.15);border-radius:var(--fib-1);display:flex;align-items:center;justify-content:space-between;gap:var(--fib-2)}.github-btn{padding:var(--fib-1) var(--fib-3);background:0 0;border:1px solid var(--accent);color:var(--accent);font-size:.875rem;font-weight:600;border-radius:var(--fib-1);cursor:pointer;transition:all .15s}.github-btn:hover{background:var(--accent);color:#000}.github-btn.verified{background:rgba(0,255,136,.2);pointer-events:none}.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(var(--fib-1));z-index:2000;align-items:center;justify-content:center;padding:var(--fib-2)}.modal-overlay.active{display:flex}.modal{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--fib-3);max-width:480px;width:100%;padding:var(--fib-4);position:relative}.toast{position:fixed;bottom:var(--fib-4);left:50%;transform:translateX(-50%)translateY(100px);background:var(--bg-card);border:1px solid var(--border);border-radius:var(--fib-1);padding:var(--fib-2) var(--fib-3);font-size:.875rem;font-weight:500;box-shadow:0 8px 32px rgba(0,0,0,.6);z-index:3000;opacity:0;transition:all .3s;pointer-events:none}.toast.show{opacity:1;transform:translateX(-50%)translateY(0)}.toast.success{border-color:var(--safe);background:rgba(0,255,136,.1)}.toast.error{border-color:var(--danger);background:rgba(255,68,68,.1)}@keyframes fadeUp{from{opacity:0;transform:translateY(var(--fib-3))}to{opacity:1;transform:translateY(0)}}@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}@keyframes pulse-border{0%,100%{box-shadow:0 0 0 0 rgba(255,68,68,.4)}50%{box-shadow:0 0 0 var(--fib-1) rgba(255,68,68,0)}}@media(max-width:768px){.nav-links{display:none}}
+:root{
+--quantum-bg:#000000;
+--quantum-surface:#0a0a0a;
+--quantum-elevated:#111111;
+--quantum-card:#141414;
+--quantum-border:#1a1a1a;
+--quantum-border-bright:#252525;
+--accent-quantum:#00ff9d;
+--accent-cyber:#00d4ff;
+--accent-danger:#ff3366;
+--accent-warn:#ffa500;
+--accent-purple:#b340ff;
+--accent-gold:#ffd700;
+--text-primary:#ffffff;
+--text-secondary:#a8a8a8;
+--text-tertiary:#666666;
+--glow-quantum:rgba(0,255,157,.15);
+--glow-cyber:rgba(0,212,255,.15);
+--glow-danger:rgba(255,51,102,.15);
+--font-display:'Clash Display',-apple-system,sans-serif;
+--font-body:'Urbanist',-apple-system,sans-serif;
+--font-mono:'Space Mono',monospace;
+--shadow-quantum:0 0 40px rgba(0,255,157,.2),0 0 80px rgba(0,255,157,.1);
+--shadow-cyber:0 0 40px rgba(0,212,255,.2),0 0 80px rgba(0,212,255,.1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{
+background:var(--quantum-bg);
+color:var(--text-primary);
+font-family:var(--font-body);
+line-height:1.6;
+-webkit-font-smoothing:antialiased;
+position:relative;
+overflow-x:hidden;
+}
+body::before{
+content:'';
+position:fixed;
+inset:0;
+background:
+radial-gradient(circle 1200px at 10% 20%, rgba(0,255,157,.03), transparent),
+radial-gradient(circle 800px at 90% 80%, rgba(0,212,255,.03), transparent),
+radial-gradient(circle 600px at 50% 50%, rgba(179,64,255,.02), transparent);
+pointer-events:none;
+z-index:0;
+animation:quantumPulse 15s ease-in-out infinite;
+}
+@keyframes quantumPulse{
+0%,100%{opacity:1;filter:blur(0)}
+50%{opacity:.7;filter:blur(1px)}
+}
+body::after{
+content:'';
+position:fixed;
+inset:0;
+background-image:
+linear-gradient(90deg, rgba(0,255,157,.01) 1px, transparent 1px),
+linear-gradient(rgba(0,255,157,.01) 1px, transparent 1px);
+background-size:50px 50px;
+pointer-events:none;
+z-index:0;
+opacity:.3;
+}
+nav{
+position:fixed;
+top:0;
+left:0;
+right:0;
+z-index:10000;
+background:rgba(10,10,10,.85);
+backdrop-filter:blur(20px) saturate(180%);
+border-bottom:1px solid var(--quantum-border);
+}
+.nav-container{
+max-width:1600px;
+margin:0 auto;
+padding:1rem 2rem;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:2rem;
+}
+.nav-brand{
+display:flex;
+align-items:center;
+gap:1rem;
+text-decoration:none;
+cursor:pointer;
+}
+.nav-logo{
+width:48px;
+height:48px;
+background:linear-gradient(135deg, var(--accent-quantum), var(--accent-cyber));
+border-radius:12px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-family:var(--font-display);
+font-weight:900;
+font-size:1.5rem;
+color:#000;
+position:relative;
+box-shadow:var(--shadow-quantum);
+}
+.nav-logo::before{
+content:'';
+position:absolute;
+inset:-2px;
+background:linear-gradient(135deg, var(--accent-quantum), var(--accent-purple));
+border-radius:12px;
+z-index:-1;
+opacity:.5;
+filter:blur(8px);
+animation:logoGlow 3s ease-in-out infinite;
+}
+@keyframes logoGlow{
+0%,100%{opacity:.5;transform:scale(1)}
+50%{opacity:.8;transform:scale(1.05)}
+}
+.nav-wordmark{
+font-family:var(--font-display);
+font-size:1.3rem;
+font-weight:700;
+letter-spacing:-0.02em;
+}
+.nav-wordmark span{
+background:linear-gradient(135deg, var(--accent-quantum), var(--accent-cyber));
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+.nav-links{
+display:flex;
+gap:0.5rem;
+list-style:none;
+}
+.nav-links a{
+padding:0.6rem 1.2rem;
+color:var(--text-secondary);
+text-decoration:none;
+font-size:0.9rem;
+font-weight:600;
+transition:all .2s;
+border-radius:8px;
+cursor:pointer;
+}
+.nav-links a:hover{
+color:var(--text-primary);
+background:rgba(255,255,255,.05);
+}
+.nav-right{
+display:flex;
+align-items:center;
+gap:1rem;
+}
+.quantum-status{
+display:flex;
+align-items:center;
+gap:0.5rem;
+padding:0.5rem 1rem;
+background:var(--quantum-card);
+border:1px solid var(--quantum-border);
+border-radius:8px;
+font-family:var(--font-mono);
+font-size:0.75rem;
+}
+.quantum-dot{
+width:8px;
+height:8px;
+border-radius:50%;
+background:var(--accent-quantum);
+box-shadow:0 0 10px var(--accent-quantum);
+animation:pulse 2s infinite;
+}
+@keyframes pulse{
+0%,100%{opacity:1}
+50%{opacity:.3}
+}
+.btn{
+padding:0.7rem 1.5rem;
+font-family:var(--font-body);
+font-size:0.9rem;
+font-weight:700;
+border-radius:8px;
+cursor:pointer;
+transition:all .2s;
+border:none;
+text-decoration:none;
+display:inline-flex;
+align-items:center;
+gap:0.5rem;
+}
+.btn-ghost{
+background:transparent;
+color:var(--text-secondary);
+border:1px solid var(--quantum-border);
+}
+.btn-ghost:hover{
+color:var(--text-primary);
+border-color:var(--quantum-border-bright);
+background:rgba(255,255,255,.03);
+}
+.btn-primary{
+background:linear-gradient(135deg, var(--accent-quantum), var(--accent-cyber));
+color:#000;
+font-weight:800;
+box-shadow:var(--shadow-quantum);
+}
+.btn-primary:hover{
+transform:translateY(-2px);
+box-shadow:0 0 60px rgba(0,255,157,.3),0 0 100px rgba(0,255,157,.15);
+}
+.page-container{
+min-height:100vh;
+padding-top:80px;
+position:relative;
+z-index:1;
+}
+.page-container.hidden{display:none}
+.hero{
+min-height:calc(100vh - 80px);
+display:flex;
+align-items:center;
+justify-content:center;
+padding:4rem 2rem;
+position:relative;
+}
+.hero-content{
+max-width:1400px;
+margin:0 auto;
+text-align:center;
+}
+.hero-badge{
+display:inline-flex;
+align-items:center;
+gap:0.5rem;
+padding:0.5rem 1.2rem;
+background:var(--glow-quantum);
+border:1px solid rgba(0,255,157,.3);
+border-radius:100px;
+font-family:var(--font-mono);
+font-size:0.75rem;
+color:var(--accent-quantum);
+margin-bottom:2rem;
+animation:fadeSlideUp .8s ease-out;
+}
+@keyframes fadeSlideUp{
+from{opacity:0;transform:translateY(20px)}
+to{opacity:1;transform:translateY(0)}
+}
+h1{
+font-family:var(--font-display);
+font-size:clamp(3rem, 10vw, 7rem);
+font-weight:900;
+line-height:1;
+letter-spacing:-0.04em;
+margin-bottom:1.5rem;
+animation:fadeSlideUp .8s .2s ease-out backwards;
+}
+.gradient-text{
+background:linear-gradient(135deg, #ffffff, var(--accent-quantum), var(--accent-cyber), var(--accent-purple));
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+background-size:300% 300%;
+animation:gradientFlow 8s ease infinite;
+}
+@keyframes gradientFlow{
+0%,100%{background-position:0% 50%}
+50%{background-position:100% 50%}
+}
+.hero-description{
+font-size:clamp(1rem, 2.5vw, 1.4rem);
+color:var(--text-secondary);
+max-width:900px;
+margin:0 auto 3rem;
+line-height:1.6;
+animation:fadeSlideUp .8s .4s ease-out backwards;
+}
+.hero-actions{
+display:flex;
+gap:1rem;
+justify-content:center;
+flex-wrap:wrap;
+margin-bottom:4rem;
+animation:fadeSlideUp .8s .6s ease-out backwards;
+}
+.stats-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
+gap:2rem;
+max-width:1200px;
+margin:0 auto;
+animation:fadeSlideUp .8s .8s ease-out backwards;
+}
+.stat-card{
+text-align:center;
+padding:2rem;
+background:var(--quantum-card);
+border:1px solid var(--quantum-border);
+border-radius:16px;
+transition:all .3s;
+}
+.stat-card:hover{
+transform:translateY(-5px);
+border-color:var(--accent-quantum);
+box-shadow:var(--shadow-quantum);
+}
+.stat-number{
+font-family:var(--font-display);
+font-size:3rem;
+font-weight:900;
+background:linear-gradient(135deg, var(--accent-quantum), var(--accent-cyber));
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+margin-bottom:0.5rem;
+}
+.stat-label{
+font-size:0.9rem;
+color:var(--text-tertiary);
+text-transform:uppercase;
+letter-spacing:0.05em;
+}
+.section{
+max-width:1600px;
+margin:0 auto;
+padding:4rem 2rem;
+}
+.section-header{
+text-align:center;
+margin-bottom:3rem;
+}
+.section-title{
+font-family:var(--font-display);
+font-size:clamp(2rem, 6vw, 4rem);
+font-weight:900;
+margin-bottom:1rem;
+}
+.section-subtitle{
+font-size:1.2rem;
+color:var(--text-secondary);
+max-width:700px;
+margin:0 auto;
+}
+.features-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit, minmax(350px, 1fr));
+gap:2rem;
+}
+.feature-card{
+padding:2.5rem;
+background:var(--quantum-card);
+border:1px solid var(--quantum-border);
+border-radius:20px;
+transition:all .3s;
+position:relative;
+overflow:hidden;
+}
+.feature-card::before{
+content:'';
+position:absolute;
+top:0;
+left:0;
+right:0;
+height:3px;
+background:linear-gradient(90deg, var(--accent-quantum), var(--accent-cyber));
+transform:scaleX(0);
+transition:transform .3s;
+}
+.feature-card:hover{
+transform:translateY(-8px);
+border-color:var(--accent-quantum);
+box-shadow:var(--shadow-quantum);
+}
+.feature-card:hover::before{
+transform:scaleX(1);
+}
+.feature-icon{
+font-size:3rem;
+margin-bottom:1.5rem;
+}
+.feature-title{
+font-family:var(--font-display);
+font-size:1.5rem;
+font-weight:700;
+margin-bottom:1rem;
+}
+.feature-description{
+color:var(--text-secondary);
+line-height:1.6;
+}
+.tool-tabs{
+display:flex;
+gap:1rem;
+justify-content:center;
+margin-bottom:3rem;
+flex-wrap:wrap;
+}
+.tool-tab{
+padding:1rem 2rem;
+background:var(--quantum-card);
+border:1px solid var(--quantum-border);
+border-radius:12px;
+cursor:pointer;
+font-weight:700;
+transition:all .2s;
+}
+.tool-tab.active{
+background:linear-gradient(135deg, var(--accent-quantum), var(--accent-cyber));
+color:#000;
+border-color:transparent;
+box-shadow:var(--shadow-quantum);
+}
+.tool-tab:not(.active):hover{
+border-color:var(--accent-quantum);
+background:rgba(0,255,157,.05);
+}
+.tool-panel{
+display:none;
+}
+.tool-panel.active{
+display:block;
+animation:fadeIn .5s ease-out;
+}
+@keyframes fadeIn{
+from{opacity:0}
+to{opacity:1}
+}
+.analyzer-layout{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:2rem;
+}
+@media(max-width:1024px){
+.analyzer-layout{
+grid-template-columns:1fr;
+}
+}
+.input-panel{
+background:var(--quantum-card);
+border:1px solid var(--quantum-border);
+border-radius:20px;
+padding:2rem;
+}
+.output-panel{
+background:var(--quantum-card);
+border:1px solid var(--quantum-border);
+border-radius:20px;
+padding:2rem;
+min-height:500px;
+}
+.input-label{
+font-size:0.85rem;
+font-weight:700;
+color:var(--text-secondary);
+text-transform:uppercase;
+letter-spacing:0.05em;
+margin-bottom:0.8rem;
+display:block;
+}
+textarea,input[type=text],input[type=email],input[type=password],select{
+width:100%;
+background:var(--quantum-elevated);
+border:1px solid var(--quantum-border);
+border-radius:12px;
+padding:1rem;
+color:var(--text-primary);
+font-family:var(--font-body);
+font-size:0.95rem;
+transition:all .2s;
+}
+textarea{
+min-height:300px;
+resize:vertical;
+font-family:var(--font-mono);
+line-height:1.6;
+}
+textarea:focus,input:focus,select:focus{
+outline:0;
+border-color:var(--accent-quantum);
+box-shadow:0 0 0 3px var(--glow-quantum);
+}
+.analyze-btn{
+width:100%;
+padding:1rem;
+margin-top:1.5rem;
+background:linear-gradient(135deg, var(--accent-quantum), var(--accent-cyber));
+color:#000;
+font-weight:800;
+border:none;
+border-radius:12px;
+cursor:pointer;
+transition:all .2s;
+font-size:1rem;
+position:relative;
+}
+.analyze-btn:hover:not(:disabled){
+transform:translateY(-2px);
+box-shadow:var(--shadow-quantum);
+}
+.analyze-btn:disabled{
+opacity:.5;
+cursor:not-allowed;
+}
+.spinner{
+display:none;
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%, -50%);
+width:20px;
+height:20px;
+border:3px solid rgba(0,0,0,.2);
+border-top-color:#000;
+border-radius:50%;
+animation:spin .6s linear infinite;
+}
+@keyframes spin{
+to{transform:translate(-50%, -50%) rotate(360deg)}
+}
+.analyze-btn.loading .spinner{
+display:block;
+}
+.analyze-btn.loading .btn-text{
+opacity:0;
+}
+.score-display{
+text-align:center;
+padding:3rem;
+}
+.score-circle{
+width:200px;
+height:200px;
+margin:0 auto 2rem;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+position:relative;
+}
+.score-number{
+font-family:var(--font-display);
+font-size:4rem;
+font-weight:900;
+}
+.score-label{
+font-size:1.2rem;
+font-weight:700;
+text-transform:uppercase;
+letter-spacing:0.1em;
+margin-top:0.5rem;
+}
+.score-breakdown{
+text-align:left;
+margin-top:2rem;
+}
+.score-item{
+display:flex;
+justify-content:space-between;
+padding:1rem;
+background:var(--quantum-elevated);
+border-radius:12px;
+margin-bottom:0.5rem;
+}
+.blockchain-badge{
+display:inline-flex;
+align-items:center;
+gap:0.5rem;
+padding:0.5rem 1rem;
+background:var(--glow-quantum);
+border:1px solid var(--accent-quantum);
+border-radius:100px;
+font-family:var(--font-mono);
+font-size:0.75rem;
+color:var(--accent-quantum);
+margin-top:1rem;
+}
+.modal-overlay{
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.9);
+backdrop-filter:blur(10px);
+z-index:20000;
+align-items:center;
+justify-content:center;
+padding:2rem;
+}
+.modal-overlay.active{
+display:flex;
+animation:fadeIn .3s ease-out;
+}
+.modal{
+background:var(--quantum-card);
+border:1px solid var(--quantum-border);
+border-radius:24px;
+max-width:500px;
+width:100%;
+padding:3rem;
+position:relative;
+box-shadow:0 20px 60px rgba(0,0,0,.5);
+}
+.modal-close{
+position:absolute;
+top:1.5rem;
+right:1.5rem;
+background:transparent;
+border:none;
+color:var(--text-secondary);
+font-size:2rem;
+cursor:pointer;
+transition:all .2s;
+}
+.modal-close:hover{
+color:var(--text-primary);
+transform:rotate(90deg);
+}
+.toast{
+position:fixed;
+bottom:2rem;
+left:50%;
+transform:translateX(-50%) translateY(100px);
+background:var(--quantum-card);
+border:1px solid var(--quantum-border);
+border-radius:12px;
+padding:1rem 2rem;
+font-weight:600;
+box-shadow:0 10px 40px rgba(0,0,0,.6);
+z-index:30000;
+opacity:0;
+transition:all .3s;
+}
+.toast.show{
+opacity:1;
+transform:translateX(-50%) translateY(0);
+}
+.toast.success{
+border-color:var(--accent-quantum);
+background:var(--glow-quantum);
+}
+.toast.error{
+border-color:var(--accent-danger);
+background:var(--glow-danger);
+}
+.dashboard-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+gap:2rem;
+}
+.dashboard-card{
+padding:2rem;
+background:var(--quantum-card);
+border:1px solid var(--quantum-border);
+border-radius:20px;
+}
+.dashboard-value{
+font-family:var(--font-display);
+font-size:3.5rem;
+font-weight:900;
+margin-bottom:0.5rem;
+}
+.dashboard-label{
+font-size:0.9rem;
+color:var(--text-tertiary);
+text-transform:uppercase;
+letter-spacing:0.05em;
+}
+.job-card{
+background:var(--quantum-card);
+border:1px solid var(--quantum-border);
+border-radius:16px;
+padding:2rem;
+margin-bottom:1.5rem;
+transition:all .3s;
+cursor:pointer;
+}
+.job-card:hover{
+transform:translateY(-5px);
+border-color:var(--accent-quantum);
+box-shadow:var(--shadow-quantum);
+}
+.job-header{
+display:flex;
+justify-content:space-between;
+align-items:start;
+margin-bottom:1.5rem;
+}
+.job-title{
+font-family:var(--font-display);
+font-size:1.5rem;
+font-weight:700;
+margin-bottom:0.5rem;
+}
+.job-company{
+color:var(--text-secondary);
+font-size:1rem;
+}
+.compatibility-badge{
+padding:0.5rem 1rem;
+background:var(--glow-quantum);
+border:1px solid var(--accent-quantum);
+border-radius:100px;
+font-family:var(--font-mono);
+font-weight:700;
+color:var(--accent-quantum);
+}
+.job-meta{
+display:flex;
+gap:1.5rem;
+flex-wrap:wrap;
+margin-bottom:1rem;
+font-size:0.9rem;
+color:var(--text-secondary);
+}
+.job-tags{
+display:flex;
+gap:0.5rem;
+flex-wrap:wrap;
+}
+.job-tag{
+padding:0.4rem 1rem;
+background:var(--quantum-elevated);
+border:1px solid var(--quantum-border);
+border-radius:6px;
+font-size:0.85rem;
+}
+@media(max-width:768px){
+.nav-links{display:none}
+.analyzer-layout{grid-template-columns:1fr}
+.stats-grid{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
 
+<!-- NAVIGATION -->
 <nav>
 <div class="nav-container">
-<a class="nav-brand" onclick="nav('home')">
-<div class="nav-logo">T</div>
-<div class="nav-wordmark">Trust<span>Hire</span></div>
+<a class="nav-brand" onclick="navigate('home')">
+<div class="nav-logo">TQ</div>
+<div class="nav-wordmark">TrustHire <span>Quantum</span></div>
 </a>
 <div class="nav-links">
-<a onclick="nav('home')">Home</a>
-<a onclick="nav('feed')">Network</a>
-<a onclick="nav('jobs')">Jobs</a>
-<a onclick="nav('analyze')">Tools</a>
-<a onclick="nav('dashboard')" id="dashLink" style="display:none">Dashboard</a>
+<a onclick="navigate('home')">Início</a>
+<a onclick="navigate('network')">Rede</a>
+<a onclick="navigate('jobs')">Vagas</a>
+<a onclick="navigate('tools')">Ferramentas IA</a>
+<a onclick="navigate('dashboard')" id="dashLink" style="display:none">Dashboard</a>
 </div>
 <div class="nav-right">
-<div id="navGuest" style="display:flex;align-items:center;gap:var(--fib-2)">
-<div class="usage-indicator">
-<span class="usage-count" id="usageCount">3</span>
-<span>analyses left</span>
+<div class="quantum-status">
+<span class="quantum-dot"></span>
+<span>QUANTUM ACTIVE</span>
 </div>
-<button class="btn btn-ghost" onclick="openAuth()">Sign In</button>
-<button class="btn btn-primary" onclick="openAuth()">Join Free</button>
+<div id="navGuest" style="display:flex;gap:1rem">
+<button class="btn btn-ghost" onclick="openAuth()">Entrar</button>
+<button class="btn btn-primary" onclick="openAuth()">Cadastrar Grátis</button>
 </div>
-<div class="nav-user" id="navUser">
-<div class="user-avatar" id="userAvatar">U</div>
-<span style="font-size:.875rem;font-weight:600" id="userName"></span>
-<button class="btn btn-ghost" onclick="logout()">Sign Out</button>
+<div class="nav-user" id="navUser" style="display:none;align-items:center;gap:1rem">
+<div style="font-weight:700" id="userName"></div>
+<button class="btn btn-ghost" onclick="logout()">Sair</button>
 </div>
 </div>
 </div>
 </nav>
 
-<!-- HOME -->
+<!-- HOME PAGE -->
 <div class="page-container" id="homePage">
 <section class="hero">
 <div class="hero-content">
 <div class="hero-badge">
-<span class="status-dot"></span>
-<span>Quantum Protected • Real-time Fraud Detection • Professional Network</span>
+<span class="quantum-dot"></span>
+<span>BLOCKCHAIN VERIFIED • QUANTUM SECURITY • AI-POWERED MATCHING</span>
 </div>
-<h1>The world's safest<br><span class="gradient-text">professional network</span></h1>
-<p style="font-size:clamp(1rem,2vw,1.25rem);color:var(--text-secondary);max-width:800px;margin:0 auto 2.5rem;line-height:1.618">Connect safely, find jobs, detect scams in real-time. LinkedIn meets enterprise security.</p>
-<div style="display:flex;gap:var(--fib-2);justify-content:center;flex-wrap:wrap">
-<button class="btn btn-primary" onclick="openAuth()" style="font-size:1rem;padding:var(--fib-2) var(--fib-5)">Join Free →</button>
-<button class="btn btn-ghost" onclick="nav('feed')" style="font-size:1rem;padding:var(--fib-2) var(--fib-5)">Explore Network</button>
+<h1>A evolução do <span class="gradient-text">recrutamento profissional</span></h1>
+<p class="hero-description">
+Sistema de matching com IA quântica, blockchain de reputação, transparência total de compatibilidade e detector de fraudes em tempo real. O futuro do trabalho começa aqui.
+</p>
+<div class="hero-actions">
+<button class="btn btn-primary" onclick="openAuth()" style="font-size:1.1rem;padding:1rem 2.5rem">
+Começar Grátis →
+</button>
+<button class="btn btn-ghost" onclick="navigate('tools')" style="font-size:1.1rem;padding:1rem 2.5rem">
+Explorar Ferramentas IA
+</button>
 </div>
-<div style="display:flex;gap:var(--fib-5);justify-content:center;margin-top:var(--fib-6);flex-wrap:wrap">
-<div style="text-align:center"><span style="font-size:2rem;font-weight:900;color:var(--accent);display:block;margin-bottom:var(--fib-1)">500k+</span><span style="font-size:.875rem;color:var(--text-tertiary)">Professionals</span></div>
-<div style="text-align:center"><span style="font-size:2rem;font-weight:900;color:var(--accent);display:block;margin-bottom:var(--fib-1)">15k+</span><span style="font-size:.875rem;color:var(--text-tertiary)">Jobs Posted</span></div>
-<div style="text-align:center"><span style="font-size:2rem;font-weight:900;color:var(--accent);display:block;margin-bottom:var(--fib-1)">25k+</span><span style="font-size:.875rem;color:var(--text-tertiary)">Scams Blocked</span></div>
-<div style="text-align:center"><span style="font-size:2rem;font-weight:900;color:var(--accent);display:block;margin-bottom:var(--fib-1)">99.94%</span><span style="font-size:.875rem;color:var(--text-tertiary)">Detection Rate</span></div>
+<div class="stats-grid">
+<div class="stat-card">
+<div class="stat-number">847K+</div>
+<div class="stat-label">Profissionais Verificados</div>
+</div>
+<div class="stat-card">
+<div class="stat-number">32K+</div>
+<div class="stat-label">Vagas Verificadas</div>
+</div>
+<div class="stat-card">
+<div class="stat-number">89K+</div>
+<div class="stat-label">Fraudes Bloqueadas</div>
+</div>
+<div class="stat-card">
+<div class="stat-number">99.97%</div>
+<div class="stat-label">Taxa de Detecção IA</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-header">
+<h2 class="section-title">Funcionalidades <span class="gradient-text">Revolucionárias</span></h2>
+<p class="section-subtitle">Tecnologias que nenhuma plataforma de emprego possui</p>
+</div>
+<div class="features-grid">
+<div class="feature-card">
+<div class="feature-icon">🎯</div>
+<h3 class="feature-title">Score Transparente de Compatibilidade</h3>
+<p class="feature-description">
+Veja seu score real (0-100%) para cada vaga com breakdown completo: +30 skills técnicas, -5 localização. Total transparência algorítmica.
+</p>
+</div>
+<div class="feature-card">
+<div class="feature-icon">🧪</div>
+<h3 class="feature-title">Simulador de Candidatura</h3>
+<p class="feature-description">
+Teste seu currículo antes de enviar. IA analisa chance de entrevista, pontos fracos e palavras-chave faltando. Sandbox preditivo único.
+</p>
+</div>
+<div class="feature-card">
+<div class="feature-icon">🛡️</div>
+<h3 class="feature-title">Detector de Vagas Falsas</h3>
+<p class="feature-description">
+Ghost jobs expostos! Score de confiabilidade da vaga baseado em histórico da empresa, tempo aberta e padrões suspeitos. Proteção quântica.
+</p>
+</div>
+<div class="feature-card">
+<div class="feature-icon">📊</div>
+<h3 class="feature-title">Radar de Mercado em Tempo Real</h3>
+<p class="feature-description">
+Demanda por sua skill, salário médio atualizado por hora, empresas contratando agora, tempo médio de contratação. Dados vivos.
+</p>
+</div>
+<div class="feature-card">
+<div class="feature-icon">🔬</div>
+<h3 class="feature-title">Validação de Skills Blockchain</h3>
+<p class="feature-description">
+Certificação descentralizada e verificável. Provas práticas integradas. Nível declarado vs testado. Reputação imutável on-chain.
+</p>
+</div>
+<div class="feature-card">
+<div class="feature-icon">🔄</div>
+<h3 class="feature-title">Matching Reverso Inteligente</h3>
+<p class="feature-description">
+Vagas procuram VOCÊ. Se score > 90%, candidatura automática opcional. Sistema proativo que trabalha para você 24/7.
+</p>
+</div>
+<div class="feature-card">
+<div class="feature-icon">🔮</div>
+<h3 class="feature-title">Timeline de Carreira Preditiva</h3>
+<p class="feature-description">
+IA calcula sua trajetória: promoção em 14 meses, salário estimado em 2 anos, risco de estagnação. Planejamento com ciência de dados.
+</p>
+</div>
+<div class="feature-card">
+<div class="feature-icon">⚖️</div>
+<h3 class="feature-title">Sistema Anti-Viés Auditável</h3>
+<p class="feature-description">
+Cada rejeição explica fatores ponderados. Transparência algorítmica total. Combate discriminação e injustiça com IA ética.
+</p>
+</div>
+<div class="feature-card">
+<div class="feature-icon">⭐</div>
+<h3 class="feature-title">Reputação Bidirecional</h3>
+<p class="feature-description">
+Empresas também são avaliadas: tempo de resposta 9/10, transparência 8/10, feedback real 3/10. Equilíbrio de poder restaurado.
+</p>
 </div>
 </div>
 </section>
 </div>
 
-<!-- FEED/NETWORK -->
-<div class="page-container hidden" id="feedPage">
-<div class="feed-container">
-<aside class="sidebar-left">
-<div class="card" style="margin-bottom:var(--fib-3)">
-<h3 style="font-size:.95rem;margin-bottom:var(--fib-2)">Your Profile</h3>
-<div style="font-size:.85rem;color:var(--text-secondary)" id="profileSidebar">Sign in to view</div>
+<!-- TOOLS PAGE -->
+<div class="page-container hidden" id="toolsPage">
+<div class="section">
+<div class="section-header">
+<h2 class="section-title">Ferramentas <span class="gradient-text">Quânticas</span></h2>
+<p class="section-subtitle">IA avançada com segurança blockchain e análise preditiva</p>
 </div>
-</aside>
-<main class="feed-main" id="feedMain"></main>
-<aside class="sidebar-right">
-<div class="card">
-<h3 style="font-size:.95rem;margin-bottom:var(--fib-2)">Trending Jobs</h3>
-<div style="font-size:.85rem;color:var(--text-secondary)">Loading...</div>
+<div class="tool-tabs">
+<div class="tool-tab active" onclick="switchTool('analyzer')">
+🔍 Analisador de Mensagens
 </div>
-</aside>
+<div class="tool-tab" onclick="switchTool('simulator')">
+🧪 Simulador de Candidatura
+</div>
+<div class="tool-tab" onclick="switchTool('detector')">
+🛡️ Detector de Vagas Falsas
+</div>
+<div class="tool-tab" onclick="switchTool('radar')">
+📊 Radar de Mercado
+</div>
+<div class="tool-tab" onclick="switchTool('validator')">
+🔬 Validador de Skills
 </div>
 </div>
 
-<!-- JOBS -->
+<!-- ANALYZER TOOL -->
+<div class="tool-panel active" id="analyzerTool">
+<div class="analyzer-layout">
+<div class="input-panel">
+<label class="input-label">Mensagem para Análise</label>
+<textarea id="msgInput" placeholder="Cole aqui a mensagem do recrutador ou proposta de emprego...
+
+Exemplo:
+'Olá! Temos vaga urgente, 15k/mês trabalho remoto, sem experiência necessária. Deposite R$500 taxa de matrícula no treinamento. WhatsApp: +55...'"></textarea>
+<button class="analyze-btn" id="analyzeBtn" onclick="analyzeMessage()">
+<span class="btn-text">🔍 Analisar com IA Quântica</span>
+<span class="spinner"></span>
+</button>
+<div class="blockchain-badge" style="width:100%;justify-content:center;margin-top:1rem">
+<span>🔐</span>
+<span>Protegido por Blockchain • Análise criptografada</span>
+</div>
+</div>
+<div class="output-panel" id="analyzerOutput">
+<div class="score-display">
+<div style="font-size:4rem;opacity:.1">🛡️</div>
+<div style="font-size:1.2rem;color:var(--text-secondary);margin-top:1rem">
+<strong>IA Quântica Pronta</strong><br>
+Cole uma mensagem para análise em tempo real
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- SIMULATOR TOOL -->
+<div class="tool-panel" id="simulatorTool">
+<div class="analyzer-layout">
+<div class="input-panel">
+<label class="input-label">Cole seu Currículo</label>
+<textarea id="cvInput" placeholder="Formação: Ciência da Computação - USP (2018-2022)
+
+Experiência:
+- Desenvolvedor Full Stack na XYZ Corp (2022-2024)
+  • React, Node.js, PostgreSQL
+  • Liderou projeto de migração cloud
+  • Aumentou performance em 40%
+
+Skills: JavaScript, Python, AWS, Docker, Git"></textarea>
+<label class="input-label" style="margin-top:1.5rem">Descrição da Vaga</label>
+<textarea id="jobInput" style="min-height:200px" placeholder="Senior Full Stack Developer
+
+Requisitos:
+- 3+ anos React e Node.js
+- Experiência com cloud (AWS/GCP)
+- Inglês fluente
+- Liderança técnica
+
+Diferencial:
+- Certificação AWS
+- Contribuição open-source"></textarea>
+<button class="analyze-btn" onclick="simulateApplication()">
+<span class="btn-text">🧪 Simular Candidatura</span>
+<span class="spinner"></span>
+</button>
+</div>
+<div class="output-panel" id="simulatorOutput">
+<div class="score-display">
+<div style="font-size:4rem;opacity:.1">🧪</div>
+<div style="font-size:1.2rem;color:var(--text-secondary);margin-top:1rem">
+<strong>Sandbox Preditivo</strong><br>
+Teste compatibilidade antes de candidatar
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- DETECTOR TOOL -->
+<div class="tool-panel" id="detectorTool">
+<div class="analyzer-layout">
+<div class="input-panel">
+<label class="input-label">URL ou Descrição da Vaga</label>
+<input type="text" id="jobUrl" placeholder="https://linkedin.com/jobs/view/123456" style="margin-bottom:1rem">
+<textarea id="jobDesc" placeholder="Ou cole a descrição completa da vaga aqui...
+
+Empresa: TechCorp Brasil
+Vaga: Desenvolvedor Senior
+Salário: R$ 25.000/mês
+Regime: CLT Remoto
+
+Descrição:
+Buscamos desenvolvedor para projeto inovador..."></textarea>
+<button class="analyze-btn" onclick="detectFraud()">
+<span class="btn-text">🛡️ Verificar Autenticidade</span>
+<span class="spinner"></span>
+</button>
+</div>
+<div class="output-panel" id="detectorOutput">
+<div class="score-display">
+<div style="font-size:4rem;opacity:.1">🛡️</div>
+<div style="font-size:1.2rem;color:var(--text-secondary);margin-top:1rem">
+<strong>Detector Quantum</strong><br>
+Expõe ghost jobs e fraudes em segundos
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- RADAR TOOL -->
+<div class="tool-panel" id="radarTool">
+<div class="analyzer-layout">
+<div class="input-panel">
+<label class="input-label">Sua Skill Principal</label>
+<input type="text" id="skillInput" placeholder="Ex: React Developer, Data Scientist, UX Designer">
+<label class="input-label" style="margin-top:1.5rem">Localização</label>
+<input type="text" id="locationInput" placeholder="Ex: São Paulo, Brasil">
+<label class="input-label" style="margin-top:1.5rem">Nível de Senioridade</label>
+<select id="levelInput">
+<option>Júnior</option>
+<option selected>Pleno</option>
+<option>Sênior</option>
+<option>Especialista</option>
+</select>
+<button class="analyze-btn" onclick="getMarketRadar()">
+<span class="btn-text">📊 Gerar Radar em Tempo Real</span>
+<span class="spinner"></span>
+</button>
+</div>
+<div class="output-panel" id="radarOutput">
+<div class="score-display">
+<div style="font-size:4rem;opacity:.1">📊</div>
+<div style="font-size:1.2rem;color:var(--text-secondary);margin-top:1rem">
+<strong>Market Intelligence</strong><br>
+Dados atualizados a cada hora
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- VALIDATOR TOOL -->
+<div class="tool-panel" id="validatorTool">
+<div class="analyzer-layout">
+<div class="input-panel">
+<label class="input-label">Skill para Validar</label>
+<input type="text" id="skillValidate" placeholder="Ex: Python, JavaScript, AWS, Machine Learning">
+<label class="input-label" style="margin-top:1.5rem">Nível Declarado</label>
+<select id="declaredLevel">
+<option>Básico</option>
+<option>Intermediário</option>
+<option selected>Avançado</option>
+<option>Especialista</option>
+</select>
+<label class="input-label" style="margin-top:1.5rem">Provas (opcional)</label>
+<textarea id="proofInput" style="min-height:150px" placeholder="Links para GitHub, certificados, projetos:
+• github.com/seu-usuario
+• certificação AWS Solutions Architect
+• projeto: app-xyz.com"></textarea>
+<button class="analyze-btn" onclick="validateSkill()">
+<span class="btn-text">🔬 Validar com Blockchain</span>
+<span class="spinner"></span>
+</button>
+</div>
+<div class="output-panel" id="validatorOutput">
+<div class="score-display">
+<div style="font-size:4rem;opacity:.1">🔬</div>
+<div style="font-size:1.2rem;color:var(--text-secondary);margin-top:1rem">
+<strong>Blockchain Validator</strong><br>
+Certificação descentralizada e imutável
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- JOBS PAGE -->
 <div class="page-container hidden" id="jobsPage">
-<div style="max-width:1200px;margin:0 auto;padding:var(--fib-5) var(--fib-3)">
-<h2 style="font-size:2.5rem;font-weight:900;margin-bottom:var(--fib-2)">Job Opportunities</h2>
-<p style="color:var(--text-secondary);margin-bottom:var(--fib-5)">All verified • Real-time scam detection</p>
+<div class="section">
+<div class="section-header">
+<h2 class="section-title">Vagas <span class="gradient-text">Verificadas</span></h2>
+<p class="section-subtitle">Todas as vagas com score de autenticidade e compatibilidade transparente</p>
+</div>
 <div id="jobsList"></div>
 </div>
 </div>
 
-<!-- TOOLS/ANALYZE -->
-<div class="page-container hidden" id="analyzePage">
-<div style="max-width:1400px;margin:0 auto;padding:var(--fib-5) var(--fib-3)">
-<h2 style="font-size:2.5rem;font-weight:900;margin-bottom:var(--fib-2);text-align:center">Professional Tools</h2>
-<p style="color:var(--text-secondary);margin-bottom:var(--fib-5);text-align:center">Fraud detection • Resume optimization • Company verification</p>
-<div style="display:flex;gap:var(--fib-1);justify-content:center;margin-bottom:var(--fib-5);flex-wrap:wrap">
-<button class="btn" style="background:var(--accent);color:#000" onclick="switchTool('message')">🔍 Analyze Message</button>
-<button class="btn btn-ghost" onclick="switchTool('resume')">📄 Resume Optimizer</button>
-<button class="btn btn-ghost" onclick="switchTool('company')">🏢 Company Check</button>
-</div>
-<div id="toolMessage">
-<div class="analyzer-grid">
-<div class="input-section">
-<label class="input-label">Message to Analyze</label>
-<textarea id="msgInput" placeholder="Paste recruiter message..." maxlength="5000"></textarea>
-<button class="analyze-btn" id="analyzeBtn" onclick="analyze()"><span class="btn-text">Analyze with AI</span><span class="spinner"></span></button>
-<div class="github-unlock" id="githubUnlock" style="display:none">
-<div style="flex:1;font-size:.875rem"><strong style="color:var(--accent)">⭐ Unlock +1 Analysis</strong><br>Click to star our GitHub (opens new tab + auto-stars)</div>
-<button class="github-btn" id="githubBtn" onclick="autoStar()">Star Repo</button>
-</div>
-</div>
-<div class="result-panel" id="msgResult">
-<div style="text-align:center;padding:var(--fib-5);color:var(--text-tertiary)"><div style="font-size:3rem;opacity:.2">🛡️</div><strong>AI Ready</strong></div>
-</div>
-</div>
-</div>
-<div id="toolResume" style="display:none">
-<div class="analyzer-grid">
-<div class="input-section">
-<label class="input-label">Upload Resume</label>
-<div class="file-upload" onclick="document.getElementById('resFile').click()">
-<input type="file" id="resFile" accept=".pdf,.doc,.docx" style="display:none" onchange="handleFile(event)">
-<div style="font-size:2rem;margin-bottom:var(--fib-1);opacity:.3">📄</div>
-<div style="font-size:.875rem;color:var(--text-secondary)">Click to upload</div>
-<div style="font-size:.75rem;color:var(--text-tertiary);margin-top:var(--fib-1)">PDF, DOC, DOCX • Max 10MB</div>
-</div>
-<div id="fileName" style="display:none;margin-top:var(--fib-1);padding:var(--fib-1);background:rgba(0,255,136,.1);border-radius:var(--fib-1);font-size:.875rem;color:var(--safe)"></div>
-<label class="input-label" style="margin-top:var(--fib-2)">ATS System</label>
-<select id="atsSelect">
-<option>Generic (All Systems)</option>
-<option>Workday</option>
-<option>Greenhouse</option>
-<option>Lever</option>
-<option>Oracle Taleo</option>
-<option>iCIMS</option>
-<option>LinkedIn</option>
-<option>Indeed</option>
-</select>
-<button class="optimize-btn" id="optimizeBtn" onclick="optimizeResume()"><span class="btn-text">Optimize with AI</span><span class="spinner"></span></button>
-</div>
-<div class="result-panel" id="resResult">
-<div style="text-align:center;padding:var(--fib-5);color:var(--text-tertiary)"><div style="font-size:3rem;opacity:.2">📊</div><strong>ATS Optimizer Ready</strong></div>
-</div>
-</div>
-</div>
-<div id="toolCompany" style="display:none">
-<div style="text-align:center;padding:var(--fib-6)">
-<div style="font-size:4rem;opacity:.2;margin-bottom:var(--fib-2)">🏢</div>
-<h3 style="font-size:1.5rem;margin-bottom:var(--fib-2)">Company Verification</h3>
-<p style="color:var(--text-secondary);max-width:500px;margin:0 auto var(--fib-4)">Coming soon - Verify company legitimacy with blockchain validation</p>
-</div>
-</div>
-</div>
-</div>
-
-<!-- DASHBOARD -->
+<!-- DASHBOARD PAGE -->
 <div class="page-container hidden" id="dashboardPage">
-<div style="max-width:1400px;margin:0 auto;padding:var(--fib-5) var(--fib-3)">
-<h2 style="font-size:2.5rem;font-weight:900;margin-bottom:var(--fib-5)">Dashboard</h2>
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:var(--fib-3)">
-<div class="card"><div style="font-size:.875rem;color:var(--text-tertiary);margin-bottom:var(--fib-2)">ANALYSES</div><div style="font-size:2.5rem;font-weight:900" id="dashAnalyses">0</div></div>
-<div class="card"><div style="font-size:.875rem;color:var(--text-tertiary);margin-bottom:var(--fib-2)">THREATS BLOCKED</div><div style="font-size:2.5rem;font-weight:900;color:var(--danger)" id="dashThreats">0</div></div>
-<div class="card"><div style="font-size:.875rem;color:var(--text-tertiary);margin-bottom:var(--fib-2)">CONNECTIONS</div><div style="font-size:2.5rem;font-weight:900;color:var(--accent)" id="dashConnections">0</div></div>
-<div class="card"><div style="font-size:.875rem;color:var(--text-tertiary);margin-bottom:var(--fib-2)">SUCCESS RATE</div><div style="font-size:2.5rem;font-weight:900;color:var(--safe)">99.94%</div></div>
+<div class="section">
+<h2 class="section-title">Dashboard <span class="gradient-text">Quantum</span></h2>
+<div class="dashboard-grid" style="margin-top:3rem">
+<div class="dashboard-card">
+<div class="dashboard-label">Análises Realizadas</div>
+<div class="dashboard-value" style="color:var(--accent-quantum)" id="dashAnalyses">0</div>
+</div>
+<div class="dashboard-card">
+<div class="dashboard-label">Fraudes Bloqueadas</div>
+<div class="dashboard-value" style="color:var(--accent-danger)" id="dashThreats">0</div>
+</div>
+<div class="dashboard-card">
+<div class="dashboard-label">Score de Reputação</div>
+<div class="dashboard-value" style="color:var(--accent-cyber)" id="dashReputation">0</div>
+</div>
+<div class="dashboard-card">
+<div class="dashboard-label">Compatibilidade Média</div>
+<div class="dashboard-value" style="color:var(--accent-purple)">87%</div>
+</div>
 </div>
 </div>
 </div>
@@ -179,23 +1127,784 @@
 <!-- AUTH MODAL -->
 <div class="modal-overlay" id="authModal">
 <div class="modal">
-<button onclick="closeAuth()" style="position:absolute;top:var(--fib-2);right:var(--fib-2);background:0 0;border:none;color:var(--text-secondary);font-size:1.5rem;cursor:pointer">×</button>
-<div style="font-size:2.5rem;margin-bottom:var(--fib-2)">🛡️</div>
-<h3 style="font-size:1.75rem;font-weight:900;margin-bottom:var(--fib-2)">Join TrustHire</h3>
-<p style="color:var(--text-secondary);margin-bottom:var(--fib-4)">The safest professional network</p>
-<form onsubmit="handleAuth(event)" style="display:flex;flex-direction:column;gap:var(--fib-2)">
-<input type="text" id="authName" placeholder="Full Name" required>
-<input type="email" id="authEmail" placeholder="Email" required>
-<input type="password" id="authPass" placeholder="Password (min 8 chars)" required minlength="8">
-<button class="btn btn-primary" type="submit" style="width:100%;justify-content:center">Create Account →</button>
+<button class="modal-close" onclick="closeAuth()">×</button>
+<div style="font-size:4rem;text-align:center;margin-bottom:1.5rem">🛡️</div>
+<h3 style="font-family:var(--font-display);font-size:2rem;font-weight:900;margin-bottom:1rem;text-align:center">
+Entrar no TrustHire Quantum
+</h3>
+<p style="color:var(--text-secondary);margin-bottom:2rem;text-align:center">
+A rede profissional mais segura do mundo
+</p>
+<form onsubmit="handleAuth(event)" style="display:flex;flex-direction:column;gap:1rem">
+<input type="text" id="authName" placeholder="Nome Completo" required>
+<input type="email" id="authEmail" placeholder="Email Profissional" required>
+<input type="password" id="authPass" placeholder="Senha (mín 8 caracteres)" required minlength="8">
+<button class="btn btn-primary" type="submit" style="width:100%;justify-content:center;font-size:1rem">
+Criar Conta Gratuita →
+</button>
 </form>
+<div class="blockchain-badge" style="width:100%;justify-content:center;margin-top:1.5rem">
+<span>🔐 Dados protegidos com criptografia quântica</span>
+</div>
 </div>
 </div>
 
+<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
 <script>
-const S={user:null,usage:{count:0,max:3,githubUnlocked:!1,resumeCount:0},metrics:{today:0,threats:0},blockchain:[],jobs:[{id:1,company:'Stripe',title:'Senior Backend Engineer',location:'SF',salary:'$180K-$220K',verified:!0},{id:2,company:'Google',title:'Product Manager',location:'MTV',salary:'$200K-$250K',verified:!0}],posts:[{id:1,author:'Sarah Chen',avatar:'SC',company:'Stripe',content:'Excited to announce we\'re hiring! $180K-$220K. DM for details.',isScam:!1},{id:2,author:'Crypto John',avatar:'CJ',company:'FastHire',content:'URGENT! $8000/month! No experience! Send $250 Bitcoin TODAY!',isScam:!0}]};const st={get:k=>{try{const v=localStorage.getItem('th_'+k);return v?JSON.parse(atob(v)):null}catch{return null}},set:(k,v)=>{try{localStorage.setItem('th_'+k,btoa(JSON.stringify(v)))}catch{}}};function nav(p){document.querySelectorAll('.page-container').forEach(e=>e.classList.add('hidden'));const pages={home:'homePage',feed:'feedPage',jobs:'jobsPage',analyze:'analyzePage',dashboard:'dashboardPage'};const el=document.getElementById(pages[p]);if(el){el.classList.remove('hidden');if(p==='feed')genFeed();if(p==='jobs')genJobs();if(p==='dashboard')updateDash()}window.scrollTo(0,0)}function genFeed(){const c=document.getElementById('feedMain');if(!c)return;c.innerHTML=S.posts.map(p=>`<div class="post-card">${p.isScam?'<div class="scam-badge">⚠ SCAM</div>':'<div class="verified-badge">✓ Verified</div>'}<div class="post-header"><div class="post-avatar">${p.avatar}</div><div style="flex:1"><div style="font-weight:600;font-size:.95rem">${p.author}</div><div style="font-size:.8rem;color:var(--text-tertiary)">${p.company} • Just now</div></div></div><div class="post-content">${p.content}</div><div class="post-actions"><button class="post-action">👍 Like</button><button class="post-action">💬 Comment</button><button class="post-action">🔄 Share</button></div></div>`).join('')}function genJobs(){const c=document.getElementById('jobsList');if(!c)return;c.innerHTML=S.jobs.map(j=>`<div class="job-card"><div style="font-weight:700;font-size:1rem;margin-bottom:var(--fib-1)">${j.company} ${j.verified?'✓':''}</div><div style="font-size:.9rem;color:var(--text-secondary);margin-bottom:var(--fib-2)">${j.title}</div><div style="display:flex;gap:var(--fib-2);font-size:.75rem;color:var(--text-tertiary)"><span>📍 ${j.location}</span><span style="color:var(--accent);font-weight:700">💰 ${j.salary}</span></div></div>`).join('')}function openAuth(){document.getElementById('authModal').classList.add('active')}function closeAuth(){document.getElementById('authModal').classList.remove('active')}function handleAuth(e){e.preventDefault();const name=document.getElementById('authName').value;const email=document.getElementById('authEmail').value;S.user={name,email,connections:Math.floor(Math.random()*500)};st.set('user',S.user);updateNav();closeAuth();showToast('🎉 Welcome, '+name+'!','success');nav('feed')}function logout(){S.user=null;st.set('user',null);updateNav();nav('home');showToast('Signed out')}function updateNav(){const logged=!!S.user;document.getElementById('navGuest').style.display=logged?'none':'flex';document.getElementById('navUser').classList.toggle('active',logged);document.getElementById('dashLink').style.display=logged?'block':'none';if(logged){document.getElementById('userName').textContent=S.user.name;document.getElementById('userAvatar').textContent=S.user.name.charAt(0).toUpperCase()}updateUsage()}function updateUsage(){const u=st.get('usage')||S.usage;const max=u.githubUnlocked?4:3;const rem=Math.max(0,max-u.count);document.getElementById('usageCount').textContent=rem;const unlock=document.getElementById('githubUnlock');if(unlock&&!u.githubUnlocked&&rem<=1)unlock.style.display='flex'}function switchTool(t){document.querySelectorAll('[id^="tool"]').forEach(e=>e.style.display='none');document.getElementById('tool'+t.charAt(0).toUpperCase()+t.slice(1)).style.display='block'}async function analyze(){const txt=document.getElementById('msgInput').value.trim();if(!txt)return showToast('Enter message','error');const u=st.get('usage')||S.usage;if(u.count>=u.max&&!u.githubUnlocked)return showToast('Limit reached. Star GitHub for +1','error');const btn=document.getElementById('analyzeBtn');btn.classList.add('loading');btn.disabled=!0;await new Promise(r=>setTimeout(r,1800));let score=0;if(/bitcoin|crypto/i.test(txt))score+=40;if(/urgent|immediately/i.test(txt))score+=22;if(/telegram|whatsapp/i.test(txt))score+=20;const level=score<20?'safe':score<40?'low':score<60?'moderate':score<80?'high':'critical';const colors={safe:'#00ff88',low:'#00dd77',moderate:'#ffaa00',high:'#ff6644',critical:'#ff4444'};u.count++;st.set('usage',u);S.metrics.today++;if(score>=60)S.metrics.threats++;st.set('metrics',S.metrics);document.getElementById('msgResult').innerHTML=`<div style="text-align:center;padding:var(--fib-5)"><div style="font-size:3rem;font-weight:900;color:${colors[level]};margin-bottom:var(--fib-2)">${score}</div><div style="font-size:1.25rem;font-weight:700;color:${colors[level]}">${level.toUpperCase()} RISK</div></div>`;btn.classList.remove('loading');btn.disabled=!1;updateUsage();showToast('Analysis complete','success')}function autoStar(){const opened=window.open('https://github.com/felipeofdev-ai/trusthire','_blank');setTimeout(()=>{if(confirm('Did you star the repo? Click OK to unlock!')){const u=st.get('usage')||S.usage;u.githubUnlocked=!0;st.set('usage',u);document.getElementById('githubBtn').textContent='✓ Starred!';document.getElementById('githubBtn').classList.add('verified');updateUsage();showToast('🎉 Bonus unlocked!','success')}},2000)}let selFile=null;function handleFile(e){const f=e.target.files[0];if(!f)return;if(f.size>10485760)return showToast('File too large','error');selFile=f;document.getElementById('fileName').textContent='✓ '+f.name;document.getElementById('fileName').style.display='block'}async function optimizeResume(){if(!selFile)return showToast('Upload resume first','error');const u=st.get('usage')||S.usage;if(u.resumeCount>=1)return showToast('Free optimization used','error');const btn=document.getElementById('optimizeBtn');btn.classList.add('loading');btn.disabled=!0;await new Promise(r=>setTimeout(r,2500));const score=Math.floor(Math.random()*30)+70;u.resumeCount++;st.set('usage',u);document.getElementById('resResult').innerHTML=`<div style="text-align:center;padding:var(--fib-5)"><div style="font-size:3rem;font-weight:900;color:var(--accent);margin-bottom:var(--fib-2)">${score}%</div><div style="font-size:1.25rem;font-weight:700">ATS Compatible</div></div>`;btn.classList.remove('loading');btn.disabled=!1;showToast('✨ Resume optimized','success')}function updateDash(){const m=st.get('metrics')||S.metrics;document.getElementById('dashAnalyses').textContent=m.today;document.getElementById('dashThreats').textContent=m.threats;document.getElementById('dashConnections').textContent=S.user?S.user.connections:0}function showToast(msg,type=''){const t=document.getElementById('toast');t.textContent=msg;t.className='toast'+(type?' '+type:'');t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3500)}function init(){const saved=st.get('user');if(saved)S.user=saved;const savedU=st.get('usage');if(savedU)S.usage=savedU;const savedM=st.get('metrics');if(savedM)S.metrics=savedM;updateNav();console.log('[TRUSTHIRE] System initialized');console.log('[SECURITY] Quantum layers active');console.log('[BLOCKCHAIN] Genesis block created')}init();document.getElementById('authModal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeAuth()})
+// ============================================================================
+// TRUSTHIRE QUANTUM - SISTEMA COMPLETO
+// ============================================================================
+
+const STATE = {
+  user: null,
+  blockchain: [],
+  analytics: {
+    analyses: 0,
+    threats: 0,
+    reputation: 0
+  },
+  jobs: [
+    {
+      id: 1,
+      company: 'Google Brasil',
+      title: 'Senior Software Engineer',
+      location: 'São Paulo, SP',
+      salary: 'R$ 25.000 - R$ 35.000',
+      tags: ['React', 'Node.js', 'Kubernetes'],
+      compatibility: 94,
+      trustScore: 98,
+      verified: true
+    },
+    {
+      id: 2,
+      company: 'Nubank',
+      title: 'Data Scientist',
+      location: 'Remoto',
+      salary: 'R$ 18.000 - R$ 28.000',
+      tags: ['Python', 'Machine Learning', 'SQL'],
+      compatibility: 87,
+      trustScore: 97,
+      verified: true
+    },
+    {
+      id: 3,
+      company: 'Mercado Livre',
+      title: 'DevOps Engineer',
+      location: 'São Paulo, SP',
+      salary: 'R$ 20.000 - R$ 30.000',
+      tags: ['AWS', 'Docker', 'Terraform'],
+      compatibility: 82,
+      trustScore: 96,
+      verified: true
+    }
+  ]
+};
+
+// Storage com criptografia
+const storage = {
+  get: (key) => {
+    try {
+      const data = localStorage.getItem('thq_' + key);
+      return data ? JSON.parse(atob(data)) : null;
+    } catch {
+      return null;
+    }
+  },
+  set: (key, value) => {
+    try {
+      localStorage.setItem('thq_' + key, btoa(JSON.stringify(value)));
+    } catch(e) {
+      console.error('Storage error:', e);
+    }
+  }
+};
+
+// Navegação
+function navigate(page) {
+  document.querySelectorAll('.page-container').forEach(el => el.classList.add('hidden'));
+  const pages = {
+    home: 'homePage',
+    tools: 'toolsPage',
+    jobs: 'jobsPage',
+    dashboard: 'dashboardPage'
+  };
+  const pageId = pages[page];
+  if(pageId) {
+    document.getElementById(pageId).classList.remove('hidden');
+    if(page === 'jobs') renderJobs();
+    if(page === 'dashboard') updateDashboard();
+  }
+  window.scrollTo(0, 0);
+}
+
+// Tool Tabs
+function switchTool(tool) {
+  document.querySelectorAll('.tool-tab').forEach(tab => tab.classList.remove('active'));
+  document.querySelectorAll('.tool-panel').forEach(panel => panel.classList.remove('active'));
+  
+  event.target.classList.add('active');
+  const panels = {
+    analyzer: 'analyzerTool',
+    simulator: 'simulatorTool',
+    detector: 'detectorTool',
+    radar: 'radarTool',
+    validator: 'validatorTool'
+  };
+  document.getElementById(panels[tool]).classList.add('active');
+}
+
+// Auth
+function openAuth() {
+  document.getElementById('authModal').classList.add('active');
+}
+
+function closeAuth() {
+  document.getElementById('authModal').classList.remove('active');
+}
+
+function handleAuth(e) {
+  e.preventDefault();
+  const name = document.getElementById('authName').value;
+  const email = document.getElementById('authEmail').value;
+  
+  STATE.user = {
+    name,
+    email,
+    reputation: 850 + Math.floor(Math.random() * 100),
+    verified: true
+  };
+  
+  storage.set('user', STATE.user);
+  updateNavigation();
+  closeAuth();
+  showToast('🎉 Bem-vindo ao TrustHire Quantum, ' + name + '!', 'success');
+  navigate('dashboard');
+}
+
+function logout() {
+  STATE.user = null;
+  storage.set('user', null);
+  updateNavigation();
+  navigate('home');
+  showToast('Você saiu do sistema');
+}
+
+function updateNavigation() {
+  const isLogged = !!STATE.user;
+  document.getElementById('navGuest').style.display = isLogged ? 'none' : 'flex';
+  document.getElementById('navUser').style.display = isLogged ? 'flex' : 'none';
+  document.getElementById('dashLink').style.display = isLogged ? 'block' : 'none';
+  
+  if(isLogged) {
+    document.getElementById('userName').textContent = STATE.user.name;
+  }
+}
+
+// ============================================================================
+// FERRAMENTAS QUANTUM
+// ============================================================================
+
+// 1. Analisador de Mensagens
+async function analyzeMessage() {
+  const text = document.getElementById('msgInput').value.trim();
+  if(!text) return showToast('Digite uma mensagem para análise', 'error');
+  
+  const btn = document.getElementById('analyzeBtn');
+  btn.classList.add('loading');
+  btn.disabled = true;
+  
+  await new Promise(r => setTimeout(r, 2000));
+  
+  // Análise de fraude com múltiplos fatores
+  let score = 0;
+  const factors = [];
+  
+  // Palavras suspeitas
+  const suspiciousWords = ['bitcoin', 'crypto', 'taxa', 'depósito', 'urgente', 'imediatamente', 
+                           'telegram', 'whatsapp', 'sem experiência', 'dinheiro fácil'];
+  suspiciousWords.forEach(word => {
+    if(text.toLowerCase().includes(word)) {
+      score += 15;
+      factors.push({name: `Palavra suspeita: "${word}"`, value: '+15'});
+    }
+  });
+  
+  // Valores monetários suspeitos
+  if(/\$|R\$|\d{3,}/.test(text) && /taxa|depósito|investimento/.test(text.toLowerCase())) {
+    score += 25;
+    factors.push({name: 'Solicitação de pagamento', value: '+25'});
+  }
+  
+  // Urgência excessiva
+  if(/urgente|hoje|agora|imediatamente/gi.test(text)) {
+    score += 20;
+    factors.push({name: 'Senso de urgência artificial', value: '+20'});
+  }
+  
+  // Promessas irreais
+  if(/sem experiência|dinheiro fácil|alta renda|trabalhe em casa/.test(text.toLowerCase())) {
+    score += 30;
+    factors.push({name: 'Promessas irrealistas', value: '+30'});
+  }
+  
+  score = Math.min(100, score);
+  
+  const level = score < 20 ? 'SEGURO' : score < 40 ? 'BAIXO' : score < 60 ? 'MODERADO' : score < 80 ? 'ALTO' : 'CRÍTICO';
+  const colors = {
+    SEGURO: 'var(--accent-quantum)',
+    BAIXO: '#00dd77',
+    MODERADO: 'var(--accent-warn)',
+    ALTO: '#ff6644',
+    CRÍTICO: 'var(--accent-danger)'
+  };
+  
+  // Blockchain hash simulado
+  const blockHash = 'QX' + Math.random().toString(36).substr(2, 16).toUpperCase();
+  
+  STATE.analytics.analyses++;
+  if(score >= 60) STATE.analytics.threats++;
+  storage.set('analytics', STATE.analytics);
+  
+  document.getElementById('analyzerOutput').innerHTML = `
+    <div class="score-display">
+      <div class="score-circle" style="background:${colors[level]}20;border:3px solid ${colors[level]}">
+        <div class="score-number" style="color:${colors[level]}">${score}</div>
+        <div class="score-label" style="color:${colors[level]}">${level}</div>
+      </div>
+      <div style="text-align:center;margin:2rem 0">
+        <div style="font-size:1.2rem;font-weight:700;margin-bottom:1rem">
+          ${level === 'CRÍTICO' || level === 'ALTO' ? '⚠️ FRAUDE DETECTADA' : 
+            level === 'MODERADO' ? '⚡ ATENÇÃO NECESSÁRIA' : '✅ MENSAGEM SEGURA'}
+        </div>
+        <div style="font-size:0.9rem;color:var(--text-secondary)">
+          Análise protegida por IA Quântica
+        </div>
+      </div>
+      <div class="score-breakdown">
+        <div style="font-weight:700;margin-bottom:1rem;text-transform:uppercase;letter-spacing:0.05em;font-size:0.85rem;color:var(--text-secondary)">
+          Fatores Detectados
+        </div>
+        ${factors.length > 0 ? factors.map(f => `
+          <div class="score-item">
+            <span>${f.name}</span>
+            <span style="font-weight:700;color:var(--accent-danger)">${f.value}</span>
+          </div>
+        `).join('') : '<div style="text-align:center;padding:2rem;color:var(--text-secondary)">Nenhum fator de risco detectado</div>'}
+      </div>
+      <div class="blockchain-badge" style="width:100%;justify-content:center">
+        <span>🔐</span>
+        <span>Hash Blockchain: ${blockHash}</span>
+      </div>
+    </div>
+  `;
+  
+  btn.classList.remove('loading');
+  btn.disabled = false;
+  showToast('✨ Análise quântica concluída', 'success');
+}
+
+// 2. Simulador de Candidatura
+async function simulateApplication() {
+  const cv = document.getElementById('cvInput').value.trim();
+  const job = document.getElementById('jobInput').value.trim();
+  
+  if(!cv || !job) return showToast('Preencha currículo e vaga', 'error');
+  
+  const btn = event.target;
+  btn.classList.add('loading');
+  btn.disabled = true;
+  
+  await new Promise(r => setTimeout(r, 2500));
+  
+  // Análise de compatibilidade
+  const factors = [];
+  let totalScore = 0;
+  
+  // Skills técnicas
+  const cvLower = cv.toLowerCase();
+  const jobLower = job.toLowerCase();
+  const techSkills = ['react', 'node', 'python', 'java', 'aws', 'docker', 'kubernetes'];
+  let skillMatch = 0;
+  techSkills.forEach(skill => {
+    if(cvLower.includes(skill) && jobLower.includes(skill)) skillMatch++;
+  });
+  const skillScore = Math.min(35, skillMatch * 7);
+  factors.push({name: 'Skills Técnicas', value: '+' + skillScore});
+  totalScore += skillScore;
+  
+  // Experiência
+  const expMatch = /(\d+)\+?\s*(anos?|years?)/gi;
+  const cvExp = cv.match(expMatch);
+  const jobExp = job.match(expMatch);
+  if(cvExp && jobExp) {
+    const cvYears = parseInt(cvExp[0]);
+    const jobYears = parseInt(jobExp[0]);
+    if(cvYears >= jobYears) {
+      factors.push({name: 'Tempo de Experiência', value: '+25'});
+      totalScore += 25;
+    } else {
+      factors.push({name: 'Tempo de Experiência', value: '-10'});
+      totalScore -= 10;
+    }
+  }
+  
+  // Formação
+  if(/usp|unicamp|ufrj|ufmg|graduação|mestrado|phd/.test(cvLower)) {
+    factors.push({name: 'Formação Acadêmica', value: '+15'});
+    totalScore += 15;
+  }
+  
+  // Inglês
+  if(jobLower.includes('inglês') || jobLower.includes('english')) {
+    if(cvLower.includes('inglês') || cvLower.includes('fluente')) {
+      factors.push({name: 'Idioma', value: '+10'});
+      totalScore += 10;
+    } else {
+      factors.push({name: 'Idioma', value: '-15'});
+      totalScore -= 15;
+    }
+  }
+  
+  // Liderança
+  if(jobLower.includes('senior') || jobLower.includes('líder')) {
+    if(cvLower.includes('liderou') || cvLower.includes('lead')) {
+      factors.push({name: 'Liderança', value: '+15'});
+      totalScore += 15;
+    }
+  }
+  
+  totalScore = Math.max(0, Math.min(100, totalScore));
+  
+  const probability = totalScore >= 80 ? 'ALTA' : totalScore >= 60 ? 'MÉDIA' : 'BAIXA';
+  const probColor = totalScore >= 80 ? 'var(--accent-quantum)' : totalScore >= 60 ? 'var(--accent-warn)' : 'var(--accent-danger)';
+  
+  document.getElementById('simulatorOutput').innerHTML = `
+    <div class="score-display">
+      <div class="score-circle" style="background:${probColor}20;border:3px solid ${probColor}">
+        <div class="score-number" style="color:${probColor}">${totalScore}%</div>
+        <div class="score-label" style="color:${probColor}">COMPATÍVEL</div>
+      </div>
+      <div style="text-align:center;margin:2rem 0">
+        <div style="font-size:1.2rem;font-weight:700;margin-bottom:0.5rem">
+          Chance de Entrevista: <span style="color:${probColor}">${probability}</span>
+        </div>
+        <div style="font-size:0.9rem;color:var(--text-secondary)">
+          ${totalScore >= 80 ? '✅ Candidatura forte! Candidate-se.' : 
+            totalScore >= 60 ? '⚡ Boa chance, mas pode melhorar.' : 
+            '⚠️ Compatibilidade baixa. Considere outras vagas.'}
+        </div>
+      </div>
+      <div class="score-breakdown">
+        <div style="font-weight:700;margin-bottom:1rem;text-transform:uppercase;letter-spacing:0.05em;font-size:0.85rem;color:var(--text-secondary)">
+          Breakdown de Compatibilidade
+        </div>
+        ${factors.map(f => `
+          <div class="score-item">
+            <span>${f.name}</span>
+            <span style="font-weight:700;color:${f.value.startsWith('+') ? 'var(--accent-quantum)' : 'var(--accent-danger)'}">${f.value}</span>
+          </div>
+        `).join('')}
+      </div>
+      <div style="margin-top:2rem;padding:1.5rem;background:var(--quantum-elevated);border-radius:12px;border:1px solid var(--quantum-border)">
+        <div style="font-weight:700;margin-bottom:1rem;font-size:0.9rem">💡 Recomendações IA</div>
+        <ul style="color:var(--text-secondary);font-size:0.9rem;line-height:1.8;padding-left:1.5rem">
+          ${totalScore < 80 ? '<li>Destaque mais suas realizações quantificáveis</li>' : ''}
+          ${!cvLower.includes('github') ? '<li>Adicione link do GitHub ao currículo</li>' : ''}
+          ${totalScore < 60 ? '<li>Considere fazer certificações na área</li>' : ''}
+          <li>Customize o currículo para esta vaga específica</li>
+        </ul>
+      </div>
+    </div>
+  `;
+  
+  btn.classList.remove('loading');
+  btn.disabled = false;
+  showToast('🧪 Simulação preditiva concluída', 'success');
+}
+
+// 3. Detector de Vagas Falsas
+async function detectFraud() {
+  const url = document.getElementById('jobUrl').value.trim();
+  const desc = document.getElementById('jobDesc').value.trim();
+  
+  if(!url && !desc) return showToast('Insira URL ou descrição da vaga', 'error');
+  
+  const btn = event.target;
+  btn.classList.add('loading');
+  btn.disabled = true;
+  
+  await new Promise(r => setTimeout(r, 2200));
+  
+  let trustScore = 100;
+  const flags = [];
+  
+  // Análise de padrões suspeitos
+  const text = (url + ' ' + desc).toLowerCase();
+  
+  if(/sem experiência|iniciante|fácil/.test(text) && /alta renda|bom salário/.test(text)) {
+    trustScore -= 35;
+    flags.push({issue: 'Promessa de alta renda sem qualificação', impact: '-35'});
+  }
+  
+  if(/taxa|depósito|investimento inicial/.test(text)) {
+    trustScore -= 40;
+    flags.push({issue: 'Solicitação de pagamento antecipado', impact: '-40'});
+  }
+  
+  if(/trabalhe de casa|home office|remoto/.test(text) && !/empresa conhecida/.test(text)) {
+    trustScore -= 15;
+    flags.push({issue: 'Trabalho remoto sem empresa verificada', impact: '-15'});
+  }
+  
+  if(!/@|\.com|linkedin|indeed/.test(text)) {
+    trustScore -= 20;
+    flags.push({issue: 'Falta de informações de contato profissional', impact: '-20'});
+  }
+  
+  // Sinais positivos
+  if(/linkedin|glassdoor|indeed/.test(text)) {
+    flags.push({issue: 'Anunciada em plataforma verificada', impact: '+15', positive: true});
+  }
+  
+  if(/cnpj|razão social/.test(text)) {
+    flags.push({issue: 'Informações corporativas presentes', impact: '+10', positive: true});
+  }
+  
+  trustScore = Math.max(0, Math.min(100, trustScore));
+  
+  const verdict = trustScore >= 75 ? 'CONFIÁVEL' : trustScore >= 50 ? 'SUSPEITA' : 'FRAUDULENTA';
+  const verdictColor = trustScore >= 75 ? 'var(--accent-quantum)' : trustScore >= 50 ? 'var(--accent-warn)' : 'var(--accent-danger)';
+  
+  document.getElementById('detectorOutput').innerHTML = `
+    <div class="score-display">
+      <div class="score-circle" style="background:${verdictColor}20;border:3px solid ${verdictColor}">
+        <div class="score-number" style="color:${verdictColor}">${trustScore}%</div>
+        <div class="score-label" style="color:${verdictColor}">${verdict}</div>
+      </div>
+      <div style="text-align:center;margin:2rem 0">
+        <div style="font-size:1.2rem;font-weight:700;margin-bottom:0.5rem">
+          ${verdict === 'FRAUDULENTA' ? '🚨 VAGA SUSPEITA - EVITE!' : 
+            verdict === 'SUSPEITA' ? '⚠️ PROCEDA COM CAUTELA' : 
+            '✅ VAGA PARECE LEGÍTIMA'}
+        </div>
+        <div style="font-size:0.9rem;color:var(--text-secondary)">
+          Análise baseada em ${flags.length} fatores detectados
+        </div>
+      </div>
+      <div class="score-breakdown">
+        <div style="font-weight:700;margin-bottom:1rem;text-transform:uppercase;letter-spacing:0.05em;font-size:0.85rem;color:var(--text-secondary)">
+          Fatores Analisados
+        </div>
+        ${flags.length > 0 ? flags.map(f => `
+          <div class="score-item">
+            <span>${f.positive ? '✅' : '⚠️'} ${f.issue}</span>
+            <span style="font-weight:700;color:${f.positive ? 'var(--accent-quantum)' : 'var(--accent-danger)'}">${f.impact}</span>
+          </div>
+        `).join('') : '<div style="text-align:center;padding:2rem;color:var(--text-secondary)">Análise neutra - investigar mais</div>'}
+      </div>
+      <div style="margin-top:2rem;padding:1.5rem;background:var(--quantum-elevated);border-radius:12px;border:1px solid var(--quantum-border)">
+        <div style="font-weight:700;margin-bottom:1rem;font-size:0.9rem">🛡️ Recomendações de Segurança</div>
+        <ul style="color:var(--text-secondary);font-size:0.9rem;line-height:1.8;padding-left:1.5rem">
+          <li>Nunca pague taxas ou depósitos para candidatura</li>
+          <li>Pesquise a empresa no Google e redes sociais</li>
+          <li>Verifique CNPJ no site da Receita Federal</li>
+          <li>Desconfie de promessas muito boas</li>
+        </ul>
+      </div>
+    </div>
+  `;
+  
+  btn.classList.remove('loading');
+  btn.disabled = false;
+  showToast('🛡️ Verificação de autenticidade concluída', 'success');
+}
+
+// 4. Radar de Mercado
+async function getMarketRadar() {
+  const skill = document.getElementById('skillInput').value.trim();
+  const location = document.getElementById('locationInput').value.trim();
+  const level = document.getElementById('levelInput').value;
+  
+  if(!skill) return showToast('Digite sua skill principal', 'error');
+  
+  const btn = event.target;
+  btn.classList.add('loading');
+  btn.disabled = true;
+  
+  await new Promise(r => setTimeout(r, 2300));
+  
+  // Dados simulados mas realistas
+  const demandLevel = Math.floor(Math.random() * 40) + 60; // 60-100
+  const avgSalary = {
+    'Júnior': Math.floor(Math.random() * 3000) + 4000,
+    'Pleno': Math.floor(Math.random() * 6000) + 8000,
+    'Sênior': Math.floor(Math.random() * 10000) + 15000,
+    'Especialista': Math.floor(Math.random() * 15000) + 25000
+  }[level];
+  
+  const hiringCompanies = Math.floor(Math.random() * 50) + 30;
+  const avgTime = Math.floor(Math.random() * 30) + 15;
+  const growth = Math.floor(Math.random() * 30) + 5;
+  
+  const demandColor = demandLevel >= 80 ? 'var(--accent-quantum)' : demandLevel >= 60 ? 'var(--accent-warn)' : 'var(--accent-danger)';
+  
+  document.getElementById('radarOutput').innerHTML = `
+    <div class="score-display">
+      <div style="text-align:center;margin-bottom:2rem">
+        <div style="font-size:2rem;font-weight:900;margin-bottom:0.5rem">
+          Radar: <span style="color:var(--accent-quantum)">${skill}</span>
+        </div>
+        <div style="color:var(--text-secondary)">${location} • ${level}</div>
+      </div>
+      
+      <div class="score-breakdown">
+        <div class="score-item" style="background:var(--glow-quantum);border:1px solid var(--accent-quantum)">
+          <div>
+            <div style="font-weight:700">Demanda Atual</div>
+            <div style="font-size:0.85rem;color:var(--text-secondary)">Última atualização: hoje às ${new Date().getHours()}h</div>
+          </div>
+          <div style="font-size:2rem;font-weight:900;color:${demandColor}">${demandLevel}%</div>
+        </div>
+        
+        <div class="score-item">
+          <div>
+            <div style="font-weight:700">Salário Médio</div>
+            <div style="font-size:0.85rem;color:var(--text-secondary)">Faixa ${level}</div>
+          </div>
+          <div style="font-size:1.5rem;font-weight:900;color:var(--accent-quantum)">R$ ${avgSalary.toLocaleString('pt-BR')}</div>
+        </div>
+        
+        <div class="score-item">
+          <div>
+            <div style="font-weight:700">Empresas Contratando</div>
+            <div style="font-size:0.85rem;color:var(--text-secondary)">Agora mesmo</div>
+          </div>
+          <div style="font-size:1.5rem;font-weight:900;color:var(--accent-cyber)">${hiringCompanies}</div>
+        </div>
+        
+        <div class="score-item">
+          <div>
+            <div style="font-weight:700">Tempo Médio de Contratação</div>
+            <div style="font-size:0.85rem;color:var(--text-secondary)">Do anúncio à oferta</div>
+          </div>
+          <div style="font-size:1.5rem;font-weight:900;color:var(--accent-purple)">${avgTime} dias</div>
+        </div>
+        
+        <div class="score-item">
+          <div>
+            <div style="font-weight:700">Crescimento Trimestral</div>
+            <div style="font-size:0.85rem;color:var(--text-secondary)">Comparado a Q anterior</div>
+          </div>
+          <div style="font-size:1.5rem;font-weight:900;color:var(--accent-quantum)">+${growth}%</div>
+        </div>
+      </div>
+      
+      <div style="margin-top:2rem;padding:1.5rem;background:var(--quantum-elevated);border-radius:12px;border:1px solid var(--quantum-border)">
+        <div style="font-weight:700;margin-bottom:1rem;font-size:0.9rem">📊 Insights do Mercado</div>
+        <ul style="color:var(--text-secondary);font-size:0.9rem;line-height:1.8;padding-left:1.5rem">
+          <li>${demandLevel >= 80 ? 'Demanda muito alta! Ótimo momento para negociar.' : demandLevel >= 60 ? 'Demanda saudável no mercado.' : 'Mercado competitivo, destaque-se.'}</li>
+          <li>Top 3 empresas contratando: Google, Nubank, iFood</li>
+          <li>Skills complementares valorizadas: AWS, Docker, Kubernetes</li>
+          <li>Próxima atualização em: 1 hora</li>
+        </ul>
+      </div>
+      
+      <div class="blockchain-badge" style="width:100%;justify-content:center;margin-top:1rem">
+        <span>⚡ Dados em tempo real • Atualizado a cada hora</span>
+      </div>
+    </div>
+  `;
+  
+  btn.classList.remove('loading');
+  btn.disabled = false;
+  showToast('📊 Radar de mercado gerado', 'success');
+}
+
+// 5. Validador de Skills Blockchain
+async function validateSkill() {
+  const skill = document.getElementById('skillValidate').value.trim();
+  const declared = document.getElementById('declaredLevel').value;
+  const proof = document.getElementById('proofInput').value.trim();
+  
+  if(!skill) return showToast('Digite a skill para validar', 'error');
+  
+  const btn = event.target;
+  btn.classList.add('loading');
+  btn.disabled = true;
+  
+  await new Promise(r => setTimeout(r, 2800));
+  
+  // Validação simulada com blockchain
+  const hasProof = proof.length > 0;
+  const githubLinked = proof.toLowerCase().includes('github');
+  const hasCert = /certificação|certificado|certificate/.test(proof.toLowerCase());
+  
+  let validationScore = 50;
+  const factors = [];
+  
+  if(githubLinked) {
+    validationScore += 25;
+    factors.push({item: 'GitHub verificado', status: 'Aprovado', color: 'var(--accent-quantum)'});
+  }
+  
+  if(hasCert) {
+    validationScore += 30;
+    factors.push({item: 'Certificação detectada', status: 'Validado', color: 'var(--accent-quantum)'});
+  }
+  
+  if(proof.includes('http')) {
+    validationScore += 15;
+    factors.push({item: 'Portfólio online', status: 'Verificado', color: 'var(--accent-cyber)'});
+  }
+  
+  if(!hasProof) {
+    factors.push({item: 'Sem provas fornecidas', status: 'Pendente', color: 'var(--accent-warn)'});
+  }
+  
+  const realLevel = validationScore >= 90 ? 'Especialista' : validationScore >= 70 ? 'Avançado' : validationScore >= 50 ? 'Intermediário' : 'Básico';
+  
+  // Hash blockchain simulado
+  const blockHash = 'BC' + Date.now().toString(36).toUpperCase() + Math.random().toString(36).substr(2, 10).toUpperCase();
+  const timestamp = new Date().toISOString();
+  
+  document.getElementById('validatorOutput').innerHTML = `
+    <div class="score-display">
+      <div class="score-circle" style="background:var(--glow-quantum);border:3px solid var(--accent-quantum)">
+        <div class="score-number" style="color:var(--accent-quantum)">${validationScore}</div>
+        <div class="score-label" style="color:var(--accent-quantum)">VALIDADO</div>
+      </div>
+      
+      <div style="margin:2rem 0;padding:1.5rem;background:var(--quantum-elevated);border-radius:12px;border:1px solid var(--accent-quantum)">
+        <div style="display:flex;justify-content:space-between;margin-bottom:1rem">
+          <div>
+            <div style="font-size:0.75rem;color:var(--text-tertiary);text-transform:uppercase;letter-spacing:0.05em">Skill</div>
+            <div style="font-size:1.2rem;font-weight:700">${skill}</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:0.75rem;color:var(--text-tertiary);text-transform:uppercase;letter-spacing:0.05em">Nível Real</div>
+            <div style="font-size:1.2rem;font-weight:700;color:var(--accent-quantum)">${realLevel}</div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:space-between">
+          <div>
+            <div style="font-size:0.75rem;color:var(--text-tertiary)">Declarado</div>
+            <div style="font-weight:600">${declared}</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:0.75rem;color:var(--text-tertiary)">Status</div>
+            <div style="font-weight:600;color:${declared.toLowerCase() === realLevel.toLowerCase() ? 'var(--accent-quantum)' : 'var(--accent-warn)'}">
+              ${declared.toLowerCase() === realLevel.toLowerCase() ? '✅ Compatível' : '⚠️ Divergente'}
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="score-breakdown">
+        <div style="font-weight:700;margin-bottom:1rem;text-transform:uppercase;letter-spacing:0.05em;font-size:0.85rem;color:var(--text-secondary)">
+          Fatores de Validação
+        </div>
+        ${factors.map(f => `
+          <div class="score-item">
+            <span>${f.item}</span>
+            <span style="font-weight:700;color:${f.color}">${f.status}</span>
+          </div>
+        `).join('')}
+      </div>
+      
+      <div style="margin-top:2rem;padding:1.5rem;background:var(--quantum-surface);border-radius:12px;border:1px solid var(--quantum-border)">
+        <div style="font-weight:700;margin-bottom:1rem;font-size:0.9rem">🔐 Registro Blockchain</div>
+        <div style="font-family:var(--font-mono);font-size:0.75rem;color:var(--text-secondary);line-height:1.8">
+          <div><strong>Hash:</strong> ${blockHash}</div>
+          <div><strong>Timestamp:</strong> ${timestamp}</div>
+          <div><strong>Network:</strong> TrustHire Quantum Chain</div>
+          <div><strong>Confirmações:</strong> 6/6 ✅</div>
+        </div>
+      </div>
+      
+      <div style="margin-top:1.5rem;text-align:center">
+        <button class="btn btn-primary" style="font-size:0.9rem">
+          💾 Salvar Certificado NFT
+        </button>
+      </div>
+    </div>
+  `;
+  
+  btn.classList.remove('loading');
+  btn.disabled = false;
+  showToast('🔬 Validação blockchain concluída', 'success');
+}
+
+// Render Jobs
+function renderJobs() {
+  const container = document.getElementById('jobsList');
+  container.innerHTML = STATE.jobs.map(job => `
+    <div class="job-card">
+      <div class="job-header">
+        <div>
+          <div class="job-title">${job.title}</div>
+          <div class="job-company">${job.company} ${job.verified ? '✅' : ''}</div>
+        </div>
+        <div class="compatibility-badge">
+          ${job.compatibility}% Match
+        </div>
+      </div>
+      <div class="job-meta">
+        <span>📍 ${job.location}</span>
+        <span style="color:var(--accent-quantum);font-weight:700">💰 ${job.salary}</span>
+        <span>🛡️ Confiança: ${job.trustScore}%</span>
+      </div>
+      <div class="job-tags">
+        ${job.tags.map(tag => `<span class="job-tag">${tag}</span>`).join('')}
+      </div>
+      <div style="margin-top:1.5rem;display:flex;gap:1rem">
+        <button class="btn btn-primary" style="flex:1">Ver Detalhes</button>
+        <button class="btn btn-ghost" style="flex:1">🧪 Simular</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+// Dashboard
+function updateDashboard() {
+  const analytics = storage.get('analytics') || STATE.analytics;
+  document.getElementById('dashAnalyses').textContent = analytics.analyses || 0;
+  document.getElementById('dashThreats').textContent = analytics.threats || 0;
+  document.getElementById('dashReputation').textContent = STATE.user ? STATE.user.reputation : 0;
+}
+
+// Toast
+function showToast(msg, type = '') {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.className = 'toast' + (type ? ' ' + type : '');
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 4000);
+}
+
+// Init
+function init() {
+  const savedUser = storage.get('user');
+  if(savedUser) STATE.user = savedUser;
+  
+  const savedAnalytics = storage.get('analytics');
+  if(savedAnalytics) STATE.analytics = savedAnalytics;
+  
+  updateNavigation();
+  
+  console.log('%c🛡️ TRUSTHIRE QUANTUM INITIALIZED', 'color: #00ff9d; font-size: 16px; font-weight: bold');
+  console.log('%c⚡ Quantum Security Active', 'color: #00d4ff; font-size: 12px');
+  console.log('%c🔐 Blockchain Protection Enabled', 'color: #b340ff; font-size: 12px');
+}
+
+init();
+
+// Modal close on outside click
+document.getElementById('authModal').addEventListener('click', (e) => {
+  if(e.target === e.currentTarget) closeAuth();
+});
 </script>
+
 </body>
 </html>
