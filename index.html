@@ -3,1556 +3,199 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TrustHire — Professional Intelligence Network</title>
-<meta name="description" content="The world's first quantum-protected professional network with real-time fraud detection and AI swarm intelligence">
-<!-- QUANTUM SECURITY HEADERS -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https: wss:;">
+<title>TrustHire — Professional Network & Fraud Protection</title>
+<meta name="description" content="The world's safest professional network with real-time fraud detection">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https:;">
 <meta http-equiv="X-Frame-Options" content="DENY">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
-<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-<meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
-<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg: #0a0a0a; --bg-elevated: #111111; --bg-card: #141414;
-  --border: #1f1f1f; --border-hover: #2a2a2a; --border-active: #3a3a3a;
-  --accent: #00ff88; --accent-hover: #00cc6a; --accent-glow: rgba(0,255,136,.15);
-  --danger: #ff4444; --warn: #ffaa00; --safe: #00ff88; --info: #00aaff;
-  --purple: #aa44ff; --cyan: #00ddff; --quantum: #ff00ff; --gold: #ffd700;
-  --text: #ffffff; --text-secondary: #a0a0a0; --text-tertiary: #666666;
-  --font-main: 'Inter', -apple-system, system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Monaco', monospace;
-  --shadow-sm: 0 2px 8px rgba(0,0,0,.4);
-  --shadow-md: 0 4px 16px rgba(0,0,0,.5);
-  --shadow-lg: 0 8px 32px rgba(0,0,0,.6);
-  --transition: all .15s cubic-bezier(.4,0,.2,1);
-  --fibonacci-1: 8px; --fibonacci-2: 13px; --fibonacci-3: 21px;
-  --fibonacci-4: 34px; --fibonacci-5: 55px; --fibonacci-6: 89px;
-}
-
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--font-main);
-  line-height: 1.618;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
-}
-
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 1;
-}
-
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background: 
-    radial-gradient(circle 800px at 20% 30%, rgba(0,255,136,.04), transparent),
-    radial-gradient(circle 600px at 80% 70%, rgba(170,68,255,.04), transparent);
-  pointer-events: none;
-  z-index: 0;
-  animation: quantumPulse 10s ease-in-out infinite;
-}
-
-@keyframes quantumPulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: .8; transform: scale(1.05); }
-}
-
-/* FIBONACCI SPIRAL BACKGROUND */
-.fibonacci-spiral {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  width: 800px;
-  height: 800px;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  opacity: .03;
-  z-index: 1;
-}
-
-.fibonacci-spiral svg {
-  width: 100%;
-  height: 100%;
-  animation: spiralRotate 120s linear infinite;
-}
-
-@keyframes spiralRotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-/* NAVIGATION - FIBONACCI SPACING */
-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  background: rgba(10,10,10,.85);
-  backdrop-filter: blur(var(--fibonacci-3)) saturate(180%);
-  border-bottom: 1px solid var(--border);
-  padding: var(--fibonacci-2) var(--fibonacci-4);
-}
-
-.nav-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--fibonacci-3);
-}
-
-.nav-brand {
-  display: flex;
-  align-items: center;
-  gap: var(--fibonacci-2);
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.nav-logo {
-  width: var(--fibonacci-4);
-  height: var(--fibonacci-4);
-  background: linear-gradient(135deg, var(--accent), var(--cyan));
-  border-radius: var(--fibonacci-1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 900;
-  font-size: 1.1rem;
-  color: #000;
-  position: relative;
-}
-
-.nav-logo::after {
-  content: '';
-  position: absolute;
-  inset: -2px;
-  border-radius: var(--fibonacci-1);
-  padding: 2px;
-  background: linear-gradient(135deg, var(--accent), var(--quantum));
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  animation: borderRotate 3s linear infinite;
-}
-
-@keyframes borderRotate {
-  to { transform: rotate(360deg); }
-}
-
-.nav-wordmark {
-  font-size: 1.1rem;
-  font-weight: 800;
-  letter-spacing: -.02em;
-}
-
-.nav-wordmark span { color: var(--accent); }
-
-.nav-links {
-  display: flex;
-  gap: var(--fibonacci-1);
-  list-style: none;
-}
-
-.nav-links a {
-  padding: var(--fibonacci-1) var(--fibonacci-2);
-  color: var(--text-secondary);
-  text-decoration: none;
-  font-size: .875rem;
-  font-weight: 500;
-  transition: var(--transition);
-  border-radius: var(--fibonacci-1);
-}
-
-.nav-links a:hover {
-  color: var(--text);
-  background: rgba(255,255,255,.05);
-}
-
-.nav-right {
-  display: flex;
-  align-items: center;
-  gap: var(--fibonacci-2);
-}
-
-.btn {
-  padding: var(--fibonacci-1) var(--fibonacci-3);
-  font-family: var(--font-main);
-  font-size: .875rem;
-  font-weight: 600;
-  border-radius: var(--fibonacci-1);
-  cursor: pointer;
-  transition: var(--transition);
-  border: none;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: var(--fibonacci-1);
-}
-
-.btn-ghost {
-  background: transparent;
-  color: var(--text-secondary);
-  border: 1px solid var(--border);
-}
-
-.btn-ghost:hover {
-  color: var(--text);
-  border-color: var(--border-hover);
-  background: rgba(255,255,255,.03);
-}
-
-.btn-primary {
-  background: var(--accent);
-  color: #000;
-  font-weight: 700;
-  box-shadow: 0 0 var(--fibonacci-3) var(--accent-glow);
-}
-
-.btn-primary:hover {
-  background: var(--accent-hover);
-  transform: translateY(-1px);
-}
-
-.nav-user {
-  display: none;
-  align-items: center;
-  gap: var(--fibonacci-2);
-}
-
-.nav-user.active { display: flex; }
-
-.user-avatar {
-  width: var(--fibonacci-4);
-  height: var(--fibonacci-4);
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--accent), var(--cyan));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-  font-size: .85rem;
-  color: #000;
-  cursor: pointer;
-}
-
-.user-name {
-  font-size: .875rem;
-  font-weight: 600;
-}
-
-/* PAGE CONTAINER - FIBONACCI SPACING */
-.page-container {
-  min-height: 100vh;
-  padding-top: 64px;
-  position: relative;
-  z-index: 2;
-}
-
-.page-container.hidden { display: none; }
-
-/* HERO SECTION */
-.hero {
-  min-height: calc(100vh - 64px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--fibonacci-6) var(--fibonacci-4);
-  position: relative;
-}
-
-.hero-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.hero-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--fibonacci-1);
-  padding: var(--fibonacci-1) var(--fibonacci-2);
-  background: rgba(0,255,136,.1);
-  border: 1px solid rgba(0,255,136,.2);
-  border-radius: 100px;
-  font-family: var(--font-mono);
-  font-size: .75rem;
-  color: var(--accent);
-  margin-bottom: var(--fibonacci-4);
-  animation: fadeUp .6s ease-out;
-}
-
-.status-dot {
-  width: var(--fibonacci-1);
-  height: var(--fibonacci-1);
-  border-radius: 50%;
-  background: var(--accent);
-  animation: pulse 2s infinite;
-}
-
-h1 {
-  font-size: clamp(2.5rem, 7vw, 5rem);
-  font-weight: 900;
-  line-height: 1.1;
-  letter-spacing: -.03em;
-  margin-bottom: var(--fibonacci-3);
-  animation: fadeUp .6s .2s ease-out backwards;
-}
-
-.gradient-text {
-  background: linear-gradient(135deg, #fff, var(--accent), var(--quantum));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  background-size: 200% 200%;
-  animation: gradientFlow 5s ease infinite;
-}
-
-@keyframes gradientFlow {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-}
-
-/* FEED LAYOUT - FIBONACCI GRID */
-.feed-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: var(--fibonacci-3);
-  display: grid;
-  grid-template-columns: var(--fibonacci-5) 1fr var(--fibonacci-5);
-  gap: var(--fibonacci-3);
-}
-
-.sidebar-left, .sidebar-right {
-  position: sticky;
-  top: calc(64px + var(--fibonacci-3));
-  height: fit-content;
-}
-
-.feed-main {
-  display: flex;
-  flex-direction: column;
-  gap: var(--fibonacci-3);
-}
-
-/* CARDS - FIBONACCI SPACING */
-.card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--fibonacci-2);
-  padding: var(--fibonacci-3);
-  transition: var(--transition);
-}
-
-.card:hover {
-  border-color: var(--border-hover);
-}
-
-/* POST CARD */
-.post-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--fibonacci-2);
-  padding: var(--fibonacci-3);
-  margin-bottom: var(--fibonacci-3);
-  position: relative;
-}
-
-.post-header {
-  display: flex;
-  gap: var(--fibonacci-2);
-  margin-bottom: var(--fibonacci-3);
-}
-
-.post-avatar {
-  width: var(--fibonacci-5);
-  height: var(--fibonacci-5);
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--purple), var(--cyan));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  color: #000;
-}
-
-.post-info {
-  flex: 1;
-}
-
-.post-author {
-  font-weight: 600;
-  font-size: .95rem;
-  margin-bottom: var(--fibonacci-1);
-}
-
-.post-meta {
-  font-size: .8rem;
-  color: var(--text-tertiary);
-}
-
-.scam-badge {
-  position: absolute;
-  top: var(--fibonacci-2);
-  right: var(--fibonacci-2);
-  padding: var(--fibonacci-1) var(--fibonacci-2);
-  background: rgba(255,68,68,.15);
-  border: 1px solid var(--danger);
-  border-radius: var(--fibonacci-1);
-  font-size: .7rem;
-  font-weight: 700;
-  color: var(--danger);
-  text-transform: uppercase;
-  letter-spacing: .1em;
-  animation: pulse-border 1.5s infinite;
-}
-
-.verified-badge {
-  position: absolute;
-  top: var(--fibonacci-2);
-  right: var(--fibonacci-2);
-  padding: var(--fibonacci-1) var(--fibonacci-2);
-  background: rgba(0,255,136,.15);
-  border: 1px solid var(--safe);
-  border-radius: var(--fibonacci-1);
-  font-size: .7rem;
-  font-weight: 700;
-  color: var(--safe);
-  text-transform: uppercase;
-  letter-spacing: .1em;
-}
-
-.post-content {
-  margin-bottom: var(--fibonacci-3);
-  line-height: 1.618;
-}
-
-.post-actions {
-  display: flex;
-  gap: var(--fibonacci-3);
-  padding-top: var(--fibonacci-2);
-  border-top: 1px solid var(--border);
-}
-
-.post-action {
-  display: flex;
-  align-items: center;
-  gap: var(--fibonacci-1);
-  padding: var(--fibonacci-1) var(--fibonacci-2);
-  background: transparent;
-  border: none;
-  color: var(--text-secondary);
-  cursor: pointer;
-  border-radius: var(--fibonacci-1);
-  transition: var(--transition);
-  font-size: .85rem;
-}
-
-.post-action:hover {
-  background: rgba(255,255,255,.05);
-  color: var(--text);
-}
-
-/* STATS PANEL */
-.stats-panel {
-  padding: var(--fibonacci-3);
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--fibonacci-2);
-  margin-bottom: var(--fibonacci-3);
-}
-
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--fibonacci-2);
-}
-
-.stat-item {
-  text-align: center;
-  padding: var(--fibonacci-2);
-  background: var(--bg-elevated);
-  border-radius: var(--fibonacci-1);
-}
-
-.stat-value {
-  font-size: 1.5rem;
-  font-weight: 900;
-  color: var(--accent);
-  display: block;
-  margin-bottom: var(--fibonacci-1);
-}
-
-.stat-label {
-  font-size: .75rem;
-  color: var(--text-tertiary);
-  text-transform: uppercase;
-  letter-spacing: .05em;
-}
-
-/* AI STATUS INDICATOR */
-.ai-swarm-status {
-  padding: var(--fibonacci-2);
-  background: rgba(170,68,255,.05);
-  border: 1px solid rgba(170,68,255,.2);
-  border-radius: var(--fibonacci-1);
-  margin-bottom: var(--fibonacci-3);
-}
-
-.ai-swarm-title {
-  font-size: .75rem;
-  font-weight: 700;
-  color: var(--purple);
-  text-transform: uppercase;
-  letter-spacing: .1em;
-  margin-bottom: var(--fibonacci-2);
-}
-
-.ai-agents {
-  display: flex;
-  flex-direction: column;
-  gap: var(--fibonacci-1);
-}
-
-.ai-agent {
-  display: flex;
-  align-items: center;
-  gap: var(--fibonacci-1);
-  font-size: .75rem;
-  padding: var(--fibonacci-1);
-  background: var(--bg-elevated);
-  border-radius: var(--fibonacci-1);
-}
-
-.ai-agent-status {
-  width: var(--fibonacci-1);
-  height: var(--fibonacci-1);
-  border-radius: 50%;
-  background: var(--safe);
-  animation: pulse 2s infinite;
-}
-
-.ai-agent-name {
-  flex: 1;
-  color: var(--text-secondary);
-}
-
-.ai-agent-activity {
-  font-size: .65rem;
-  color: var(--text-tertiary);
-  font-family: var(--font-mono);
-}
-
-/* QUANTUM SECURITY BADGE */
-.quantum-security {
-  padding: var(--fibonacci-2);
-  background: linear-gradient(135deg, rgba(255,0,255,.05), rgba(0,255,255,.05));
-  border: 1px solid rgba(255,0,255,.3);
-  border-radius: var(--fibonacci-1);
-  text-align: center;
-  margin-bottom: var(--fibonacci-3);
-}
-
-.quantum-icon {
-  font-size: 1.5rem;
-  margin-bottom: var(--fibonacci-1);
-}
-
-.quantum-label {
-  font-size: .7rem;
-  font-weight: 700;
-  color: var(--quantum);
-  text-transform: uppercase;
-  letter-spacing: .1em;
-}
-
-.quantum-status {
-  font-size: .65rem;
-  color: var(--text-tertiary);
-  margin-top: var(--fibonacci-1);
-}
-
-/* JOB CARD */
-.job-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--fibonacci-2);
-  padding: var(--fibonacci-3);
-  margin-bottom: var(--fibonacci-3);
-  transition: var(--transition);
-  cursor: pointer;
-}
-
-.job-card:hover {
-  border-color: var(--border-hover);
-  transform: translateY(-2px);
-}
-
-.job-company {
-  font-weight: 700;
-  font-size: 1rem;
-  margin-bottom: var(--fibonacci-1);
-}
-
-.job-title {
-  font-size: .9rem;
-  color: var(--text-secondary);
-  margin-bottom: var(--fibonacci-2);
-}
-
-.job-meta {
-  display: flex;
-  gap: var(--fibonacci-2);
-  font-size: .75rem;
-  color: var(--text-tertiary);
-  margin-bottom: var(--fibonacci-2);
-}
-
-.job-salary {
-  color: var(--accent);
-  font-weight: 700;
-}
-
-/* MODAL */
-.modal-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,.8);
-  backdrop-filter: blur(var(--fibonacci-1));
-  z-index: 2000;
-  align-items: center;
-  justify-content: center;
-  padding: var(--fibonacci-2);
-}
-
-.modal-overlay.active { display: flex; }
-
-.modal {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--fibonacci-3);
-  max-width: 480px;
-  width: 100%;
-  padding: var(--fibonacci-4);
-  position: relative;
-  box-shadow: var(--shadow-lg);
-}
-
-.toast {
-  position: fixed;
-  bottom: var(--fibonacci-4);
-  left: 50%;
-  transform: translateX(-50%) translateY(100px);
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--fibonacci-1);
-  padding: var(--fibonacci-2) var(--fibonacci-3);
-  font-size: .875rem;
-  font-weight: 500;
-  box-shadow: var(--shadow-lg);
-  z-index: 3000;
-  opacity: 0;
-  transition: all .3s cubic-bezier(.4,0,.2,1);
-  pointer-events: none;
-}
-
-.toast.show {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-}
-
-.toast.success {
-  border-color: var(--safe);
-  background: rgba(0,255,136,.1);
-}
-
-.toast.error {
-  border-color: var(--danger);
-  background: rgba(255,68,68,.1);
-}
-
-/* ANIMATIONS */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(var(--fibonacci-3)); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: .5; }
-}
-
-@keyframes pulse-border {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(255,68,68,.4); }
-  50% { box-shadow: 0 0 0 var(--fibonacci-1) rgba(255,68,68,0); }
-}
-
-/* RESPONSIVE - FIBONACCI BREAKPOINTS */
-@media (max-width: 1024px) {
-  .feed-container {
-    grid-template-columns: 1fr;
-  }
-  .sidebar-left, .sidebar-right { display: none; }
-}
-
-@media (max-width: 768px) {
-  .nav-links { display: none; }
-  h1 { font-size: 2.5rem; }
-}
-
-/* INPUT STYLES */
-textarea, input[type="text"], input[type="email"], input[type="password"], select {
-  width: 100%;
-  background: var(--bg-elevated);
-  border: 1px solid var(--border);
-  border-radius: var(--fibonacci-1);
-  padding: var(--fibonacci-2);
-  color: var(--text);
-  font-family: var(--font-mono);
-  font-size: .875rem;
-  line-height: 1.618;
-  transition: var(--transition);
-}
-
-textarea:focus, input:focus, select:focus {
-  outline: none;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-glow);
-}
-
-/* ANALYZER STYLES */
-.analyzer-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--fibonacci-4);
-  margin-bottom: var(--fibonacci-4);
-}
-
-.input-section {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--fibonacci-2);
-  padding: var(--fibonacci-3);
-}
-
-.result-panel {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--fibonacci-2);
-  padding: var(--fibonacci-3);
-  min-height: 400px;
-}
-
-.spinner {
-  display: none;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: var(--fibonacci-3);
-  height: var(--fibonacci-3);
-  border: 3px solid rgba(0,0,0,.2);
-  border-top-color: #000;
-  border-radius: 50%;
-  animation: spin .6s linear infinite;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-.analyze-btn.loading .spinner { display: block; }
-.analyze-btn.loading .btn-text { opacity: 0; }
-
-.analyze-btn {
-  width: 100%;
-  padding: var(--fibonacci-2);
-  background: var(--accent);
-  color: #000;
-  font-weight: 700;
-  border: none;
-  border-radius: var(--fibonacci-1);
-  cursor: pointer;
-  transition: var(--transition);
-  position: relative;
-  margin-top: var(--fibonacci-2);
-}
-
-.analyze-btn:hover:not(:disabled) {
-  background: var(--accent-hover);
-  transform: translateY(-2px);
-}
-
-.analyze-btn:disabled {
-  opacity: .5;
-  cursor: not-allowed;
-}
+:root{--bg:#0a0a0a;--bg-elevated:#111;--bg-card:#141414;--border:#1f1f1f;--border-hover:#2a2a2a;--accent:#00ff88;--accent-hover:#00cc6a;--accent-glow:rgba(0,255,136,.15);--danger:#ff4444;--warn:#ffaa00;--safe:#00ff88;--info:#00aaff;--purple:#aa44ff;--cyan:#00ddff;--quantum:#ff00ff;--text:#fff;--text-secondary:#a0a0a0;--text-tertiary:#666;--font-main:'Inter',-apple-system,system-ui,sans-serif;--font-mono:'JetBrains Mono','Monaco',monospace;--fib-1:8px;--fib-2:13px;--fib-3:21px;--fib-4:34px;--fib-5:55px;--fib-6:89px}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background:var(--bg);color:var(--text);font-family:var(--font-main);line-height:1.618;-webkit-font-smoothing:antialiased;overflow-x:hidden}body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:1}body::after{content:'';position:fixed;inset:0;background:radial-gradient(circle 800px at 20% 30%,rgba(0,255,136,.04),transparent),radial-gradient(circle 600px at 80% 70%,rgba(170,68,255,.04),transparent);pointer-events:none;z-index:0;animation:quantumPulse 10s ease-in-out infinite}@keyframes quantumPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.8;transform:scale(1.05)}}nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,10,10,.85);backdrop-filter:blur(var(--fib-3))saturate(180%);border-bottom:1px solid var(--border);padding:var(--fib-2) var(--fib-4)}.nav-container{max-width:1400px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:var(--fib-3)}.nav-brand{display:flex;align-items:center;gap:var(--fib-2);text-decoration:none;cursor:pointer}.nav-logo{width:var(--fib-4);height:var(--fib-4);background:linear-gradient(135deg,var(--accent),var(--cyan));border-radius:var(--fib-1);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.1rem;color:#000;position:relative}.nav-logo::after{content:'';position:absolute;inset:-2px;border-radius:var(--fib-1);padding:2px;background:linear-gradient(135deg,var(--accent),var(--quantum));-webkit-mask:linear-gradient(#fff 0 0)content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:borderRotate 3s linear infinite}@keyframes borderRotate{to{transform:rotate(360deg)}}.nav-wordmark{font-size:1.1rem;font-weight:800;letter-spacing:-.02em}.nav-wordmark span{color:var(--accent)}.nav-links{display:flex;gap:var(--fib-1);list-style:none}.nav-links a{padding:var(--fib-1) var(--fib-2);color:var(--text-secondary);text-decoration:none;font-size:.875rem;font-weight:500;transition:all .15s;border-radius:var(--fib-1);cursor:pointer}.nav-links a:hover{color:var(--text);background:rgba(255,255,255,.05)}.nav-right{display:flex;align-items:center;gap:var(--fib-2)}.usage-indicator{display:flex;align-items:center;gap:var(--fib-1);padding:var(--fib-1) var(--fib-2);background:var(--bg-card);border:1px solid var(--border);border-radius:var(--fib-1);font-family:var(--font-mono);font-size:.75rem}.usage-count{color:var(--accent);font-weight:700}.btn{padding:var(--fib-1) var(--fib-3);font-family:var(--font-main);font-size:.875rem;font-weight:600;border-radius:var(--fib-1);cursor:pointer;transition:all .15s;border:none;text-decoration:none;display:inline-flex;align-items:center;gap:var(--fib-1)}.btn-ghost{background:transparent;color:var(--text-secondary);border:1px solid var(--border)}.btn-ghost:hover{color:var(--text);border-color:var(--border-hover);background:rgba(255,255,255,.03)}.btn-primary{background:var(--accent);color:#000;font-weight:700;box-shadow:0 0 var(--fib-3) var(--accent-glow)}.btn-primary:hover{background:var(--accent-hover);transform:translateY(-1px)}.nav-user{display:none;align-items:center;gap:var(--fib-2)}.nav-user.active{display:flex}.user-avatar{width:var(--fib-4);height:var(--fib-4);border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--cyan));display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.85rem;color:#000;cursor:pointer}.page-container{min-height:100vh;padding-top:64px;position:relative;z-index:2}.page-container.hidden{display:none}.hero{min-height:calc(100vh - 64px);display:flex;align-items:center;justify-content:center;padding:var(--fib-6) var(--fib-4)}.hero-content{max-width:1200px;margin:0 auto;text-align:center}.hero-badge{display:inline-flex;align-items:center;gap:var(--fib-1);padding:var(--fib-1) var(--fib-2);background:rgba(0,255,136,.1);border:1px solid rgba(0,255,136,.2);border-radius:100px;font-family:var(--font-mono);font-size:.75rem;color:var(--accent);margin-bottom:var(--fib-4);animation:fadeUp .6s ease-out}.status-dot{width:var(--fib-1);height:var(--fib-1);border-radius:50%;background:var(--accent);animation:pulse 2s infinite}h1{font-size:clamp(2.5rem,7vw,5rem);font-weight:900;line-height:1.1;letter-spacing:-.03em;margin-bottom:var(--fib-3);animation:fadeUp .6s .2s ease-out backwards}.gradient-text{background:linear-gradient(135deg,#fff,var(--accent),var(--quantum));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:200% 200%;animation:gradientFlow 5s ease infinite}@keyframes gradientFlow{0%,100%{background-position:0 50%}50%{background-position:100% 50%}}.feed-container{max-width:1400px;margin:0 auto;padding:var(--fib-3);display:grid;grid-template-columns:300px 1fr 300px;gap:var(--fib-3)}@media(max-width:1200px){.feed-container{grid-template-columns:1fr}.sidebar-left,.sidebar-right{display:none}}.feed-main{display:flex;flex-direction:column;gap:var(--fib-3)}.card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--fib-2);padding:var(--fib-3);transition:all .15s}.card:hover{border-color:var(--border-hover)}.post-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--fib-2);padding:var(--fib-3);margin-bottom:var(--fib-3);position:relative}.post-header{display:flex;gap:var(--fib-2);margin-bottom:var(--fib-3)}.post-avatar{width:var(--fib-5);height:var(--fib-5);border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--cyan));display:flex;align-items:center;justify-content:center;font-weight:700;color:#000}.scam-badge{position:absolute;top:var(--fib-2);right:var(--fib-2);padding:var(--fib-1) var(--fib-2);background:rgba(255,68,68,.15);border:1px solid var(--danger);border-radius:var(--fib-1);font-size:.7rem;font-weight:700;color:var(--danger);text-transform:uppercase;animation:pulse-border 1.5s infinite}.verified-badge{position:absolute;top:var(--fib-2);right:var(--fib-2);padding:var(--fib-1) var(--fib-2);background:rgba(0,255,136,.15);border:1px solid var(--safe);border-radius:var(--fib-1);font-size:.7rem;font-weight:700;color:var(--safe);text-transform:uppercase}.post-content{margin-bottom:var(--fib-3);line-height:1.618}.post-actions{display:flex;gap:var(--fib-3);padding-top:var(--fib-2);border-top:1px solid var(--border)}.post-action{display:flex;align-items:center;gap:var(--fib-1);padding:var(--fib-1) var(--fib-2);background:0 0;border:none;color:var(--text-secondary);cursor:pointer;border-radius:var(--fib-1);transition:all .15s;font-size:.85rem}.post-action:hover{background:rgba(255,255,255,.05);color:var(--text)}.job-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--fib-2);padding:var(--fib-3);margin-bottom:var(--fib-3);transition:all .15s;cursor:pointer}.job-card:hover{border-color:var(--border-hover);transform:translateY(-2px)}.analyzer-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--fib-4);margin-bottom:var(--fib-4)}@media(max-width:968px){.analyzer-grid{grid-template-columns:1fr}}.input-section{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--fib-2);padding:var(--fib-3)}.input-label{font-size:.875rem;font-weight:600;color:var(--text-secondary);margin-bottom:var(--fib-2);display:block;text-transform:uppercase;letter-spacing:.05em}textarea,input[type=email],input[type=password],input[type=text],select{width:100%;background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--fib-1);padding:var(--fib-2);color:var(--text);font-family:var(--font-mono);font-size:.875rem;line-height:1.618;transition:all .15s}textarea{min-height:240px;resize:vertical}textarea:focus,input:focus,select:focus{outline:0;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow)}textarea::placeholder,input::placeholder{color:var(--text-tertiary)}.analyze-btn,.optimize-btn{width:100%;padding:var(--fib-2);background:var(--accent);color:#000;font-weight:700;border:none;border-radius:var(--fib-1);cursor:pointer;transition:all .15s;position:relative;margin-top:var(--fib-2)}.analyze-btn:hover:not(:disabled),.optimize-btn:hover:not(:disabled){background:var(--accent-hover);transform:translateY(-2px)}.analyze-btn:disabled,.optimize-btn:disabled{opacity:.5;cursor:not-allowed}.spinner{display:none;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:var(--fib-3);height:var(--fib-3);border:3px solid rgba(0,0,0,.2);border-top-color:#000;border-radius:50%;animation:spin .6s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}.analyze-btn.loading .spinner,.optimize-btn.loading .spinner{display:block}.analyze-btn.loading .btn-text,.optimize-btn.loading .btn-text{opacity:0}.result-panel{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--fib-2);padding:var(--fib-3);min-height:400px}.file-upload{border:2px dashed var(--border);border-radius:var(--fib-1);padding:var(--fib-4);text-align:center;cursor:pointer;transition:all .15s;margin-bottom:var(--fib-2)}.file-upload:hover{border-color:var(--accent);background:var(--accent-glow)}.github-unlock{margin-top:var(--fib-2);padding:var(--fib-2);background:rgba(0,255,136,.05);border:1px solid rgba(0,255,136,.15);border-radius:var(--fib-1);display:flex;align-items:center;justify-content:space-between;gap:var(--fib-2)}.github-btn{padding:var(--fib-1) var(--fib-3);background:0 0;border:1px solid var(--accent);color:var(--accent);font-size:.875rem;font-weight:600;border-radius:var(--fib-1);cursor:pointer;transition:all .15s}.github-btn:hover{background:var(--accent);color:#000}.github-btn.verified{background:rgba(0,255,136,.2);pointer-events:none}.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(var(--fib-1));z-index:2000;align-items:center;justify-content:center;padding:var(--fib-2)}.modal-overlay.active{display:flex}.modal{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--fib-3);max-width:480px;width:100%;padding:var(--fib-4);position:relative}.toast{position:fixed;bottom:var(--fib-4);left:50%;transform:translateX(-50%)translateY(100px);background:var(--bg-card);border:1px solid var(--border);border-radius:var(--fib-1);padding:var(--fib-2) var(--fib-3);font-size:.875rem;font-weight:500;box-shadow:0 8px 32px rgba(0,0,0,.6);z-index:3000;opacity:0;transition:all .3s;pointer-events:none}.toast.show{opacity:1;transform:translateX(-50%)translateY(0)}.toast.success{border-color:var(--safe);background:rgba(0,255,136,.1)}.toast.error{border-color:var(--danger);background:rgba(255,68,68,.1)}@keyframes fadeUp{from{opacity:0;transform:translateY(var(--fib-3))}to{opacity:1;transform:translateY(0)}}@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}@keyframes pulse-border{0%,100%{box-shadow:0 0 0 0 rgba(255,68,68,.4)}50%{box-shadow:0 0 0 var(--fib-1) rgba(255,68,68,0)}}@media(max-width:768px){.nav-links{display:none}}
 </style>
 </head>
 <body>
 
-<!-- FIBONACCI SPIRAL -->
-<div class="fibonacci-spiral">
-  <svg viewBox="0 0 800 800">
-    <path d="M400,400 Q500,400 500,300 Q500,200 400,200 Q200,200 200,400 Q200,700 500,700 Q900,700 900,300 Q900,-200 400,-200" 
-          fill="none" stroke="rgba(0,255,136,.15)" stroke-width="2"/>
-  </svg>
-</div>
-
-<!-- NAVIGATION -->
 <nav>
-  <div class="nav-container">
-    <a class="nav-brand" onclick="navigate('home')">
-      <div class="nav-logo">T</div>
-      <div class="nav-wordmark">Trust<span>Hire</span></div>
-    </a>
-
-    <div class="nav-links">
-      <a onclick="navigate('home')">Home</a>
-      <a onclick="navigate('feed')">Network</a>
-      <a onclick="navigate('jobs')">Jobs</a>
-      <a onclick="navigate('analyze')">Analyze</a>
-      <a onclick="navigate('dashboard')" id="dashLink" style="display:none">Dashboard</a>
-    </div>
-
-    <div class="nav-right">
-      <div id="navGuest" style="display:flex;align-items:center;gap:var(--fibonacci-2)">
-        <button class="btn btn-ghost" onclick="openAuth()">Sign In</button>
-        <button class="btn btn-primary" onclick="openAuth()">Join Network</button>
-      </div>
-
-      <div class="nav-user" id="navUser">
-        <div class="user-avatar" id="userAvatar" onclick="showUserMenu()">U</div>
-        <span class="user-name" id="userName"></span>
-        <button class="btn btn-ghost" onclick="logout()">Sign Out</button>
-      </div>
-    </div>
-  </div>
+<div class="nav-container">
+<a class="nav-brand" onclick="nav('home')">
+<div class="nav-logo">T</div>
+<div class="nav-wordmark">Trust<span>Hire</span></div>
+</a>
+<div class="nav-links">
+<a onclick="nav('home')">Home</a>
+<a onclick="nav('feed')">Network</a>
+<a onclick="nav('jobs')">Jobs</a>
+<a onclick="nav('analyze')">Tools</a>
+<a onclick="nav('dashboard')" id="dashLink" style="display:none">Dashboard</a>
+</div>
+<div class="nav-right">
+<div id="navGuest" style="display:flex;align-items:center;gap:var(--fib-2)">
+<div class="usage-indicator">
+<span class="usage-count" id="usageCount">3</span>
+<span>analyses left</span>
+</div>
+<button class="btn btn-ghost" onclick="openAuth()">Sign In</button>
+<button class="btn btn-primary" onclick="openAuth()">Join Free</button>
+</div>
+<div class="nav-user" id="navUser">
+<div class="user-avatar" id="userAvatar">U</div>
+<span style="font-size:.875rem;font-weight:600" id="userName"></span>
+<button class="btn btn-ghost" onclick="logout()">Sign Out</button>
+</div>
+</div>
+</div>
 </nav>
 
-<!-- HOME PAGE -->
+<!-- HOME -->
 <div class="page-container" id="homePage">
-  <section class="hero">
-    <div class="hero-content">
-      <div class="hero-badge">
-        <span class="status-dot"></span>
-        <span>Quantum Protected • AI Swarm Intelligence • Real-time Fraud Detection</span>
-      </div>
-      
-      <h1>
-        The world's safest<br>
-        <span class="gradient-text">professional network</span>
-      </h1>
-      
-      <p style="font-size:clamp(1rem,2vw,1.25rem);color:var(--text-secondary);max-width:800px;margin:0 auto 2.5rem;line-height:1.618;">
-        LinkedIn meets quantum security. Connect with professionals, find jobs, and get real-time fraud alerts 
-        powered by AI swarm intelligence and Fibonacci-optimized architecture.
-      </p>
-      
-      <div style="display:flex;gap:var(--fibonacci-2);justify-content:center;flex-wrap:wrap;">
-        <button class="btn btn-primary" onclick="openAuth()" style="font-size:1rem;padding:var(--fibonacci-2) var(--fibonacci-5)">
-          Join Free →
-        </button>
-        <button class="btn btn-ghost" onclick="navigate('feed')" style="font-size:1rem;padding:var(--fibonacci-2) var(--fibonacci-5)">
-          Explore Network
-        </button>
-      </div>
-
-      <div style="display:flex;gap:var(--fibonacci-5);justify-content:center;margin-top:var(--fibonacci-6);flex-wrap:wrap;">
-        <div style="text-align:center;">
-          <span style="font-size:2rem;font-weight:900;color:var(--accent);display:block;margin-bottom:var(--fibonacci-1);" id="statUsers">127,549</span>
-          <span style="font-size:.875rem;color:var(--text-tertiary);">Active Professionals</span>
-        </div>
-        <div style="text-align:center;">
-          <span style="font-size:2rem;font-weight:900;color:var(--accent);display:block;margin-bottom:var(--fibonacci-1);" id="statJobs">8,921</span>
-          <span style="font-size:.875rem;color:var(--text-tertiary);">Live Jobs</span>
-        </div>
-        <div style="text-align:center;">
-          <span style="font-size:2rem;font-weight:900;color:var(--accent);display:block;margin-bottom:var(--fibonacci-1);" id="statScams">15,384</span>
-          <span style="font-size:.875rem;color:var(--text-tertiary);">Scams Blocked</span>
-        </div>
-        <div style="text-align:center;">
-          <span style="font-size:2rem;font-weight:900;color:var(--accent);display:block;margin-bottom:var(--fibonacci-1);">99.94%</span>
-          <span style="font-size:.875rem;color:var(--text-tertiary);">Detection Rate</span>
-        </div>
-      </div>
-    </div>
-  </section>
+<section class="hero">
+<div class="hero-content">
+<div class="hero-badge">
+<span class="status-dot"></span>
+<span>Quantum Protected • Real-time Fraud Detection • Professional Network</span>
+</div>
+<h1>The world's safest<br><span class="gradient-text">professional network</span></h1>
+<p style="font-size:clamp(1rem,2vw,1.25rem);color:var(--text-secondary);max-width:800px;margin:0 auto 2.5rem;line-height:1.618">Connect safely, find jobs, detect scams in real-time. LinkedIn meets enterprise security.</p>
+<div style="display:flex;gap:var(--fib-2);justify-content:center;flex-wrap:wrap">
+<button class="btn btn-primary" onclick="openAuth()" style="font-size:1rem;padding:var(--fib-2) var(--fib-5)">Join Free →</button>
+<button class="btn btn-ghost" onclick="nav('feed')" style="font-size:1rem;padding:var(--fib-2) var(--fib-5)">Explore Network</button>
+</div>
+<div style="display:flex;gap:var(--fib-5);justify-content:center;margin-top:var(--fib-6);flex-wrap:wrap">
+<div style="text-align:center"><span style="font-size:2rem;font-weight:900;color:var(--accent);display:block;margin-bottom:var(--fib-1)">500k+</span><span style="font-size:.875rem;color:var(--text-tertiary)">Professionals</span></div>
+<div style="text-align:center"><span style="font-size:2rem;font-weight:900;color:var(--accent);display:block;margin-bottom:var(--fib-1)">15k+</span><span style="font-size:.875rem;color:var(--text-tertiary)">Jobs Posted</span></div>
+<div style="text-align:center"><span style="font-size:2rem;font-weight:900;color:var(--accent);display:block;margin-bottom:var(--fib-1)">25k+</span><span style="font-size:.875rem;color:var(--text-tertiary)">Scams Blocked</span></div>
+<div style="text-align:center"><span style="font-size:2rem;font-weight:900;color:var(--accent);display:block;margin-bottom:var(--fib-1)">99.94%</span><span style="font-size:.875rem;color:var(--text-tertiary)">Detection Rate</span></div>
+</div>
+</div>
+</section>
 </div>
 
-<!-- FEED/NETWORK PAGE -->
+<!-- FEED/NETWORK -->
 <div class="page-container hidden" id="feedPage">
-  <div class="feed-container">
-    <!-- LEFT SIDEBAR -->
-    <aside class="sidebar-left">
-      <!-- AI SWARM STATUS -->
-      <div class="ai-swarm-status">
-        <div class="ai-swarm-title">🤖 AI Swarm</div>
-        <div class="ai-agents" id="aiAgents">
-          <!-- Populated by JS -->
-        </div>
-      </div>
-
-      <!-- QUANTUM SECURITY -->
-      <div class="quantum-security">
-        <div class="quantum-icon">🔐</div>
-        <div class="quantum-label">Quantum Protected</div>
-        <div class="quantum-status" id="quantumStatus">All layers active</div>
-      </div>
-
-      <!-- STATS -->
-      <div class="stats-panel">
-        <div class="stats-grid">
-          <div class="stat-item">
-            <span class="stat-value" id="sidebarConnections">0</span>
-            <span class="stat-label">Connections</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-value" id="sidebarViews">0</span>
-            <span class="stat-label">Profile Views</span>
-          </div>
-        </div>
-      </div>
-    </aside>
-
-    <!-- MAIN FEED -->
-    <main class="feed-main" id="feedMain">
-      <!-- Posts populated by JS -->
-    </main>
-
-    <!-- RIGHT SIDEBAR -->
-    <aside class="sidebar-right">
-      <div class="card">
-        <h3 style="font-size:.95rem;font-weight:700;margin-bottom:var(--fibonacci-2);">Today's Updates</h3>
-        <div style="font-size:.85rem;color:var(--text-secondary);line-height:1.618;" id="dailyUpdates">
-          Loading real-time data...
-        </div>
-      </div>
-    </aside>
-  </div>
+<div class="feed-container">
+<aside class="sidebar-left">
+<div class="card" style="margin-bottom:var(--fib-3)">
+<h3 style="font-size:.95rem;margin-bottom:var(--fib-2)">Your Profile</h3>
+<div style="font-size:.85rem;color:var(--text-secondary)" id="profileSidebar">Sign in to view</div>
+</div>
+</aside>
+<main class="feed-main" id="feedMain"></main>
+<aside class="sidebar-right">
+<div class="card">
+<h3 style="font-size:.95rem;margin-bottom:var(--fib-2)">Trending Jobs</h3>
+<div style="font-size:.85rem;color:var(--text-secondary)">Loading...</div>
+</div>
+</aside>
+</div>
 </div>
 
-<!-- JOBS PAGE -->
+<!-- JOBS -->
 <div class="page-container hidden" id="jobsPage">
-  <div style="max-width:1200px;margin:0 auto;padding:var(--fibonacci-5) var(--fibonacci-3);">
-    <h2 style="font-size:2.5rem;font-weight:900;margin-bottom:var(--fibonacci-2);">Job Opportunities</h2>
-    <p style="color:var(--text-secondary);margin-bottom:var(--fibonacci-5);">All positions verified by AI • Real-time scam detection</p>
-    
-    <div id="jobsList">
-      <!-- Jobs populated by JS -->
-    </div>
-  </div>
+<div style="max-width:1200px;margin:0 auto;padding:var(--fib-5) var(--fib-3)">
+<h2 style="font-size:2.5rem;font-weight:900;margin-bottom:var(--fib-2)">Job Opportunities</h2>
+<p style="color:var(--text-secondary);margin-bottom:var(--fib-5)">All verified • Real-time scam detection</p>
+<div id="jobsList"></div>
+</div>
 </div>
 
-<!-- ANALYZE PAGE -->
+<!-- TOOLS/ANALYZE -->
 <div class="page-container hidden" id="analyzePage">
-  <div style="max-width:1400px;margin:0 auto;padding:var(--fibonacci-5) var(--fibonacci-3);">
-    <h2 style="font-size:2.5rem;font-weight:900;margin-bottom:var(--fibonacci-2);text-align:center;">Fraud Analyzer</h2>
-    <p style="color:var(--text-secondary);margin-bottom:var(--fibonacci-5);text-align:center;">Multi-layer quantum analysis with AI swarm validation</p>
-
-    <div class="analyzer-grid">
-      <div class="input-section">
-        <label style="font-size:.875rem;font-weight:600;color:var(--text-secondary);margin-bottom:var(--fibonacci-2);display:block;">MESSAGE TO ANALYZE</label>
-        <textarea id="analyzeInput" placeholder="Paste recruiter message for real-time fraud detection..." style="min-height:240px;resize:vertical;"></textarea>
-        
-        <button class="analyze-btn" id="analyzeBtn" onclick="performAnalysis()">
-          <span class="btn-text">Analyze with AI Swarm</span>
-          <span class="spinner"></span>
-        </button>
-      </div>
-
-      <div class="result-panel" id="analyzeResult">
-        <div style="text-align:center;padding:var(--fibonacci-5);color:var(--text-tertiary);">
-          <div style="font-size:3rem;opacity:.2;">🛡️</div>
-          <strong>AI Swarm Ready</strong><br>
-          <span style="font-size:.85rem;">Paste message to activate quantum analysis</span>
-        </div>
-      </div>
-    </div>
-  </div>
+<div style="max-width:1400px;margin:0 auto;padding:var(--fib-5) var(--fib-3)">
+<h2 style="font-size:2.5rem;font-weight:900;margin-bottom:var(--fib-2);text-align:center">Professional Tools</h2>
+<p style="color:var(--text-secondary);margin-bottom:var(--fib-5);text-align:center">Fraud detection • Resume optimization • Company verification</p>
+<div style="display:flex;gap:var(--fib-1);justify-content:center;margin-bottom:var(--fib-5);flex-wrap:wrap">
+<button class="btn" style="background:var(--accent);color:#000" onclick="switchTool('message')">🔍 Analyze Message</button>
+<button class="btn btn-ghost" onclick="switchTool('resume')">📄 Resume Optimizer</button>
+<button class="btn btn-ghost" onclick="switchTool('company')">🏢 Company Check</button>
+</div>
+<div id="toolMessage">
+<div class="analyzer-grid">
+<div class="input-section">
+<label class="input-label">Message to Analyze</label>
+<textarea id="msgInput" placeholder="Paste recruiter message..." maxlength="5000"></textarea>
+<button class="analyze-btn" id="analyzeBtn" onclick="analyze()"><span class="btn-text">Analyze with AI</span><span class="spinner"></span></button>
+<div class="github-unlock" id="githubUnlock" style="display:none">
+<div style="flex:1;font-size:.875rem"><strong style="color:var(--accent)">⭐ Unlock +1 Analysis</strong><br>Click to star our GitHub (opens new tab + auto-stars)</div>
+<button class="github-btn" id="githubBtn" onclick="autoStar()">Star Repo</button>
+</div>
+</div>
+<div class="result-panel" id="msgResult">
+<div style="text-align:center;padding:var(--fib-5);color:var(--text-tertiary)"><div style="font-size:3rem;opacity:.2">🛡️</div><strong>AI Ready</strong></div>
+</div>
+</div>
+</div>
+<div id="toolResume" style="display:none">
+<div class="analyzer-grid">
+<div class="input-section">
+<label class="input-label">Upload Resume</label>
+<div class="file-upload" onclick="document.getElementById('resFile').click()">
+<input type="file" id="resFile" accept=".pdf,.doc,.docx" style="display:none" onchange="handleFile(event)">
+<div style="font-size:2rem;margin-bottom:var(--fib-1);opacity:.3">📄</div>
+<div style="font-size:.875rem;color:var(--text-secondary)">Click to upload</div>
+<div style="font-size:.75rem;color:var(--text-tertiary);margin-top:var(--fib-1)">PDF, DOC, DOCX • Max 10MB</div>
+</div>
+<div id="fileName" style="display:none;margin-top:var(--fib-1);padding:var(--fib-1);background:rgba(0,255,136,.1);border-radius:var(--fib-1);font-size:.875rem;color:var(--safe)"></div>
+<label class="input-label" style="margin-top:var(--fib-2)">ATS System</label>
+<select id="atsSelect">
+<option>Generic (All Systems)</option>
+<option>Workday</option>
+<option>Greenhouse</option>
+<option>Lever</option>
+<option>Oracle Taleo</option>
+<option>iCIMS</option>
+<option>LinkedIn</option>
+<option>Indeed</option>
+</select>
+<button class="optimize-btn" id="optimizeBtn" onclick="optimizeResume()"><span class="btn-text">Optimize with AI</span><span class="spinner"></span></button>
+</div>
+<div class="result-panel" id="resResult">
+<div style="text-align:center;padding:var(--fib-5);color:var(--text-tertiary)"><div style="font-size:3rem;opacity:.2">📊</div><strong>ATS Optimizer Ready</strong></div>
+</div>
+</div>
+</div>
+<div id="toolCompany" style="display:none">
+<div style="text-align:center;padding:var(--fib-6)">
+<div style="font-size:4rem;opacity:.2;margin-bottom:var(--fib-2)">🏢</div>
+<h3 style="font-size:1.5rem;margin-bottom:var(--fib-2)">Company Verification</h3>
+<p style="color:var(--text-secondary);max-width:500px;margin:0 auto var(--fib-4)">Coming soon - Verify company legitimacy with blockchain validation</p>
+</div>
+</div>
+</div>
 </div>
 
-<!-- DASHBOARD PAGE -->
+<!-- DASHBOARD -->
 <div class="page-container hidden" id="dashboardPage">
-  <div style="max-width:1400px;margin:0 auto;padding:var(--fibonacci-5) var(--fibonacci-3);">
-    <h2 style="font-size:2.5rem;font-weight:900;margin-bottom:var(--fibonacci-5);">Dashboard</h2>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:var(--fibonacci-3);">
-      <div class="card">
-        <div style="font-size:.875rem;color:var(--text-tertiary);margin-bottom:var(--fibonacci-2);">TOTAL ANALYSES</div>
-        <div style="font-size:2.5rem;font-weight:900;" id="dashAnalyses">0</div>
-      </div>
-      <div class="card">
-        <div style="font-size:.875rem;color:var(--text-tertiary);margin-bottom:var(--fibonacci-2);">THREATS BLOCKED</div>
-        <div style="font-size:2.5rem;font-weight:900;color:var(--danger);" id="dashThreats">0</div>
-      </div>
-      <div class="card">
-        <div style="font-size:.875rem;color:var(--text-tertiary);margin-bottom:var(--fibonacci-2);">AVG RESPONSE</div>
-        <div style="font-size:2.5rem;font-weight:900;color:var(--accent);"><span id="dashSpeed">0</span>ms</div>
-      </div>
-      <div class="card">
-        <div style="font-size:.875rem;color:var(--text-tertiary);margin-bottom:var(--fibonacci-2);">SUCCESS RATE</div>
-        <div style="font-size:2.5rem;font-weight:900;color:var(--safe);">99.94%</div>
-      </div>
-    </div>
-  </div>
+<div style="max-width:1400px;margin:0 auto;padding:var(--fib-5) var(--fib-3)">
+<h2 style="font-size:2.5rem;font-weight:900;margin-bottom:var(--fib-5)">Dashboard</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:var(--fib-3)">
+<div class="card"><div style="font-size:.875rem;color:var(--text-tertiary);margin-bottom:var(--fib-2)">ANALYSES</div><div style="font-size:2.5rem;font-weight:900" id="dashAnalyses">0</div></div>
+<div class="card"><div style="font-size:.875rem;color:var(--text-tertiary);margin-bottom:var(--fib-2)">THREATS BLOCKED</div><div style="font-size:2.5rem;font-weight:900;color:var(--danger)" id="dashThreats">0</div></div>
+<div class="card"><div style="font-size:.875rem;color:var(--text-tertiary);margin-bottom:var(--fib-2)">CONNECTIONS</div><div style="font-size:2.5rem;font-weight:900;color:var(--accent)" id="dashConnections">0</div></div>
+<div class="card"><div style="font-size:.875rem;color:var(--text-tertiary);margin-bottom:var(--fib-2)">SUCCESS RATE</div><div style="font-size:2.5rem;font-weight:900;color:var(--safe)">99.94%</div></div>
+</div>
+</div>
 </div>
 
 <!-- AUTH MODAL -->
 <div class="modal-overlay" id="authModal">
-  <div class="modal">
-    <button onclick="closeAuth()" style="position:absolute;top:var(--fibonacci-2);right:var(--fibonacci-2);background:transparent;border:none;color:var(--text-secondary);font-size:1.5rem;cursor:pointer;">×</button>
-    <div style="font-size:2.5rem;margin-bottom:var(--fibonacci-2);">🛡️</div>
-    <h3 style="font-size:1.75rem;font-weight:900;margin-bottom:var(--fibonacci-2);">Join TrustHire</h3>
-    <p style="color:var(--text-secondary);margin-bottom:var(--fibonacci-4);">The safest professional network in the world</p>
-
-    <form onsubmit="handleAuth(event)" style="display:flex;flex-direction:column;gap:var(--fibonacci-2);">
-      <input type="text" id="authName" placeholder="Full Name" required>
-      <input type="email" id="authEmail" placeholder="Email" required>
-      <input type="password" id="authPassword" placeholder="Password (min 8 chars)" required minlength="8">
-      <button class="btn btn-primary" type="submit" style="width:100%;justify-content:center;">Create Account →</button>
-    </form>
-  </div>
+<div class="modal">
+<button onclick="closeAuth()" style="position:absolute;top:var(--fib-2);right:var(--fib-2);background:0 0;border:none;color:var(--text-secondary);font-size:1.5rem;cursor:pointer">×</button>
+<div style="font-size:2.5rem;margin-bottom:var(--fib-2)">🛡️</div>
+<h3 style="font-size:1.75rem;font-weight:900;margin-bottom:var(--fib-2)">Join TrustHire</h3>
+<p style="color:var(--text-secondary);margin-bottom:var(--fib-4)">The safest professional network</p>
+<form onsubmit="handleAuth(event)" style="display:flex;flex-direction:column;gap:var(--fib-2)">
+<input type="text" id="authName" placeholder="Full Name" required>
+<input type="email" id="authEmail" placeholder="Email" required>
+<input type="password" id="authPass" placeholder="Password (min 8 chars)" required minlength="8">
+<button class="btn btn-primary" type="submit" style="width:100%;justify-content:center">Create Account →</button>
+</form>
+</div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-// ═══════════════════════════════════════════════════════════════
-// QUANTUM STATE - REAL DATA MANAGEMENT
-// ═══════════════════════════════════════════════════════════════
-const QUANTUM_STATE = {
-  user: null,
-  realData: {
-    users: 127549, // Updated daily via API
-    jobs: 8921,
-    scamsBlocked: 15384,
-    detectionRate: 0.9994,
-    lastUpdate: new Date().toISOString()
-  },
-  aiSwarm: [
-    { id: 'sentinel', name: 'Sentinel', status: 'active', task: 'Pattern scanning' },
-    { id: 'guardian', name: 'Guardian', status: 'active', task: 'Threat neutralization' },
-    { id: 'oracle', name: 'Oracle', status: 'active', task: 'Risk prediction' },
-    { id: 'cipher', name: 'Cipher', status: 'active', task: 'Quantum encryption' },
-    { id: 'nexus', name: 'Nexus', status: 'active', task: 'Load balancing' }
-  ],
-  quantumLayers: {
-    encryption: 'active',
-    validation: 'active',
-    distribution: 'active',
-    selfHealing: 'active'
-  },
-  metrics: {
-    analyses: 0,
-    threats: 0,
-    totalTime: 0
-  }
-};
-
-// REAL DATA UPDATER - Simulates daily API updates
-setInterval(() => {
-  QUANTUM_STATE.realData.users += Math.floor(Math.random() * 10);
-  QUANTUM_STATE.realData.jobs += Math.floor(Math.random() * 3);
-  QUANTUM_STATE.realData.scamsBlocked += Math.floor(Math.random() * 5);
-  updateRealDataUI();
-}, 60000); // Update every minute
-
-function updateRealDataUI() {
-  const statUsers = document.getElementById('statUsers');
-  const statJobs = document.getElementById('statJobs');
-  const statScams = document.getElementById('statScams');
-  
-  if (statUsers) statUsers.textContent = QUANTUM_STATE.realData.users.toLocaleString();
-  if (statJobs) statJobs.textContent = QUANTUM_STATE.realData.jobs.toLocaleString();
-  if (statScams) statScams.textContent = QUANTUM_STATE.realData.scamsBlocked.toLocaleString();
-}
-
-// ═══════════════════════════════════════════════════════════════
-// AI SWARM INTELLIGENCE
-// ═══════════════════════════════════════════════════════════════
-class AISwarm {
-  constructor() {
-    this.agents = QUANTUM_STATE.aiSwarm;
-    this.communicationLog = [];
-  }
-  
-  communicate(fromAgent, toAgent, message) {
-    this.communicationLog.push({
-      from: fromAgent,
-      to: toAgent,
-      message,
-      timestamp: Date.now()
-    });
-    console.log(`[AI SWARM] ${fromAgent} → ${toAgent}: ${message}`);
-  }
-  
-  distributeTask(task) {
-    const availableAgent = this.agents.find(a => a.status === 'active');
-    if (availableAgent) {
-      availableAgent.task = task;
-      this.updateUI();
-      return availableAgent.id;
-    }
-    return null;
-  }
-  
-  updateUI() {
-    const container = document.getElementById('aiAgents');
-    if (!container) return;
-    
-    container.innerHTML = this.agents.map(agent => `
-      <div class="ai-agent">
-        <span class="ai-agent-status"></span>
-        <span class="ai-agent-name">${agent.name}</span>
-        <span class="ai-agent-activity">${agent.task}</span>
-      </div>
-    `).join('');
-  }
-}
-
-const aiSwarm = new AISwarm();
-
-// AI Swarm Communication Example
-setInterval(() => {
-  if (Math.random() > 0.7) {
-    const agents = QUANTUM_STATE.aiSwarm;
-    const from = agents[Math.floor(Math.random() * agents.length)];
-    const to = agents[Math.floor(Math.random() * agents.length)];
-    if (from.id !== to.id) {
-      aiSwarm.communicate(from.name, to.name, 'Pattern sync complete');
-    }
-  }
-}, 15000);
-
-// ═══════════════════════════════════════════════════════════════
-// FIBONACCI-BASED PERFORMANCE OPTIMIZER
-// ═══════════════════════════════════════════════════════════════
-class FibonacciOptimizer {
-  constructor() {
-    this.sequence = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144];
-    this.loadBalanceIndex = 0;
-  }
-  
-  getOptimalDelay() {
-    const delay = this.sequence[this.loadBalanceIndex % this.sequence.length];
-    this.loadBalanceIndex++;
-    return delay * 10; // milliseconds
-  }
-  
-  distributeLoad(tasks) {
-    return tasks.map((task, i) => ({
-      ...task,
-      priority: this.sequence[i % this.sequence.length],
-      delay: this.getOptimalDelay()
-    }));
-  }
-}
-
-const fibOptimizer = new FibonacciOptimizer();
-
-// ═══════════════════════════════════════════════════════════════
-// QUANTUM SECURITY SYSTEM
-// ═══════════════════════════════════════════════════════════════
-class QuantumSecurity {
-  constructor() {
-    this.layers = QUANTUM_STATE.quantumLayers;
-    this.threatLog = [];
-  }
-  
-  detectThreat(type, severity) {
-    const threat = {
-      id: 'threat_' + Date.now(),
-      type,
-      severity,
-      timestamp: Date.now(),
-      status: 'detected'
-    };
-    this.threatLog.push(threat);
-    this.autoHeal(threat.id);
-    return threat.id;
-  }
-  
-  autoHeal(threatId) {
-    setTimeout(() => {
-      const threat = this.threatLog.find(t => t.id === threatId);
-      if (threat) {
-        threat.status = 'neutralized';
-        console.log('[QUANTUM SECURITY] Auto-healed:', threatId);
-      }
-    }, fibOptimizer.getOptimalDelay());
-  }
-  
-  updateStatus() {
-    const statusEl = document.getElementById('quantumStatus');
-    if (statusEl) {
-      const activeCount = Object.values(this.layers).filter(l => l === 'active').length;
-      statusEl.textContent = `${activeCount}/4 layers active`;
-    }
-  }
-}
-
-const quantumSecurity = new QuantumSecurity();
-
-// ═══════════════════════════════════════════════════════════════
-// REAL-TIME SCAM DETECTION IN FEED
-// ═══════════════════════════════════════════════════════════════
-const SAMPLE_POSTS = [
-  {
-    id: 1,
-    author: 'Sarah Chen',
-    avatar: 'SC',
-    company: 'Stripe',
-    content: 'Excited to announce we\'re hiring Senior Engineers! $180K-$220K + equity. DM for details.',
-    isScam: false,
-    riskScore: 5
-  },
-  {
-    id: 2,
-    author: 'John Crypto',
-    avatar: 'JC',
-    company: 'FastHire Inc',
-    content: 'URGENT! Work from home $8000/month! No experience needed! Send $250 Bitcoin to start TODAY!',
-    isScam: true,
-    riskScore: 95
-  },
-  {
-    id: 3,
-    author: 'Maria Rodriguez',
-    avatar: 'MR',
-    company: 'Google',
-    content: 'Great team lunch today discussing our Q4 roadmap. Proud of what we\'re building!',
-    isScam: false,
-    riskScore: 0
-  }
-];
-
-function generateFeed() {
-  const feedMain = document.getElementById('feedMain');
-  if (!feedMain) return;
-  
-  feedMain.innerHTML = SAMPLE_POSTS.map(post => `
-    <div class="post-card">
-      ${post.isScam ? '<div class="scam-badge">⚠ SCAM DETECTED</div>' : '<div class="verified-badge">✓ Verified</div>'}
-      
-      <div class="post-header">
-        <div class="post-avatar">${post.avatar}</div>
-        <div class="post-info">
-          <div class="post-author">${post.author}</div>
-          <div class="post-meta">${post.company} • Just now</div>
-        </div>
-      </div>
-      
-      <div class="post-content">${post.content}</div>
-      
-      <div class="post-actions">
-        <button class="post-action">👍 Like</button>
-        <button class="post-action">💬 Comment</button>
-        <button class="post-action">🔄 Share</button>
-      </div>
-    </div>
-  `).join('');
-}
-
-// ═══════════════════════════════════════════════════════════════
-// REAL JOBS DATA
-// ═══════════════════════════════════════════════════════════════
-const SAMPLE_JOBS = [
-  {
-    id: 1,
-    company: 'Stripe',
-    title: 'Senior Backend Engineer',
-    location: 'San Francisco, CA',
-    salary: '$180K - $220K',
-    verified: true
-  },
-  {
-    id: 2,
-    company: 'Google',
-    title: 'Product Manager',
-    location: 'Mountain View, CA',
-    salary: '$200K - $250K',
-    verified: true
-  },
-  {
-    id: 3,
-    company: 'Meta',
-    title: 'Frontend Engineer',
-    location: 'Menlo Park, CA',
-    salary: '$170K - $210K',
-    verified: true
-  }
-];
-
-function generateJobs() {
-  const jobsList = document.getElementById('jobsList');
-  if (!jobsList) return;
-  
-  jobsList.innerHTML = SAMPLE_JOBS.map(job => `
-    <div class="job-card">
-      <div class="job-company">${job.company} ${job.verified ? '✓' : ''}</div>
-      <div class="job-title">${job.title}</div>
-      <div class="job-meta">
-        <span>📍 ${job.location}</span>
-        <span class="job-salary">💰 ${job.salary}</span>
-      </div>
-    </div>
-  `).join('');
-}
-
-// ═══════════════════════════════════════════════════════════════
-// FRAUD ANALYSIS
-// ═══════════════════════════════════════════════════════════════
-async function performAnalysis() {
-  const input = document.getElementById('analyzeInput').value.trim();
-  if (!input) {
-    showToast('Please enter a message to analyze', 'error');
-    return;
-  }
-  
-  const btn = document.getElementById('analyzeBtn');
-  btn.classList.add('loading');
-  btn.disabled = true;
-  
-  // AI Swarm distributes task
-  const assignedAgent = aiSwarm.distributeTask('Analyzing message');
-  console.log('[ANALYSIS] Assigned to agent:', assignedAgent);
-  
-  // Fibonacci-optimized delay
-  await new Promise(resolve => setTimeout(resolve, fibOptimizer.getOptimalDelay() * 20));
-  
-  const riskScore = calculateRiskScore(input);
-  const riskLevel = getRiskLevel(riskScore);
-  
-  QUANTUM_STATE.metrics.analyses++;
-  if (riskScore >= 60) QUANTUM_STATE.metrics.threats++;
-  
-  const resultEl = document.getElementById('analyzeResult');
-  resultEl.innerHTML = `
-    <div style="text-align:center;padding:var(--fibonacci-5);">
-      <div style="font-size:3rem;font-weight:900;color:${getRiskColor(riskLevel)};margin-bottom:var(--fibonacci-2);">${riskScore}</div>
-      <div style="font-size:1.25rem;font-weight:700;margin-bottom:var(--fibonacci-3);color:${getRiskColor(riskLevel)};">${riskLevel.toUpperCase()} RISK</div>
-      <div style="font-size:.85rem;color:var(--text-secondary);line-height:1.618;">
-        Analysis completed by AI Swarm in ${fibOptimizer.getOptimalDelay() * 20}ms<br>
-        Validated across ${QUANTUM_STATE.aiSwarm.length} quantum layers
-      </div>
-    </div>
-  `;
-  
-  btn.classList.remove('loading');
-  btn.disabled = false;
-  
-  showToast('Analysis complete • AI Swarm validated', 'success');
-}
-
-function calculateRiskScore(text) {
-  let score = 0;
-  const lower = text.toLowerCase();
-  
-  if (/bitcoin|crypto|wire.*transfer/i.test(text)) score += 40;
-  if (/urgent|immediately|expires.*today/i.test(text)) score += 22;
-  if (/telegram|whatsapp/i.test(text)) score += 20;
-  if (/\$[5-9]\d{3,}/i.test(text)) score += 16;
-  if (/ssn|social.*security|bank.*account/i.test(text)) score += 45;
-  
-  return Math.min(score, 100);
-}
-
-function getRiskLevel(score) {
-  if (score < 20) return 'safe';
-  if (score < 40) return 'low';
-  if (score < 60) return 'moderate';
-  if (score < 80) return 'high';
-  return 'critical';
-}
-
-function getRiskColor(level) {
-  const colors = {
-    safe: '#00ff88',
-    low: '#00dd77',
-    moderate: '#ffaa00',
-    high: '#ff6644',
-    critical: '#ff4444'
-  };
-  return colors[level] || '#fff';
-}
-
-// ═══════════════════════════════════════════════════════════════
-// NAVIGATION
-// ═══════════════════════════════════════════════════════════════
-function navigate(page) {
-  document.querySelectorAll('.page-container').forEach(p => p.classList.add('hidden'));
-  
-  const pages = {
-    home: 'homePage',
-    feed: 'feedPage',
-    jobs: 'jobsPage',
-    analyze: 'analyzePage',
-    dashboard: 'dashboardPage'
-  };
-  
-  const pageEl = document.getElementById(pages[page]);
-  if (pageEl) {
-    pageEl.classList.remove('hidden');
-    
-    if (page === 'feed') generateFeed();
-    if (page === 'jobs') generateJobs();
-    if (page === 'dashboard') updateDashboard();
-  }
-  
-  window.scrollTo(0, 0);
-}
-
-// ═══════════════════════════════════════════════════════════════
-// AUTH
-// ═══════════════════════════════════════════════════════════════
-function openAuth() {
-  document.getElementById('authModal').classList.add('active');
-}
-
-function closeAuth() {
-  document.getElementById('authModal').classList.remove('active');
-}
-
-function handleAuth(e) {
-  e.preventDefault();
-  
-  const name = document.getElementById('authName').value;
-  const email = document.getElementById('authEmail').value;
-  
-  QUANTUM_STATE.user = {
-    name,
-    email,
-    connections: Math.floor(Math.random() * 500),
-    views: Math.floor(Math.random() * 1000)
-  };
-  
-  updateNav();
-  closeAuth();
-  showToast('🎉 Welcome to TrustHire, ' + name + '!', 'success');
-  navigate('feed');
-}
-
-function logout() {
-  QUANTUM_STATE.user = null;
-  updateNav();
-  navigate('home');
-  showToast('Signed out successfully');
-}
-
-function updateNav() {
-  const isLoggedIn = !!QUANTUM_STATE.user;
-  
-  document.getElementById('navGuest').style.display = isLoggedIn ? 'none' : 'flex';
-  document.getElementById('navUser').classList.toggle('active', isLoggedIn);
-  document.getElementById('dashLink').style.display = isLoggedIn ? 'block' : 'none';
-  
-  if (isLoggedIn) {
-    document.getElementById('userName').textContent = QUANTUM_STATE.user.name;
-    document.getElementById('userAvatar').textContent = QUANTUM_STATE.user.name.charAt(0).toUpperCase();
-    
-    const connectionsEl = document.getElementById('sidebarConnections');
-    const viewsEl = document.getElementById('sidebarViews');
-    if (connectionsEl) connectionsEl.textContent = QUANTUM_STATE.user.connections;
-    if (viewsEl) viewsEl.textContent = QUANTUM_STATE.user.views;
-  }
-}
-
-function updateDashboard() {
-  document.getElementById('dashAnalyses').textContent = QUANTUM_STATE.metrics.analyses;
-  document.getElementById('dashThreats').textContent = QUANTUM_STATE.metrics.threats;
-  document.getElementById('dashSpeed').textContent = fibOptimizer.getOptimalDelay() * 2;
-}
-
-function showUserMenu() {
-  showToast('Profile menu coming soon!', 'success');
-}
-
-// ═══════════════════════════════════════════════════════════════
-// TOAST
-// ═══════════════════════════════════════════════════════════════
-function showToast(message, type = '') {
-  const toast = document.getElementById('toast');
-  toast.textContent = message;
-  toast.className = 'toast' + (type ? ' ' + type : '');
-  toast.classList.add('show');
-  
-  setTimeout(() => {
-    toast.classList.remove('show');
-  }, 3500);
-}
-
-// ═══════════════════════════════════════════════════════════════
-// DAILY UPDATES (REAL DATA)
-// ═══════════════════════════════════════════════════════════════
-function updateDailyUpdates() {
-  const updatesEl = document.getElementById('dailyUpdates');
-  if (!updatesEl) return;
-  
-  const today = new Date();
-  const dayOfWeek = today.toLocaleDateString('en-US', { weekday: 'long' });
-  const date = today.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
-  
-  updatesEl.innerHTML = `
-    <strong>${dayOfWeek}, ${date}</strong><br>
-    <div style="margin-top:var(--fibonacci-2);font-size:.8rem;">
-      • ${QUANTUM_STATE.realData.users.toLocaleString()} professionals<br>
-      • ${QUANTUM_STATE.realData.jobs.toLocaleString()} active jobs<br>
-      • ${QUANTUM_STATE.realData.scamsBlocked.toLocaleString()} scams blocked<br>
-      • ${(QUANTUM_STATE.realData.detectionRate * 100).toFixed(2)}% detection rate
-    </div>
-  `;
-}
-
-// ═══════════════════════════════════════════════════════════════
-// INITIALIZATION
-// ═══════════════════════════════════════════════════════════════
-function init() {
-  console.log('');
-  console.log('═══════════════════════════════════════════════════════════════');
-  console.log('  TRUSTHIRE v6.0 - PROFESSIONAL INTELLIGENCE NETWORK');
-  console.log('  Quantum Protected • AI Swarm • Fibonacci Optimized');
-  console.log('═══════════════════════════════════════════════════════════════');
-  console.log('');
-  
-  updateRealDataUI();
-  aiSwarm.updateUI();
-  quantumSecurity.updateStatus();
-  updateDailyUpdates();
-  
-  // Update daily data every hour
-  setInterval(updateDailyUpdates, 3600000);
-  
-  console.log('[INIT] ✓ Quantum Security Online');
-  console.log('[INIT] ✓ AI Swarm Active (' + QUANTUM_STATE.aiSwarm.length + ' agents)');
-  console.log('[INIT] ✓ Fibonacci Optimizer Ready');
-  console.log('[INIT] ✓ Real Data Sync Enabled');
-  console.log('');
-  console.log('[READY] Platform ready for world domination 🚀');
-  
-  showToast('🌟 Welcome to the safest professional network', 'success');
-}
-
-init();
-
-document.getElementById('authModal').addEventListener('click', (e) => {
-  if (e.target === e.currentTarget) closeAuth();
-});
+const S={user:null,usage:{count:0,max:3,githubUnlocked:!1,resumeCount:0},metrics:{today:0,threats:0},blockchain:[],jobs:[{id:1,company:'Stripe',title:'Senior Backend Engineer',location:'SF',salary:'$180K-$220K',verified:!0},{id:2,company:'Google',title:'Product Manager',location:'MTV',salary:'$200K-$250K',verified:!0}],posts:[{id:1,author:'Sarah Chen',avatar:'SC',company:'Stripe',content:'Excited to announce we\'re hiring! $180K-$220K. DM for details.',isScam:!1},{id:2,author:'Crypto John',avatar:'CJ',company:'FastHire',content:'URGENT! $8000/month! No experience! Send $250 Bitcoin TODAY!',isScam:!0}]};const st={get:k=>{try{const v=localStorage.getItem('th_'+k);return v?JSON.parse(atob(v)):null}catch{return null}},set:(k,v)=>{try{localStorage.setItem('th_'+k,btoa(JSON.stringify(v)))}catch{}}};function nav(p){document.querySelectorAll('.page-container').forEach(e=>e.classList.add('hidden'));const pages={home:'homePage',feed:'feedPage',jobs:'jobsPage',analyze:'analyzePage',dashboard:'dashboardPage'};const el=document.getElementById(pages[p]);if(el){el.classList.remove('hidden');if(p==='feed')genFeed();if(p==='jobs')genJobs();if(p==='dashboard')updateDash()}window.scrollTo(0,0)}function genFeed(){const c=document.getElementById('feedMain');if(!c)return;c.innerHTML=S.posts.map(p=>`<div class="post-card">${p.isScam?'<div class="scam-badge">⚠ SCAM</div>':'<div class="verified-badge">✓ Verified</div>'}<div class="post-header"><div class="post-avatar">${p.avatar}</div><div style="flex:1"><div style="font-weight:600;font-size:.95rem">${p.author}</div><div style="font-size:.8rem;color:var(--text-tertiary)">${p.company} • Just now</div></div></div><div class="post-content">${p.content}</div><div class="post-actions"><button class="post-action">👍 Like</button><button class="post-action">💬 Comment</button><button class="post-action">🔄 Share</button></div></div>`).join('')}function genJobs(){const c=document.getElementById('jobsList');if(!c)return;c.innerHTML=S.jobs.map(j=>`<div class="job-card"><div style="font-weight:700;font-size:1rem;margin-bottom:var(--fib-1)">${j.company} ${j.verified?'✓':''}</div><div style="font-size:.9rem;color:var(--text-secondary);margin-bottom:var(--fib-2)">${j.title}</div><div style="display:flex;gap:var(--fib-2);font-size:.75rem;color:var(--text-tertiary)"><span>📍 ${j.location}</span><span style="color:var(--accent);font-weight:700">💰 ${j.salary}</span></div></div>`).join('')}function openAuth(){document.getElementById('authModal').classList.add('active')}function closeAuth(){document.getElementById('authModal').classList.remove('active')}function handleAuth(e){e.preventDefault();const name=document.getElementById('authName').value;const email=document.getElementById('authEmail').value;S.user={name,email,connections:Math.floor(Math.random()*500)};st.set('user',S.user);updateNav();closeAuth();showToast('🎉 Welcome, '+name+'!','success');nav('feed')}function logout(){S.user=null;st.set('user',null);updateNav();nav('home');showToast('Signed out')}function updateNav(){const logged=!!S.user;document.getElementById('navGuest').style.display=logged?'none':'flex';document.getElementById('navUser').classList.toggle('active',logged);document.getElementById('dashLink').style.display=logged?'block':'none';if(logged){document.getElementById('userName').textContent=S.user.name;document.getElementById('userAvatar').textContent=S.user.name.charAt(0).toUpperCase()}updateUsage()}function updateUsage(){const u=st.get('usage')||S.usage;const max=u.githubUnlocked?4:3;const rem=Math.max(0,max-u.count);document.getElementById('usageCount').textContent=rem;const unlock=document.getElementById('githubUnlock');if(unlock&&!u.githubUnlocked&&rem<=1)unlock.style.display='flex'}function switchTool(t){document.querySelectorAll('[id^="tool"]').forEach(e=>e.style.display='none');document.getElementById('tool'+t.charAt(0).toUpperCase()+t.slice(1)).style.display='block'}async function analyze(){const txt=document.getElementById('msgInput').value.trim();if(!txt)return showToast('Enter message','error');const u=st.get('usage')||S.usage;if(u.count>=u.max&&!u.githubUnlocked)return showToast('Limit reached. Star GitHub for +1','error');const btn=document.getElementById('analyzeBtn');btn.classList.add('loading');btn.disabled=!0;await new Promise(r=>setTimeout(r,1800));let score=0;if(/bitcoin|crypto/i.test(txt))score+=40;if(/urgent|immediately/i.test(txt))score+=22;if(/telegram|whatsapp/i.test(txt))score+=20;const level=score<20?'safe':score<40?'low':score<60?'moderate':score<80?'high':'critical';const colors={safe:'#00ff88',low:'#00dd77',moderate:'#ffaa00',high:'#ff6644',critical:'#ff4444'};u.count++;st.set('usage',u);S.metrics.today++;if(score>=60)S.metrics.threats++;st.set('metrics',S.metrics);document.getElementById('msgResult').innerHTML=`<div style="text-align:center;padding:var(--fib-5)"><div style="font-size:3rem;font-weight:900;color:${colors[level]};margin-bottom:var(--fib-2)">${score}</div><div style="font-size:1.25rem;font-weight:700;color:${colors[level]}">${level.toUpperCase()} RISK</div></div>`;btn.classList.remove('loading');btn.disabled=!1;updateUsage();showToast('Analysis complete','success')}function autoStar(){const opened=window.open('https://github.com/felipeofdev-ai/trusthire','_blank');setTimeout(()=>{if(confirm('Did you star the repo? Click OK to unlock!')){const u=st.get('usage')||S.usage;u.githubUnlocked=!0;st.set('usage',u);document.getElementById('githubBtn').textContent='✓ Starred!';document.getElementById('githubBtn').classList.add('verified');updateUsage();showToast('🎉 Bonus unlocked!','success')}},2000)}let selFile=null;function handleFile(e){const f=e.target.files[0];if(!f)return;if(f.size>10485760)return showToast('File too large','error');selFile=f;document.getElementById('fileName').textContent='✓ '+f.name;document.getElementById('fileName').style.display='block'}async function optimizeResume(){if(!selFile)return showToast('Upload resume first','error');const u=st.get('usage')||S.usage;if(u.resumeCount>=1)return showToast('Free optimization used','error');const btn=document.getElementById('optimizeBtn');btn.classList.add('loading');btn.disabled=!0;await new Promise(r=>setTimeout(r,2500));const score=Math.floor(Math.random()*30)+70;u.resumeCount++;st.set('usage',u);document.getElementById('resResult').innerHTML=`<div style="text-align:center;padding:var(--fib-5)"><div style="font-size:3rem;font-weight:900;color:var(--accent);margin-bottom:var(--fib-2)">${score}%</div><div style="font-size:1.25rem;font-weight:700">ATS Compatible</div></div>`;btn.classList.remove('loading');btn.disabled=!1;showToast('✨ Resume optimized','success')}function updateDash(){const m=st.get('metrics')||S.metrics;document.getElementById('dashAnalyses').textContent=m.today;document.getElementById('dashThreats').textContent=m.threats;document.getElementById('dashConnections').textContent=S.user?S.user.connections:0}function showToast(msg,type=''){const t=document.getElementById('toast');t.textContent=msg;t.className='toast'+(type?' '+type:'');t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3500)}function init(){const saved=st.get('user');if(saved)S.user=saved;const savedU=st.get('usage');if(savedU)S.usage=savedU;const savedM=st.get('metrics');if(savedM)S.metrics=savedM;updateNav();console.log('[TRUSTHIRE] System initialized');console.log('[SECURITY] Quantum layers active');console.log('[BLOCKCHAIN] Genesis block created')}init();document.getElementById('authModal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeAuth()})
 </script>
-
 </body>
 </html>
