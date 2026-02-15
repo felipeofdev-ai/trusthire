@@ -55,9 +55,9 @@ class RiskScoringEngine:
         
         # Combine scores with weights
         total_score = (
-            signal_score * 0.60 +  # Pattern signals: 60%
-            link_score * 0.25 +     # Link analysis: 25%
-            se_score * 0.15         # Social engineering: 15%
+            signal_score * 0.80 +  # Pattern signals: 80%
+            link_score * 0.10 +     # Link analysis: 10%
+            se_score * 0.10         # Social engineering: 10%
         )
         
         # Clamp to 0-100
@@ -79,8 +79,8 @@ class RiskScoringEngine:
             for s in signals
         )
         
-        # Normalize to 0-100 scale (assuming max ~5 critical signals = 250 points)
-        normalized = min(weighted_sum / 2.5, 100)
+        # Normalize to 0-100 scale, emphasizing critical detections
+        normalized = min(weighted_sum / 1.2, 100)
         
         return normalized
     

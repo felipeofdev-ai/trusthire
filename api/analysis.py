@@ -3,7 +3,7 @@ TrustHire Analysis API — SaaS Edition
 Core analysis endpoints with per-tier rate limiting
 """
 
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, HTTPException, Depends, Request
 
 from models.schemas import AnalysisRequest, AnalysisResult
 from models.user_models import TokenData, UserTier
@@ -11,6 +11,8 @@ from core.analyzer import get_analyzer
 from auth.auth_service import get_current_user
 from database.user_repository import UserRepository
 from utils.logger import get_logger
+from utils.security import sanitize_user_text
+from utils.audit import log_audit_event
 
 logger = get_logger("api.analysis")
 router = APIRouter()
@@ -40,6 +42,7 @@ async def enforce_rate_limit(user: TokenData) -> None:
 async def analyze_message(
     request: AnalysisRequest,
     user: TokenData = Depends(get_current_user),
+    http_request: Request = None,
 ):
     """
     Analyze a recruitment message for scam indicators.
@@ -58,6 +61,7 @@ async def analyze_message(
 
     try:
         analyzer = get_analyzer()
+        request.text = sanitize_user_text(request.text)
         result = await analyzer.analyze(
             text=request.text,
             include_ai=request.include_ai_analysis and user.tier != UserTier.FREE,
@@ -67,6 +71,7 @@ async def analyze_message(
         if user.user_id != "anonymous":
             db = UserRepository()
             await db.increment_analysis_count(user.user_id)
+            log_audit_event("analysis.run", user.user_id, request=http_request)
         return result
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))

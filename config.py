@@ -29,7 +29,7 @@ class Settings(BaseSettings):
     ALLOWED_HOSTS: str = "*"
     # CORS_ORIGINS as a plain string — split on comma at runtime
     # In Railway set as: https://felipeofdev-ai.github.io,https://trusthire.dev
-    CORS_ORIGINS_STR: str = "http://localhost:3000,http://localhost:8000,https://felipeofdev-ai.github.io,https://trusthire.dev"
+    CORS_ORIGINS_STR: str = "http://localhost:3000,http://localhost:5173,http://localhost:4173,http://localhost:8080,http://127.0.0.1:3000,http://127.0.0.1:5173,http://127.0.0.1:4173,http://127.0.0.1:8080,http://localhost:8000,https://felipeofdev-ai.github.io,https://trusthire.dev"
 
     @property
     def CORS_ORIGINS(self) -> list[str]:
@@ -47,6 +47,9 @@ class Settings(BaseSettings):
     AI_MAX_TOKENS: int = 500
     AI_TIMEOUT: int = 15
     AI_TEMPERATURE: float = 0.3
+    OPENAI_API_KEY: Optional[str] = None
+    GPT_MODEL: str = "gpt-4.1"
+    CODEX_MODEL: str = "gpt-5-codex"
 
     # ==================== ANALYSIS ENGINE ====================
     ENGINE_VERSION: str = "2.0.0"
@@ -75,6 +78,10 @@ class Settings(BaseSettings):
     LOG_LEVEL: str = "INFO"
     LOG_FORMAT: str = "json"
     METRICS_ENABLED: bool = True
+    ESTIMATED_COST_PER_REQUEST_USD: float = 0.002
+
+    # ==================== SECURITY ====================
+    ENABLE_SECURITY_HEADERS: bool = True
 
     # ==================== STRIPE ====================
     # Optional — billing disabled if empty
@@ -85,6 +92,9 @@ class Settings(BaseSettings):
     STRIPE_PRICE_PRO_YEARLY: str = ""
     STRIPE_PRICE_ENTERPRISE_MONTHLY: str = ""
     STRIPE_PRICE_ENTERPRISE_YEARLY: str = ""
+    STRIPE_SUCCESS_URL: str = "https://trusthire.ai/success"
+    STRIPE_CANCEL_URL: str = "https://trusthire.ai/cancel"
+    STRIPE_TRIAL_DAYS: int = 7
 
     # ==================== FEATURES ====================
     FEATURE_PDF_REPORTS: bool = True

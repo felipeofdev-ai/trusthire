@@ -1,5 +1,23 @@
 # 🚀 TrustHire - Guia Rápido de Integração
 
+
+## ✅ Integração automática (recomendado)
+
+No repositório `trusthire`, execute:
+
+```bash
+bash scripts/link_trusthire_ecossistema.sh
+```
+
+Esse script:
+- clona/atualiza `trusthire-backend` e `trusthire-frontend` como diretórios irmãos;
+- ajusta `ALLOWED_ORIGINS` no backend para aceitar frontend React e `index.html`;
+- cria `trusthire-frontend/.env.local` apontando para `http://localhost:8000/api/v1`.
+
+Depois, suba os 3 serviços conforme instruções exibidas pelo script.
+
+---
+
 ## ⚡ Setup em 5 Minutos
 
 ### 1️⃣ Clone os 3 Repositórios

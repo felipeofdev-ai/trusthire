@@ -6,7 +6,7 @@ pydantic-settings>=2.2.0
 
 # Auth
 python-jose[cryptography]>=3.3.0
-passlib[bcrypt]>=1.7.4
+passlib[argon2,bcrypt]>=1.7.4
 
 # AI
 anthropic>=0.25.0
@@ -23,3 +23,5 @@ stripe>=8.0.0
 # Production
 slowapi>=0.1.9
 python-multipart>=0.0.9
+
+
