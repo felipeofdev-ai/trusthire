@@ -6,7 +6,7 @@ Register, login, refresh tokens, manage API keys
 from datetime import timedelta
 from typing import Optional
 
-from fastapi import APIRouter, HTTPException, Depends, status, BackgroundTasks
+from fastapi import APIRouter, HTTPException, Depends, status, BackgroundTasks, Request
 from fastapi.security import HTTPAuthorizationCredentials
 
 from models.user_models import (
@@ -22,6 +22,8 @@ from auth.auth_service import (
 )
 from database.user_repository import UserRepository
 from utils.logger import get_logger
+from utils.audit import log_audit_event
+from utils.security import sanitize_user_text
 
 logger = get_logger("api.auth")
 router = APIRouter(prefix="/auth", tags=["Authentication"])
@@ -32,6 +34,7 @@ router = APIRouter(prefix="/auth", tags=["Authentication"])
 async def register(
     request: RegisterRequest,
     background_tasks: BackgroundTasks,
+    http_request: Request,
 ):
     """
     Register a new user account.
@@ -49,10 +52,11 @@ async def register(
         )
 
     # Create user
+    safe_name = sanitize_user_text(request.name)
     hashed = hash_password(request.password)
     user = await db.create_user(
         email=request.email,
-        name=request.name,
+        name=safe_name,
         hashed_password=hashed,
     )
 
@@ -66,6 +70,7 @@ async def register(
     refresh_token = create_refresh_token(user.id)
 
     logger.info("user_registered", extra={"user_id": user.id})
+    log_audit_event("auth.register", user.id, request=http_request)
 
     return Token(
         access_token=access_token,
@@ -77,7 +82,7 @@ async def register(
 # ==================== LOGIN ====================
 
 @router.post("/login", response_model=Token)
-async def login(request: LoginRequest):
+async def login(request: LoginRequest, http_request: Request):
     """
     Login with email and password.
     
@@ -105,6 +110,7 @@ async def login(request: LoginRequest):
     refresh_token = create_refresh_token(user.id)
 
     logger.info("user_login", extra={"user_id": user.id, "tier": user.tier.value})
+    log_audit_event("auth.login", user.id, request=http_request)
 
     return Token(
         access_token=access_token,
@@ -166,6 +172,7 @@ async def get_me(user=Depends(require_auth)):
 async def change_password(
     request: ChangePasswordRequest,
     user=Depends(require_auth),
+    http_request: Request = None,
 ):
     """Change account password"""
     db = UserRepository()
@@ -182,6 +189,7 @@ async def change_password(
     new_hash = hash_password(request.new_password)
     await db.update_password(user.user_id, new_hash)
     logger.info("password_changed", extra={"user_id": user.user_id})
+    log_audit_event("auth.change_password", user.user_id, request=http_request)
 
 
 # ==================== API KEYS ====================
@@ -190,6 +198,7 @@ async def change_password(
 async def create_api_key(
     request: APIKeyCreate,
     user=Depends(require_auth),
+    http_request: Request = None,
 ):
     """
     Generate a new API key for programmatic access.
@@ -205,6 +214,7 @@ async def create_api_key(
 
     from datetime import datetime
     logger.info("api_key_generated", extra={"user_id": user.user_id})
+    log_audit_event("auth.api_key_generated", user.user_id, request=http_request)
 
     return APIKeyResponse(
         key=raw_key,
@@ -215,8 +225,9 @@ async def create_api_key(
 
 
 @router.delete("/api-keys", status_code=status.HTTP_204_NO_CONTENT)
-async def revoke_api_key(user=Depends(require_auth)):
+async def revoke_api_key(user=Depends(require_auth), http_request: Request = None):
     """Revoke current API key"""
     db = UserRepository()
     await db.update_api_key(user.user_id, None)
     logger.info("api_key_revoked", extra={"user_id": user.user_id})
+    log_audit_event("auth.api_key_revoked", user.user_id, request=http_request)

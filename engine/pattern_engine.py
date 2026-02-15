@@ -46,7 +46,7 @@ class AdvancedPatternEngine:
             # ---------- FINANCIAL SIGNALS ----------
             PatternRule(
                 pattern=re.compile(
-                    r"\b(pay|payment|transfer|send\s+money|wire|pix|paypal|venmo|cashapp|zelle)\b.*?\$?\d+",
+                    r"(\b(pay|payment|transfer|send(\s+money)?|wire|pix|paypal|venmo|cashapp|zelle)\b[^\n]{0,40}\$?\d+)|(\$\d+[^\n]{0,40}\b(pay|payment|fee|paypal|transfer|wire|pix)\b)",
                     re.I
                 ),
                 category=SignalCategory.FINANCIAL,
@@ -84,7 +84,7 @@ class AdvancedPatternEngine:
                     re.I
                 ),
                 category=SignalCategory.URGENCY,
-                message="Creates artificial urgency",
+                message="Contains urgent pressure language",
                 severity=Severity.MEDIUM,
                 confidence=0.85,
             ),

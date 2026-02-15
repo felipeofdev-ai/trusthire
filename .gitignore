@@ -1,0 +1,16 @@
+# Secrets and infra state
+.env
+*.pem
+secrets/
+weights/
+terraform.tfstate
+terraform.tfstate.*
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Node
+node_modules/

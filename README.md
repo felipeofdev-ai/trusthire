@@ -210,3 +210,107 @@ Contributions welcome! Please:
 ---
 
 **Built with ❤️ to protect job seekers from scams**
+
+
+## ✅ Production Readiness Checklist
+
+- Deploy público online: Railway (`render.yaml`/`railway.toml`) e health endpoint `/health`.
+- Login real: JWT com refresh token e API keys.
+- Banco real: suporte a PostgreSQL via `DATABASE_URL`.
+- API documentada: Swagger em `/api/v1/docs`.
+- Testes unitários: suíte `tests/` + CI em `.github/workflows/ci.yml`.
+- Monitoramento e métricas: endpoint `/metrics` com uptime, latência média/p95, RPM e taxa de erro.
+- Segurança básica: rate limiting, headers CSP/XSS, sanitização server-side e hash Argon2.
+
+## Stripe (modo real)
+1. No Dashboard Stripe, trocar para **Live mode**.
+2. Configurar variáveis no Railway:
+   - `STRIPE_SECRET_KEY`
+   - `STRIPE_PUBLISHABLE_KEY`
+   - `STRIPE_WEBHOOK_SECRET`
+3. Criar produtos/preços live e preencher os `STRIPE_PRICE_*`.
+4. Validar checkout no endpoint `/api/v1/billing`.
+
+## Railway (produção)
+1. Definir variáveis de ambiente de produção (`ENV=prod`, `SECRET_KEY`, `DATABASE_URL`, `REDIS_URL`).
+2. Garantir `CORS_ORIGINS_STR` com domínio público do frontend.
+3. Monitorar `/health` e `/metrics` no painel de observabilidade.
+
+
+## 🚀 Deploy de Produção (script completo)
+
+```bash
+bash scripts/deploy_production.sh
+```
+
+Variáveis opcionais:
+- `REGISTRY_URI` (ex: ECR/GHCR)
+- `IMAGE_TAG` (default: `latest`)
+
+## 📈 Monitoramento pronto + Dashboard pronto
+
+```bash
+docker compose -f docker-compose.monitoring.yml up -d
+```
+
+Acessos:
+- Prometheus: `http://localhost:9090`
+- Grafana: `http://localhost:3001` (`admin/admin`)
+- Loki: `http://localhost:3100`
+
+Métricas Prometheus da API:
+- `GET /metrics/prometheus`
+
+## ⚡ Load test pronto
+
+```bash
+bash scripts/run_load_test.sh http://localhost:8000
+```
+
+Saída de benchmark:
+- `loadtest/results/benchmark.md`
+- CSVs do Locust em `loadtest/results/`
+
+
+## 💳 Stripe Live (produção)
+
+Guia operacional completo em `docs/STRIPE_LIVE_SETUP.md`.
+
+Script para criação de produtos/preços live:
+```bash
+export STRIPE_SECRET_KEY=sk_live_...
+bash scripts/stripe_setup_live.sh
+```
+
+
+Teste local do webhook com Stripe CLI:
+```bash
+bash scripts/stripe_webhook_local_test.sh http://localhost:8000
+```
+
+
+## 🌐 Provas Públicas de Senioridade
+
+### Demo pública
+- Live Demo: `https://app.trusthire.ai` (configure apontamento para seu deploy em produção)
+
+### Screenshot do dashboard
+- Suba a stack de monitoramento:
+```bash
+docker compose -f docker-compose.monitoring.yml up -d
+```
+- Acesse Grafana em `http://localhost:3001` e exporte screenshot do dashboard "TrustHire Production Overview".
+
+### Benchmark publicado
+```bash
+bash scripts/run_load_test.sh http://localhost:8000
+python scripts/generate_benchmark_summary.py
+```
+- Resultado público em: `docs/BENCHMARK_PUBLIC.md`
+
+### Architecture diagram
+- Arquitetura: `docs/ARCHITECTURE_DIAGRAM.md`
+- Diagrama SVG: `docs/architecture.svg`
+
+### Case study técnico
+- Documento: `docs/CASE_STUDY_TECHNICAL.md`

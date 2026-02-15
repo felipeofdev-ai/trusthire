@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  prometheus:
+    image: prom/prometheus:v2.54.1
+    container_name: trusthire-prometheus
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports:
+      - "9090:9090"
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:11.2.0
+    container_name: trusthire-grafana
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+    volumes:
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./monitoring/grafana/dashboards:/var/lib/grafana/dashboards:ro
+    ports:
+      - "3001:3000"
+    depends_on:
+      - prometheus
+      - loki
+    restart: unless-stopped
+
+  loki:
+    image: grafana/loki:3.1.1
+    container_name: trusthire-loki
+    command: ["-config.file=/etc/loki/loki-config.yml"]
+    volumes:
+      - ./monitoring/loki-config.yml:/etc/loki/loki-config.yml:ro
+    ports:
+      - "3100:3100"
+    restart: unless-stopped
+
+  promtail:
+    image: grafana/promtail:3.1.1
+    container_name: trusthire-promtail
+    command: ["-config.file=/etc/promtail/promtail-config.yml"]
+    volumes:
+      - ./monitoring/promtail-config.yml:/etc/promtail/promtail-config.yml:ro
+      - /var/log:/var/log:ro
+    depends_on:
+      - loki
+    restart: unless-stopped

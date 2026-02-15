@@ -1,0 +1,19 @@
+{
+  "annotations": {"list": []},
+  "editable": true,
+  "panels": [
+    {"type": "stat", "title": "Uptime %", "gridPos": {"h": 5, "w": 6, "x": 0, "y": 0}, "targets": [{"expr": "trusthire_uptime_percent"}]},
+    {"type": "stat", "title": "Latency Avg (ms)", "gridPos": {"h": 5, "w": 6, "x": 6, "y": 0}, "targets": [{"expr": "trusthire_latency_avg_ms"}]},
+    {"type": "stat", "title": "Latency P95 (ms)", "gridPos": {"h": 5, "w": 6, "x": 12, "y": 0}, "targets": [{"expr": "trusthire_latency_p95_ms"}]},
+    {"type": "stat", "title": "Req/min", "gridPos": {"h": 5, "w": 6, "x": 18, "y": 0}, "targets": [{"expr": "trusthire_requests_per_minute"}]},
+    {"type": "timeseries", "title": "Error Rate", "gridPos": {"h": 8, "w": 12, "x": 0, "y": 5}, "targets": [{"expr": "trusthire_error_rate"}]},
+    {"type": "timeseries", "title": "Total Requests", "gridPos": {"h": 8, "w": 12, "x": 12, "y": 5}, "targets": [{"expr": "trusthire_total_requests"}]}
+  ],
+  "schemaVersion": 39,
+  "style": "dark",
+  "tags": ["trusthire", "production"],
+  "templating": {"list": []},
+  "time": {"from": "now-30m", "to": "now"},
+  "title": "TrustHire Production Overview",
+  "version": 1
+}

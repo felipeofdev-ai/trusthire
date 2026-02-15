@@ -22,7 +22,7 @@ logger = get_logger("auth")
 
 # ==================== CRYPTO ====================
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+pwd_context = CryptContext(schemes=["argon2", "bcrypt"], deprecated="auto")
 bearer_scheme = HTTPBearer(auto_error=False)
 api_key_header = APIKeyHeader(name="X-API-Key", auto_error=False)
 
