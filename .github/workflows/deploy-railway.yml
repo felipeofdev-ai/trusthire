@@ -1,0 +1,54 @@
+name: Deploy Railway
+
+on:
+  workflow_dispatch:
+    inputs:
+      public_api_url:
+        description: "URL pública para validar o /health (ex: https://seu-app.up.railway.app)"
+        required: false
+        type: string
+  push:
+    branches: ["main"]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+      PUBLIC_API_URL_SECRET: ${{ secrets.PUBLIC_API_URL }}
+      PUBLIC_API_URL_INPUT: ${{ inputs.public_api_url }}
+      RAILWAY_PROJECT_ID: ${{ secrets.RAILWAY_PROJECT_ID }}
+      RAILWAY_ENVIRONMENT_ID: ${{ secrets.RAILWAY_ENVIRONMENT_ID }}
+      RAILWAY_SERVICE_ID: ${{ secrets.RAILWAY_SERVICE_ID }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Railway CLI
+        run: npm i -g @railway/cli
+
+      - name: Link Railway project (optional)
+        if: ${{ env.RAILWAY_PROJECT_ID != '' && env.RAILWAY_ENVIRONMENT_ID != '' && env.RAILWAY_SERVICE_ID != '' }}
+        run: |
+          railway link \
+            --project "$RAILWAY_PROJECT_ID" \
+            --environment "$RAILWAY_ENVIRONMENT_ID" \
+            --service "$RAILWAY_SERVICE_ID"
+
+      - name: Resolve public API URL
+        run: |
+          if [ -n "$PUBLIC_API_URL_INPUT" ]; then
+            echo "PUBLIC_API_URL=$PUBLIC_API_URL_INPUT" >> "$GITHUB_ENV"
+          elif [ -n "$PUBLIC_API_URL_SECRET" ]; then
+            echo "PUBLIC_API_URL=$PUBLIC_API_URL_SECRET" >> "$GITHUB_ENV"
+          fi
+
+      - name: Deploy to Railway and verify healthcheck
+        run: ./scripts/deploy_real.sh

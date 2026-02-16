@@ -12,6 +12,38 @@
 
 ---
 
+## ⚡ Deploy real em 1 comando (CLI)
+
+Se você já tem o projeto vinculado no Railway, use o script automatizado:
+
+```bash
+# Linux/macOS
+export RAILWAY_TOKEN=seu_token
+./scripts/deploy_real.sh
+```
+
+```powershell
+# Windows (PowerShell)
+$env:RAILWAY_TOKEN="seu_token"
+.\scripts\deploy_real.ps1
+```
+
+Ele executa testes, faz deploy com `railway up --ci` e só finaliza quando `/health` responde 200.
+
+---
+
+## 🤖 Deploy direto pelo GitHub (sem terminal local)
+
+1. No GitHub: **Settings → Secrets and variables → Actions**
+2. Adicione os secrets:
+   - `RAILWAY_TOKEN` (obrigatório)
+   - `PUBLIC_API_URL` (recomendado)
+   - `RAILWAY_PROJECT_ID`, `RAILWAY_ENVIRONMENT_ID`, `RAILWAY_SERVICE_ID` (opcionais para link explícito)
+3. Vá em **Actions → Deploy Railway → Run workflow**
+4. O workflow usa `.github/workflows/deploy-railway.yml` e executa `./scripts/deploy_real.sh` automaticamente.
+
+---
+
 ## 🚀 PASSO A PASSO — Deploy mínimo (sem Stripe/DB ainda)
 
 ### 1. Push das correções pro GitHub

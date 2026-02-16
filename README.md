@@ -120,6 +120,63 @@ curl -X POST http://localhost:8000/api/v1/analyze \
 └─────────────┴────────────┘
 ```
 
+
+## 🚀 Deploy real (produção)
+
+Para publicar a API de forma **real** no Railway com validação automática de healthcheck:
+
+```bash
+# Linux/macOS
+npm i -g @railway/cli
+export RAILWAY_TOKEN=seu_token
+./scripts/deploy_real.sh
+```
+
+```powershell
+# Windows (PowerShell)
+npm i -g @railway/cli
+$env:RAILWAY_TOKEN="seu_token"
+.\scripts\deploy_real.ps1
+```
+
+Se o PowerShell bloquear execução de script local, rode antes:
+
+```powershell
+Set-ExecutionPolicy -Scope Process Bypass
+```
+
+O script:
+- valida pré-requisitos e estado limpo do Git;
+- roda testes (`pytest -q`) antes da publicação;
+- executa `railway up --ci`;
+- detecta domínio público e valida `/health` até ficar online.
+
+Se a detecção automática do domínio falhar, informe manualmente:
+
+```bash
+PUBLIC_API_URL=https://seu-app.up.railway.app ./scripts/deploy_real.sh
+```
+
+```powershell
+.\scripts\deploy_real.ps1 -PublicApiUrl "https://seu-app.up.railway.app"
+```
+
+### Deploy direto pelo GitHub Actions
+
+Você também pode publicar sem rodar nada localmente:
+
+1. No GitHub do repositório, vá em **Settings → Secrets and variables → Actions** e crie:
+   - `RAILWAY_TOKEN` (**obrigatório**)
+   - `PUBLIC_API_URL` (recomendado, ex: `https://seu-app.up.railway.app`)
+   - `RAILWAY_PROJECT_ID` (opcional)
+   - `RAILWAY_ENVIRONMENT_ID` (opcional)
+   - `RAILWAY_SERVICE_ID` (opcional)
+2. Vá em **Actions → Deploy Railway → Run workflow**.
+3. (Opcional) Preencha `public_api_url` no dispatch manual.
+4. O workflow executa `./scripts/deploy_real.sh`, roda testes, faz deploy e valida `/health`.
+
+Arquivo do workflow: `.github/workflows/deploy-railway.yml`.
+
 ## 🧪 Testing
 
 ```bash
