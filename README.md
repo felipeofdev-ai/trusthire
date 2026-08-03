@@ -1,42 +1,54 @@
-# TrustHire
+<div align="center">
 
-Job offer and recruitment message analyzer that detects scam indicators using pattern matching and AI.
+# 🛡️ TrustHire
+
+### AI that protects professionals before they apply
+
+[![Live](https://img.shields.io/badge/demo-analyze_API-4DE8C2?style=for-the-badge)](https://github.com/felipeofdev-ai/trusthire)
+[![Stack](https://img.shields.io/badge/Python-FastAPI-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://github.com/felipeofdev-ai/trusthire)
+[![AI](https://img.shields.io/badge/Claude-Anthropic-D66BFF?style=for-the-badge)](https://www.anthropic.com)
+[![Stars](https://img.shields.io/github/stars/felipeofdev-ai/trusthire?style=for-the-badge)](https://github.com/felipeofdev-ai/trusthire/stargazers)
+
+**Paste a job offer or recruiter DM → get a risk score (0–100) with explainable signals.**  
+Built so people don’t lose money or data to hiring scams.
+
+[Portfolio RPG](https://felipeofdev-ai.github.io/) · [Backend](https://github.com/felipeofdev-ai/trusthire-backend) · [Frontend](https://github.com/felipeofdev-ai/trusthire-frontend) · [Author](https://github.com/felipeofdev-ai)
+
+</div>
 
 ---
 
-## What it does
+## Why this quest exists
 
-Analyzes text from job offers or recruiter messages and returns a risk score (0–100) with detailed breakdown of detected signals:
+Recruitment fraud is a real boss fight: fake offers, “pay for onboarding”, crypto fees, Telegram redirects.  
+TrustHire is a **production-shaped** analyzer — heuristics + optional Claude — that returns **citations you can trust**, not vibes.
 
-- Financial requests (payments, crypto, wire transfers)
-- Urgency and pressure tactics
-- Requests for sensitive personal data
-- Unrealistic salary or benefit promises
-- Off-platform communication redirects (Telegram, WhatsApp)
-- Suspicious URLs and domain reputation
-- Phishing and social engineering patterns
+## What it detects
 
----
+| Signal class | Examples |
+|---|---|
+| Financial pressure | wire, crypto, “verification fee” |
+| Urgency tactics | “hire today or lose the role” |
+| PII harvesting | SSN, bank login, passport dumps |
+| Unrealistic bait | inflated salary / benefits |
+| Off-platform redirect | Telegram / WhatsApp-only hiring |
+| Link / domain risk | phishing patterns, shady hosts |
 
 ## Stack
 
-Python · FastAPI · Anthropic Claude API · PostgreSQL · Redis · JWT auth · Docker · Railway
-
----
+`Python` · `FastAPI` · `Anthropic Claude` · `PostgreSQL` · `Redis` · `JWT` · `Docker` · `Stripe` (SaaS path)
 
 ## Quickstart
 
 ```bash
 git clone https://github.com/felipeofdev-ai/trusthire.git
 cd trusthire
-python -m venv venv && source venv/bin/activate
+python -m venv venv && source venv/bin/activate   # Windows: venv\Scripts\activate
 pip install -r requirements.txt
-cp .env.example .env
-# add your ANTHROPIC_API_KEY to .env
+cp .env.example .env   # set ANTHROPIC_API_KEY
 uvicorn main:app --reload
 ```
 
-**Analyze a message:**
 ```bash
 curl -X POST http://localhost:8000/api/v1/analyze \
   -H "Content-Type: application/json" \
@@ -47,9 +59,7 @@ curl -X POST http://localhost:8000/api/v1/analyze \
   }'
 ```
 
-**API docs:** `http://localhost:8000/api/v1/docs`
-
----
+API docs: `http://localhost:8000/api/v1/docs`
 
 ## Docker
 
@@ -58,67 +68,37 @@ docker-compose up -d
 docker-compose logs -f app
 ```
 
----
-
-## Testing
+## Tests
 
 ```bash
 pytest
 pytest --cov=. --cov-report=html
 ```
 
----
-
-## Configuration
+## Config
 
 | Variable | Required | Description |
 |---|---|---|
-| `ANTHROPIC_API_KEY` | Yes | Claude API key for AI analysis |
-| `DATABASE_URL` | No | PostgreSQL connection string |
-| `REDIS_URL` | No | Redis for caching |
+| `ANTHROPIC_API_KEY` | Yes | Claude for AI analysis |
+| `DATABASE_URL` | No | PostgreSQL |
+| `REDIS_URL` | No | Cache |
 | `ENV` | No | `dev` / `staging` / `prod` |
 
-See `.env.example` for all options.
+## Ecosystem
+
+| Repo | Role |
+|---|---|
+| [trusthire](https://github.com/felipeofdev-ai/trusthire) | Core analyzer (this repo) |
+| [trusthire-backend](https://github.com/felipeofdev-ai/trusthire-backend) | SaaS API + Stripe |
+| [trusthire-frontend](https://github.com/felipeofdev-ai/trusthire-frontend) | Product UI |
 
 ---
 
-## Deploy
+<p align="center">
+  <b>If this helped you or your team — ⭐ the repo.</b><br/>
+  Stars help recruiters and candidates find tools that put <i>trust before apply</i>.
+</p>
 
-Configured for Railway deployment:
-
-```bash
-npm i -g @railway/cli
-export RAILWAY_TOKEN=your_token
-./scripts/deploy_real.sh
-```
-
-Or trigger via GitHub Actions: `Actions → Deploy Railway → Run workflow`
-
----
-
-## Monitoring
-
-```bash
-docker compose -f docker-compose.monitoring.yml up -d
-# Prometheus: http://localhost:9090
-# Grafana: http://localhost:3001 (admin/admin)
-GET /metrics/prometheus
-```
-
----
-
-## Project structure
-
-```
-api/          # FastAPI routes
-engine/       # Pattern detection engine
-core/         # Configuration, logging
-services/     # External services (Anthropic, URL scanning)
-models/       # Pydantic models
-auth/         # JWT + API key authentication
-tests/        # Test suite
-```
-
----
-
-MIT License · [@felipeofdev-ai](https://github.com/felipeofdev-ai)
+<p align="center">
+  Made by <a href="https://github.com/felipeofdev-ai">Felipe Fernandes</a> · Systems & Agentic AI Engineer
+</p>
